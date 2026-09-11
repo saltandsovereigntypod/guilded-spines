@@ -245,6 +245,31 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .progress-band i{display:block;height:100%;background:linear-gradient(90deg,var(--gilt),var(--gilt-bright));box-shadow:0 0 8px rgba(234,203,128,.6)}
 .status-dot{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--sd);box-shadow:0 0 6px var(--sd);z-index:2}
 
+/* ---------- selecting ---------- */
+.selecting .spine,.selecting .faced{cursor:pointer;-webkit-user-select:none;user-select:none}
+.selecting .spine:hover,.selecting .faced:hover{transform:translateY(-6px)}
+.spine.sel,.faced.sel{outline:2px solid var(--gilt-bright);outline-offset:1px;z-index:4}
+.sel-tick{
+  position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;
+  background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));
+  display:grid;place-items:center;z-index:6;
+  box-shadow:0 1px 4px rgba(0,0,0,.7), 0 0 0 1px rgba(16,12,23,.55);
+}
+.sel-tick svg{width:9px;height:9px;fill:none;stroke:var(--ink);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+
+.select-bar{
+  display:flex;flex-wrap:wrap;gap:9px;align-items:center;
+  padding:12px 16px;margin:-18px 0 26px;
+  background:linear-gradient(180deg,rgba(46,34,64,.86),rgba(16,12,23,.86));
+  border:1px solid var(--hair);border-radius:3px;
+  box-shadow:inset 0 1px 0 rgba(201,162,76,.1), 0 10px 26px rgba(0,0,0,.45);
+}
+.select-bar .count{
+  font-family:var(--f-display);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gilt);margin-right:2px;white-space:nowrap;
+}
+.select-bar .spacer{flex:1 1 8px}
+
 /* ---------- arranging ---------- */
 .arranging .spine,.arranging .faced{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
 .arranging .spine:hover,.arranging .faced:hover{transform:none;filter:none}
@@ -289,6 +314,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   filter:brightness(1.08);z-index:5;
 }
 .faced img{width:100%;height:100%;object-fit:cover;display:block;max-width:100%}
+/* A book button must always be its own event target: every child is decoration,
+   and an <img> that takes the press starts the browser's drag-and-drop instead,
+   which kills the pointer stream a drag needs. */
+.spine *,.faced *{pointer-events:none}
+.faced img,.cover-preview img,.cover-gen{
+  pointer-events:none;
+  -webkit-user-drag:none;user-drag:none;
+  -webkit-user-select:none;user-select:none;
+}
 
 /* generated cover — shared by shelf + open book preview */
 .cover-gen{
@@ -357,6 +391,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   border-top:1px solid var(--hair-soft);padding-top:16px;
 }
 .save-state{display:flex;align-items:center;gap:8px;letter-spacing:.06em}
+.save-state .btn{padding:4px 9px;font-size:.56rem;margin-left:2px}
 .save-state .lamp{width:7px;height:7px;border-radius:50%;background:var(--gilt);box-shadow:0 0 8px var(--gilt)}
 .save-state.warn .lamp{background:var(--amber);box-shadow:0 0 8px var(--amber)}
 .save-state.off .lamp{background:var(--dimmer);box-shadow:none}
@@ -562,6 +597,43 @@ input[type=range]{
 .icon-opt svg{width:17px;height:17px}
 .icon-opt[aria-pressed="true"]{border-color:var(--gilt);box-shadow:0 0 14px rgba(201,162,76,.3)}
 .sheet-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px;border-top:1px solid var(--hair-soft);padding-top:16px}
+
+/* bulk styling sheet */
+.sheet .scroller{max-height:min(56vh,520px);overflow-y:auto;margin:2px -4px 0;padding:0 4px}
+.bulk-row{
+  display:grid;grid-template-columns:minmax(120px,168px) 1fr;gap:12px;align-items:center;
+  padding:10px 0;border-top:1px solid var(--hair-soft);
+}
+.bulk-row > .check{align-self:center}
+.bulk-ctl{display:flex;flex-wrap:wrap;gap:9px;align-items:center;min-width:0}
+.bulk-ctl .slider-row{flex:1 1 130px;min-width:110px}
+.bulk-ctl.dim{opacity:.42;pointer-events:none}
+.dot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:8px 14px;margin:10px 0 4px}
+.dot-line{display:flex;align-items:center;gap:8px;font-family:var(--f-data);font-size:.84rem;color:var(--dim)}
+.dot-line .swatch-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+
+/* The sheet is velvet, not parchment: the panel controls need light ink here. */
+.sheet .check,.sheet .toggle{color:var(--dim)}
+.sheet .check input,.sheet .toggle input{accent-color:var(--gilt)}
+.sheet .sub-label{color:var(--gilt-dim)}
+.sheet .num-out{color:var(--dim)}
+.sheet .seg{border-color:var(--hair)}
+.sheet .seg button{background:rgba(7,6,11,.55);color:var(--dim)}
+.sheet .seg button + button{border-left-color:var(--hair-soft)}
+.sheet .seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));color:var(--ink)}
+.sheet input[type=color],.grad-line input[type=color]{
+  width:34px;height:26px;padding:0;border:1px solid var(--hair);border-radius:2px;
+  background:rgba(7,6,11,.6);cursor:pointer;flex:0 0 auto;
+}
+.sheet .page-rule{background:linear-gradient(90deg,var(--hair),transparent)}
+.sheet h4{
+  font-family:var(--f-display);font-weight:500;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gilt);margin:18px 0 8px;
+}
+
+@media (max-width:560px){
+  .bulk-row{grid-template-columns:1fr;gap:7px}
+}
 
 /* ---------- responsive ---------- */
 @media (max-width:760px){
@@ -792,19 +864,31 @@ input[type=range]{
     <label class="toggle" for="favOnly"><input type="checkbox" id="favOnly">Favorites only</label>
     <button class="btn" id="addBtn">Add a book</button>
     <button class="btn ghost" id="arrangeBtn" aria-pressed="false">Arrange</button>
+    <button class="btn ghost" id="selectBtn" aria-pressed="false">Select</button>
     <div class="seg" id="moveSeg" hidden aria-label="What a drag moves">
       <button type="button" data-move="book" aria-pressed="true">Move: Book</button>
       <button type="button" data-move="group" aria-pressed="false">Group</button>
     </div>
-    <button class="btn ghost" id="setBtn">Ratings</button>
+    <button class="btn ghost" id="setBtn">Settings</button>
     <button class="btn ghost" id="exportBtn">Export</button>
     <button class="btn ghost" id="importBtn">Import</button>
+  </div>
+
+  <div class="select-bar" id="selectBar" hidden>
+    <span class="count" id="selCount">Nothing selected</span>
+    <button class="btn small ghost" type="button" data-sel="all">All</button>
+    <button class="btn small ghost" type="button" data-sel="fav">Favorites</button>
+    <button class="btn small ghost" type="button" data-sel="shelf">This shelf</button>
+    <button class="btn small ghost" type="button" data-sel="invert">Invert</button>
+    <button class="btn small ghost" type="button" data-sel="none">None</button>
+    <span class="spacer"></span>
+    <button class="btn" type="button" id="bulkBtn">Apply styling</button>
   </div>
 
   <main id="library"></main>
 
   <div class="footer">
-    <div class="save-state" id="saveState"><span class="lamp"></span><span id="saveText">Lighting the candles…</span></div>
+    <div class="save-state" id="saveState"><span class="lamp"></span><span id="saveText">Lighting the candles…</span><button class="btn small" type="button" id="undoBtn" hidden>Undo</button></div>
     <div class="stats" id="stats"></div>
   </div>
 </div>
@@ -847,6 +931,9 @@ var PALETTE = ["#4A1F2E","#2C3A52","#3E2A4A","#22403A","#4A3520","#5A2330",
 var SPINE_DEFAULTS = {title:true, author:true, series:false, number:false, pips:true};
 var COVER_DEFAULTS = {title:true, author:true, series:true, number:false, pips:false};
 var DEFAULT_RIBBON = "#C94059";
+var DEFAULT_DOT_COLORS = {
+  want:"#7A5AA6", reading:"#C9A24C", paused:"#B4813C", read:"#6E8F72", dnf:"#7A2530"
+};
 var SPINE_ANGLE = 180, COVER_ANGLE = 165;
 
 /* ---------------- state ---------------- */
@@ -855,8 +942,29 @@ var state = {
   tab:"all", q:"", groupBy:"none", groupStyle:"continuous",
   sortBy:"series", dir:"asc",
   favOnly:false, openId:null, loaded:false,
-  arranging:false, moveMode:"book", statusDots:true
+  arranging:false, moveMode:"book",
+  selecting:false, selection:{},
+  statusDots:{show:true, colors:defaultDotColors()}
 };
+function defaultDotColors(){
+  var out = {};
+  Object.keys(DEFAULT_DOT_COLORS).forEach(function(k){ out[k] = DEFAULT_DOT_COLORS[k]; });
+  return out;
+}
+/* Older records and older export files stored this as a plain boolean. */
+function normStatusDots(v){
+  var out = {show:true, colors:defaultDotColors()};
+  if(typeof v === "boolean"){ out.show = v; return out; }
+  if(v && typeof v === "object"){
+    if(typeof v.show === "boolean") out.show = v.show;
+    if(v.colors && typeof v.colors === "object"){
+      Object.keys(out.colors).forEach(function(k){
+        out.colors[k] = safeColor(v.colors[k], out.colors[k]);
+      });
+    }
+  }
+  return out;
+}
 var db = null, assets = null, assetsChecked = false;
 var saveTimers = {};
 
@@ -999,8 +1107,13 @@ function coverTo(b){
 function coverAngle(b){ return safeAngle(b.coverAngle, COVER_ANGLE); }
 function ribbonColor(b){ return safeColor(b.ribbonColor, DEFAULT_RIBBON); }
 function statusDotOn(b){
-  return typeof b.showStatusDot === "boolean" ? b.showStatusDot : state.statusDots;
+  return typeof b.showStatusDot === "boolean" ? b.showStatusDot : state.statusDots.show;
 }
+function statusDotColor(b){
+  return safeColor(b.dotColor, null) ||
+    state.statusDots.colors[b.status] || DEFAULT_DOT_COLORS.want;
+}
+function dotMode(b){ return typeof b.showStatusDot === "boolean" ? (b.showStatusDot ? "show" : "hide") : "default"; }
 /* The CSS keeps a solid spine's shading exactly as it was; a gradient replaces
    only the base layer, so the lit edge and inner shadow still read as an object. */
 function spineBaseCSS(b){
@@ -1038,17 +1151,24 @@ function textScale(b){ return typeof b.spineTextSize === "number" ? b.spineTextS
 function coverSrc(b){ return b.coverId ? ("/_blob/" + b.coverId) : null; }
 
 /* ---------------- persistence ---------------- */
-function setSave(text, cls){
+function paintSave(text, cls){
   var el = byId("saveState");
   el.className = "save-state" + (cls ? " " + cls : "");
   byId("saveText").textContent = text;
+}
+function setSave(text, cls){ clearUndo(); paintSave(text, cls); }
+/* Debounced writes and snapshot echoes are not actions the reader took, so they
+   must not talk over a standing offer to undo. */
+function setSaveQuiet(text, cls){
+  if(undoState) return;
+  paintSave(text, cls);
 }
 function saveBook(b){
   if(!db) return;
   clearTimeout(saveTimers[b.id]);
   saveTimers[b.id] = setTimeout(function(){
     db.doc("books/" + b.id).set(b).then(function(){
-      setSave("Saved to your account", "");
+      setSaveQuiet("Saved to your account", "");
     }).catch(function(e){
       setSave(e && e.code === "not_granted" ? "Not saving — permission declined" : "Couldn't save that change", "warn");
     });
@@ -1069,19 +1189,6 @@ function savePrefs(){
   }).catch(function(){
     setSave("Couldn't save your settings", "warn");
   });
-}
-/* A global switch should actually switch every book, so per-book overrides that
-   disagree with it are dropped rather than quietly winning. */
-function setGlobalDots(on){
-  state.statusDots = !!on;
-  savePrefs();
-  list().forEach(function(b){
-    if(typeof b.showStatusDot === "boolean" && b.showStatusDot !== state.statusDots){
-      delete b.showStatusDot;
-      saveBook(b);
-    }
-  });
-  render();
 }
 function getAssets(){
   if(assetsChecked) return Promise.resolve(assets);
@@ -1168,7 +1275,7 @@ function coverInner(b, w){
   if(b.coverImage) return coverGenHTML(b, w);
   var src = coverSrc(b);
   if(!src) return coverGenHTML(b, w);
-  return '<img src="' + esc(src) + '" alt="Cover of ' + esc(b.title) + '"' +
+  return '<img src="' + esc(src) + '" alt="Cover of ' + esc(b.title) + '" draggable="false"' +
     ' onerror="this.parentNode.innerHTML=' + esc(JSON.stringify(coverGenHTML(b, w))) + '">';
 }
 /* Swap in the stored cover and spine images once IndexedDB has them. */
@@ -1179,10 +1286,14 @@ function hydrateImages(root){
     el.removeAttribute("data-img-cover");
     imgGet(key).then(function(url){
       if(!url || !el.isConnected) return;
+      /* Never swap a node out from under a live drag: it would replace the very
+         element the pointer is captured against and the drag would die silently. */
+      if(isDragging){ renderPending = true; return; }
       var gen = el.querySelector(".cover-gen");
       var img = document.createElement("img");
       img.src = url;
       img.alt = el.getAttribute("data-img-alt") || "";
+      img.draggable = false;
       if(gen) gen.replaceWith(img); else el.insertBefore(img, el.firstChild);
     });
   });
@@ -1191,6 +1302,7 @@ function hydrateImages(root){
     el.removeAttribute("data-img-spine");
     imgGet(key).then(function(url){
       if(!url || !el.isConnected) return;
+      if(isDragging){ renderPending = true; return; }
       el.style.setProperty("--spine-img", 'url("' + url + '")');
     });
   });
@@ -1206,9 +1318,13 @@ function pipRow(b){
   if(half) h += '<b class="half"></b>';
   return '<span class="spine-pips">' + h + "</span>";
 }
+function isSelected(b){ return !!state.selection[b.id]; }
 function chromeHTML(b){
   var st = STATUS[b.status] || STATUS.want;
-  return (statusDotOn(b) ? '<span class="status-dot" style="--sd:' + st.color + '"></span>' : "") +
+  var tick = (state.selecting && isSelected(b))
+    ? '<span class="sel-tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></span>' : "";
+  return tick +
+    (statusDotOn(b) ? '<span class="status-dot" style="--sd:' + esc(statusDotColor(b)) + '"></span>' : "") +
     (b.favorite ? '<span class="ribbon" style="--rb:' + esc(ribbonColor(b)) + '"></span>' : "") +
     (b.status === "reading" && b.progress
       ? '<span class="progress-band"><i style="width:' + Math.max(2, Math.min(100, b.progress)) + '%"></i></span>'
@@ -1221,7 +1337,7 @@ function itemHTML(b, isLast, count){
 
   if(b.display === "front"){
     var w = Math.round(h * 0.66);
-    return '<button class="faced" type="button" data-id="' + esc(b.id) + '"' +
+    return '<button class="faced' + (isSelected(b) ? " sel" : "") + '" type="button" data-id="' + esc(b.id) + '"' +
       ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(coverFrom(b)) + '"' +
       (b.coverImage ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '" data-img-alt="Cover of ' + esc(b.title) + '"' : "") +
       ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">' +
@@ -1240,7 +1356,7 @@ function itemHTML(b, isLast, count){
   var lean = (isLast && count > 3 && hash(b.id) % 3 === 0) ? " lean" : "";
 
   var base = spineBaseCSS(b);
-  return '<button class="spine' + lean + '" type="button" data-id="' + esc(b.id) + '"' +
+  return '<button class="spine' + lean + (isSelected(b) ? " sel" : "") + '" type="button" data-id="' + esc(b.id) + '"' +
     ' style="--h:' + h + 'px;--w:' + spineW(b) + 'px;--c:' + esc(color(b)) + ';--fs:' + fs +
       (base ? ';--spine-base:' + base : "") + '"' +
     (b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "") +
@@ -1253,7 +1369,17 @@ function itemHTML(b, isLast, count){
 }
 
 /* ---------------- render ---------------- */
+/* A drag holds the shelf still. Anything that wants to redraw mid-drag leaves a
+   note instead, and the drag runs it once on the way out. */
+var isDragging = false, renderPending = false;
+function flushRender(){
+  if(!renderPending) return;
+  renderPending = false;
+  render();
+}
 function render(){
+  if(isDragging){ renderPending = true; return; }
+  renderPending = false;
   var lib = byId("library");
   var books = list().filter(matches).sort(cmp);
   renderTabs(); renderStats();
@@ -1426,6 +1552,13 @@ function paintBlockHTML(target, label, from, to, angle){
     "</div>" +
   "</div>";
 }
+function dotSegHTML(mode, idPrefix){
+  return '<div class="seg" id="' + idPrefix + 'Seg">' +
+    ["default","show","hide"].map(function(k){
+      return '<button type="button" data-dotmode="' + k + '" aria-pressed="' + (mode === k) + '">' +
+        (k === "default" ? "Default" : k === "show" ? "Show" : "Hide") + "</button>";
+    }).join("") + "</div>";
+}
 function checkRowHTML(kind, vals){
   return '<div class="checks" data-showrow="' + kind + '" style="margin-top:6px">' +
     '<label class="check"><input type="checkbox" data-show="title"' + (vals.title?" checked":"") + ">Title</label>" +
@@ -1517,7 +1650,12 @@ function openBook(id, isNew){
           '<div class="grad-line">' +
             '<span class="sub-label">Favourite bookmark</span>' +
             '<input type="color" id="ribbonColor" value="' + esc(ribbonColor(b)) + '" aria-label="Favourite bookmark colour">' +
-            '<label class="check"><input type="checkbox" id="dotToggle"' + (statusDotOn(b) ? " checked" : "") + ">Show status dot</label>" +
+          "</div>" +
+          '<div class="grad-line">' +
+            '<span class="sub-label">Status dot</span>' +
+            dotSegHTML(dotMode(b), "dot") +
+            '<input type="color" id="dotColorInput" value="' + esc(statusDotColor(b)) + '" aria-label="Status dot colour">' +
+            (b.dotColor ? '<button class="btn small ghost" id="dotColorClear" type="button">Use status colour</button>' : "") +
           "</div>" +
 
           '<div>' +
@@ -1726,8 +1864,29 @@ function openBook(id, isNew){
     b.ribbonColor = this.value;
     saveBook(b); render();
   });
-  byId("dotToggle").addEventListener("change", function(){
-    b.showStatusDot = this.checked;
+  byId("dotSeg").addEventListener("click", function(e){
+    var btn = e.target.closest("[data-dotmode]");
+    if(!btn) return;
+    var m = btn.getAttribute("data-dotmode");
+    if(m === "default") delete b.showStatusDot; else b.showStatusDot = (m === "show");
+    Array.prototype.forEach.call(this.querySelectorAll("[data-dotmode]"), function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-dotmode") === m));
+    });
+    saveBook(b); render();
+  });
+  byId("dotColorInput").addEventListener("input", function(){
+    b.dotColor = this.value;
+    if(!byId("dotColorClear")){
+      this.insertAdjacentHTML("afterend",
+        '<button class="btn small ghost" id="dotColorClear" type="button">Use status colour</button>');
+    }
+    saveBook(b); render();
+  });
+  spread.addEventListener("click", function(e){
+    if(!e.target.closest("#dotColorClear")) return;
+    delete b.dotColor;
+    byId("dotColorInput").value = statusDotColor(b);
+    byId("dotColorClear").remove();
     saveBook(b); render();
   });
 
@@ -1880,9 +2039,19 @@ function openSettings(){
       '<input type="text" id="newCat" placeholder="Banter, Worldbuilding, Dragons…"></div>' +
     '<div class="icon-picker" id="iconPicker"></div>' +
     '<div class="page-rule"></div>' +
+    "<h4>Status dots</h4>" +
     '<label class="toggle" for="globalDots" style="padding-bottom:0">' +
-      '<input type="checkbox" id="globalDots"' + (state.statusDots ? " checked" : "") + ">Show status dots on every spine</label>" +
-    '<p class="hint" style="margin:6px 0 0;font-size:.84rem">Applies to every book, clearing any dot setting made on an individual book.</p>' +
+      '<input type="checkbox" id="globalDots"' + (state.statusDots.show ? " checked" : "") + ">Show status dots</label>" +
+    '<p class="hint" style="margin:6px 0 0;font-size:.84rem">The default for every book. A book set to Show or Hide keeps its own answer.</p>' +
+    '<div class="dot-grid" id="dotColors">' +
+      STATUS_ORDER.map(function(k){
+        return '<label class="dot-line">' +
+          '<input type="color" data-dotcolor="' + k + '" value="' + esc(state.statusDots.colors[k]) +
+            '" aria-label="' + esc(STATUS[k].label) + ' dot colour">' +
+          esc(STATUS[k].label) + "</label>";
+      }).join("") +
+    "</div>" +
+    '<button class="btn small ghost" id="resetDots" type="button">Reset to defaults</button>' +
     '<div class="sheet-actions">' +
       '<button class="btn ghost" id="addCat" type="button">Add category</button>' +
       '<button class="btn" id="setClose" type="button">Done</button>' +
@@ -1910,7 +2079,23 @@ function openSettings(){
   }
   drawCats(); drawIcons();
 
-  byId("globalDots").addEventListener("change", function(){ setGlobalDots(this.checked); });
+  byId("globalDots").addEventListener("change", function(){
+    state.statusDots.show = this.checked;
+    savePrefs(); render();
+  });
+  byId("dotColors").addEventListener("input", function(e){
+    var inp = e.target.closest("[data-dotcolor]");
+    if(!inp) return;
+    state.statusDots.colors[inp.getAttribute("data-dotcolor")] = safeColor(inp.value, DEFAULT_DOT_COLORS.want);
+    savePrefs(); render();
+  });
+  byId("resetDots").addEventListener("click", function(){
+    state.statusDots.colors = defaultDotColors();
+    Array.prototype.forEach.call(byId("dotColors").querySelectorAll("[data-dotcolor]"), function(inp){
+      inp.value = state.statusDots.colors[inp.getAttribute("data-dotcolor")];
+    });
+    savePrefs(); render();
+  });
 
   ov.addEventListener("click", function(e){
     var ic = e.target.closest("[data-icon]");
@@ -2077,7 +2262,7 @@ function finishImport(payload, incoming, mode){
     state.categories = payload.categories;
     buildSortOptions();
   }
-  if(typeof payload.statusDots === "boolean") state.statusDots = payload.statusDots;
+  if(payload.statusDots !== undefined) state.statusDots = normStatusDots(payload.statusDots);
   savePrefs();
   render();
   setSave("Imported " + incoming.length + " books", "");
@@ -2125,6 +2310,354 @@ function buildSortOptions(){
   sel.innerHTML = opts.join("");
   sel.value = keep;
   if(sel.value !== keep){ state.sortBy = "series"; sel.value = "series"; }
+}
+
+/* ---------------- selection ---------------- */
+function selectedIds(){
+  return Object.keys(state.selection).filter(function(id){ return state.books[id]; });
+}
+function selectedBooks(){
+  return selectedIds().map(function(id){ return state.books[id]; }).sort(cmp);
+}
+function clearSelection(){ state.selection = {}; }
+function drawSelectBar(){
+  var bar = byId("selectBar");
+  bar.hidden = !state.selecting;
+  if(!state.selecting) return;
+  var n = selectedIds().length;
+  byId("selCount").textContent = n ? (n + (n === 1 ? " selected" : " selected")) : "Nothing selected";
+  byId("bulkBtn").disabled = !n;
+  byId("bulkBtn").style.opacity = n ? "" : ".45";
+}
+function setSelecting(on){
+  state.selecting = !!on;
+  if(state.selecting && state.arranging) setArranging(false);
+  if(!state.selecting) clearSelection();
+  byId("selectBtn").setAttribute("aria-pressed", String(state.selecting));
+  document.body.classList.toggle("selecting", state.selecting);
+  drawSelectBar();
+  render();
+}
+function setArranging(on){
+  state.arranging = !!on;
+  if(state.arranging && state.selecting) setSelecting(false);
+  byId("arrangeBtn").setAttribute("aria-pressed", String(state.arranging));
+  document.body.classList.toggle("arranging", state.arranging);
+  if(state.arranging) useCustomOrder(); else endDrag(false);
+  updateMoveSeg();
+  render();
+}
+function quickSelect(which){
+  var all = list();
+  if(which === "none"){ clearSelection(); }
+  else if(which === "all"){ all.forEach(function(b){ state.selection[b.id] = true; }); }
+  else if(which === "fav"){ all.forEach(function(b){ if(b.favorite) state.selection[b.id] = true; }); }
+  else if(which === "shelf"){ all.filter(matches).forEach(function(b){ state.selection[b.id] = true; }); }
+  else if(which === "invert"){
+    var next = {};
+    all.forEach(function(b){ if(!state.selection[b.id]) next[b.id] = true; });
+    state.selection = next;
+  }
+  drawSelectBar();
+  render();
+}
+
+/* ---------------- one level of undo ---------------- */
+var undoState = null, undoTimer = null;
+function clearUndo(){
+  undoState = null;
+  clearTimeout(undoTimer);
+  var u = byId("undoBtn");
+  if(u) u.hidden = true;
+}
+function offerUndo(snapshot, text){
+  clearTimeout(undoTimer);
+  undoState = snapshot;
+  paintSave(text, "");
+  byId("undoBtn").hidden = false;
+  undoTimer = setTimeout(function(){ clearUndo(); }, 30000);
+}
+function runUndo(){
+  if(!undoState) return;
+  var snap = undoState, n = snap.length;
+  clearUndo();
+  snap.forEach(function(o){
+    var b = state.books[o.id];
+    if(!b) return;
+    Object.keys(o).forEach(function(f){
+      if(f === "id") return;
+      if(o[f] === undefined) delete b[f]; else b[f] = o[f];
+    });
+    saveBook(b);
+  });
+  render();
+  paintSave("Reverted " + n + " books", "");
+}
+
+/* ---------------- bulk styling ---------------- */
+/* Only ticked rows are written. Everything else on the selected books is left
+   exactly as it was, so this is safe to reach for with fifty books selected. */
+var BULK_ROWS = [
+  {key:"spineColor",  label:"Spine colour",      fields:["spineColor"]},
+  {key:"spineGrad",   label:"Spine gradient",    fields:["spineColor2","spineAngle"]},
+  {key:"coverColor",  label:"Cover colour",      fields:["coverColor"]},
+  {key:"coverGrad",   label:"Cover gradient",    fields:["coverColor","coverColor2","coverAngle"]},
+  {key:"ribbonColor", label:"Bookmark colour",   fields:["ribbonColor"]},
+  {key:"dot",         label:"Status dot",        fields:["showStatusDot","dotColor"]},
+  {key:"spineShow",   label:"Show on the spine", fields:["spineShow"]},
+  {key:"coverShow",   label:"Show on the cover", fields:["coverShow"]},
+  {key:"textSize",    label:"Lettering size",    fields:["spineTextSize"]},
+  {key:"height",      label:"Book height",       fields:["spineHeight"]},
+  {key:"width",       label:"Spine thickness",   fields:["spineWidth"]},
+  {key:"display",     label:"Shelf display",     fields:["display"]}
+];
+function cloneVal(v){ return (v && typeof v === "object") ? JSON.parse(JSON.stringify(v)) : v; }
+function segValue(id, attr){
+  var el = byId(id);
+  if(!el) return null;
+  var on = el.querySelector('[' + attr + '][aria-pressed="true"]');
+  return on ? on.getAttribute(attr) : null;
+}
+function wireSeg(id, attr){
+  var el = byId(id);
+  if(!el) return;
+  el.addEventListener("click", function(e){
+    var btn = e.target.closest("[" + attr + "]");
+    if(!btn) return;
+    Array.prototype.forEach.call(this.querySelectorAll("[" + attr + "]"), function(x){
+      x.setAttribute("aria-pressed", String(x === btn));
+    });
+  });
+}
+function setSeg(id, attr, value){
+  var el = byId(id);
+  if(!el) return;
+  Array.prototype.forEach.call(el.querySelectorAll("[" + attr + "]"), function(x){
+    x.setAttribute("aria-pressed", String(x.getAttribute(attr) === value));
+  });
+}
+function bulkRowHTML(row, b){
+  var ctl;
+  switch(row.key){
+    case "spineColor":
+      ctl = '<input type="color" id="bkSpineColor" value="' + esc(color(b)) + '" aria-label="Spine colour">';
+      break;
+    case "spineGrad":
+      ctl = '<label class="check"><input type="checkbox" id="bkSpineGradOn"' + (spineTo(b) ? " checked" : "") + ">On</label>" +
+        '<input type="color" id="bkSpineGrad2" value="' + esc(spineTo(b) || darken(color(b), .55)) + '" aria-label="Spine gradient end">' +
+        '<div class="slider-row"><input type="range" id="bkSpineAngle" min="0" max="360" step="15" value="' + spineAngle(b) + '">' +
+        '<span class="num-out" id="bkSpineAngleOut">' + spineAngle(b) + "&deg;</span></div>";
+      break;
+    case "coverColor":
+      ctl = '<input type="color" id="bkCoverColor" value="' + esc(coverFrom(b)) + '" aria-label="Cover colour">';
+      break;
+    case "coverGrad":
+      ctl = '<label class="check"><input type="checkbox" id="bkCoverGradOn"' + (coverTo(b) ? " checked" : "") + ">On</label>" +
+        '<input type="color" id="bkCoverGrad2" value="' + esc(coverTo(b) || darken(coverFrom(b), .55)) + '" aria-label="Cover gradient end">' +
+        '<div class="slider-row"><input type="range" id="bkCoverAngle" min="0" max="360" step="15" value="' + coverAngle(b) + '">' +
+        '<span class="num-out" id="bkCoverAngleOut">' + coverAngle(b) + "&deg;</span></div>";
+      break;
+    case "ribbonColor":
+      ctl = '<input type="color" id="bkRibbon" value="' + esc(ribbonColor(b)) + '" aria-label="Bookmark colour">';
+      break;
+    case "dot":
+      ctl = dotSegHTML(dotMode(b), "bkDot") +
+        '<input type="color" id="bkDotColor" value="' + esc(statusDotColor(b)) + '" aria-label="Status dot colour">' +
+        '<label class="check"><input type="checkbox" id="bkDotAuto"' + (b.dotColor ? "" : " checked") + ">Use status colour</label>";
+      break;
+    case "spineShow": ctl = checkRowHTML("bulkSpine", show(b)); break;
+    case "coverShow": ctl = checkRowHTML("bulkCover", coverShow(b)); break;
+    case "textSize":
+      ctl = '<div class="slider-row"><input type="range" id="bkSize" min="0.65" max="1.5" step="0.05" value="' + textScale(b) + '">' +
+        '<span class="num-out" id="bkSizeOut">' + Math.round(textScale(b)*100) + "%</span></div>";
+      break;
+    case "height":
+      ctl = '<div class="slider-row"><input type="range" id="bkHeight" min="150" max="340" step="2" value="' + spineH(b) + '">' +
+        '<span class="num-out" id="bkHeightOut">' + spineH(b) + "px</span></div>";
+      break;
+    case "width":
+      ctl = '<div class="slider-row"><input type="range" id="bkWidth" min="26" max="90" step="1" value="' + spineW(b) + '">' +
+        '<span class="num-out" id="bkWidthOut">' + spineW(b) + "px</span></div>";
+      break;
+    case "display":
+      ctl = '<div class="seg" id="bkDisplaySeg">' +
+        '<button type="button" data-bulkdisplay="spine" aria-pressed="' + (b.display !== "front") + '">Spine out</button>' +
+        '<button type="button" data-bulkdisplay="front" aria-pressed="' + (b.display === "front") + '">Front out</button>' +
+      "</div>";
+      break;
+  }
+  return '<div class="bulk-row">' +
+    '<label class="check"><input type="checkbox" data-bulk="' + row.key + '">' + esc(row.label) + "</label>" +
+    '<div class="bulk-ctl">' + ctl + "</div>" +
+  "</div>";
+}
+function openBulk(){
+  var books = selectedBooks();
+  if(!books.length) return;
+  clearUndo();
+  var seed = books[0];
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "bulkOverlay";
+  ov.innerHTML =
+  '<div class="sheet" role="dialog" aria-modal="true" aria-label="Apply styling">' +
+    "<h3>Apply styling to " + books.length + " book" + (books.length === 1 ? "" : "s") + "</h3>" +
+    '<p class="hint">Only the rows you tick are written. Everything else is left alone.</p>' +
+    '<div class="field"><label class="lbl" for="bulkFrom">Start from</label>' +
+      '<select id="bulkFrom">' + books.map(function(b){
+        return '<option value="' + esc(b.id) + '">' + esc(b.title || "Untitled") + "</option>";
+      }).join("") + "</select></div>" +
+    '<div class="scroller">' + BULK_ROWS.map(function(r){ return bulkRowHTML(r, seed); }).join("") + "</div>" +
+    '<div class="sheet-actions">' +
+      '<button class="btn ghost" id="bulkCancel" type="button">Cancel</button>' +
+      '<button class="btn" id="bulkApply" type="button">Apply to ' + books.length + " book" + (books.length === 1 ? "" : "s") + "</button>" +
+    "</div>" +
+  "</div>";
+  document.body.appendChild(ov);
+  document.body.style.overflow = "hidden";
+
+  wireSeg("bkDotSeg", "data-dotmode");
+  wireSeg("bkDisplaySeg", "data-bulkdisplay");
+  [["bkSpineAngle","bkSpineAngleOut",function(v){ return v + "°"; }],
+   ["bkCoverAngle","bkCoverAngleOut",function(v){ return v + "°"; }],
+   ["bkSize","bkSizeOut",function(v){ return Math.round(v*100) + "%"; }],
+   ["bkHeight","bkHeightOut",function(v){ return v + "px"; }],
+   ["bkWidth","bkWidthOut",function(v){ return v + "px"; }]].forEach(function(t){
+    byId(t[0]).addEventListener("input", function(){ byId(t[1]).textContent = t[2](parseFloat(this.value)); });
+  });
+
+  /* "Start from" fills the controls in and nothing else: what gets pushed is
+     still hers to tick. */
+  function prefill(b){
+    byId("bkSpineColor").value = color(b);
+    byId("bkSpineGradOn").checked = !!spineTo(b);
+    byId("bkSpineGrad2").value = spineTo(b) || darken(color(b), .55);
+    byId("bkSpineAngle").value = spineAngle(b);
+    byId("bkSpineAngleOut").textContent = spineAngle(b) + "°";
+    byId("bkCoverColor").value = coverFrom(b);
+    byId("bkCoverGradOn").checked = !!coverTo(b);
+    byId("bkCoverGrad2").value = coverTo(b) || darken(coverFrom(b), .55);
+    byId("bkCoverAngle").value = coverAngle(b);
+    byId("bkCoverAngleOut").textContent = coverAngle(b) + "°";
+    byId("bkRibbon").value = ribbonColor(b);
+    setSeg("bkDotSeg", "data-dotmode", dotMode(b));
+    byId("bkDotColor").value = statusDotColor(b);
+    byId("bkDotAuto").checked = !b.dotColor;
+    var sv = show(b), cv = coverShow(b);
+    Array.prototype.forEach.call(ov.querySelectorAll('[data-showrow="bulkSpine"] [data-show]'), function(cb){
+      cb.checked = !!sv[cb.getAttribute("data-show")];
+    });
+    Array.prototype.forEach.call(ov.querySelectorAll('[data-showrow="bulkCover"] [data-show]'), function(cb){
+      cb.checked = !!cv[cb.getAttribute("data-show")];
+    });
+    byId("bkSize").value = textScale(b);
+    byId("bkSizeOut").textContent = Math.round(textScale(b)*100) + "%";
+    byId("bkHeight").value = spineH(b);
+    byId("bkHeightOut").textContent = spineH(b) + "px";
+    byId("bkWidth").value = spineW(b);
+    byId("bkWidthOut").textContent = spineW(b) + "px";
+    setSeg("bkDisplaySeg", "data-bulkdisplay", b.display === "front" ? "front" : "spine");
+  }
+  byId("bulkFrom").addEventListener("change", function(){
+    var b = state.books[this.value];
+    if(b) prefill(b);
+  });
+
+  byId("bulkCancel").addEventListener("click", closeBulk);
+  byId("bulkApply").addEventListener("click", applyBulk);
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeBulk(); });
+  byId("bulkCancel").focus();
+}
+function closeBulk(){
+  var ov = byId("bulkOverlay");
+  if(ov) ov.remove();
+  document.body.style.overflow = "";
+}
+function readShowRow(kind){
+  var out = {};
+  Array.prototype.forEach.call(
+    document.querySelectorAll('[data-showrow="' + kind + '"] [data-show]'),
+    function(cb){ out[cb.getAttribute("data-show")] = cb.checked; });
+  return out;
+}
+function applyBulk(){
+  var rows = BULK_ROWS.filter(function(r){
+    var cb = document.querySelector('[data-bulk="' + r.key + '"]');
+    return cb && cb.checked;
+  });
+  var books = selectedBooks();
+  if(!rows.length || !books.length){ closeBulk(); return; }
+
+  var v = {
+    spineColor: safeColor(byId("bkSpineColor").value, PALETTE[0]),
+    spineGradOn: byId("bkSpineGradOn").checked,
+    spineGrad2: safeColor(byId("bkSpineGrad2").value, null),
+    spineAngle: safeAngle(byId("bkSpineAngle").value, SPINE_ANGLE),
+    coverColor: safeColor(byId("bkCoverColor").value, PALETTE[0]),
+    coverGradOn: byId("bkCoverGradOn").checked,
+    coverGrad2: safeColor(byId("bkCoverGrad2").value, null),
+    coverAngle: safeAngle(byId("bkCoverAngle").value, COVER_ANGLE),
+    ribbon: safeColor(byId("bkRibbon").value, DEFAULT_RIBBON),
+    dotMode: segValue("bkDotSeg", "data-dotmode") || "default",
+    dotAuto: byId("bkDotAuto").checked,
+    dotColor: safeColor(byId("bkDotColor").value, null),
+    spineShow: readShowRow("bulkSpine"),
+    coverShow: readShowRow("bulkCover"),
+    textSize: parseFloat(byId("bkSize").value),
+    height: parseFloat(byId("bkHeight").value),
+    width: parseFloat(byId("bkWidth").value),
+    display: segValue("bkDisplaySeg", "data-bulkdisplay") === "front" ? "front" : "spine"
+  };
+  var writers = {
+    spineColor: function(b){ b.spineColor = v.spineColor; },
+    spineGrad:  function(b){
+      b.spineColor2 = v.spineGradOn ? v.spineGrad2 : null;
+      if(v.spineGradOn) b.spineAngle = v.spineAngle;
+    },
+    coverColor: function(b){ b.coverColor = v.coverColor; },
+    coverGrad:  function(b){
+      /* Pin the cover's own colour first: a cover with none inherits the spine's
+         gradient, and "off" has to mean solid. */
+      if(!b.coverColor) b.coverColor = coverFrom(b);
+      b.coverColor2 = v.coverGradOn ? v.coverGrad2 : null;
+      if(v.coverGradOn) b.coverAngle = v.coverAngle;
+    },
+    ribbonColor: function(b){ b.ribbonColor = v.ribbon; },
+    dot: function(b){
+      if(v.dotMode === "default") delete b.showStatusDot;
+      else b.showStatusDot = (v.dotMode === "show");
+      if(v.dotAuto) delete b.dotColor; else b.dotColor = v.dotColor;
+    },
+    spineShow: function(b){ b.spineShow = cloneVal(v.spineShow); },
+    coverShow: function(b){ b.coverShow = cloneVal(v.coverShow); },
+    textSize: function(b){ b.spineTextSize = v.textSize; },
+    height:   function(b){ b.spineHeight = v.height; },
+    width:    function(b){ b.spineWidth = v.width; },
+    display:  function(b){ b.display = v.display; }
+  };
+
+  var fields = [];
+  rows.forEach(function(r){
+    r.fields.forEach(function(f){ if(fields.indexOf(f) === -1) fields.push(f); });
+  });
+  var snap = books.map(function(b){
+    var o = {id:b.id};
+    fields.forEach(function(f){
+      o[f] = Object.prototype.hasOwnProperty.call(b, f) ? cloneVal(b[f]) : undefined;
+    });
+    return o;
+  });
+
+  books.forEach(function(b){
+    rows.forEach(function(r){ writers[r.key](b); });
+    saveBook(b);
+  });
+  var n = books.length;
+  closeBulk();
+  clearSelection();
+  drawSelectBar();
+  render();
+  offerUndo(snap, "Styling applied to " + n + " book" + (n === 1 ? "" : "s"));
 }
 
 /* ---------------- arranging ----------------
@@ -2215,6 +2748,7 @@ function startDrag(){
   if(!drag || drag.started) return;
   clearTimeout(drag.timer);
   drag.started = true;
+  isDragging = true;
   drag.ids = dragIds(drag.id);
   drag.ids.forEach(function(id){
     var el = bookEl(id);
@@ -2288,8 +2822,9 @@ function endDrag(commit){
   drag = null;
   if(d.ghost) d.ghost.remove();
   if(d.caret) d.caret.remove();
-  try { d.el.releasePointerCapture(d.pointerId); } catch(err){}
-  if(!d.started) return;
+  try { (d.capture || d.el).releasePointerCapture(d.pointerId); } catch(err){}
+  isDragging = false;
+  if(!d.started){ flushRender(); return; }
   if(commit && d.target){
     var items = liveItems();
     var afterId = d.target.index > 0 && items[d.target.index - 1]
@@ -2298,6 +2833,7 @@ function endDrag(commit){
   } else {
     render();
   }
+  flushRender();
 }
 
 /* ---------------- events ---------------- */
@@ -2311,8 +2847,18 @@ byId("library").addEventListener("click", function(e){
   if(state.arranging) return;
   var s = e.target.closest("[data-id]");
   if(!s) return;
-  window.__lastSpine = s.getAttribute("data-id");
-  openBook(s.getAttribute("data-id"), false);
+  var id = s.getAttribute("data-id");
+  if(state.selecting){
+    if(state.selection[id]) delete state.selection[id];
+    else state.selection[id] = true;
+    clearUndo();
+    drawSelectBar();
+    render();
+    return;
+  }
+  window.__lastSpine = id;
+  clearUndo();
+  openBook(id, false);
 });
 byId("library").addEventListener("pointerdown", function(e){
   if(!state.arranging || (e.button != null && e.button !== 0)) return;
@@ -2321,11 +2867,18 @@ byId("library").addEventListener("pointerdown", function(e){
   endDrag(false);
   drag = {
     id: el.getAttribute("data-id"), el: el, pointerId: e.pointerId,
+    capture: e.currentTarget,
     x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY,
     started: false, target: null, ids: [],
     timer: setTimeout(function(){ startDrag(); }, 180)
   };
-  try { el.setPointerCapture(e.pointerId); } catch(err){}
+  /* Capture on the shelf, not the book: the book can be replaced by an image
+     swap or a redraw, and a capture on a detached node is a dead drag. */
+  try { e.currentTarget.setPointerCapture(e.pointerId); } catch(err){}
+});
+/* An image inside a book would otherwise start a native drag on press. */
+byId("library").addEventListener("dragstart", function(e){
+  if(state.arranging || state.selecting) e.preventDefault();
 });
 byId("library").addEventListener("pointermove", function(e){
   if(!drag || e.pointerId !== drag.pointerId) return;
@@ -2354,13 +2907,19 @@ byId("groupBy").addEventListener("change", function(){
 });
 byId("groupStyle").addEventListener("change", function(){ state.groupStyle = this.value; render(); });
 byId("arrangeBtn").addEventListener("click", function(){
-  state.arranging = !state.arranging;
-  this.setAttribute("aria-pressed", String(state.arranging));
-  document.body.classList.toggle("arranging", state.arranging);
-  if(state.arranging) useCustomOrder(); else endDrag(false);
-  updateMoveSeg();
-  render();
+  clearUndo();
+  setArranging(!state.arranging);
 });
+byId("selectBtn").addEventListener("click", function(){
+  clearUndo();
+  setSelecting(!state.selecting);
+});
+byId("selectBar").addEventListener("click", function(e){
+  var q = e.target.closest("[data-sel]");
+  if(q){ clearUndo(); quickSelect(q.getAttribute("data-sel")); return; }
+  if(e.target.closest("#bulkBtn")) openBulk();
+});
+byId("undoBtn").addEventListener("click", runUndo);
 byId("moveSeg").addEventListener("click", function(e){
   var btn = e.target.closest("[data-move]");
   if(!btn || btn.disabled) return;
@@ -2376,7 +2935,7 @@ byId("sortBy").addEventListener("change", function(){
 });
 byId("dir").addEventListener("change", function(){ state.dir = this.value; savePrefs(); render(); });
 byId("favOnly").addEventListener("change", function(){ state.favOnly = this.checked; render(); });
-byId("setBtn").addEventListener("click", openSettings);
+byId("setBtn").addEventListener("click", function(){ clearUndo(); openSettings(); });
 byId("exportBtn").addEventListener("click", exportLibrary);
 byId("importBtn").addEventListener("click", importLibrary);
 byId("addBtn").addEventListener("click", function(){
@@ -2392,7 +2951,8 @@ byId("addBtn").addEventListener("click", function(){
 });
 document.addEventListener("keydown", function(e){
   if(e.key !== "Escape") return;
-  if(byId("setOverlay")) closeSettings();
+  if(byId("bulkOverlay")) closeBulk();
+  else if(byId("setOverlay")) closeSettings();
   else if(byId("bookOverlay")) closeBook();
 });
 
@@ -2422,6 +2982,7 @@ document.addEventListener("keydown", function(e){
 /* ---------------- boot ---------------- */
 buildSortOptions();
 updateMoveSeg();
+drawSelectBar();
 render();
 setSave("Lighting the candles…", "off");
 
@@ -2441,7 +3002,7 @@ if(window.claude && window.claude.use){
           state.categories = d.categories;
           buildSortOptions();
         }
-        if(typeof d.statusDots === "boolean") state.statusDots = d.statusDots;
+        if(d.statusDots !== undefined) state.statusDots = normStatusDots(d.statusDots);
         if(typeof d.sortBy === "string") state.sortBy = d.sortBy;
         if(d.dir === "asc" || d.dir === "desc") state.dir = d.dir;
         buildSortOptions();
@@ -2458,7 +3019,7 @@ if(window.claude && window.claude.use){
       });
       state.books = next;
       state.loaded = true;
-      setSave("Saved to your account", "");
+      setSaveQuiet("Saved to your account", "");
       render();
     }, function(err){
       state.loaded = true;

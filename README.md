@@ -19,6 +19,10 @@ your notes and theories on the verso.
   Emotional Impact and Scare by default — each 0–5 in halves, each with its own
   icon. The first category is what shows as pips on the spine. Click the left or
   right half of an icon, or use the arrow keys.
+- **Status dots you control.** A dot at the head of each spine marks its shelf.
+  Settings holds the default — on or off — and the colour of each of the five
+  statuses; any single book can override both, showing or hiding its dot and
+  taking a colour of its own.
 - **Per-book appearance.** Spine and cover are painted separately: each takes a
   colour from 18 swatches or any colour you like, and each can be a gradient with
   its own second colour and angle. Plus the favourite bookmark's colour, whether
@@ -37,6 +41,13 @@ your notes and theories on the verso.
   lot onto one continuous run with the joins marked on the plank.
 - **Arrange by hand.** Turn on Arrange and drag books into the order you want,
   with a pointer or a fingertip. Move one book, or move a whole series as a unit.
+- **Style many books at once.** Turn on Select, pick books by hand or with All /
+  Favorites / This shelf / Invert, then Apply styling. The sheet is a list of
+  properties — colours, gradients, bookmark, status dot, what shows on the spine
+  and on the cover, sizes, spine or front out — and only the rows you tick are
+  written, so nothing else on those books is disturbed. **Start from** fills the
+  controls from any selected book, which makes "give these the same spine as that
+  one" two clicks. Afterwards the status line offers a single **Undo**.
 - **Search** across titles, authors, series and the text of your own notes.
 - **Export and import.** Every copy of the app keeps its own store, so this is
   how a shelf moves between devices: **Export** writes the whole library — books,
@@ -56,7 +67,8 @@ Artifact runtime capabilities:
 
 - **`db`** — the library lives in an account-backed document store, one document
   per book in a `books` collection plus a `settings/prefs` document for rating
-  categories. Same shelf on every device, updating live.
+  categories, status dot settings and the current sort. Same shelf on every
+  device, updating live.
 - **`assets`** — uploaded cover images, served back to the page from its own
   origin. Preferred for covers where it exists; everything else goes to the
   browser's own image store below.
@@ -145,6 +157,7 @@ One document per book:
   "coverAngle": 165,
   "ribbonColor": "#C94059",
   "showStatusDot": true,
+  "dotColor": null,
   "spineShow": { "title": true, "author": true, "series": false, "number": false, "pips": true },
   "coverShow": { "title": true, "author": true, "series": true, "number": false, "pips": false },
   "spineTextSize": 1,
@@ -165,3 +178,7 @@ spine or cover rather than a gradient; `coverColor`/`coverColor2` absent mean th
 cover follows the spine's colours, and it keeps doing so until the cover is given
 colours of its own. `order` is the hand-arranged shelf position, used only by the
 **Custom (arranged)** sort and seeded from wherever the books already sat.
+
+`showStatusDot` absent means the book follows the global default in Settings;
+`true` or `false` is the book's own answer and outranks it. `dotColor` absent
+means the dot takes the global colour for that book's status.
