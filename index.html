@@ -300,13 +300,20 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .let-blind .spine-sub{color:color-mix(in srgb, var(--c) 74%, black)}
 
 /* ---------- bookbinding parts ---------- */
-.sp-hubs{position:absolute;top:15px;bottom:15px;left:0;right:0;z-index:1;background-image:var(--hubs)}
+.sp-hubs{position:absolute;top:15px;bottom:15px;left:2px;right:2px;z-index:1;background-image:var(--hubs)}
+/* Both stripe colours are translucent, so the band takes the spine's own colour
+   rather than sitting on it as opaque gold. The 1px line on the inner side is
+   what makes it read as tucked into the text block. The gold is the palette's
+   dim gilt rather than the bright one, and the alphas are set so the stripe
+   swing measures about 29 luminance levels rather than 62: at 62 it is a
+   checkerboard the moment anyone zooms in. */
 .sp-head,.sp-foot{
-  position:absolute;left:0;right:0;height:4px;z-index:3;opacity:.86;
-  background:repeating-linear-gradient(90deg, var(--gilt-bright) 0 3px, #4A3413 3px 6px);
+  position:absolute;left:3px;right:3px;height:3px;z-index:3;
+  background:repeating-linear-gradient(90deg,
+    rgba(138,113,57,.26) 0 2px, rgba(26,18,6,.42) 2px 4px);
 }
-.sp-head{top:0}
-.sp-foot{bottom:0}
+.sp-head{top:0;box-shadow:0 1px 0 rgba(0,0,0,.42)}
+.sp-foot{bottom:0;box-shadow:0 -1px 0 rgba(0,0,0,.42)}
 .sp-pages{
   position:absolute;top:4px;bottom:4px;right:0;width:2px;z-index:3;opacity:.42;
   background:repeating-linear-gradient(90deg,#EFE6D0 0 1px,#D3C6AC 1px 2px);
@@ -1443,19 +1450,25 @@ function displayMode(b){
   return b.display === "front" ? "front" : (b.display === "angle" ? "angle" : "spine");
 }
 function materialClass(b){ return " fin-" + finishOf(b) + " let-" + letteringOf(b); }
-/* Hubs are one gradient rather than five elements: 44 books is 220 nodes saved. */
-function hubCount(h){ return Math.max(3, Math.min(5, Math.round((h - 30) / 62))); }
-function hubsCSS(h){
-  var n = hubCount(h), step = (h - 30) / (n + 1), stops = [], i, y;
+function headbandsOn(b){ return typeof b.headbands === "boolean" ? b.headbands : true; }
+/* Hubs are one gradient rather than five elements: 44 books is 220 nodes saved.
+   Four or five ridges on a thin spine reads as segmentation rather than binding,
+   so a narrow book gets three at most however tall it is. */
+function hubCount(h, w){
+  var n = Math.max(3, Math.min(5, Math.round((h - 30) / 62)));
+  return w < 40 ? Math.min(3, n) : n;
+}
+function hubsCSS(h, w){
+  var n = hubCount(h, w), step = (h - 30) / (n + 1), stops = [], i, y;
   for(i = 1; i <= n; i++){
     y = step * i;
     stops.push(
-      "transparent " + (y - 2.5).toFixed(1) + "px",
-      "rgba(255,255,255,.18) " + (y - 2.5).toFixed(1) + "px",
-      "rgba(255,255,255,.09) " + (y - 1).toFixed(1) + "px",
-      "rgba(0,0,0,.12) " + (y + 1).toFixed(1) + "px",
-      "rgba(0,0,0,.30) " + (y + 2.5).toFixed(1) + "px",
-      "transparent " + (y + 2.5).toFixed(1) + "px");
+      "transparent " + (y - 2).toFixed(1) + "px",
+      "rgba(255,255,255,.09) " + (y - 2).toFixed(1) + "px",
+      "rgba(255,255,255,.045) " + (y - 0.8).toFixed(1) + "px",
+      "rgba(0,0,0,.06) " + (y + 0.8).toFixed(1) + "px",
+      "rgba(0,0,0,.15) " + (y + 2).toFixed(1) + "px",
+      "transparent " + (y + 2).toFixed(1) + "px");
   }
   return "linear-gradient(180deg," + stops.join(",") + ")";
 }
@@ -1677,8 +1690,9 @@ function chromeHTML(b){
 /* The bookbinding parts and the lettering, shared by a spine-out book and the
    spine face of an angled one. */
 function spineFaceHTML(b, h, fs, s, sub){
-  return (hubsOn(b) ? '<span class="sp-hubs" style="--hubs:' + hubsCSS(h) + '"></span>' : "") +
-    '<span class="sp-head"></span><span class="sp-foot"></span><span class="sp-pages"></span>' +
+  return (hubsOn(b) ? '<span class="sp-hubs" style="--hubs:' + hubsCSS(h, spineW(b)) + '"></span>' : "") +
+    (headbandsOn(b) ? '<span class="sp-head"></span><span class="sp-foot"></span>' : "") +
+    '<span class="sp-pages"></span>' +
     (s.number && b.seriesNumber ? '<span class="spine-num">' + esc(b.seriesNumber) + "</span>" : "") +
     (s.title ? '<span class="spine-text">' + esc(b.title) + "</span>" : "") +
     (sub ? '<span class="spine-sub">' + esc(sub) + "</span>" : "") +
@@ -2110,6 +2124,7 @@ function openBook(id, isNew){
               }).join("") +
             "</div>" +
             '<label class="check"><input type="checkbox" id="hubsToggle"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>" +
+            '<label class="check"><input type="checkbox" id="bandsToggle"' + (headbandsOn(b) ? " checked" : "") + ">Headbands</label>" +
           "</div>" +
 
           paintBlockHTML("spine", "Spine colour", color(b), spineTo(b), spineAngle(b)) +
@@ -2347,6 +2362,7 @@ function openBook(id, isNew){
       x.setAttribute("aria-pressed", String(x.getAttribute("data-lettering") === letteringOf(b)));
     });
     byId("hubsToggle").checked = hubsOn(b);
+    byId("bandsToggle").checked = headbandsOn(b);
     saveBook(b); render(); refreshPreview();
   });
   byId("letterSeg").addEventListener("click", function(e){
@@ -2360,6 +2376,10 @@ function openBook(id, isNew){
   });
   byId("hubsToggle").addEventListener("change", function(){
     b.hubs = this.checked;
+    saveBook(b); render();
+  });
+  byId("bandsToggle").addEventListener("change", function(){
+    b.headbands = this.checked;
     saveBook(b); render();
   });
 
@@ -2858,6 +2878,7 @@ function normalizeBook(raw){
   if(FINISHES.indexOf(b.finish) === -1) delete b.finish;
   if(LETTERINGS.indexOf(b.lettering) === -1) delete b.lettering;
   if(typeof b.hubs !== "boolean") delete b.hubs;
+  if(typeof b.headbands !== "boolean") delete b.headbands;
   if(["spine","front","angle"].indexOf(b.display) === -1) b.display = "spine";
   b.title = String(b.title == null ? "Untitled" : b.title);
   b.author = String(b.author == null ? "" : b.author);
@@ -3110,7 +3131,7 @@ var BULK_ROWS = [
   {key:"height",      label:"Book height",       fields:["spineHeight"]},
   {key:"width",       label:"Spine thickness",   fields:["spineWidth"]},
   {key:"display",     label:"Shelf display",     fields:["display"]},
-  {key:"finish",      label:"Finish",            fields:["finish","hubs"]},
+  {key:"finish",      label:"Finish",            fields:["finish","hubs","headbands"]},
   {key:"lettering",   label:"Lettering",         fields:["lettering"]}
 ];
 function cloneVal(v){ return (v && typeof v === "object") ? JSON.parse(JSON.stringify(v)) : v; }
@@ -3194,7 +3215,8 @@ function bulkRowHTML(row, b){
           return '<button type="button" data-bulkfinish="' + f + '" aria-pressed="' +
             (finishOf(b) === f) + '">' + FINISH_LABELS[f] + "</button>";
         }).join("") + "</div>" +
-        '<label class="check"><input type="checkbox" id="bkHubs"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>";
+        '<label class="check"><input type="checkbox" id="bkHubs"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>" +
+        '<label class="check"><input type="checkbox" id="bkBands"' + (headbandsOn(b) ? " checked" : "") + ">Headbands</label>";
       break;
     case "lettering":
       ctl = '<div class="seg" id="bkLetterSeg">' +
@@ -3280,6 +3302,7 @@ function openBulk(){
     setSeg("bkFinishSeg", "data-bulkfinish", finishOf(b));
     setSeg("bkLetterSeg", "data-bulkletter", letteringOf(b));
     byId("bkHubs").checked = hubsOn(b);
+    byId("bkBands").checked = headbandsOn(b);
   }
   byId("bulkFrom").addEventListener("change", function(){
     var b = state.books[this.value];
@@ -3332,6 +3355,7 @@ function applyBulk(){
     display: segValue("bkDisplaySeg", "data-bulkdisplay") || "spine",
     finish: segValue("bkFinishSeg", "data-bulkfinish") || "leather",
     hubs: byId("bkHubs").checked,
+    headbands: byId("bkBands").checked,
     lettering: segValue("bkLetterSeg", "data-bulkletter") || "gilt"
   };
   var writers = {
@@ -3360,7 +3384,7 @@ function applyBulk(){
     height:   function(b){ b.spineHeight = v.height; },
     width:    function(b){ b.spineWidth = v.width; },
     display:  function(b){ b.display = v.display; },
-    finish:   function(b){ b.finish = v.finish; b.hubs = v.hubs; },
+    finish:   function(b){ b.finish = v.finish; b.hubs = v.hubs; b.headbands = v.headbands; },
     lettering:function(b){ b.lettering = v.lettering; }
   };
 
