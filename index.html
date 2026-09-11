@@ -283,17 +283,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .fin-smooth{--grain:none}
 
 /* ---------- embossed lettering ---------- */
-.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{color:var(--gilt-bright)}
+.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num,
+.let-gilt .slab-title,.let-gilt .slab-num{color:var(--gilt-bright)}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{
+  .let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num,
+  .let-gilt .slab-title,.let-gilt .slab-num{
     background:linear-gradient(180deg,#F0D492,#C9A24C 45%,#8A6B24);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
 }
-.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{
+.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num,
+.let-gilt .slab-title,.let-gilt .slab-num{
   text-shadow:0 1px 0 rgba(255,255,255,.20), 0 -1px 1px rgba(0,0,0,.62);
 }
-.let-blind .spine-text,.let-blind .spine-sub,.let-blind .spine-num{
+.let-blind .spine-text,.let-blind .spine-sub,.let-blind .spine-num,
+.let-blind .slab-title,.let-blind .slab-num{
   color:color-mix(in srgb, var(--c) 82%, black);
   text-shadow:0 1px 0 rgba(255,255,255,.16), 0 -1px 1px rgba(0,0,0,.5);
 }
@@ -301,33 +305,23 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 
 /* ---------- bookbinding parts ---------- */
 .sp-hubs{position:absolute;top:15px;bottom:15px;left:2px;right:2px;z-index:1;background-image:var(--hubs)}
-/* Both stripe colours are translucent, so the band takes the spine's own colour
-   rather than sitting on it as opaque gold. The 1px line on the inner side is
-   what makes it read as tucked into the text block. The gold is the palette's
-   dim gilt rather than the bright one, and the alphas are set so the stripe
-   swing measures about 29 luminance levels rather than 62: at 62 it is a
-   checkerboard the moment anyone zooms in. */
-.sp-head,.sp-foot{
-  position:absolute;left:3px;right:3px;height:3px;z-index:3;
-  background:repeating-linear-gradient(90deg,
-    rgba(138,113,57,.26) 0 2px, rgba(26,18,6,.42) 2px 4px);
-}
-.sp-head{top:0;box-shadow:0 1px 0 rgba(0,0,0,.42)}
-.sp-foot{bottom:0;box-shadow:0 -1px 0 rgba(0,0,0,.42)}
+/* Where the text block sits inside the case: one dark line in from each end.
+   Nothing gold, nothing striped. */
+.sp-case{position:absolute;left:0;right:0;height:1px;z-index:3;background:rgba(0,0,0,.35)}
+.sp-case.top{top:4px}
+.sp-case.bot{bottom:4px}
+/* A real shelf shows a little text block beside the spine, and only there. Warm
+   parchment darkening at the outer edge so it recedes instead of glowing; no
+   repeating line, which at 2px only aliases into noise. */
 .sp-pages{
-  position:absolute;top:4px;bottom:4px;right:0;width:2px;z-index:3;opacity:.42;
-  background:repeating-linear-gradient(90deg,#EFE6D0 0 1px,#D3C6AC 1px 2px);
-  box-shadow:inset 1px 0 1px rgba(0,0,0,.55);
+  position:absolute;top:4px;bottom:4px;right:0;width:2px;z-index:3;opacity:.8;
+  background:linear-gradient(90deg,#C9BCA0 0%, #8E8269 55%, rgba(28,22,14,.9) 100%);
 }
 
 /* ---------- cover construction ---------- */
 .fc-board{
   position:absolute;inset:0;z-index:3;border-radius:inherit;
   box-shadow:inset 3px 3px 0 -1px rgba(255,255,255,.11), inset -3px -3px 0 -1px rgba(0,0,0,.34);
-}
-.fc-pages{
-  position:absolute;top:2px;bottom:2px;right:0;width:4px;z-index:4;opacity:.85;
-  background:repeating-linear-gradient(90deg,#EFE6D0 0 1px,#D3C6AC 1px 2px);
 }
 .fc-spine{
   position:absolute;top:0;bottom:0;left:0;width:5px;z-index:4;
@@ -345,17 +339,87 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   box-shadow:0 1px 0 rgba(255,255,255,.1);
 }
 
+/* ---------- stacked groups ----------
+   A book laid on its side, seen from the spine edge, so the title reads across.
+   The material stack is the same as a standing spine; only the edge shading is
+   re-aimed, since the curve of the spine now runs top to bottom. */
+.stack{
+  flex:0 0 auto;width:var(--sw);position:relative;
+  display:flex;flex-direction:column-reverse;align-items:flex-start;
+  padding:0 10px;
+}
+.slab{
+  flex:0 0 auto;width:var(--slw);height:var(--slh);
+  border:0;margin:0;padding:0 7px;cursor:pointer;position:relative;border-radius:2px;
+  display:flex;align-items:center;gap:5px;overflow:hidden;
+  box-shadow:0 3px 5px -2px rgba(0,0,0,.6);
+  --leaf-edge:linear-gradient(180deg,
+    rgba(0,0,0,.62) 0%, rgba(255,255,255,.15) 7%, rgba(255,255,255,.05) 21%,
+    rgba(0,0,0,.05) 52%, rgba(0,0,0,.30) 82%, rgba(0,0,0,.62) 100%);
+  transition:filter .2s;
+}
+.slab *{pointer-events:none}
+.slab::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16), inset 0 -1px 0 rgba(0,0,0,.46);
+}
+.slab:hover,.slab:focus-visible{filter:brightness(1.12);z-index:6}
+.slab.sel{outline:2px solid var(--gilt-bright);outline-offset:1px;z-index:5}
+.slab-title{
+  flex:1 1 auto;min-width:0;text-align:center;
+  font-family:var(--f-display);font-weight:600;font-size:var(--fs);letter-spacing:.04em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.slab-num{flex:0 0 auto;font-family:var(--f-data);font-size:calc(var(--fs) * .82);opacity:.85}
+.slab-pips{flex:0 0 auto;display:flex;gap:2px;align-items:center}
+.slab-pips b{width:3px;height:3px;border-radius:50%;background:var(--gilt-bright);box-shadow:0 0 4px rgba(234,203,128,.8)}
+.slab-pips b.half{background:linear-gradient(90deg,var(--gilt-bright) 50%,rgba(234,203,128,.2) 50%)}
+
+.grp-layout{
+  font-family:var(--f-display);font-size:.5rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  color:#2A2119;background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));
+  border:1px solid rgba(65,48,15,.5);border-radius:2px;padding:2px 6px;cursor:pointer;
+  white-space:nowrap;flex:0 0 auto;line-height:1.3;
+}
+.grp-layout:hover{background:linear-gradient(180deg,#F3DCA4,var(--gilt-bright))}
+/* Without a brass plate the control still has to be reachable, so it stands on
+   the plank on its own. */
+.name-plate.bare{
+  background:none;border:0;box-shadow:none;padding:0;height:auto;bottom:-2px;max-width:none;
+}
+.name-plate.bare::before,.name-plate.bare::after{display:none}
+.name-plate.bare .grp-layout{
+  background:linear-gradient(180deg,rgba(52,38,70,.94),rgba(16,12,23,.94));
+  color:var(--gilt);border-color:var(--hair);
+}
+.name-plate.bare .grp-layout:hover{color:var(--gilt-bright);border-color:var(--gilt-dim)}
+.plate .grp-layout{margin-left:2px}
+.arranging .grp-layout{pointer-events:none;opacity:.4}
+
 /* ---------- angled books ---------- */
 .angled{
   position:relative;flex:0 0 auto;width:var(--w);height:var(--h);
   border:0;padding:0;cursor:pointer;background:transparent;display:block;
   perspective:1000px;transform-origin:bottom center;
+  /* The eye sits a little above the book. At the default mid-height it is level
+     with the case and the top of the text block is edge-on — its underside
+     faces us and there is nothing to see. Twenty percent up exposes about three
+     pixels of it, which is the whole point of the top face. */
+  perspective-origin:50% -20%;
   transition:transform .26s cubic-bezier(.2,.8,.3,1);
 }
 .angled:hover,.angled:focus-visible{transform:translateY(-16px);z-index:5}
+/* The contact shadow, wider on the side the book leans away from. This is what
+   actually reads as "sitting on a shelf". */
+.angled::after{
+  content:"";position:absolute;z-index:-1;pointer-events:none;
+  left:-2px;right:-12px;bottom:-2px;height:11px;
+  background:radial-gradient(ellipse 58% 100% at 38% 0%,
+    rgba(0,0,0,.6) 0%, rgba(0,0,0,.34) 42%, transparent 78%);
+}
 .ang-scene{
   position:absolute;top:0;left:calc(var(--thick) * .22);height:100%;width:var(--cw);
-  transform-style:preserve-3d;transform-origin:left center;
+  transform-style:preserve-3d;transform-origin:bottom center;
   /* Turned the other way from a page-flip: the hinge edge comes toward the
      viewer, which is what puts the spine face in view down the left side. */
   transform:rotateY(26deg);
@@ -376,6 +440,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
      out of the book's left side, so it is the front of the face we see. */
   transform:translateZ(calc(var(--thick) / -2)) rotateY(-90deg);
   backface-visibility:hidden;overflow:hidden;border-radius:2px 0 0 2px;
+}
+.ang-top{
+  position:absolute;top:0;left:0;width:var(--cw);height:var(--thick);
+  transform-origin:top center;
+  transform:translateZ(calc(var(--thick) / -2)) rotateX(90deg);
+  backface-visibility:hidden;
+  background:linear-gradient(180deg, rgba(40,32,20,.95) 0%, #9E9177 62%, #C9BCA0 100%);
 }
 .angled *{pointer-events:none}
 
@@ -1191,8 +1262,21 @@ var state = {
   selecting:false, selection:{},
   statusDots:{show:true, colors:defaultDotColors()},
   defaultSections:DEFAULT_SECTIONS.slice(),
-  shelfPlates:{show:false, labels:{}, hidden:{}}
+  shelfPlates:{show:false, labels:{}, hidden:{}},
+  groupLayout:{}, defaultGroupLayout:"shelf"
 };
+var LAYOUTS = ["shelf","stack-neat","stack-messy"];
+var LAYOUT_LABEL = {shelf:"Shelf", "stack-neat":"Neat stack", "stack-messy":"Messy stack"};
+function normLayout(v, fallback){ return LAYOUTS.indexOf(v) === -1 ? fallback : v; }
+function normLayoutMap(v){
+  var out = {};
+  if(v && typeof v === "object"){
+    Object.keys(v).forEach(function(k){
+      if(LAYOUTS.indexOf(v[k]) !== -1) out[k] = v[k];
+    });
+  }
+  return out;
+}
 var secSeq = 0;
 function sectionId(){
   return "s" + Date.now().toString(36) + "-" + (++secSeq).toString(36) +
@@ -1449,8 +1533,26 @@ function hubsOn(b){
 function displayMode(b){
   return b.display === "front" ? "front" : (b.display === "angle" ? "angle" : "spine");
 }
+var ANG_DEG = 26, ANG_COS = Math.cos(ANG_DEG * Math.PI / 180), ANG_SIN = Math.sin(ANG_DEG * Math.PI / 180);
+var ANG_PERSP = 1000;
+function angledWidth(b){
+  /* Turned 26 degrees a book takes up cover*cos + thickness*sin on the plank,
+     plus four pixels so it never grazes its neighbours. */
+  return Math.ceil(Math.round(spineH(b) * 0.66) * ANG_COS + spineW(b) * ANG_SIN) + 4;
+}
+/* Perspective magnifies whatever leans toward the viewer about the element's
+   centre, so the near-bottom corner of a turned book is thrown BELOW the shelf
+   line and it clips into the plank. The overshoot is exact, so raise the book by
+   it rather than tilting the shelf every other book stands on. */
+var ANG_EYE = -0.20;            /* perspective-origin Y, as a fraction of height */
+function angledDrop(b){
+  var cw = Math.round(spineH(b) * 0.66), t = spineW(b), h = spineH(b);
+  var zNear = (cw / 2) * ANG_SIN + (t / 2) * ANG_COS;
+  /* Everything nearer the eye is magnified about the perspective origin, so the
+     book's near-bottom corner is thrown this far below the shelf line. */
+  return h * (1 - ANG_EYE) * zNear / (ANG_PERSP - zNear);
+}
 function materialClass(b){ return " fin-" + finishOf(b) + " let-" + letteringOf(b); }
-function headbandsOn(b){ return typeof b.headbands === "boolean" ? b.headbands : true; }
 /* Hubs are one gradient rather than five elements: 44 books is 220 nodes saved.
    Four or five ridges on a thin spine reads as segmentation rather than binding,
    so a narrow book gets three at most however tall it is. */
@@ -1539,6 +1641,8 @@ function savePrefs(){
     statusDots: state.statusDots,
     defaultSections: state.defaultSections,
     shelfPlates: state.shelfPlates,
+    groupLayout: state.groupLayout,
+    defaultGroupLayout: state.defaultGroupLayout,
     sortBy: state.sortBy,
     dir: state.dir,
     groupBy: state.groupBy,
@@ -1665,6 +1769,64 @@ function hydrateImages(root){
   });
 }
 
+/* ---------------- stacks ---------------- */
+function groupLayoutOf(gk){ return normLayout(state.groupLayout[gk], state.defaultGroupLayout); }
+function isStacked(gk){ return groupLayoutOf(gk) !== "shelf"; }
+function cycleLayout(gk){
+  var next = LAYOUTS[(LAYOUTS.indexOf(groupLayoutOf(gk)) + 1) % LAYOUTS.length];
+  if(next === state.defaultGroupLayout) delete state.groupLayout[gk];
+  else state.groupLayout[gk] = next;
+  savePrefs(); render();
+}
+function slabWidth(b){ return Math.round(spineH(b) * 0.66); }
+/* A minimum so a thin volume is still tappable. */
+function slabHeight(b){ return Math.max(14, spineW(b)); }
+/* Seeded from the book's id through the existing hash, so a messy stack looks
+   the same on every render and after a reload. */
+function messyShift(id){ return (hash(id) % 2001) / 100 - 10; }
+function messyTilt(id){ return (hash("tilt:" + id) % 301) / 100 - 1.5; }
+function layoutBtnHTML(gk){
+  if(state.groupBy === "none" || !gk) return "";
+  return '<button class="grp-layout" type="button" data-glayout="' + esc(gk) +
+    '" title="Shelf, neat stack or messy stack">' + LAYOUT_LABEL[groupLayoutOf(gk)] + "</button>";
+}
+function slabHTML(b, messy){
+  var w = slabWidth(b), hgt = slabHeight(b), sh = show(b);
+  var fs = Math.max(8, Math.min(13, hgt * 0.48));
+  var base = spineBaseCSS(b);
+  var tf = messy
+    ? ";transform:translateX(" + messyShift(b.id).toFixed(1) + "px) rotate(" + messyTilt(b.id).toFixed(2) + "deg)"
+    : "";
+  var st = STATUS[b.status] || STATUS.want;
+  var pips = sh.pips ? pipMarks(b) : "";
+  return '<button class="slab leaf' + materialClass(b) + (isSelected(b) ? " sel" : "") +
+      '" type="button" data-id="' + esc(b.id) + '"' +
+    ' style="--slw:' + w + 'px;--slh:' + hgt + 'px;--c:' + esc(color(b)) + ';--fs:' + fs.toFixed(1) + 'px' +
+      (base ? ";--leaf-base:" + base : "") + tf + '"' +
+    (b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "") +
+    ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") +
+    '" aria-label="' + esc(b.title) + ", " + esc(b.author || "unknown author") + ", " + esc(st.label) + '. Open.">' +
+    (state.selecting && isSelected(b)
+      ? '<span class="sel-tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></span>' : "") +
+    (sh.number && b.seriesNumber ? '<span class="slab-num">' + esc(b.seriesNumber) + "</span>" : "") +
+    (sh.title ? '<span class="slab-title">' + esc(b.title) + "</span>" : "") +
+    (pips ? '<span class="slab-pips">' + pips + "</span>" : "") +
+  "</button>";
+}
+function stackHTML(st){
+  var messy = groupLayoutOf(st.gk) === "stack-messy";
+  /* Widest at the bottom. The sort is stable, so books of equal width keep the
+     order the group already had. column-reverse then puts the first child at the
+     bottom, which also makes each slab paint over the one beneath it. */
+  var books = st.books.slice().sort(function(x, y){ return slabWidth(y) - slabWidth(x); });
+  var widest = books.reduce(function(m, b){ return Math.max(m, slabWidth(b)); }, 0);
+  var last = st.books[st.books.length - 1];
+  return '<div class="stack" data-item="" data-stack="' + esc(st.gk) +
+      '" data-last="' + esc(last ? last.id : "") + '" style="--sw:' + (widest + 20) + 'px">' +
+    books.map(function(b){ return slabHTML(b, messy); }).join("") +
+  "</div>";
+}
+
 /* ---------------- shelf items ---------------- */
 function pipRow(b){
   var key = state.categories[0] ? state.categories[0].key : "overall";
@@ -1689,17 +1851,17 @@ function chromeHTML(b){
 }
 /* The bookbinding parts and the lettering, shared by a spine-out book and the
    spine face of an angled one. */
-function spineFaceHTML(b, h, fs, s, sub){
+function spineFaceHTML(b, h, fs, s, sub, withPages){
   return (hubsOn(b) ? '<span class="sp-hubs" style="--hubs:' + hubsCSS(h, spineW(b)) + '"></span>' : "") +
-    (headbandsOn(b) ? '<span class="sp-head"></span><span class="sp-foot"></span>' : "") +
-    '<span class="sp-pages"></span>' +
+    '<span class="sp-case top"></span><span class="sp-case bot"></span>' +
+    (withPages ? '<span class="sp-pages"></span>' : "") +
     (s.number && b.seriesNumber ? '<span class="spine-num">' + esc(b.seriesNumber) + "</span>" : "") +
     (s.title ? '<span class="spine-text">' + esc(b.title) + "</span>" : "") +
     (sub ? '<span class="spine-sub">' + esc(sub) + "</span>" : "") +
     (s.pips ? pipRow(b) : "");
 }
 function coverPartsHTML(){
-  return '<span class="fc-board"></span><span class="fc-pages"></span><span class="fc-spine"></span>';
+  return '<span class="fc-board"></span><span class="fc-spine"></span>';
 }
 function spineFontSize(b, h, sub){
   /* Fit the lettering to the room it actually has: spine height, less the
@@ -1729,7 +1891,7 @@ function itemHTML(b, isLast, count){
 
   if(mode === "front"){
     var w = Math.round(h * 0.66);
-    return '<button class="faced' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '"' +
+    return '<button class="faced' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '" data-item=""' +
       ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(coverFrom(b)) + ';--sc:' + esc(color(b)) + '"' +
       coverImgAttr + tip +
       coverInner(b, w) + coverPartsHTML() + chromeHTML(b) + "</button>";
@@ -1737,12 +1899,14 @@ function itemHTML(b, isLast, count){
 
   if(mode === "angle"){
     var cw = Math.round(h * 0.66);
-    return '<button class="angled' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '"' +
+    return '<button class="angled' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '" data-item=""' +
       ' style="--h:' + h + 'px;--w:' + itemWidth(b) + 'px;--cw:' + cw + 'px;--thick:' + spineW(b) +
-        'px;--c:' + esc(color(b)) + ';--fs:' + fs + (base ? ';--leaf-base:' + base : "") + '"' +
+        'px;--c:' + esc(color(b)) + ';--fs:' + fs + ';margin-bottom:' + angledDrop(b).toFixed(1) + 'px' +
+        (base ? ';--leaf-base:' + base : "") + '"' +
       spineImgAttr + coverImgAttr + tip +
       '<span class="ang-scene">' +
-        '<span class="ang-side leaf spine-body">' + spineFaceHTML(b, h, fs, s, sub) + "</span>" +
+        '<span class="ang-side leaf spine-body">' + spineFaceHTML(b, h, fs, s, sub, false) + "</span>" +
+        '<span class="ang-top"></span>' +
         '<span class="ang-front" style="--c:' + esc(coverFrom(b)) + ';--sc:' + esc(color(b)) + '">' +
           coverInner(b, cw) + coverPartsHTML() + "</span>" +
       "</span>" +
@@ -1751,11 +1915,11 @@ function itemHTML(b, isLast, count){
 
   var lean = (isLast && count > 3 && hash(b.id) % 3 === 0) ? " lean" : "";
   return '<button class="spine leaf spine-body' + lean + mat + (isSelected(b) ? " sel" : "") + narrow +
-      '" type="button" data-id="' + esc(b.id) + '"' +
+      '" type="button" data-id="' + esc(b.id) + '" data-item=""' +
     ' style="--h:' + h + 'px;--w:' + spineW(b) + 'px;--c:' + esc(color(b)) + ';--fs:' + fs +
       (base ? ';--leaf-base:' + base : "") + '"' +
     spineImgAttr + tip +
-    chromeHTML(b) + spineFaceHTML(b, h, fs, s, sub) + "</button>";
+    chromeHTML(b) + spineFaceHTML(b, h, fs, s, sub, true) + "</button>";
 }
 
 /* ---------------- render ---------------- */
@@ -1788,7 +1952,7 @@ function render(){
     var g = buildGroups(books);
     if(state.groupStyle === "own"){
       html = g.order.map(function(k){
-        return shelfHTML(k, g.groups[k].map(function(b){ return {b:b, gk:plateKey(k)}; }));
+        return shelfHTML(k, groupEntries(k, g.groups[k], 0), plateKey(k));
       }).join("");
     } else {
       /* Continuous: one unbroken run of shelves. Cluster members stay adjacent
@@ -1796,9 +1960,7 @@ function render(){
          and leaving a metre of empty wood. */
       var entries = [];
       g.order.forEach(function(k, gi){
-        g.groups[k].forEach(function(b, bi){
-          entries.push({b:b, sep: gi > 0 && bi === 0, gk:plateKey(k)});
-        });
+        entries = entries.concat(groupEntries(k, g.groups[k], gi));
       });
       html = shelfHTML("", entries);
     }
@@ -1807,6 +1969,12 @@ function render(){
   hydrateImages(lib);
   positionPlates(lib);
   drawPlateControls();
+}
+/* A stacked group is one item on the plank; it does not also stand books up. */
+function groupEntries(k, books, gi){
+  var gk = plateKey(k);
+  if(isStacked(gk)) return [{stack:{gk:gk, books:books}, gk:gk, sep: gi > 0}];
+  return books.map(function(b, bi){ return {b:b, gk:gk, sep: gi > 0 && bi === 0}; });
 }
 /* Group names are namespaced by the grouping in force, so wording written for
    the series "Favorites" never leaks onto the Favorites group. */
@@ -1827,7 +1995,7 @@ function positionPlates(root){
   Array.prototype.forEach.call(root.querySelectorAll(".shelf"), function(shelf){
     var plates = shelf.querySelectorAll(".name-plate");
     if(!plates.length) return;
-    var books = shelf.querySelectorAll("[data-id]");
+    var books = shelf.querySelectorAll("[data-item]");
     var sr = shelf.getBoundingClientRect();
     Array.prototype.forEach.call(plates, function(p){
       var a = books[parseInt(p.getAttribute("data-from"), 10)];
@@ -1836,7 +2004,9 @@ function positionPlates(root){
       var left = a.getBoundingClientRect().left - sr.left;
       var right = z.getBoundingClientRect().right - sr.left;
       p.style.left = Math.round((left + right) / 2) + "px";
-      p.style.maxWidth = Math.max(28, Math.round(right - left) - 12) + "px";
+      if(!p.classList.contains("bare")){
+        p.style.maxWidth = Math.max(28, Math.round(right - left) - 12) + "px";
+      }
     });
   });
 }
@@ -1867,20 +2037,26 @@ function itemWidth(b){
   if(m === "front") return Math.round(spineH(b) * 0.66);
   /* Turned 26 degrees, a book takes up cover*cos + thickness*sin on the plank.
      Pack with the cover width and every row overflows. */
-  if(m === "angle") return Math.ceil(Math.round(spineH(b) * 0.66) * 0.8988 + spineW(b) * 0.4384);
+  if(m === "angle") return angledWidth(b);
   return spineW(b);
+}
+function entryWidth(e){
+  if(e.stack){
+    return e.stack.books.reduce(function(m, b){ return Math.max(m, slabWidth(b)); }, 0) + 20;
+  }
+  return itemWidth(e.b);
 }
 function packRows(entries, avail){
   var rows = [], cur = [], w = 0, GAP = 5, SEPW = 8;
   entries.forEach(function(e){
-    var bw = itemWidth(e.b);
+    var bw = entryWidth(e);
     var sep = !!e.sep;
     var lead = cur.length ? (sep ? GAP + SEPW + GAP : GAP) : 0;
     if(cur.length && w + lead + bw > avail){
       rows.push(cur); cur = []; w = 0; lead = 0; sep = false;
     }
     w += lead + bw;
-    cur.push({b:e.b, sep:sep && cur.length > 0, gk:e.gk});
+    cur.push({b:e.b, stack:e.stack, sep:sep && cur.length > 0, gk:e.gk});
   });
   if(cur.length) rows.push(cur);
   return rows;
@@ -1890,7 +2066,7 @@ function shelfWidth(){
   return Math.max(120, (lib ? lib.clientWidth : 900) - 32);
 }
 function platesHTML(row){
-  if(!state.shelfPlates.show) return "";
+  if(state.groupBy === "none") return "";
   var runs = [], cur = null;
   row.forEach(function(e, i){
     if(!e.gk) { cur = null; return; }
@@ -1898,25 +2074,30 @@ function platesHTML(row){
     else cur.to = i;
   });
   return runs.map(function(r){
-    if(state.shelfPlates.hidden[r.gk]) return "";
+    var pos = ' data-pkey="' + esc(r.gk) + '" data-from="' + r.from + '" data-to="' + r.to + '"';
+    if(!state.shelfPlates.show || state.shelfPlates.hidden[r.gk]){
+      return '<div class="name-plate bare"' + pos + ">" + layoutBtnHTML(r.gk) + "</div>";
+    }
     var name = plateName(r.gk);
-    return '<div class="name-plate" data-pkey="' + esc(r.gk) + '" data-from="' + r.from +
-        '" data-to="' + r.to + '" title="' + esc(name) + '">' +
+    return '<div class="name-plate"' + pos + ' title="' + esc(name) + '">' +
       '<span class="plate-text">' + esc(name) + "</span>" +
+      layoutBtnHTML(r.gk) +
       '<button class="plate-hide" type="button" data-phide="' + esc(r.gk) +
         '" aria-label="Hide this plate" title="Hide this plate">&times;</button>' +
     "</div>";
   }).join("");
 }
-function shelfHTML(label, entries){
+function shelfHTML(label, entries, gk){
+  var count = entries.reduce(function(n, e){ return n + (e.stack ? e.stack.books.length : 1); }, 0);
   var plate = label
-    ? '<div class="plate"><i></i><h2>' + esc(label) + '</h2><span class="cnt">' + entries.length + '</span><i></i></div>'
+    ? '<div class="plate"><i></i><h2>' + esc(label) + '</h2><span class="cnt">' + count + "</span>" +
+      layoutBtnHTML(gk) + "<i></i></div>"
     : "";
   var rows = packRows(entries, shelfWidth());
   var shelves = rows.map(function(row){
     var items = row.map(function(e,i){
       return (e.sep ? '<span class="cluster-gap" aria-hidden="true"></span>' : "") +
-        itemHTML(e.b, i === row.length-1, row.length);
+        (e.stack ? stackHTML(e.stack) : itemHTML(e.b, i === row.length-1, row.length));
     }).join("");
     return '<div class="shelf"><div class="books">' + items + '</div><div class="plank"></div>' +
       platesHTML(row) + "</div>";
@@ -2124,7 +2305,6 @@ function openBook(id, isNew){
               }).join("") +
             "</div>" +
             '<label class="check"><input type="checkbox" id="hubsToggle"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>" +
-            '<label class="check"><input type="checkbox" id="bandsToggle"' + (headbandsOn(b) ? " checked" : "") + ">Headbands</label>" +
           "</div>" +
 
           paintBlockHTML("spine", "Spine colour", color(b), spineTo(b), spineAngle(b)) +
@@ -2362,7 +2542,6 @@ function openBook(id, isNew){
       x.setAttribute("aria-pressed", String(x.getAttribute("data-lettering") === letteringOf(b)));
     });
     byId("hubsToggle").checked = hubsOn(b);
-    byId("bandsToggle").checked = headbandsOn(b);
     saveBook(b); render(); refreshPreview();
   });
   byId("letterSeg").addEventListener("click", function(e){
@@ -2376,10 +2555,6 @@ function openBook(id, isNew){
   });
   byId("hubsToggle").addEventListener("change", function(){
     b.hubs = this.checked;
-    saveBook(b); render();
-  });
-  byId("bandsToggle").addEventListener("change", function(){
-    b.headbands = this.checked;
     saveBook(b); render();
   });
 
@@ -2807,6 +2982,8 @@ function libraryPayload(images){
     statusDots:state.statusDots,
     defaultSections:state.defaultSections,
     shelfPlates:state.shelfPlates,
+    groupLayout:state.groupLayout,
+    defaultGroupLayout:state.defaultGroupLayout,
     categories:state.categories,
     books:list(),
     images:images || {}
@@ -2878,7 +3055,7 @@ function normalizeBook(raw){
   if(FINISHES.indexOf(b.finish) === -1) delete b.finish;
   if(LETTERINGS.indexOf(b.lettering) === -1) delete b.lettering;
   if(typeof b.hubs !== "boolean") delete b.hubs;
-  if(typeof b.headbands !== "boolean") delete b.headbands;
+  delete b.headbands;   /* dropped feature; ignored if an older file carries it */
   if(["spine","front","angle"].indexOf(b.display) === -1) b.display = "spine";
   b.title = String(b.title == null ? "Untitled" : b.title);
   b.author = String(b.author == null ? "" : b.author);
@@ -2939,6 +3116,10 @@ function finishImport(payload, incoming, mode){
   if(payload.shelfPlates !== undefined){
     state.shelfPlates = normPlates(payload.shelfPlates);
     byId("platesOn").checked = state.shelfPlates.show;
+  }
+  if(payload.groupLayout !== undefined) state.groupLayout = normLayoutMap(payload.groupLayout);
+  if(payload.defaultGroupLayout !== undefined){
+    state.defaultGroupLayout = normLayout(payload.defaultGroupLayout, "shelf");
   }
   savePrefs();
   render();
@@ -3131,7 +3312,7 @@ var BULK_ROWS = [
   {key:"height",      label:"Book height",       fields:["spineHeight"]},
   {key:"width",       label:"Spine thickness",   fields:["spineWidth"]},
   {key:"display",     label:"Shelf display",     fields:["display"]},
-  {key:"finish",      label:"Finish",            fields:["finish","hubs","headbands"]},
+  {key:"finish",      label:"Finish",            fields:["finish","hubs"]},
   {key:"lettering",   label:"Lettering",         fields:["lettering"]}
 ];
 function cloneVal(v){ return (v && typeof v === "object") ? JSON.parse(JSON.stringify(v)) : v; }
@@ -3215,8 +3396,7 @@ function bulkRowHTML(row, b){
           return '<button type="button" data-bulkfinish="' + f + '" aria-pressed="' +
             (finishOf(b) === f) + '">' + FINISH_LABELS[f] + "</button>";
         }).join("") + "</div>" +
-        '<label class="check"><input type="checkbox" id="bkHubs"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>" +
-        '<label class="check"><input type="checkbox" id="bkBands"' + (headbandsOn(b) ? " checked" : "") + ">Headbands</label>";
+        '<label class="check"><input type="checkbox" id="bkHubs"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>";
       break;
     case "lettering":
       ctl = '<div class="seg" id="bkLetterSeg">' +
@@ -3302,7 +3482,6 @@ function openBulk(){
     setSeg("bkFinishSeg", "data-bulkfinish", finishOf(b));
     setSeg("bkLetterSeg", "data-bulkletter", letteringOf(b));
     byId("bkHubs").checked = hubsOn(b);
-    byId("bkBands").checked = headbandsOn(b);
   }
   byId("bulkFrom").addEventListener("change", function(){
     var b = state.books[this.value];
@@ -3355,7 +3534,6 @@ function applyBulk(){
     display: segValue("bkDisplaySeg", "data-bulkdisplay") || "spine",
     finish: segValue("bkFinishSeg", "data-bulkfinish") || "leather",
     hubs: byId("bkHubs").checked,
-    headbands: byId("bkBands").checked,
     lettering: segValue("bkLetterSeg", "data-bulkletter") || "gilt"
   };
   var writers = {
@@ -3384,7 +3562,7 @@ function applyBulk(){
     height:   function(b){ b.spineHeight = v.height; },
     width:    function(b){ b.spineWidth = v.width; },
     display:  function(b){ b.display = v.display; },
-    finish:   function(b){ b.finish = v.finish; b.hubs = v.hubs; b.headbands = v.headbands; },
+    finish:   function(b){ b.finish = v.finish; b.hubs = v.hubs; },
     lettering:function(b){ b.lettering = v.lettering; }
   };
 
@@ -3459,12 +3637,26 @@ function bookEl(id){
   for(i=0;i<all.length;i++) if(all[i].getAttribute("data-id") === id) return all[i];
   return null;
 }
-function dragIds(id){
+/* Dragging any slab moves its whole stack: the books in a stack follow the sort,
+   they are not reordered against each other by hand. */
+function dragIds(el){
+  if(!el) return [];
+  if(el.hasAttribute("data-stack")){
+    return Array.prototype.map.call(el.querySelectorAll("[data-id]"), function(x){
+      return x.getAttribute("data-id");
+    });
+  }
+  var id = el.getAttribute("data-id");
   var b = state.books[id];
   if(state.moveMode !== "group" || state.groupBy === "none" || !b) return [id];
   var key = groupKey(b);
   return list().sort(cmp).filter(function(x){ return groupKey(x) === key; })
     .map(function(x){ return x.id; });
+}
+/* Which book a drop should land after: for a stack, the last book in the
+   group's own order rather than whichever slab happens to sit at the bottom. */
+function itemAnchorId(el){
+  return el.getAttribute("data-last") || el.getAttribute("data-id");
 }
 /* Which gap the pointer is over: find the shelf row by vertical bounds first,
    then the first book in it whose horizontal midpoint the pointer is left of. */
@@ -3492,7 +3684,7 @@ function dropTarget(items, x, y){
   return {index: items.indexOf(row[row.length-1]) + 1, x: r.right + 2, top: r.top, height: r.height};
 }
 function liveItems(){
-  return Array.prototype.filter.call(byId("library").querySelectorAll("[data-id]"), function(el){
+  return Array.prototype.filter.call(byId("library").querySelectorAll("[data-item]"), function(el){
     return !el.classList.contains("drag-source");
   });
 }
@@ -3501,11 +3693,13 @@ function startDrag(){
   clearTimeout(drag.timer);
   drag.started = true;
   isDragging = true;
-  drag.ids = dragIds(drag.id);
+  drag.ids = dragIds(drag.el);
   drag.ids.forEach(function(id){
     var el = bookEl(id);
-    if(el) el.classList.add("drag-source");
+    var item = el && el.closest("[data-item]");
+    if(item) item.classList.add("drag-source");
   });
+  drag.el.classList.add("drag-source");
   var r = drag.el.getBoundingClientRect();
   var ghost = document.createElement("div");
   ghost.className = "drag-ghost";
@@ -3580,7 +3774,7 @@ function endDrag(commit){
   if(commit && d.target){
     var items = liveItems();
     var afterId = d.target.index > 0 && items[d.target.index - 1]
-      ? items[d.target.index - 1].getAttribute("data-id") : null;
+      ? itemAnchorId(items[d.target.index - 1]) : null;
     applyArrange(d.ids, afterId);
   } else {
     render();
@@ -3597,6 +3791,8 @@ byId("tabs").addEventListener("click", function(e){
 });
 byId("library").addEventListener("click", function(e){
   if(state.arranging) return;
+  var glay = e.target.closest("[data-glayout]");
+  if(glay){ cycleLayout(glay.getAttribute("data-glayout")); return; }
   var hide = e.target.closest("[data-phide]");
   if(hide){
     state.shelfPlates.hidden[hide.getAttribute("data-phide")] = true;
@@ -3649,7 +3845,7 @@ byId("library").addEventListener("keydown", function(e){
 });
 byId("library").addEventListener("pointerdown", function(e){
   if(!state.arranging || (e.button != null && e.button !== 0)) return;
-  var el = e.target.closest("[data-id]");
+  var el = e.target.closest("[data-item]");
   if(!el) return;
   endDrag(false);
   drag = {
@@ -3807,6 +4003,8 @@ if(window.claude && window.claude.use){
           state.shelfPlates = normPlates(d.shelfPlates);
           byId("platesOn").checked = state.shelfPlates.show;
         }
+        if(d.groupLayout !== undefined) state.groupLayout = normLayoutMap(d.groupLayout);
+        if(d.defaultGroupLayout !== undefined) state.defaultGroupLayout = normLayout(d.defaultGroupLayout, "shelf");
         if(typeof d.sortBy === "string") state.sortBy = d.sortBy;
         if(d.dir === "asc" || d.dir === "desc") state.dir = d.dir;
         if(typeof d.groupBy === "string" && byId("groupBy").querySelector('[value="' + d.groupBy + '"]')){

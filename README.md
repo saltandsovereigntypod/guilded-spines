@@ -38,15 +38,23 @@ your notes and theories on the verso.
   carries the lot.
 - **Books that look like books.** An untouched book is a leather-bound hardback:
   grain, a broad sheen down the left third, raised hubs between the gilt rules,
-  striped headbands at head and tail, a sliver of page block at the fore edge and
-  lettering that reads as tooled into the material rather than printed on it.
+  a dark line in from each end where the text block sits inside the case, a warm
+  parchment sliver of page block at the fore edge and lettering that reads as
+  tooled into the material rather than printed on it.
   Five finishes — leather, cloth, paper, foil, smooth — each with its own grain
   and sheen, and three lettering treatments: embossed gilt, blind emboss, and the
   flat painted look.
 - **Three ways to stand.** Spine out, front out, or **angled** — the cover turned
-  towards you with the spine still in view down its left side, built as real CSS
-  3D with a front face and a spine face that carry their own lettering. Both the
-  cover and the spine can take an image of your own.
+  towards you with the spine still in view down its left side and a sliver of the
+  text block's top edge catching the light, built as real CSS 3D with faces that
+  carry their own lettering, planted on the shelf line with a contact shadow.
+  Both the cover and the spine can take an image of your own.
+- **Or lay a group flat.** Any group can be a **stack** instead of a row of
+  standing books: each volume becomes a slab seen from the spine, title reading
+  across, widest at the bottom, in the same leather or cloth it would have had
+  standing up. Neat stacks line their edges up; messy ones sit a little askew,
+  seeded from each book's id so the pile looks the same every time you come
+  back. Per group, cycled from the control on its plate.
 - **Sort and group.** Sort by series & volume, title, author, volume number,
   shelf, favourites, date added, progress, any rating category, or your own
   arrangement. Group by series, author, shelf, rating, favourites or first
@@ -140,8 +148,18 @@ background is one stack, topmost first: the edge shading that makes the spine
 read as curved, the finish's sheen, the grain at `background-blend-mode: overlay`,
 and then the base. The base is the *only* layer a custom colour or gradient
 touches, so a book set to a purple-to-black gradient is still visibly leather,
-with the same grain, sheen, hubs and headbands as an untouched one. There is a
-single rendering path and no branch on whether a book has been recoloured.
+with the same grain, sheen and hubs as an untouched one. There is a single
+rendering path and no branch on whether a book has been recoloured, and a slab
+in a stack is the same stack of layers with its edge shading re-aimed.
+
+An angled book is planted rather than floated. Perspective magnifies whatever
+leans towards the eye, about the perspective origin, so a turned book's
+near-bottom corner is thrown below the shelf line and cuts into the plank. The
+overshoot is exact — height × (1 − eye) × zNear ÷ (distance − zNear) — so the
+book is raised by precisely that rather than the shelf being tilted under every
+other book on the row. The eye itself sits a fifth of a book-height above the
+top, which is what exposes the few pixels of the text block's top edge; level
+with the case, that edge is edge-on and there is nothing to see.
 
 The grain is one `feTurbulence` data URI per finish, declared once on `:root` and
 shared by every book — a stack of radial gradients per spine is far too slow at
@@ -227,7 +245,9 @@ means the dot takes the global colour for that book's status.
 `paper`, `foil`, `smooth` and defaults to leather; `lettering` is `gilt`, `blind`
 or `painted` and, when absent, follows the finish — blind on paper, gilt
 everywhere else. `hubs` absent means raised hubs are drawn on every finish but
-cloth and paper. A book carrying none of these renders as leather with gilt
+cloth and paper. Group layout lives in the settings record rather than on books,
+as `groupLayout` — a map of namespaced group key to `shelf`, `stack-neat` or
+`stack-messy` — alongside `defaultGroupLayout`. A book carrying none of these renders as leather with gilt
 embossed lettering and hubs on, which is why the shelf changes appearance on the
 first load after this feature and no records need rewriting.
 
