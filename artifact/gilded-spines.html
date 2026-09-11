@@ -126,7 +126,7 @@ select{
   background-position:calc(100% - 15px) 55%, calc(100% - 10px) 55%;
   background-size:5px 5px,5px 5px;background-repeat:no-repeat;
 }
-input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.spine:focus-visible,.faced:focus-visible,.pips:focus-visible,.swatch:focus-visible{
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.spine:focus-visible,.faced:focus-visible,.angled:focus-visible,.pips:focus-visible,.swatch:focus-visible{
   outline:2px solid var(--gilt-bright);outline-offset:2px;
 }
 input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:0 0 0 3px rgba(201,162,76,.1)}
@@ -143,6 +143,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .btn.ghost:hover{background:linear-gradient(180deg,var(--gilt-bright),var(--gilt))}
 .btn.small{padding:6px 10px;font-size:.6rem}
 .btn.danger:hover{background:linear-gradient(180deg,var(--rose-bright),var(--rose));border-color:var(--rose-bright);color:var(--parchment)}
+.btn.peril{color:#E7A9B4;border-color:rgba(201,64,89,.45);background:linear-gradient(180deg,rgba(90,24,38,.5),rgba(40,12,20,.5))}
+.btn.peril:hover{background:linear-gradient(180deg,var(--rose-bright),var(--rose));border-color:var(--rose-bright);color:var(--parchment)}
 .toggle{display:flex;align-items:center;gap:7px;font-family:var(--f-data);font-size:.84rem;color:var(--dim);cursor:pointer;padding-bottom:9px}
 .toggle input{accent-color:var(--gilt);width:15px;height:15px;cursor:pointer}
 
@@ -212,28 +214,171 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   background:linear-gradient(180deg,transparent,var(--gilt-bright));opacity:.5;
 }
 
+/* ---------- material ----------
+   One grain image per finish, generated once with feTurbulence and reused by
+   every book: a stack of radial gradients per spine is far too slow at this
+   count. Colour never reaches these layers — see .leaf below.
+   The noise is pushed away from mid-grey before it is blended: overlay treats
+   mid-grey as a no-op, so straight turbulence at these opacities moves a dark
+   leather by under one luminance level and reads as nothing at all. */
+:root{
+  --grain-leather:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncG type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncB type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncA type='discrete' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.16'/%3E%3C/svg%3E");
+  --grain-cloth:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncG type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncB type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncA type='discrete' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+  --grain-paper:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.2' intercept='-1.1'/%3E%3CfeFuncG type='linear' slope='3.2' intercept='-1.1'/%3E%3CfeFuncB type='linear' slope='3.2' intercept='-1.1'/%3E%3CfeFuncA type='discrete' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.09'/%3E%3C/svg%3E");
+  --grain-foil:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncG type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncB type='linear' slope='3.0' intercept='-1.0'/%3E%3CfeFuncA type='discrete' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+/* The governing rule: the base layer is the ONLY layer a custom colour or
+   gradient touches. Edge shading, sheen and grain are drawn identically over a
+   flat colour and over a two-stop gradient, so a purple-to-black book is still
+   visibly leather. There is one rendering path; --leaf-base is the variable. */
+.leaf{
+  --leaf-edge:linear-gradient(90deg,
+    rgba(0,0,0,.62) 0%, rgba(255,255,255,.15) 7%, rgba(255,255,255,.05) 21%,
+    rgba(0,0,0,.05) 52%, rgba(0,0,0,.30) 82%, rgba(0,0,0,.62) 100%);
+  --leaf-base:linear-gradient(180deg,
+    color-mix(in srgb, var(--c) 88%, white 12%), var(--c) 22%,
+    color-mix(in srgb, var(--c) 78%, black 22%) 100%);
+  background-color:var(--c);
+  background-image:
+    var(--leaf-edge),
+    var(--spine-img, none),
+    var(--weave-a, none),
+    var(--weave-b, none),
+    var(--sheen, none),
+    var(--grain, none),
+    var(--leaf-base);
+  background-size:auto, cover, var(--weave-size,auto), var(--weave-size,auto), auto, var(--grain-size,auto), auto;
+  background-position:0 0, center, 0 0, 0 0, 0 0, 0 0, 0 0;
+  background-repeat:repeat, no-repeat, repeat, repeat, no-repeat, repeat, repeat;
+  background-blend-mode:normal, normal, normal, normal, normal, overlay, normal;
+}
+.fin-leather{
+  --grain:var(--grain-leather);--grain-size:90px;
+  --sheen:radial-gradient(130% 62% at 24% 50%, rgba(255,255,255,.11), transparent 72%);
+}
+.fin-cloth{
+  --grain:var(--grain-cloth);--grain-size:40px;
+  --weave-a:repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px);
+  --weave-b:repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 1px, transparent 1px 3px);
+  --weave-size:auto;
+}
+.fin-paper{--grain:var(--grain-paper);--grain-size:70px}
+.fin-foil{
+  --grain:var(--grain-foil);--grain-size:110px;
+  --sheen:linear-gradient(112deg, transparent 26%, rgba(255,255,255,.20) 43%,
+    rgba(255,255,255,.04) 51%, transparent 64%);
+}
+.fin-smooth{--grain:none}
+
+/* ---------- embossed lettering ---------- */
+.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{color:var(--gilt-bright)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{
+    background:linear-gradient(180deg,#F0D492,#C9A24C 45%,#8A6B24);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+}
+.let-gilt .spine-text,.let-gilt .spine-sub,.let-gilt .spine-num{
+  text-shadow:0 1px 0 rgba(255,255,255,.20), 0 -1px 1px rgba(0,0,0,.62);
+}
+.let-blind .spine-text,.let-blind .spine-sub,.let-blind .spine-num{
+  color:color-mix(in srgb, var(--c) 82%, black);
+  text-shadow:0 1px 0 rgba(255,255,255,.16), 0 -1px 1px rgba(0,0,0,.5);
+}
+.let-blind .spine-sub{color:color-mix(in srgb, var(--c) 74%, black)}
+
+/* ---------- bookbinding parts ---------- */
+.sp-hubs{position:absolute;top:15px;bottom:15px;left:0;right:0;z-index:1;background-image:var(--hubs)}
+.sp-head,.sp-foot{
+  position:absolute;left:0;right:0;height:4px;z-index:3;opacity:.86;
+  background:repeating-linear-gradient(90deg, var(--gilt-bright) 0 3px, #4A3413 3px 6px);
+}
+.sp-head{top:0}
+.sp-foot{bottom:0}
+.sp-pages{
+  position:absolute;top:4px;bottom:4px;right:0;width:2px;z-index:3;opacity:.42;
+  background:repeating-linear-gradient(90deg,#EFE6D0 0 1px,#D3C6AC 1px 2px);
+  box-shadow:inset 1px 0 1px rgba(0,0,0,.55);
+}
+
+/* ---------- cover construction ---------- */
+.fc-board{
+  position:absolute;inset:0;z-index:3;border-radius:inherit;
+  box-shadow:inset 3px 3px 0 -1px rgba(255,255,255,.11), inset -3px -3px 0 -1px rgba(0,0,0,.34);
+}
+.fc-pages{
+  position:absolute;top:2px;bottom:2px;right:0;width:4px;z-index:4;opacity:.85;
+  background:repeating-linear-gradient(90deg,#EFE6D0 0 1px,#D3C6AC 1px 2px);
+}
+.fc-spine{
+  position:absolute;top:0;bottom:0;left:0;width:5px;z-index:4;
+  background:linear-gradient(90deg,
+    color-mix(in srgb, var(--sc,var(--c)) 48%, black),
+    color-mix(in srgb, var(--sc,var(--c)) 70%, black));
+}
+/* On leather the printed gilt frame gives way to a blind-embossed rule box. */
+.fin-leather .cover-gen::before{
+  border-color:rgba(0,0,0,.34);
+  box-shadow:0 1px 0 rgba(255,255,255,.16);
+}
+.fin-leather .cover-gen::after{
+  border-color:rgba(0,0,0,.2);
+  box-shadow:0 1px 0 rgba(255,255,255,.1);
+}
+
+/* ---------- angled books ---------- */
+.angled{
+  position:relative;flex:0 0 auto;width:var(--w);height:var(--h);
+  border:0;padding:0;cursor:pointer;background:transparent;display:block;
+  perspective:1000px;transform-origin:bottom center;
+  transition:transform .26s cubic-bezier(.2,.8,.3,1);
+}
+.angled:hover,.angled:focus-visible{transform:translateY(-16px);z-index:5}
+.ang-scene{
+  position:absolute;top:0;left:calc(var(--thick) * .22);height:100%;width:var(--cw);
+  transform-style:preserve-3d;transform-origin:left center;
+  /* Turned the other way from a page-flip: the hinge edge comes toward the
+     viewer, which is what puts the spine face in view down the left side. */
+  transform:rotateY(26deg);
+}
+.ang-front{
+  position:absolute;inset:0;overflow:hidden;border-radius:1px 3px 3px 1px;
+  transform:translateZ(calc(var(--thick) / 2));
+  background:var(--c);backface-visibility:hidden;
+  box-shadow:0 2px 0 rgba(0,0,0,.45), 6px 16px 26px -10px rgba(0,0,0,.92);
+}
+.ang-side{
+  position:absolute;top:0;left:0;height:100%;width:var(--thick);
+  transform-origin:left center;
+  /* Order matters. Rotating the face first and then pushing it along the
+     PARENT's z lands it on the hinge at x=0, spanning the full thickness;
+     translating before the rotation parks it at x=-thickness/2, detached from
+     the cover by a visible gap. The negative angle is what points its normal
+     out of the book's left side, so it is the front of the face we see. */
+  transform:translateZ(calc(var(--thick) / -2)) rotateY(-90deg);
+  backface-visibility:hidden;overflow:hidden;border-radius:2px 0 0 2px;
+}
+.angled *{pointer-events:none}
+
 /* ---------- spines ---------- */
 .spine{
   position:relative;flex:0 0 auto;width:var(--w);height:var(--h);
   border:0;padding:0;cursor:pointer;border-radius:2px 5px 5px 2px;
-  --spine-edge:linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(255,255,255,.09) 9%, rgba(255,255,255,.03) 26%, rgba(0,0,0,.16) 72%, rgba(0,0,0,.5) 100%);
-  --spine-base:linear-gradient(180deg, color-mix(in srgb, var(--c) 88%, white 12%), var(--c) 22%, color-mix(in srgb, var(--c) 78%, black 22%) 100%);
-  background-color:var(--c);
-  background-image:var(--spine-edge), var(--spine-img, none), var(--spine-base);
-  background-size:auto, cover, auto;
-  background-position:0 0, center, 0 0;
-  background-repeat:repeat, no-repeat, repeat;
-  box-shadow:0 2px 0 rgba(0,0,0,.5), 0 12px 20px -10px rgba(0,0,0,.8);
+  /* third layer is the contact shadow where the book meets the plank */
+  box-shadow:0 2px 0 rgba(0,0,0,.5), 0 3px 5px -1px rgba(0,0,0,.55), 0 12px 20px -10px rgba(0,0,0,.8);
   transition:transform .26s cubic-bezier(.2,.8,.3,1), box-shadow .26s, filter .26s;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:22px 0 27px;overflow:hidden;transform-origin:bottom center;
+  transform-origin:bottom center;
 }
-.spine::before,.spine::after{
-  content:"";position:absolute;left:5px;right:5px;height:1px;
+.spine-body{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:22px 0 27px;overflow:hidden;
+}
+.spine-body::before,.spine-body::after{
+  content:"";position:absolute;left:5px;right:5px;height:1px;z-index:2;
   background:linear-gradient(90deg,transparent,var(--gilt),transparent);opacity:.62;
 }
-.spine::before{top:15px}
-.spine::after{bottom:15px}
+.spine-body::before{top:15px}
+.spine-body::after{bottom:15px}
 .spine:hover,.spine:focus-visible{
   transform:translateY(-16px);
   box-shadow:0 18px 30px -8px rgba(0,0,0,.9), 0 0 30px rgba(201,162,76,.3);
@@ -264,7 +409,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .spine-pips b{width:3px;height:3px;border-radius:50%;background:var(--gilt-bright);box-shadow:0 0 4px rgba(234,203,128,.8)}
 .spine-pips b.half{background:linear-gradient(90deg,var(--gilt-bright) 50%,rgba(234,203,128,.2) 50%)}
 .ribbon{
-  position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:9px;height:22px;
+  position:absolute;top:-1px;right:8px;width:9px;height:22px;
   background:linear-gradient(180deg, var(--rb,#C94059), color-mix(in srgb, var(--rb,#C94059) 65%, black));
   clip-path:polygon(0 0,100% 0,100% 100%,50% 74%,0 100%);
   box-shadow:0 1px 3px rgba(0,0,0,.6);z-index:2;
@@ -272,11 +417,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .progress-band{position:absolute;left:0;bottom:0;width:100%;height:4px;background:rgba(0,0,0,.45)}
 .progress-band i{display:block;height:100%;background:linear-gradient(90deg,var(--gilt),var(--gilt-bright));box-shadow:0 0 8px rgba(234,203,128,.6)}
 .status-dot{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--sd);box-shadow:0 0 6px var(--sd);z-index:2}
+/* Too thin to hold a centred dot and a bookmark 8px from the right edge without
+   the two touching, so the dot moves to the left edge instead. */
+.narrow .status-dot{left:6px;transform:none}
 
 /* ---------- selecting ---------- */
-.selecting .spine,.selecting .faced{cursor:pointer;-webkit-user-select:none;user-select:none}
-.selecting .spine:hover,.selecting .faced:hover{transform:translateY(-6px)}
-.spine.sel,.faced.sel{outline:2px solid var(--gilt-bright);outline-offset:1px;z-index:4}
+.selecting .spine,.selecting .faced,.selecting .angled{cursor:pointer;-webkit-user-select:none;user-select:none}
+.selecting .spine:hover,.selecting .faced:hover,.selecting .angled:hover{transform:translateY(-6px)}
+.spine.sel,.faced.sel,.angled.sel{outline:2px solid var(--gilt-bright);outline-offset:1px;z-index:4}
 .sel-tick{
   position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;
   background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));
@@ -299,8 +447,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .select-bar .spacer{flex:1 1 8px}
 
 /* ---------- arranging ---------- */
-.arranging .spine,.arranging .faced{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
-.arranging .spine:hover,.arranging .faced:hover{transform:none;filter:none}
+.arranging .spine,.arranging .faced,.arranging .angled{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.arranging .spine:hover,.arranging .faced:hover,.arranging .angled:hover{transform:none;filter:none}
 .arranging .spine.lean,.arranging .spine.lean:hover{transform:rotate(7deg) translateY(-1px)}
 .drag-source{opacity:.35!important;filter:grayscale(.3)}
 .drag-ghost{
@@ -322,7 +470,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 }
 @media (prefers-reduced-motion:reduce){
   .drag-ghost{filter:none;transition:none!important}
-  .spine,.faced{transition:none}
+  .spine,.faced,.angled{transition:none}
 }
 
 /* ---------- face-out books ---------- */
@@ -345,7 +493,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 /* A book button must always be its own event target: every child is decoration,
    and an <img> that takes the press starts the browser's drag-and-drop instead,
    which kills the pointer stream a drag needs. */
-.spine *,.faced *{pointer-events:none}
+.spine *,.faced *,.angled *{pointer-events:none}
 .faced img,.cover-preview img,.cover-gen{
   pointer-events:none;
   -webkit-user-drag:none;user-drag:none;
@@ -357,7 +505,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   width:100%;height:100%;position:relative;
   --cover-sheen:radial-gradient(120% 80% at 22% 8%, rgba(255,255,255,.15), transparent 60%);
   --cover-base:linear-gradient(165deg, color-mix(in srgb, var(--c) 82%, white 18%), var(--c) 42%, color-mix(in srgb, var(--c) 62%, black 38%) 100%);
-  background:var(--cover-sheen), var(--cover-base);
+  background-image:var(--cover-sheen), var(--weave-a,none), var(--weave-b,none),
+    var(--sheen,none), var(--grain,none), var(--cover-base);
+  background-size:auto, var(--weave-size,auto), var(--weave-size,auto), auto, var(--grain-size,auto), auto;
+  background-position:0 0,0 0,0 0,0 0,0 0,0 0;
+  background-repeat:no-repeat, repeat, repeat, no-repeat, repeat, no-repeat;
+  background-blend-mode:normal, normal, normal, normal, overlay, normal;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:calc(var(--cw) * .13) calc(var(--cw) * .11) calc(var(--cw) * .2);
   text-align:center;overflow:hidden;
@@ -800,6 +953,7 @@ input[type=range]{
     <button class="btn small ghost" type="button" data-sel="invert">Invert</button>
     <button class="btn small ghost" type="button" data-sel="none">None</button>
     <span class="spacer"></span>
+    <button class="btn peril" type="button" id="deleteBtn">Delete selected</button>
     <button class="btn" type="button" id="bulkBtn">Apply styling</button>
   </div>
 
@@ -1116,6 +1270,42 @@ function coverBaseCSS(b){
   return to ? "linear-gradient(" + coverAngle(b) + "deg," + coverFrom(b) + "," + to + ")" : "";
 }
 
+var FINISHES = ["leather","cloth","paper","foil","smooth"];
+var FINISH_LABELS = {leather:"Leather", cloth:"Cloth", paper:"Paper", foil:"Foil", smooth:"Smooth"};
+var LETTERINGS = ["gilt","blind","painted"];
+var LETTER_LABELS = {gilt:"Gilt", blind:"Blind", painted:"Painted"};
+function finishOf(b){ return FINISHES.indexOf(b.finish) === -1 ? "leather" : b.finish; }
+/* Finish picks the default treatment; a book may still say otherwise. */
+function letteringOf(b){
+  if(LETTERINGS.indexOf(b.lettering) !== -1) return b.lettering;
+  return finishOf(b) === "paper" ? "blind" : "gilt";
+}
+function hubsOn(b){
+  if(typeof b.hubs === "boolean") return b.hubs;
+  var f = finishOf(b);
+  return f !== "cloth" && f !== "paper";
+}
+function displayMode(b){
+  return b.display === "front" ? "front" : (b.display === "angle" ? "angle" : "spine");
+}
+function materialClass(b){ return " fin-" + finishOf(b) + " let-" + letteringOf(b); }
+/* Hubs are one gradient rather than five elements: 44 books is 220 nodes saved. */
+function hubCount(h){ return Math.max(3, Math.min(5, Math.round((h - 30) / 62))); }
+function hubsCSS(h){
+  var n = hubCount(h), step = (h - 30) / (n + 1), stops = [], i, y;
+  for(i = 1; i <= n; i++){
+    y = step * i;
+    stops.push(
+      "transparent " + (y - 2.5).toFixed(1) + "px",
+      "rgba(255,255,255,.18) " + (y - 2.5).toFixed(1) + "px",
+      "rgba(255,255,255,.09) " + (y - 1).toFixed(1) + "px",
+      "rgba(0,0,0,.12) " + (y + 1).toFixed(1) + "px",
+      "rgba(0,0,0,.30) " + (y + 2.5).toFixed(1) + "px",
+      "transparent " + (y + 2.5).toFixed(1) + "px");
+  }
+  return "linear-gradient(180deg," + stops.join(",") + ")";
+}
+
 function show(b){
   var s = b.spineShow || {};
   var out = {};
@@ -1150,8 +1340,13 @@ function paintSave(text, cls){
 function setSave(text, cls){ clearUndo(); paintSave(text, cls); }
 /* Debounced writes and snapshot echoes are not actions the reader took, so they
    must not talk over a standing offer to undo. */
+var quietUntil = 0;
+function paintSaveSticky(text, cls){
+  paintSave(text, cls);
+  quietUntil = Date.now() + 5000;
+}
 function setSaveQuiet(text, cls){
-  if(undoState) return;
+  if(undoState || Date.now() < quietUntil) return;
   paintSave(text, cls);
 }
 function saveBook(b){
@@ -1325,42 +1520,74 @@ function chromeHTML(b){
       ? '<span class="progress-band"><i style="width:' + Math.max(2, Math.min(100, b.progress)) + '%"></i></span>'
       : "");
 }
-function itemHTML(b, isLast, count){
-  var st = STATUS[b.status] || STATUS.want;
-  var aria = esc(b.title) + ", " + esc(b.author || "unknown author") + ", " + esc(st.label) + ". Open.";
-  var h = spineH(b);
-
-  if(b.display === "front"){
-    var w = Math.round(h * 0.66);
-    return '<button class="faced' + (isSelected(b) ? " sel" : "") + '" type="button" data-id="' + esc(b.id) + '"' +
-      ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(coverFrom(b)) + '"' +
-      (b.coverImage ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '" data-img-alt="Cover of ' + esc(b.title) + '"' : "") +
-      ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">' +
-      coverInner(b, w) + chromeHTML(b) + "</button>";
-  }
-
-  var s = show(b);
-  var sub = s.series && b.series ? b.series : (s.author && b.author ? b.author : "");
-
+/* The bookbinding parts and the lettering, shared by a spine-out book and the
+   spine face of an angled one. */
+function spineFaceHTML(b, h, fs, s, sub){
+  return (hubsOn(b) ? '<span class="sp-hubs" style="--hubs:' + hubsCSS(h) + '"></span>' : "") +
+    '<span class="sp-head"></span><span class="sp-foot"></span><span class="sp-pages"></span>' +
+    (s.number && b.seriesNumber ? '<span class="spine-num">' + esc(b.seriesNumber) + "</span>" : "") +
+    (s.title ? '<span class="spine-text">' + esc(b.title) + "</span>" : "") +
+    (sub ? '<span class="spine-sub">' + esc(sub) + "</span>" : "") +
+    (s.pips ? pipRow(b) : "");
+}
+function coverPartsHTML(){
+  return '<span class="fc-board"></span><span class="fc-pages"></span><span class="fc-spine"></span>';
+}
+function spineFontSize(b, h, sub){
   /* Fit the lettering to the room it actually has: spine height, less the
      gilt-rule padding, less whatever the sub-line takes. */
   var avail = h - 49 - (sub ? Math.min(58, sub.length * 7) + 9 : 0);
   var chars = Math.max(1, (b.title || "").length);
   var px = avail / (chars * 0.615);
-  var fs = (Math.max(8.5, Math.min(15.5, px)) * textScale(b)).toFixed(2) + "px";
-  var lean = (isLast && count > 3 && hash(b.id) % 3 === 0) ? " lean" : "";
-
+  return (Math.max(8.5, Math.min(15.5, px)) * textScale(b)).toFixed(2) + "px";
+}
+function itemHTML(b, isLast, count){
+  var st = STATUS[b.status] || STATUS.want;
+  var aria = esc(b.title) + ", " + esc(b.author || "unknown author") + ", " + esc(st.label) + ". Open.";
+  var h = spineH(b);
+  var mode = displayMode(b);
+  var mat = materialClass(b);
+  /* A centred 5px dot and a 9px bookmark inset 8px from the right first clear
+     each other at 40px, not 34: below that the dot moves to the left edge. */
+  var narrow = itemWidth(b) < 40 ? " narrow" : "";
+  var tip = ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">';
+  var s = show(b);
+  var sub = s.series && b.series ? b.series : (s.author && b.author ? b.author : "");
+  var fs = spineFontSize(b, h, sub);
   var base = spineBaseCSS(b);
-  return '<button class="spine' + lean + (isSelected(b) ? " sel" : "") + '" type="button" data-id="' + esc(b.id) + '"' +
+  var coverImgAttr = b.coverImage
+    ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '" data-img-alt="Cover of ' + esc(b.title) + '"' : "";
+  var spineImgAttr = b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "";
+
+  if(mode === "front"){
+    var w = Math.round(h * 0.66);
+    return '<button class="faced' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '"' +
+      ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(coverFrom(b)) + ';--sc:' + esc(color(b)) + '"' +
+      coverImgAttr + tip +
+      coverInner(b, w) + coverPartsHTML() + chromeHTML(b) + "</button>";
+  }
+
+  if(mode === "angle"){
+    var cw = Math.round(h * 0.66);
+    return '<button class="angled' + mat + (isSelected(b) ? " sel" : "") + narrow + '" type="button" data-id="' + esc(b.id) + '"' +
+      ' style="--h:' + h + 'px;--w:' + itemWidth(b) + 'px;--cw:' + cw + 'px;--thick:' + spineW(b) +
+        'px;--c:' + esc(color(b)) + ';--fs:' + fs + (base ? ';--leaf-base:' + base : "") + '"' +
+      spineImgAttr + coverImgAttr + tip +
+      '<span class="ang-scene">' +
+        '<span class="ang-side leaf spine-body">' + spineFaceHTML(b, h, fs, s, sub) + "</span>" +
+        '<span class="ang-front" style="--c:' + esc(coverFrom(b)) + ';--sc:' + esc(color(b)) + '">' +
+          coverInner(b, cw) + coverPartsHTML() + "</span>" +
+      "</span>" +
+      chromeHTML(b) + "</button>";
+  }
+
+  var lean = (isLast && count > 3 && hash(b.id) % 3 === 0) ? " lean" : "";
+  return '<button class="spine leaf spine-body' + lean + mat + (isSelected(b) ? " sel" : "") + narrow +
+      '" type="button" data-id="' + esc(b.id) + '"' +
     ' style="--h:' + h + 'px;--w:' + spineW(b) + 'px;--c:' + esc(color(b)) + ';--fs:' + fs +
-      (base ? ';--spine-base:' + base : "") + '"' +
-    (b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "") +
-    ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">' +
-    chromeHTML(b) +
-    (s.number && b.seriesNumber ? '<span class="spine-num">' + esc(b.seriesNumber) + "</span>" : "") +
-    (s.title ? '<span class="spine-text">' + esc(b.title) + "</span>" : "") +
-    (sub ? '<span class="spine-sub">' + esc(sub) + "</span>" : "") +
-    (s.pips ? pipRow(b) : "") + "</button>";
+      (base ? ';--leaf-base:' + base : "") + '"' +
+    spineImgAttr + tip +
+    chromeHTML(b) + spineFaceHTML(b, h, fs, s, sub) + "</button>";
 }
 
 /* ---------------- render ---------------- */
@@ -1468,7 +1695,12 @@ function buildGroups(books){
 /* Pack books into rows that actually fill the width of a plank, rather than
    letting one shelf hold a single book and a metre of empty wood. */
 function itemWidth(b){
-  return b.display === "front" ? Math.round(spineH(b) * 0.66) : spineW(b);
+  var m = displayMode(b);
+  if(m === "front") return Math.round(spineH(b) * 0.66);
+  /* Turned 26 degrees, a book takes up cover*cos + thickness*sin on the plank.
+     Pack with the cover width and every row overflows. */
+  if(m === "angle") return Math.ceil(Math.round(spineH(b) * 0.66) * 0.8988 + spineW(b) * 0.4384);
+  return spineW(b);
 }
 function packRows(entries, avail){
   var rows = [], cur = [], w = 0, GAP = 5, SEPW = 8;
@@ -1682,14 +1914,15 @@ function openBook(id, isNew){
         "<summary>Cover &amp; spine</summary>" +
         '<div class="appear-body">' +
           '<div class="cover-area">' +
-            '<div class="cover-preview" id="coverPreview" style="--c:' + esc(coverFrom(b)) + '"' +
+            '<div class="cover-preview' + materialClass(b) + '" id="coverPreview" style="--c:' + esc(coverFrom(b)) + '"' +
               (b.coverImage ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '"' : "") + ">" +
               coverInner(b, 104) + "</div>" +
             '<div class="cover-ctl">' +
               '<span class="sub-label">On the shelf</span>' +
               '<div class="seg" id="displaySeg">' +
-                '<button type="button" data-display="spine" aria-pressed="' + (b.display !== "front") + '">Spine out</button>' +
-                '<button type="button" data-display="front" aria-pressed="' + (b.display === "front") + '">Front out</button>' +
+                '<button type="button" data-display="spine" aria-pressed="' + (displayMode(b) === "spine") + '">Spine out</button>' +
+                '<button type="button" data-display="front" aria-pressed="' + (displayMode(b) === "front") + '">Front out</button>' +
+                '<button type="button" data-display="angle" aria-pressed="' + (displayMode(b) === "angle") + '">Angled</button>' +
               "</div>" +
               '<span class="sub-label">Cover image</span>' +
               '<div class="page-actions" style="margin-top:0">' +
@@ -1703,6 +1936,26 @@ function openBook(id, isNew){
               "</div>" +
               '<p class="hintline" id="coverHint">' + esc(artHint(b)) + "</p>" +
             "</div>" +
+          "</div>" +
+
+          '<div class="grad-line">' +
+            '<span class="sub-label">Finish</span>' +
+            '<div class="seg" id="finishSeg">' +
+              FINISHES.map(function(f){
+                return '<button type="button" data-finish="' + f + '" aria-pressed="' +
+                  (finishOf(b) === f) + '">' + FINISH_LABELS[f] + "</button>";
+              }).join("") +
+            "</div>" +
+          "</div>" +
+          '<div class="grad-line">' +
+            '<span class="sub-label">Lettering</span>' +
+            '<div class="seg" id="letterSeg">' +
+              LETTERINGS.map(function(l){
+                return '<button type="button" data-lettering="' + l + '" aria-pressed="' +
+                  (letteringOf(b) === l) + '">' + LETTER_LABELS[l] + "</button>";
+              }).join("") +
+            "</div>" +
+            '<label class="check"><input type="checkbox" id="hubsToggle"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>" +
           "</div>" +
 
           paintBlockHTML("spine", "Spine colour", color(b), spineTo(b), spineAngle(b)) +
@@ -1773,6 +2026,7 @@ function openBook(id, isNew){
   function refreshPreview(){
     var pv = byId("coverPreview");
     if(!pv) return;
+    pv.className = "cover-preview" + materialClass(b);
     pv.style.setProperty("--c", coverFrom(b));
     pv.innerHTML = coverInner(b, 104);
     if(b.coverImage) pv.setAttribute("data-img-cover", imgKey(b.id, "cover"));
@@ -1923,6 +2177,36 @@ function openBook(id, isNew){
       b.spineShow[cb.getAttribute("data-show")] = cb.checked;
     }
     saveBook(b); render(); refreshPreview();
+  });
+
+  /* ---- appearance: material ---- */
+  byId("finishSeg").addEventListener("click", function(e){
+    var btn = e.target.closest("[data-finish]");
+    if(!btn) return;
+    b.finish = btn.getAttribute("data-finish");
+    Array.prototype.forEach.call(this.querySelectorAll("[data-finish]"), function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-finish") === b.finish));
+    });
+    /* Finish carries defaults for lettering and hubs; reflect them where the
+       book has not overridden them. */
+    Array.prototype.forEach.call(byId("letterSeg").querySelectorAll("[data-lettering]"), function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-lettering") === letteringOf(b)));
+    });
+    byId("hubsToggle").checked = hubsOn(b);
+    saveBook(b); render(); refreshPreview();
+  });
+  byId("letterSeg").addEventListener("click", function(e){
+    var btn = e.target.closest("[data-lettering]");
+    if(!btn) return;
+    b.lettering = btn.getAttribute("data-lettering");
+    Array.prototype.forEach.call(this.querySelectorAll("[data-lettering]"), function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-lettering") === b.lettering));
+    });
+    saveBook(b); render();
+  });
+  byId("hubsToggle").addEventListener("change", function(){
+    b.hubs = this.checked;
+    saveBook(b); render();
   });
 
   /* ---- appearance: bookmark colour and status dot ---- */
@@ -2417,6 +2701,10 @@ function normalizeBook(raw){
   if(typeof b.order !== "number") delete b.order;
   b.coverImage = !!b.coverImage;
   b.spineImage = !!b.spineImage;
+  if(FINISHES.indexOf(b.finish) === -1) delete b.finish;
+  if(LETTERINGS.indexOf(b.lettering) === -1) delete b.lettering;
+  if(typeof b.hubs !== "boolean") delete b.hubs;
+  if(["spine","front","angle"].indexOf(b.display) === -1) b.display = "spine";
   b.title = String(b.title == null ? "Untitled" : b.title);
   b.author = String(b.author == null ? "" : b.author);
   b.id = String(b.id || slug(b.title + "-" + b.author));
@@ -2542,6 +2830,8 @@ function drawSelectBar(){
   byId("selCount").textContent = n ? (n + (n === 1 ? " selected" : " selected")) : "Nothing selected";
   byId("bulkBtn").disabled = !n;
   byId("bulkBtn").style.opacity = n ? "" : ".45";
+  byId("deleteBtn").disabled = !n;
+  byId("deleteBtn").style.opacity = n ? "" : ".45";
 }
 function setSelecting(on){
   state.selecting = !!on;
@@ -2584,28 +2874,70 @@ function clearUndo(){
   var u = byId("undoBtn");
   if(u) u.hidden = true;
 }
-function offerUndo(snapshot, text){
+function offerUndo(run, text){
   clearTimeout(undoTimer);
-  undoState = snapshot;
+  undoState = run;
   paintSave(text, "");
   byId("undoBtn").hidden = false;
   undoTimer = setTimeout(function(){ clearUndo(); }, 30000);
 }
 function runUndo(){
   if(!undoState) return;
-  var snap = undoState, n = snap.length;
+  var run = undoState;
   clearUndo();
-  snap.forEach(function(o){
-    var b = state.books[o.id];
-    if(!b) return;
-    Object.keys(o).forEach(function(f){
-      if(f === "id") return;
-      if(o[f] === undefined) delete b[f]; else b[f] = o[f];
+  run();
+}
+function undoFields(snap){
+  return function(){
+    snap.forEach(function(o){
+      var b = state.books[o.id];
+      if(!b) return;
+      Object.keys(o).forEach(function(f){
+        if(f === "id") return;
+        if(o[f] === undefined) delete b[f]; else b[f] = o[f];
+      });
+      saveBook(b);
     });
-    saveBook(b);
+    render();
+    paintSaveSticky("Reverted " + snap.length + " books", "");
+  };
+}
+
+/* ---------------- batch delete ---------------- */
+function deleteSelected(){
+  var books = selectedBooks();
+  if(!books.length) return;
+  if(books.length === 1){
+    if(!confirm("Remove \u201C" + (books[0].title || "this book") + "\u201D from the shelf? This can't be undone.")) return;
+  } else {
+    var shown = books.slice(0, 5).map(function(b){ return "\u2022 " + (b.title || "Untitled"); }).join("\n");
+    var more = books.length > 5 ? "\n\u2022 and " + (books.length - 5) + " more" : "";
+    var typed = prompt(
+      "Delete " + books.length + " books from the shelf?\n\n" + shown + more +
+      "\n\nCover and spine images are deleted permanently \u2014 Undo brings the records back, not the images." +
+      "\n\nType DELETE to confirm.", "");
+    if(typed === null || typed.trim().toUpperCase() !== "DELETE") return;
+  }
+  var clones = books.map(function(b){ return JSON.parse(JSON.stringify(b)); });
+  books.forEach(function(b){
+    imgDel(imgKey(b.id, "cover"));
+    imgDel(imgKey(b.id, "spine"));
+    delete state.books[b.id];
+    clearTimeout(saveTimers[b.id]);
+    if(db) db.doc("books/" + b.id).delete().catch(function(){});
   });
+  var n = books.length;
+  clearSelection();
+  drawSelectBar();
   render();
-  paintSave("Reverted " + n + " books", "");
+  offerUndo(function(){
+    clones.forEach(function(c){
+      state.books[c.id] = c;
+      saveBook(c);
+    });
+    render();
+    paintSaveSticky("Restored " + n + " book" + (n === 1 ? "" : "s") + " (images not recoverable)", "");
+  }, "Deleted " + n + " book" + (n === 1 ? "" : "s"));
 }
 
 /* ---------------- bulk styling ---------------- */
@@ -2623,7 +2955,9 @@ var BULK_ROWS = [
   {key:"textSize",    label:"Lettering size",    fields:["spineTextSize"]},
   {key:"height",      label:"Book height",       fields:["spineHeight"]},
   {key:"width",       label:"Spine thickness",   fields:["spineWidth"]},
-  {key:"display",     label:"Shelf display",     fields:["display"]}
+  {key:"display",     label:"Shelf display",     fields:["display"]},
+  {key:"finish",      label:"Finish",            fields:["finish","hubs"]},
+  {key:"lettering",   label:"Lettering",         fields:["lettering"]}
 ];
 function cloneVal(v){ return (v && typeof v === "object") ? JSON.parse(JSON.stringify(v)) : v; }
 function segValue(id, attr){
@@ -2695,9 +3029,25 @@ function bulkRowHTML(row, b){
       break;
     case "display":
       ctl = '<div class="seg" id="bkDisplaySeg">' +
-        '<button type="button" data-bulkdisplay="spine" aria-pressed="' + (b.display !== "front") + '">Spine out</button>' +
-        '<button type="button" data-bulkdisplay="front" aria-pressed="' + (b.display === "front") + '">Front out</button>' +
+        '<button type="button" data-bulkdisplay="spine" aria-pressed="' + (displayMode(b) === "spine") + '">Spine out</button>' +
+        '<button type="button" data-bulkdisplay="front" aria-pressed="' + (displayMode(b) === "front") + '">Front out</button>' +
+        '<button type="button" data-bulkdisplay="angle" aria-pressed="' + (displayMode(b) === "angle") + '">Angled</button>' +
       "</div>";
+      break;
+    case "finish":
+      ctl = '<div class="seg" id="bkFinishSeg">' +
+        FINISHES.map(function(f){
+          return '<button type="button" data-bulkfinish="' + f + '" aria-pressed="' +
+            (finishOf(b) === f) + '">' + FINISH_LABELS[f] + "</button>";
+        }).join("") + "</div>" +
+        '<label class="check"><input type="checkbox" id="bkHubs"' + (hubsOn(b) ? " checked" : "") + ">Raised hubs</label>";
+      break;
+    case "lettering":
+      ctl = '<div class="seg" id="bkLetterSeg">' +
+        LETTERINGS.map(function(l){
+          return '<button type="button" data-bulkletter="' + l + '" aria-pressed="' +
+            (letteringOf(b) === l) + '">' + LETTER_LABELS[l] + "</button>";
+        }).join("") + "</div>";
       break;
   }
   return '<div class="bulk-row">' +
@@ -2732,6 +3082,8 @@ function openBulk(){
 
   wireSeg("bkDotSeg", "data-dotmode");
   wireSeg("bkDisplaySeg", "data-bulkdisplay");
+  wireSeg("bkFinishSeg", "data-bulkfinish");
+  wireSeg("bkLetterSeg", "data-bulkletter");
   [["bkSpineAngle","bkSpineAngleOut",function(v){ return v + "°"; }],
    ["bkCoverAngle","bkCoverAngleOut",function(v){ return v + "°"; }],
    ["bkSize","bkSizeOut",function(v){ return Math.round(v*100) + "%"; }],
@@ -2770,7 +3122,10 @@ function openBulk(){
     byId("bkHeightOut").textContent = spineH(b) + "px";
     byId("bkWidth").value = spineW(b);
     byId("bkWidthOut").textContent = spineW(b) + "px";
-    setSeg("bkDisplaySeg", "data-bulkdisplay", b.display === "front" ? "front" : "spine");
+    setSeg("bkDisplaySeg", "data-bulkdisplay", displayMode(b));
+    setSeg("bkFinishSeg", "data-bulkfinish", finishOf(b));
+    setSeg("bkLetterSeg", "data-bulkletter", letteringOf(b));
+    byId("bkHubs").checked = hubsOn(b);
   }
   byId("bulkFrom").addEventListener("change", function(){
     var b = state.books[this.value];
@@ -2820,7 +3175,10 @@ function applyBulk(){
     textSize: parseFloat(byId("bkSize").value),
     height: parseFloat(byId("bkHeight").value),
     width: parseFloat(byId("bkWidth").value),
-    display: segValue("bkDisplaySeg", "data-bulkdisplay") === "front" ? "front" : "spine"
+    display: segValue("bkDisplaySeg", "data-bulkdisplay") || "spine",
+    finish: segValue("bkFinishSeg", "data-bulkfinish") || "leather",
+    hubs: byId("bkHubs").checked,
+    lettering: segValue("bkLetterSeg", "data-bulkletter") || "gilt"
   };
   var writers = {
     spineColor: function(b){ b.spineColor = v.spineColor; },
@@ -2847,7 +3205,9 @@ function applyBulk(){
     textSize: function(b){ b.spineTextSize = v.textSize; },
     height:   function(b){ b.spineHeight = v.height; },
     width:    function(b){ b.spineWidth = v.width; },
-    display:  function(b){ b.display = v.display; }
+    display:  function(b){ b.display = v.display; },
+    finish:   function(b){ b.finish = v.finish; b.hubs = v.hubs; },
+    lettering:function(b){ b.lettering = v.lettering; }
   };
 
   var fields = [];
@@ -2871,7 +3231,7 @@ function applyBulk(){
   clearSelection();
   drawSelectBar();
   render();
-  offerUndo(snap, "Styling applied to " + n + " book" + (n === 1 ? "" : "s"));
+  offerUndo(undoFields(snap), "Styling applied to " + n + " book" + (n === 1 ? "" : "s"));
 }
 
 /* ---------------- arranging ----------------
@@ -3170,6 +3530,7 @@ byId("selectBar").addEventListener("click", function(e){
   var q = e.target.closest("[data-sel]");
   if(q){ clearUndo(); quickSelect(q.getAttribute("data-sel")); return; }
   if(e.target.closest("#bulkBtn")) openBulk();
+  else if(e.target.closest("#deleteBtn")) deleteSelected();
 });
 byId("undoBtn").addEventListener("click", runUndo);
 byId("moveSeg").addEventListener("click", function(e){

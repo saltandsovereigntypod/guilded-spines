@@ -36,9 +36,17 @@ your notes and theories on the verso.
   which of title / author / series / volume number / rating pips appears on the
   spine and which on the cover — a spine can carry just the title while its cover
   carries the lot.
-- **Face out or spine out.** Spine out by default; flip any individual book to
-  show its front cover. Both the cover and the spine can take an image of your
-  own; anything else is drawn from the colours above.
+- **Books that look like books.** An untouched book is a leather-bound hardback:
+  grain, a broad sheen down the left third, raised hubs between the gilt rules,
+  striped headbands at head and tail, a sliver of page block at the fore edge and
+  lettering that reads as tooled into the material rather than printed on it.
+  Five finishes — leather, cloth, paper, foil, smooth — each with its own grain
+  and sheen, and three lettering treatments: embossed gilt, blind emboss, and the
+  flat painted look.
+- **Three ways to stand.** Spine out, front out, or **angled** — the cover turned
+  towards you with the spine still in view down its left side, built as real CSS
+  3D with a front face and a spine face that carry their own lettering. Both the
+  cover and the spine can take an image of your own.
 - **Sort and group.** Sort by series & volume, title, author, volume number,
   shelf, favourites, date added, progress, any rating category, or your own
   arrangement. Group by series, author, shelf, rating, favourites or first
@@ -46,11 +54,15 @@ your notes and theories on the verso.
   lot onto one continuous run with the joins marked on the plank.
 - **Arrange by hand.** Turn on Arrange and drag books into the order you want,
   with a pointer or a fingertip. Move one book, or move a whole series as a unit.
-- **Style many books at once.** Turn on Select, pick books by hand or with All /
-  Favorites / This shelf / Invert, then Apply styling. The sheet is a list of
+- **Style or clear out many books at once.** Turn on Select, pick books by hand
+  or with All / Favorites / This shelf / Invert, then Apply styling — or Delete
+  selected, which lists what is about to go and asks you to type DELETE before
+  it does. Either way a single Undo is offered afterwards; deletion brings the
+  records back but not the images, which go for good.
+  Apply styling opens a sheet: The sheet is a list of
   properties — colours, gradients, bookmark, status dot, what shows on the spine
-  and on the cover, sizes, spine or front out — and only the rows you tick are
-  written, so nothing else on those books is disturbed. **Start from** fills the
+  and on the cover, sizes, finish, lettering, how it stands — and only the rows
+  you tick are written, so nothing else on those books is disturbed. **Start from** fills the
   controls from any selected book, which makes "give these the same spine as that
   one" two clicks. Afterwards the status line offers a single **Undo**.
 - **Search** across titles, authors, series and the text of every note section,
@@ -123,6 +135,20 @@ background. Type is **Cinzel** for carved spine lettering and headings,
 **EB Garamond** for the book pages, **Spectral** for small data. No frameworks, no
 build step for the app itself, no external requests beyond Google Fonts.
 
+**Texture and colour are independent layers.** A book's spine and cover
+background is one stack, topmost first: the edge shading that makes the spine
+read as curved, the finish's sheen, the grain at `background-blend-mode: overlay`,
+and then the base. The base is the *only* layer a custom colour or gradient
+touches, so a book set to a purple-to-black gradient is still visibly leather,
+with the same grain, sheen, hubs and headbands as an untouched one. There is a
+single rendering path and no branch on whether a book has been recoloured.
+
+The grain is one `feTurbulence` data URI per finish, declared once on `:root` and
+shared by every book — a stack of radial gradients per spine is far too slow at
+this count. The noise is pushed away from mid-grey before it is blended, because
+`overlay` treats mid-grey as a no-op: straight turbulence at these opacities
+moves a dark leather by under one luminance level and reads as nothing at all.
+
 Cover and spine images live in IndexedDB (`gilded-spines-images`), keyed
 `<bookId>:cover` and `<bookId>:spine`, as downscaled JPEG data URLs — a cover at
 most 600×900, a spine at most 200×900. They are never stored at full size: a
@@ -157,6 +183,9 @@ One document per book:
     { "id": "s1a2b-2y", "label": "Theories & Predictions", "text": "" }
   ],
   "display": "spine",
+  "finish": "leather",
+  "lettering": "gilt",
+  "hubs": true,
   "coverId": null,
   "coverImage": false,
   "spineImage": false,
@@ -193,6 +222,14 @@ colours of its own. `order` is the hand-arranged shelf position, used only by th
 `showStatusDot` absent means the book follows the global default in Settings;
 `true` or `false` is the book's own answer and outranks it. `dotColor` absent
 means the dot takes the global colour for that book's status.
+
+`display` is `spine`, `front` or `angle`. `finish` is one of `leather`, `cloth`,
+`paper`, `foil`, `smooth` and defaults to leather; `lettering` is `gilt`, `blind`
+or `painted` and, when absent, follows the finish — blind on paper, gilt
+everywhere else. `hubs` absent means raised hubs are drawn on every finish but
+cloth and paper. A book carrying none of these renders as leather with gilt
+embossed lettering and hubs on, which is why the shelf changes appearance on the
+first load after this feature and no records need rewriting.
 
 `sections` replaced the old `notes`, `theories` and `quotes` fields. A book that
 still has those — an old export, or a record written before the change — is
