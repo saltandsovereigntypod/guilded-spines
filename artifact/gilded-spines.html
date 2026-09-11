@@ -164,13 +164,25 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 }
 .plank::before{content:"";position:absolute;left:0;right:0;top:-9px;height:9px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.5));pointer-events:none}
 
+/* Continuous grouping: clusters stay on one unbroken run of shelves, parted by a
+   wider gap and a gilt mark scored into the plank beneath the join. */
+.cluster-gap{flex:0 0 8px;height:26px;position:relative;align-self:flex-end;pointer-events:none}
+.cluster-gap::after{
+  content:"";position:absolute;left:50%;bottom:-14px;width:1px;height:22px;
+  background:linear-gradient(180deg,transparent,var(--gilt-bright));opacity:.5;
+}
+
 /* ---------- spines ---------- */
 .spine{
   position:relative;flex:0 0 auto;width:var(--w);height:var(--h);
   border:0;padding:0;cursor:pointer;border-radius:2px 5px 5px 2px;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(255,255,255,.09) 9%, rgba(255,255,255,.03) 26%, rgba(0,0,0,.16) 72%, rgba(0,0,0,.5) 100%),
-    linear-gradient(180deg, color-mix(in srgb, var(--c) 88%, white 12%), var(--c) 22%, color-mix(in srgb, var(--c) 78%, black 22%) 100%);
+  --spine-edge:linear-gradient(90deg, rgba(0,0,0,.5) 0%, rgba(255,255,255,.09) 9%, rgba(255,255,255,.03) 26%, rgba(0,0,0,.16) 72%, rgba(0,0,0,.5) 100%);
+  --spine-base:linear-gradient(180deg, color-mix(in srgb, var(--c) 88%, white 12%), var(--c) 22%, color-mix(in srgb, var(--c) 78%, black 22%) 100%);
+  background-color:var(--c);
+  background-image:var(--spine-edge), var(--spine-img, none), var(--spine-base);
+  background-size:auto, cover, auto;
+  background-position:0 0, center, 0 0;
+  background-repeat:repeat, no-repeat, repeat;
   box-shadow:0 2px 0 rgba(0,0,0,.5), 0 12px 20px -10px rgba(0,0,0,.8);
   transition:transform .26s cubic-bezier(.2,.8,.3,1), box-shadow .26s, filter .26s;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
@@ -213,13 +225,40 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 .spine-pips b.half{background:linear-gradient(90deg,var(--gilt-bright) 50%,rgba(234,203,128,.2) 50%)}
 .ribbon{
   position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:9px;height:22px;
-  background:linear-gradient(180deg,var(--rose-bright),var(--rose));
+  background:linear-gradient(180deg, var(--rb,#C94059), color-mix(in srgb, var(--rb,#C94059) 65%, black));
   clip-path:polygon(0 0,100% 0,100% 100%,50% 74%,0 100%);
   box-shadow:0 1px 3px rgba(0,0,0,.6);z-index:2;
 }
 .progress-band{position:absolute;left:0;bottom:0;width:100%;height:4px;background:rgba(0,0,0,.45)}
 .progress-band i{display:block;height:100%;background:linear-gradient(90deg,var(--gilt),var(--gilt-bright));box-shadow:0 0 8px rgba(234,203,128,.6)}
 .status-dot{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--sd);box-shadow:0 0 6px var(--sd);z-index:2}
+
+/* ---------- arranging ---------- */
+.arranging .spine,.arranging .faced{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+.arranging .spine:hover,.arranging .faced:hover{transform:none;filter:none}
+.arranging .spine.lean,.arranging .spine.lean:hover{transform:rotate(7deg) translateY(-1px)}
+.drag-source{opacity:.35!important;filter:grayscale(.3)}
+.drag-ghost{
+  position:fixed;top:0;left:0;z-index:80;pointer-events:none;transform-origin:center;
+  filter:drop-shadow(0 18px 26px rgba(0,0,0,.75)) drop-shadow(0 0 22px rgba(201,162,76,.28));
+  will-change:transform;
+}
+.drag-ghost .stack-count{
+  position:absolute;top:-11px;right:-11px;min-width:22px;height:22px;padding:0 5px;
+  display:grid;place-items:center;border-radius:11px;
+  background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));color:var(--ink);
+  font-family:var(--f-data);font-size:.72rem;font-weight:600;
+  box-shadow:0 2px 8px rgba(0,0,0,.6);
+}
+.drop-caret{
+  position:fixed;z-index:79;width:2px;pointer-events:none;border-radius:1px;
+  background:linear-gradient(180deg,transparent,var(--gilt-bright) 18%,var(--gilt-bright) 88%,transparent);
+  box-shadow:0 0 10px rgba(234,203,128,.85);
+}
+@media (prefers-reduced-motion:reduce){
+  .drag-ghost{filter:none;transition:none!important}
+  .spine,.faced{transition:none}
+}
 
 /* ---------- face-out books ---------- */
 .faced{
@@ -242,9 +281,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 /* generated cover — shared by shelf + open book preview */
 .cover-gen{
   width:100%;height:100%;position:relative;
-  background:
-    radial-gradient(120% 80% at 22% 8%, rgba(255,255,255,.15), transparent 60%),
-    linear-gradient(165deg, color-mix(in srgb, var(--c) 82%, white 18%), var(--c) 42%, color-mix(in srgb, var(--c) 62%, black 38%) 100%);
+  --cover-sheen:radial-gradient(120% 80% at 22% 8%, rgba(255,255,255,.15), transparent 60%);
+  --cover-base:linear-gradient(165deg, color-mix(in srgb, var(--c) 82%, white 18%), var(--c) 42%, color-mix(in srgb, var(--c) 62%, black 38%) 100%);
+  background:var(--cover-sheen), var(--cover-base);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:calc(var(--cw) * .13) calc(var(--cw) * .11) calc(var(--cw) * .2);
   text-align:center;overflow:hidden;
@@ -278,6 +317,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   letter-spacing:.14em;text-transform:uppercase;color:rgba(246,235,210,.8);
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
+.cg-pips{
+  position:absolute;bottom:calc(var(--cw) * .085);left:0;right:0;
+  display:flex;justify-content:center;gap:calc(var(--cw) * .016);pointer-events:none;
+}
+.cg-pips.above{bottom:calc(var(--cw) * .15)}
+.cg-pips b{
+  width:calc(var(--cw) * .026);height:calc(var(--cw) * .026);border-radius:50%;
+  background:rgba(234,203,128,.9);box-shadow:0 0 calc(var(--cw) * .02) rgba(234,203,128,.7);
+}
+.cg-pips b.half{background:linear-gradient(90deg,rgba(234,203,128,.9) 50%,rgba(234,203,128,.2) 50%)}
 .cg-series{
   position:absolute;bottom:calc(var(--cw) * .085);left:0;right:0;
   font-family:var(--f-data);font-size:calc(var(--cw) * .05);
@@ -439,6 +488,19 @@ details.appear[open] > summary::after{content:"\2013"}
 .swatch.custom input{position:absolute;inset:0;opacity:0;cursor:pointer;border:0;padding:0}
 .swatch.custom svg{width:13px;height:13px;fill:#8A7351}
 
+.paint-block{display:flex;flex-direction:column;gap:6px}
+.grad-body{display:none;flex-direction:column;gap:8px;margin-top:2px;
+  padding:9px 10px;border:1px solid rgba(138,115,81,.24);border-radius:2px;background:rgba(255,255,255,.2)}
+.grad-body.on{display:flex}
+.grad-line{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.grad-line input[type=color]{
+  width:34px;height:26px;padding:0;border:1px solid rgba(138,115,81,.34);border-radius:2px;
+  background:rgba(255,255,255,.4);cursor:pointer;
+}
+.grad-line .sub-label{flex:0 0 auto}
+.grad-line .slider-row{flex:1 1 150px;min-width:130px}
+.paint-preview{height:16px;border-radius:2px;border:1px solid rgba(138,115,81,.3);flex:1 1 90px;min-width:70px}
+
 .checks{display:flex;flex-wrap:wrap;gap:10px 16px}
 .check{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-data);font-size:.82rem;color:#5C4E44;cursor:pointer}
 .check input{accent-color:#8E7332;width:14px;height:14px;cursor:pointer}
@@ -566,8 +628,20 @@ input[type=range]{
         <option value="desc">Descending</option>
       </select>
     </div>
+    <div class="field" id="groupStyleField" hidden>
+      <label class="lbl" for="groupStyle">Group style</label>
+      <select id="groupStyle">
+        <option value="continuous" selected>Continuous</option>
+        <option value="own">Own shelf</option>
+      </select>
+    </div>
     <label class="toggle" for="favOnly"><input type="checkbox" id="favOnly">Favorites only</label>
     <button class="btn" id="addBtn">Add a book</button>
+    <button class="btn ghost" id="arrangeBtn" aria-pressed="false">Arrange</button>
+    <div class="seg" id="moveSeg" hidden aria-label="What a drag moves">
+      <button type="button" data-move="book" aria-pressed="true">Move: Book</button>
+      <button type="button" data-move="group" aria-pressed="false">Group</button>
+    </div>
     <button class="btn ghost" id="setBtn">Ratings</button>
     <button class="btn ghost" id="exportBtn">Export</button>
     <button class="btn ghost" id="importBtn">Import</button>
@@ -617,15 +691,98 @@ var PALETTE = ["#4A1F2E","#2C3A52","#3E2A4A","#22403A","#4A3520","#5A2330",
                "#1B2A44","#2E2240","#5C3A1E","#123832","#402038","#2A2A3E"];
 
 var SPINE_DEFAULTS = {title:true, author:true, series:false, number:false, pips:true};
+var COVER_DEFAULTS = {title:true, author:true, series:true, number:false, pips:false};
+var DEFAULT_RIBBON = "#C94059";
+var SPINE_ANGLE = 180, COVER_ANGLE = 165;
 
 /* ---------------- state ---------------- */
 var state = {
   books:{}, categories:DEFAULT_CATEGORIES.slice(),
-  tab:"all", q:"", groupBy:"none", sortBy:"series", dir:"asc",
-  favOnly:false, openId:null, loaded:false
+  tab:"all", q:"", groupBy:"none", groupStyle:"continuous",
+  sortBy:"series", dir:"asc",
+  favOnly:false, openId:null, loaded:false,
+  arranging:false, moveMode:"book", statusDots:true
 };
 var db = null, assets = null, assetsChecked = false;
 var saveTimers = {};
+
+/* ---------------- image store (IndexedDB) ----------------
+   Covers and spine images live here rather than in the book document: they are
+   data URLs of a few tens of KB, far too big for a document store, and they have
+   to work in the standalone build where the Artifact `assets` capability is gone. */
+var IMGDB = (function(){
+  var NAME = "gilded-spines-images", STORE = "images", dbp = null;
+  function open(){
+    if(dbp) return dbp;
+    dbp = new Promise(function(res, rej){
+      var r = indexedDB.open(NAME, 1);
+      r.onupgradeneeded = function(){ r.result.createObjectStore(STORE); };
+      r.onsuccess = function(){ res(r.result); };
+      r.onerror = function(){ rej(r.error); };
+    });
+    return dbp;
+  }
+  function tx(mode, fn){
+    return open().then(function(db){
+      return new Promise(function(res, rej){
+        var t = db.transaction(STORE, mode), s = t.objectStore(STORE), out;
+        out = fn(s);
+        t.oncomplete = function(){ res(out && out.result !== undefined ? out.result : out); };
+        t.onerror = function(){ rej(t.error); };
+      });
+    });
+  }
+  return {
+    get:  function(k){ return tx("readonly",  function(s){ return s.get(k); }); },
+    put:  function(k, v){ return tx("readwrite", function(s){ return s.put(v, k); }); },
+    del:  function(k){ return tx("readwrite", function(s){ return s.delete(k); }); },
+    keys: function(){ return tx("readonly",  function(s){ return s.getAllKeys(); }); }
+  };
+})();
+
+/* Resolved data URLs, so re-renders during a drag or a search keystroke do not
+   go back to IndexedDB for every book on the shelf. */
+var IMGCACHE = {};
+function imgKey(id, kind){ return id + ":" + kind; }
+function imgGet(key){
+  if(Object.prototype.hasOwnProperty.call(IMGCACHE, key)) return Promise.resolve(IMGCACHE[key]);
+  return IMGDB.get(key).then(function(v){
+    IMGCACHE[key] = v || null;
+    return IMGCACHE[key];
+  }, function(){ IMGCACHE[key] = null; return null; });
+}
+function imgPut(key, dataUrl){
+  IMGCACHE[key] = dataUrl;
+  return IMGDB.put(key, dataUrl);
+}
+function imgDel(key){
+  delete IMGCACHE[key];
+  return IMGDB.del(key).catch(function(){});
+}
+
+/* Never store the raw file — a phone photo is several megabytes and would make
+   the export unusable. */
+function shrinkImage(file, maxW, maxH, quality){
+  return new Promise(function(res, rej){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var r = Math.min(1, maxW / img.width, maxH / img.height);
+        var w = Math.max(1, Math.round(img.width * r));
+        var h = Math.max(1, Math.round(img.height * r));
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        c.getContext("2d").drawImage(img, 0, 0, w, h);
+        res(c.toDataURL("image/jpeg", quality || 0.78));
+      };
+      img.onerror = rej;
+      img.src = reader.result;
+    };
+    reader.onerror = rej;
+    reader.readAsDataURL(file);
+  });
+}
 
 /* ---------------- helpers ---------------- */
 function esc(s){
@@ -644,16 +801,76 @@ function slug(s){
 function byId(id){ return document.getElementById(id); }
 function list(){ return Object.keys(state.books).map(function(k){ return state.books[k]; }); }
 
+/* Anything that reaches a style attribute has to survive an imported file
+   written by hand: a colour that isn't a hex literal is refused, not escaped. */
+function safeColor(v, fallback){
+  return (typeof v === "string" && /^#([0-9a-f]{3}|[0-9a-f]{4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(v.trim()))
+    ? v.trim() : fallback;
+}
+function safeAngle(v, fallback){
+  var n = parseFloat(v);
+  if(isNaN(n)) return fallback;
+  n = Math.round(n / 15) * 15;
+  return ((n % 360) + 360) % 360;
+}
+/* Mix a hex colour towards black. keep=0.55 leaves 55% of the colour, matching
+   CSS color-mix(in srgb, <c> 55%, black). */
+function darken(hex, keep){
+  var h = safeColor(hex, "#000000").slice(1);
+  if(h.length === 3) h = h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  h = h.slice(0, 6);
+  var out = "#", i, v;
+  for(i=0;i<3;i++){
+    v = Math.round(parseInt(h.substr(i*2,2),16) * keep);
+    out += ("0" + Math.max(0, Math.min(255, v)).toString(16)).slice(-2);
+  }
+  return out;
+}
+
 function color(b){
-  if(b.spineColor) return b.spineColor;
+  if(b.spineColor) return safeColor(b.spineColor, PALETTE[0]);
   var seed = b.series ? b.series : (b.author || b.title || "");
   return PALETTE[hash(seed) % PALETTE.length];
 }
+function spineTo(b){ return b.spineColor2 ? safeColor(b.spineColor2, null) : null; }
+function spineAngle(b){ return safeAngle(b.spineAngle, SPINE_ANGLE); }
+/* The cover follows the spine until it is given colours of its own; from then on
+   coverColor2 is the whole story, so clearing it leaves a solid cover even when
+   the spine carries a gradient. */
+function coverFrom(b){ return b.coverColor ? safeColor(b.coverColor, color(b)) : color(b); }
+function coverTo(b){
+  if(b.coverColor2) return safeColor(b.coverColor2, null);
+  return b.coverColor ? null : spineTo(b);
+}
+function coverAngle(b){ return safeAngle(b.coverAngle, COVER_ANGLE); }
+function ribbonColor(b){ return safeColor(b.ribbonColor, DEFAULT_RIBBON); }
+function statusDotOn(b){
+  return typeof b.showStatusDot === "boolean" ? b.showStatusDot : state.statusDots;
+}
+/* The CSS keeps a solid spine's shading exactly as it was; a gradient replaces
+   only the base layer, so the lit edge and inner shadow still read as an object. */
+function spineBaseCSS(b){
+  var to = spineTo(b);
+  return to ? "linear-gradient(" + spineAngle(b) + "deg," + color(b) + "," + to + ")" : "";
+}
+function coverBaseCSS(b){
+  var to = coverTo(b);
+  return to ? "linear-gradient(" + coverAngle(b) + "deg," + coverFrom(b) + "," + to + ")" : "";
+}
+
 function show(b){
   var s = b.spineShow || {};
   var out = {};
   Object.keys(SPINE_DEFAULTS).forEach(function(k){
     out[k] = (typeof s[k] === "boolean") ? s[k] : SPINE_DEFAULTS[k];
+  });
+  return out;
+}
+function coverShow(b){
+  var s = b.coverShow || {};
+  var out = {};
+  Object.keys(COVER_DEFAULTS).forEach(function(k){
+    out[k] = (typeof s[k] === "boolean") ? s[k] : COVER_DEFAULTS[k];
   });
   return out;
 }
@@ -688,11 +905,29 @@ function deleteBook(id){
   if(db) db.doc("books/" + id).delete().catch(function(){ setSave("Couldn't remove that book", "warn"); });
   render();
 }
-function saveCategories(){
+function savePrefs(){
   if(!db) return;
-  db.doc("settings/prefs").set({categories: state.categories}).catch(function(){
-    setSave("Couldn't save rating categories", "warn");
+  db.doc("settings/prefs").set({
+    categories: state.categories,
+    statusDots: state.statusDots,
+    sortBy: state.sortBy,
+    dir: state.dir
+  }).catch(function(){
+    setSave("Couldn't save your settings", "warn");
   });
+}
+/* A global switch should actually switch every book, so per-book overrides that
+   disagree with it are dropped rather than quietly winning. */
+function setGlobalDots(on){
+  state.statusDots = !!on;
+  savePrefs();
+  list().forEach(function(b){
+    if(typeof b.showStatusDot === "boolean" && b.showStatusDot !== state.statusDots){
+      delete b.showStatusDot;
+      saveBook(b);
+    }
+  });
+  render();
 }
 function getAssets(){
   if(assetsChecked) return Promise.resolve(assets);
@@ -723,6 +958,7 @@ function cmp(a, b){
   else if(s === "favorite") r = (b.favorite?1:0)-(a.favorite?1:0);
   else if(s === "added") r = (a.addedAt||0)-(b.addedAt||0);
   else if(s === "progress") r = (a.progress||0)-(b.progress||0);
+  else if(s === "custom") r = orderOf(a)-orderOf(b);
   else if(s.indexOf("r:") === 0){ var k = s.slice(2); r = ratingOf(a,k)-ratingOf(b,k); }
   else r = 0;
   if(r === 0) r = (a.title||"").localeCompare(b.title||"");
@@ -741,22 +977,69 @@ function groupKey(b){
 }
 
 /* ---------------- generated cover ---------------- */
+function pipMarks(b){
+  var key = state.categories[0] ? state.categories[0].key : "overall";
+  var v = ratingOf(b, key);
+  if(v <= 0) return "";
+  var h = "", i, full = Math.floor(v), half = v % 1 >= .5;
+  for(i=0;i<full;i++) h += "<b></b>";
+  if(half) h += '<b class="half"></b>';
+  return h;
+}
 function coverGenHTML(b, w){
   var len = (b.title || "").length;
   var scale = len > 44 ? .62 : len > 30 ? .74 : len > 20 ? .86 : 1;
-  return '<div class="cover-gen" style="--c:' + esc(color(b)) + ';--cw:' + Math.round(w) + 'px;--cscale:' + scale + '">' +
+  var cs = coverShow(b);
+  var base = coverBaseCSS(b);
+  var seriesLine = "";
+  if(cs.series && b.series){
+    seriesLine = esc(b.series) + ((cs.number && b.seriesNumber) ? " · " + esc(b.seriesNumber) : "");
+  } else if(cs.number && b.seriesNumber){
+    seriesLine = "Volume " + esc(b.seriesNumber);
+  }
+  var pips = cs.pips ? pipMarks(b) : "";
+  return '<div class="cover-gen" style="--c:' + esc(coverFrom(b)) + ';--cw:' + Math.round(w) + 'px;--cscale:' + scale +
+      (base ? ';--cover-base:' + base : "") + '">' +
     '<svg class="cg-orn" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-wing"/></svg>' +
-    '<span class="cg-title">' + esc(b.title || "Untitled") + "</span>" +
+    (cs.title ? '<span class="cg-title">' + esc(b.title || "Untitled") + "</span>" : "") +
     '<span class="cg-rule"></span>' +
-    '<span class="cg-author">' + esc(b.author || "") + "</span>" +
-    (b.series ? '<span class="cg-series">' + esc(b.series) + (b.seriesNumber ? " · " + esc(b.seriesNumber) : "") + "</span>" : "") +
+    (cs.author && b.author ? '<span class="cg-author">' + esc(b.author) + "</span>" : "") +
+    (pips ? '<span class="cg-pips' + (seriesLine ? " above" : "") + '">' + pips + "</span>" : "") +
+    (seriesLine ? '<span class="cg-series">' + seriesLine + "</span>" : "") +
     "</div>";
 }
+/* The drawn cover is always rendered first and the stored image swapped in when
+   IndexedDB answers, so a shelf of 300 books never waits on a database. */
 function coverInner(b, w){
+  if(b.coverImage) return coverGenHTML(b, w);
   var src = coverSrc(b);
   if(!src) return coverGenHTML(b, w);
   return '<img src="' + esc(src) + '" alt="Cover of ' + esc(b.title) + '"' +
     ' onerror="this.parentNode.innerHTML=' + esc(JSON.stringify(coverGenHTML(b, w))) + '">';
+}
+/* Swap in the stored cover and spine images once IndexedDB has them. */
+function hydrateImages(root){
+  if(!root) return;
+  Array.prototype.forEach.call(root.querySelectorAll("[data-img-cover]"), function(el){
+    var key = el.getAttribute("data-img-cover");
+    el.removeAttribute("data-img-cover");
+    imgGet(key).then(function(url){
+      if(!url || !el.isConnected) return;
+      var gen = el.querySelector(".cover-gen");
+      var img = document.createElement("img");
+      img.src = url;
+      img.alt = el.getAttribute("data-img-alt") || "";
+      if(gen) gen.replaceWith(img); else el.insertBefore(img, el.firstChild);
+    });
+  });
+  Array.prototype.forEach.call(root.querySelectorAll("[data-img-spine]"), function(el){
+    var key = el.getAttribute("data-img-spine");
+    el.removeAttribute("data-img-spine");
+    imgGet(key).then(function(url){
+      if(!url || !el.isConnected) return;
+      el.style.setProperty("--spine-img", 'url("' + url + '")');
+    });
+  });
 }
 
 /* ---------------- shelf items ---------------- */
@@ -771,8 +1054,8 @@ function pipRow(b){
 }
 function chromeHTML(b){
   var st = STATUS[b.status] || STATUS.want;
-  return '<span class="status-dot" style="--sd:' + st.color + '"></span>' +
-    (b.favorite ? '<span class="ribbon"></span>' : "") +
+  return (statusDotOn(b) ? '<span class="status-dot" style="--sd:' + st.color + '"></span>' : "") +
+    (b.favorite ? '<span class="ribbon" style="--rb:' + esc(ribbonColor(b)) + '"></span>' : "") +
     (b.status === "reading" && b.progress
       ? '<span class="progress-band"><i style="width:' + Math.max(2, Math.min(100, b.progress)) + '%"></i></span>'
       : "");
@@ -785,7 +1068,8 @@ function itemHTML(b, isLast, count){
   if(b.display === "front"){
     var w = Math.round(h * 0.66);
     return '<button class="faced" type="button" data-id="' + esc(b.id) + '"' +
-      ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(color(b)) + '"' +
+      ' style="--h:' + h + 'px;--w:' + w + 'px;--c:' + esc(coverFrom(b)) + '"' +
+      (b.coverImage ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '" data-img-alt="Cover of ' + esc(b.title) + '"' : "") +
       ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">' +
       coverInner(b, w) + chromeHTML(b) + "</button>";
   }
@@ -801,8 +1085,11 @@ function itemHTML(b, isLast, count){
   var fs = (Math.max(8.5, Math.min(15.5, px)) * textScale(b)).toFixed(2) + "px";
   var lean = (isLast && count > 3 && hash(b.id) % 3 === 0) ? " lean" : "";
 
+  var base = spineBaseCSS(b);
   return '<button class="spine' + lean + '" type="button" data-id="' + esc(b.id) + '"' +
-    ' style="--h:' + h + 'px;--w:' + spineW(b) + 'px;--c:' + esc(color(b)) + ';--fs:' + fs + '"' +
+    ' style="--h:' + h + 'px;--w:' + spineW(b) + 'px;--c:' + esc(color(b)) + ';--fs:' + fs +
+      (base ? ';--spine-base:' + base : "") + '"' +
+    (b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "") +
     ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") + '" aria-label="' + aria + '">' +
     chromeHTML(b) +
     (s.number && b.seriesNumber ? '<span class="spine-num">' + esc(b.seriesNumber) + "</span>" : "") +
@@ -826,37 +1113,65 @@ function render(){
   }
   var html;
   if(state.groupBy === "none"){
-    html = shelfHTML("", books);
+    html = shelfHTML("", books.map(function(b){ return {b:b}; }));
   } else {
-    var order = [], groups = {};
-    books.forEach(function(b){
-      var k = groupKey(b);
-      if(!groups[k]){ groups[k] = []; order.push(k); }
-      groups[k].push(b);
-    });
-    if(state.groupBy === "series" || state.groupBy === "letter" || state.groupBy === "author"){
-      order.sort(function(a,c){
-        if(a === "Standalones") return 1;
-        if(c === "Standalones") return -1;
-        return a.localeCompare(c);
+    var g = buildGroups(books);
+    if(state.groupStyle === "own"){
+      html = g.order.map(function(k){
+        return shelfHTML(k, g.groups[k].map(function(b){ return {b:b}; }));
+      }).join("");
+    } else {
+      /* Continuous: one unbroken run of shelves. Cluster members stay adjacent
+         and the join is marked, rather than each series claiming its own plank
+         and leaving a metre of empty wood. */
+      var entries = [];
+      g.order.forEach(function(k, gi){
+        g.groups[k].forEach(function(b, bi){
+          entries.push({b:b, sep: gi > 0 && bi === 0});
+        });
       });
+      html = shelfHTML("", entries);
     }
-    html = order.map(function(k){ return shelfHTML(k, groups[k]); }).join("");
   }
   lib.innerHTML = html;
+  hydrateImages(lib);
+}
+function buildGroups(books){
+  var order = [], groups = {};
+  books.forEach(function(b){
+    var k = groupKey(b);
+    if(!groups[k]){ groups[k] = []; order.push(k); }
+    groups[k].push(b);
+  });
+  /* Group names follow the sort in force. Under a hand-arranged shelf that means
+     the order the books themselves are in — alphabetising the groups there would
+     quietly undo every group you dragged. */
+  if(state.sortBy !== "custom" &&
+     (state.groupBy === "series" || state.groupBy === "letter" || state.groupBy === "author")){
+    order.sort(function(a,c){
+      if(a === "Standalones") return 1;
+      if(c === "Standalones") return -1;
+      return a.localeCompare(c);
+    });
+  }
+  return {order:order, groups:groups};
 }
 /* Pack books into rows that actually fill the width of a plank, rather than
    letting one shelf hold a single book and a metre of empty wood. */
 function itemWidth(b){
   return b.display === "front" ? Math.round(spineH(b) * 0.66) : spineW(b);
 }
-function packRows(books, avail){
-  var rows = [], cur = [], w = 0, GAP = 5;
-  books.forEach(function(b){
-    var bw = itemWidth(b);
-    if(cur.length && w + GAP + bw > avail){ rows.push(cur); cur = []; w = 0; }
-    w += (cur.length ? GAP : 0) + bw;
-    cur.push(b);
+function packRows(entries, avail){
+  var rows = [], cur = [], w = 0, GAP = 5, SEPW = 8;
+  entries.forEach(function(e){
+    var bw = itemWidth(e.b);
+    var sep = !!e.sep;
+    var lead = cur.length ? (sep ? GAP + SEPW + GAP : GAP) : 0;
+    if(cur.length && w + lead + bw > avail){
+      rows.push(cur); cur = []; w = 0; lead = 0; sep = false;
+    }
+    w += lead + bw;
+    cur.push({b:e.b, sep:sep && cur.length > 0});
   });
   if(cur.length) rows.push(cur);
   return rows;
@@ -865,13 +1180,16 @@ function shelfWidth(){
   var lib = byId("library");
   return Math.max(120, (lib ? lib.clientWidth : 900) - 32);
 }
-function shelfHTML(label, books){
+function shelfHTML(label, entries){
   var plate = label
-    ? '<div class="plate"><i></i><h2>' + esc(label) + '</h2><span class="cnt">' + books.length + '</span><i></i></div>'
+    ? '<div class="plate"><i></i><h2>' + esc(label) + '</h2><span class="cnt">' + entries.length + '</span><i></i></div>'
     : "";
-  var rows = packRows(books, shelfWidth());
+  var rows = packRows(entries, shelfWidth());
   var shelves = rows.map(function(row){
-    var items = row.map(function(b,i){ return itemHTML(b, i === row.length-1, row.length); }).join("");
+    var items = row.map(function(e,i){
+      return (e.sep ? '<span class="cluster-gap" aria-hidden="true"></span>' : "") +
+        itemHTML(e.b, i === row.length-1, row.length);
+    }).join("");
     return '<div class="shelf"><div class="books">' + items + '</div><div class="plank"></div></div>';
   }).join("");
   return '<section class="shelf-group">' + plate + shelves + "</section>";
@@ -913,12 +1231,63 @@ function pipsHTML(icon, value, key){
     ' aria-valuemin="0" aria-valuemax="5" aria-valuenow="' + (value < 0 ? 0 : value) + '">' + h + "</span>";
 }
 
+var PAINT_FIELDS = {
+  spine:{from:"spineColor", to:"spineColor2", angle:"spineAngle"},
+  cover:{from:"coverColor", to:"coverColor2", angle:"coverAngle"}
+};
+function hasCoverArt(b){ return !!(b.coverImage || b.coverId); }
+function artHint(b){
+  var bits = [];
+  if(hasCoverArt(b)) bits.push("your own cover");
+  if(b.spineImage) bits.push("your own spine");
+  if(!bits.length) return "Drawn cover and painted spine — both follow the colours below.";
+  return "Using " + bits.join(" and ") + ".";
+}
+function swatchesHTML(target, cur){
+  return PALETTE.map(function(hex){
+    return '<button class="swatch" type="button" data-swatch="' + target + '" data-color="' + hex + '" aria-pressed="' +
+      (cur.toLowerCase() === hex.toLowerCase()) + '" style="background:' + hex + '" aria-label="' + hex + '"></button>';
+  }).join("") +
+  '<span class="swatch custom" title="Pick any colour"><svg viewBox="0 0 24 24"><use href="#ic-drop"/></svg>' +
+    '<input type="color" data-custom="' + target + '" value="' + esc(cur) + '" aria-label="Custom colour"></span>';
+}
+function paintBlockHTML(target, label, from, to, angle){
+  var on = !!to, end = to || darken(from, .55);
+  return '<div class="paint-block">' +
+    '<span class="sub-label">' + esc(label) + "</span>" +
+    '<div class="swatches" data-swatch-row="' + target + '" style="margin-top:6px">' + swatchesHTML(target, from) + "</div>" +
+    '<label class="check" style="margin-top:6px"><input type="checkbox" data-grad="' + target + '"' + (on ? " checked" : "") + ">Gradient</label>" +
+    '<div class="grad-body' + (on ? " on" : "") + '" data-grad-body="' + target + '">' +
+      '<div class="grad-line">' +
+        '<span class="sub-label">To</span>' +
+        '<input type="color" data-grad2="' + target + '" value="' + esc(end) + '" aria-label="Gradient end colour">' +
+        '<span class="paint-preview" data-grad-preview="' + target + '" style="background:linear-gradient(' +
+          angle + "deg," + esc(from) + "," + esc(end) + ')"></span>' +
+      "</div>" +
+      '<div class="grad-line">' +
+        '<span class="sub-label">Angle</span>' +
+        '<div class="slider-row"><input type="range" data-gangle="' + target + '" min="0" max="360" step="15" value="' + angle + '">' +
+        '<span class="num-out" data-gangle-out="' + target + '">' + angle + "&deg;</span></div>" +
+      "</div>" +
+    "</div>" +
+  "</div>";
+}
+function checkRowHTML(kind, vals){
+  return '<div class="checks" data-showrow="' + kind + '" style="margin-top:6px">' +
+    '<label class="check"><input type="checkbox" data-show="title"' + (vals.title?" checked":"") + ">Title</label>" +
+    '<label class="check"><input type="checkbox" data-show="author"' + (vals.author?" checked":"") + ">Author</label>" +
+    '<label class="check"><input type="checkbox" data-show="series"' + (vals.series?" checked":"") + ">Series name</label>" +
+    '<label class="check"><input type="checkbox" data-show="number"' + (vals.number?" checked":"") + ">Volume number</label>" +
+    '<label class="check"><input type="checkbox" data-show="pips"' + (vals.pips?" checked":"") + ">Rating pips</label>" +
+  "</div>";
+}
+
 function openBook(id, isNew){
   var b = state.books[id];
   if(!b) return;
   state.openId = id;
 
-  var s = show(b);
+  var s = show(b), cs = coverShow(b);
   var statusOpts = STATUS_ORDER.map(function(k){
     return '<option value="' + k + '"' + (b.status === k ? " selected" : "") + ">" + esc(STATUS[k].label) + "</option>";
   }).join("");
@@ -928,13 +1297,6 @@ function openBook(id, isNew){
       pipsHTML(c.icon, v, c.key) +
       '<span class="val">' + (v < 0 ? "—" : (v % 1 ? v.toFixed(1) : v + ".0")) + "</span></div>";
   }).join("");
-  var swatches = PALETTE.map(function(hex){
-    return '<button class="swatch" type="button" data-color="' + hex + '" aria-pressed="' +
-      (color(b).toLowerCase() === hex.toLowerCase()) + '" style="background:' + hex + '" aria-label="' + hex + '"></button>';
-  }).join("") +
-  '<span class="swatch custom" title="Pick any colour"><svg viewBox="0 0 24 24"><use href="#ic-drop"/></svg>' +
-    '<input type="color" id="customColor" value="' + esc(color(b)) + '" aria-label="Custom spine colour"></span>';
-
   var ov = document.createElement("div");
   ov.className = "overlay";
   ov.id = "bookOverlay";
@@ -963,36 +1325,45 @@ function openBook(id, isNew){
         "<summary>Cover &amp; spine</summary>" +
         '<div class="appear-body">' +
           '<div class="cover-area">' +
-            '<div class="cover-preview" id="coverPreview" style="--c:' + esc(color(b)) + '">' + coverInner(b, 104) + "</div>" +
+            '<div class="cover-preview" id="coverPreview" style="--c:' + esc(coverFrom(b)) + '"' +
+              (b.coverImage ? ' data-img-cover="' + esc(imgKey(b.id, "cover")) + '"' : "") + ">" +
+              coverInner(b, 104) + "</div>" +
             '<div class="cover-ctl">' +
               '<span class="sub-label">On the shelf</span>' +
               '<div class="seg" id="displaySeg">' +
                 '<button type="button" data-display="spine" aria-pressed="' + (b.display !== "front") + '">Spine out</button>' +
                 '<button type="button" data-display="front" aria-pressed="' + (b.display === "front") + '">Front out</button>' +
               "</div>" +
-              '<span class="sub-label">Cover art</span>' +
+              '<span class="sub-label">Cover image</span>' +
               '<div class="page-actions" style="margin-top:0">' +
-                '<button class="btn small" id="uploadCover" type="button">Upload image</button>' +
-                (b.coverId ? '<button class="btn small ghost danger" id="removeCover" type="button">Use default</button>' : "") +
+                '<button class="btn small" id="uploadCover" type="button">Upload</button>' +
+                (hasCoverArt(b) ? '<button class="btn small ghost danger" id="removeCover" type="button">Remove</button>' : "") +
               "</div>" +
-              '<p class="hintline" id="coverHint">' + (b.coverId ? "Your own cover image." : "Using the drawn cover — it follows the spine colour.") + "</p>" +
+              '<span class="sub-label" style="margin-top:2px">Spine image</span>' +
+              '<div class="page-actions" style="margin-top:0">' +
+                '<button class="btn small" id="uploadSpine" type="button">Upload</button>' +
+                (b.spineImage ? '<button class="btn small ghost danger" id="removeSpine" type="button">Remove</button>' : "") +
+              "</div>" +
+              '<p class="hintline" id="coverHint">' + esc(artHint(b)) + "</p>" +
             "</div>" +
           "</div>" +
 
-          '<div>' +
-            '<span class="sub-label">Spine colour</span>' +
-            '<div class="swatches" id="swatches" style="margin-top:6px">' + swatches + "</div>" +
-          "</div>" +
+          paintBlockHTML("spine", "Spine colour", color(b), spineTo(b), spineAngle(b)) +
+          paintBlockHTML("cover", "Cover colour", coverFrom(b), coverTo(b), coverAngle(b)) +
 
           '<div>' +
             '<span class="sub-label">Show on the spine</span>' +
-            '<div class="checks" id="spineShow" style="margin-top:6px">' +
-              '<label class="check"><input type="checkbox" data-show="title"' + (s.title?" checked":"") + ">Title</label>" +
-              '<label class="check"><input type="checkbox" data-show="author"' + (s.author?" checked":"") + ">Author</label>" +
-              '<label class="check"><input type="checkbox" data-show="series"' + (s.series?" checked":"") + ">Series name</label>" +
-              '<label class="check"><input type="checkbox" data-show="number"' + (s.number?" checked":"") + ">Volume number</label>" +
-              '<label class="check"><input type="checkbox" data-show="pips"' + (s.pips?" checked":"") + ">Rating pips</label>" +
-            "</div>" +
+            checkRowHTML("spine", s) +
+          "</div>" +
+          '<div>' +
+            '<span class="sub-label">Show on the cover</span>' +
+            checkRowHTML("cover", cs) +
+          "</div>" +
+
+          '<div class="grad-line">' +
+            '<span class="sub-label">Favourite bookmark</span>' +
+            '<input type="color" id="ribbonColor" value="' + esc(ribbonColor(b)) + '" aria-label="Favourite bookmark colour">' +
+            '<label class="check"><input type="checkbox" id="dotToggle"' + (statusDotOn(b) ? " checked" : "") + ">Show status dot</label>" +
           "</div>" +
 
           '<div>' +
@@ -1044,8 +1415,11 @@ function openBook(id, isNew){
   function refreshPreview(){
     var pv = byId("coverPreview");
     if(!pv) return;
-    pv.style.setProperty("--c", color(b));
+    pv.style.setProperty("--c", coverFrom(b));
     pv.innerHTML = coverInner(b, 104);
+    if(b.coverImage) pv.setAttribute("data-img-cover", imgKey(b.id, "cover"));
+    else pv.removeAttribute("data-img-cover");
+    hydrateImages(pv.parentNode);
   }
 
   /* ---- plain fields ---- */
@@ -1125,26 +1499,81 @@ function openBook(id, isNew){
   });
 
   /* ---- appearance: colour ---- */
-  byId("swatches").addEventListener("click", function(e){
-    var sw = e.target.closest("[data-color]");
-    if(!sw) return;
-    b.spineColor = sw.getAttribute("data-color");
-    Array.prototype.forEach.call(this.querySelectorAll("[data-color]"), function(x){
-      x.setAttribute("aria-pressed", String(x.getAttribute("data-color").toLowerCase() === b.spineColor.toLowerCase()));
+  function paintFrom(t){ return t === "spine" ? color(b) : coverFrom(b); }
+  function paintTo(t){ return t === "spine" ? spineTo(b) : coverTo(b); }
+  function paintAngle(t){ return t === "spine" ? spineAngle(b) : coverAngle(b); }
+  function afterPaint(t){
+    var from = paintFrom(t), to = paintTo(t) || darken(from, .55);
+    Array.prototype.forEach.call(spread.querySelectorAll('[data-swatch="' + t + '"]'), function(x){
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-color").toLowerCase() === from.toLowerCase()));
     });
+    var pv = spread.querySelector('[data-grad-preview="' + t + '"]');
+    if(pv) pv.style.background = "linear-gradient(" + paintAngle(t) + "deg," + from + "," + to + ")";
     saveBook(b); render(); refreshPreview();
+  }
+  spread.addEventListener("click", function(e){
+    var sw = e.target.closest("[data-swatch]");
+    if(!sw) return;
+    var t = sw.getAttribute("data-swatch");
+    b[PAINT_FIELDS[t].from] = sw.getAttribute("data-color");
+    afterPaint(t);
   });
-  byId("customColor").addEventListener("input", function(){
-    b.spineColor = this.value;
+  spread.addEventListener("input", function(e){
+    var cu = e.target.closest("[data-custom]"), t;
+    if(cu){ t = cu.getAttribute("data-custom"); b[PAINT_FIELDS[t].from] = cu.value; afterPaint(t); return; }
+    var g2 = e.target.closest("[data-grad2]");
+    if(g2){ t = g2.getAttribute("data-grad2"); b[PAINT_FIELDS[t].to] = g2.value; afterPaint(t); return; }
+    var ga = e.target.closest("[data-gangle]");
+    if(ga){
+      t = ga.getAttribute("data-gangle");
+      b[PAINT_FIELDS[t].angle] = safeAngle(ga.value, t === "spine" ? SPINE_ANGLE : COVER_ANGLE);
+      var out = spread.querySelector('[data-gangle-out="' + t + '"]');
+      if(out) out.textContent = b[PAINT_FIELDS[t].angle] + "\u00B0";
+      afterPaint(t);
+    }
+  });
+  spread.addEventListener("change", function(e){
+    var gc = e.target.closest("[data-grad]");
+    if(!gc) return;
+    var t = gc.getAttribute("data-grad"), f = PAINT_FIELDS[t];
+    /* Pin the colour it is showing right now before changing anything, so the
+       cover can go solid while the spine keeps its gradient. */
+    b[f.from] = paintFrom(t);
+    if(gc.checked){
+      b[f.to] = darken(b[f.from], .55);
+      var inp = spread.querySelector('[data-grad2="' + t + '"]');
+      if(inp) inp.value = b[f.to];
+    } else {
+      b[f.to] = null;
+    }
+    var body = spread.querySelector('[data-grad-body="' + t + '"]');
+    if(body) body.classList.toggle("on", gc.checked);
+    afterPaint(t);
+  });
+
+  /* ---- appearance: what shows, spine and cover kept apart ---- */
+  spread.addEventListener("change", function(e){
+    var cb = e.target.closest("[data-show]");
+    if(!cb) return;
+    var row = cb.closest("[data-showrow]");
+    var kind = row ? row.getAttribute("data-showrow") : "spine";
+    if(kind === "cover"){
+      if(!b.coverShow) b.coverShow = coverShow(b);
+      b.coverShow[cb.getAttribute("data-show")] = cb.checked;
+    } else {
+      if(!b.spineShow) b.spineShow = show(b);
+      b.spineShow[cb.getAttribute("data-show")] = cb.checked;
+    }
     saveBook(b); render(); refreshPreview();
   });
 
-  /* ---- appearance: what shows ---- */
-  byId("spineShow").addEventListener("change", function(e){
-    var cb = e.target.closest("[data-show]");
-    if(!cb) return;
-    if(!b.spineShow) b.spineShow = show(b);
-    b.spineShow[cb.getAttribute("data-show")] = cb.checked;
+  /* ---- appearance: bookmark colour and status dot ---- */
+  byId("ribbonColor").addEventListener("input", function(){
+    b.ribbonColor = this.value;
+    saveBook(b); render();
+  });
+  byId("dotToggle").addEventListener("change", function(){
+    b.showStatusDot = this.checked;
     saveBook(b); render();
   });
 
@@ -1162,55 +1591,93 @@ function openBook(id, isNew){
   slider("heightRange","heightOut","spineHeight", function(v){ return v + "px"; });
   slider("widthRange","widthOut","spineWidth", function(v){ return v + "px"; });
 
-  /* ---- appearance: cover upload ---- */
+  /* ---- appearance: cover and spine images ---- */
+  function setHint(t){ var h = byId("coverHint"); if(h) h.textContent = t; }
+  function pickFile(cb){
+    var input = byId("coverFile");
+    input.value = "";
+    input.onchange = function(){
+      var f = input.files && input.files[0];
+      if(f) cb(f);
+    };
+    input.click();
+  }
+  function ensureRemove(uploadId, removeId){
+    if(byId(removeId)) return;
+    var up = byId(uploadId);
+    if(!up) return;
+    up.parentNode.insertAdjacentHTML("beforeend",
+      '<button class="btn small ghost danger" id="' + removeId + '" type="button">Remove</button>');
+  }
+  function tooBig(file){
+    if(file.size <= 20 * 1024 * 1024) return false;
+    setHint("That image is over 20 MB — try a smaller one.");
+    return true;
+  }
   byId("uploadCover").addEventListener("click", function(){
-    var hint = byId("coverHint");
-    getAssets().then(function(a){
-      if(!a){
-        hint.textContent = "Image upload isn't available in this view.";
-        return;
-      }
-      var input = byId("coverFile");
-      input.value = "";
-      input.onchange = function(){
-        var file = input.files && input.files[0];
-        if(!file) return;
-        if(file.size > 20 * 1024 * 1024){
-          hint.textContent = "That image is over 20 MB — try a smaller one.";
-          return;
+    pickFile(function(file){
+      if(tooBig(file)) return;
+      setHint("Adding the cover…");
+      /* The Artifact's asset store is still the better home for a cover when it
+         exists; IndexedDB is what makes the upload work everywhere else. */
+      getAssets().then(function(a){
+        if(a && a.upload){
+          return a.upload(file).then(function(res){
+            if(b.coverImage) imgDel(imgKey(b.id, "cover"));
+            b.coverId = res.id; b.coverImage = false;
+          });
         }
-        hint.textContent = "Uploading…";
-        a.upload(file).then(function(res){
-          b.coverId = res.id;
-          saveBook(b); render(); refreshPreview();
-          hint.textContent = "Your own cover image.";
-          var rm = byId("removeCover");
-          if(!rm){
-            var holder = byId("uploadCover").parentNode;
-            holder.insertAdjacentHTML("beforeend",
-              '<button class="btn small ghost danger" id="removeCover" type="button">Use default</button>');
-            wireRemove();
-          }
-        }).catch(function(){
-          hint.textContent = "That upload didn't go through. Try again, or pick a smaller image.";
+        return shrinkImage(file, 600, 900, 0.78).then(function(url){
+          return imgPut(imgKey(b.id, "cover"), url).then(function(){
+            b.coverImage = true; b.coverId = null;
+          });
         });
-      };
-      input.click();
+      }).then(function(){
+        saveBook(b); render(); refreshPreview();
+        setHint(artHint(b));
+        ensureRemove("uploadCover", "removeCover");
+      }).catch(function(){
+        setHint("That image didn't go through. Try again, or pick a smaller one.");
+      });
     });
   });
-  function wireRemove(){
-    var rm = byId("removeCover");
-    if(!rm) return;
-    rm.addEventListener("click", function(){
+  byId("uploadSpine").addEventListener("click", function(){
+    pickFile(function(file){
+      if(tooBig(file)) return;
+      setHint("Adding the spine image…");
+      shrinkImage(file, 200, 900, 0.8).then(function(url){
+        return imgPut(imgKey(b.id, "spine"), url);
+      }).then(function(){
+        b.spineImage = true;
+        saveBook(b); render();
+        setHint(artHint(b));
+        ensureRemove("uploadSpine", "removeSpine");
+      }).catch(function(){
+        setHint("That image didn't go through. Try again, or pick a smaller one.");
+      });
+    });
+  });
+  spread.addEventListener("click", function(e){
+    var rmC = e.target.closest("#removeCover");
+    if(rmC){
       var old = b.coverId;
       b.coverId = null;
+      if(b.coverImage){ imgDel(imgKey(b.id, "cover")); b.coverImage = false; }
       saveBook(b); render(); refreshPreview();
-      byId("coverHint").textContent = "Using the drawn cover — it follows the spine colour.";
-      rm.remove();
+      setHint(artHint(b));
+      rmC.remove();
       if(old && assets && assets.delete) assets.delete(old).catch(function(){});
-    });
-  }
-  wireRemove();
+      return;
+    }
+    var rmS = e.target.closest("#removeSpine");
+    if(rmS){
+      imgDel(imgKey(b.id, "spine"));
+      b.spineImage = false;
+      saveBook(b); render();
+      setHint(artHint(b));
+      rmS.remove();
+    }
+  });
 
   /* ---- favorite / delete / close ---- */
   byId("favBtn").addEventListener("click", function(){
@@ -1251,13 +1718,17 @@ function openSettings(){
   ov.className = "overlay";
   ov.id = "setOverlay";
   ov.innerHTML =
-  '<div class="sheet" role="dialog" aria-modal="true" aria-label="Rating categories">' +
-    "<h3>Rating Categories</h3>" +
+  '<div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">' +
+    "<h3>Settings</h3>" +
     '<p class="hint">Every category rates in half steps, nought to five. The first one is what shows on the spines.</p>' +
     '<div class="cat-list" id="catList"></div>' +
     '<div class="field"><label class="lbl" for="newCat">Add a category</label>' +
       '<input type="text" id="newCat" placeholder="Banter, Worldbuilding, Dragons…"></div>' +
     '<div class="icon-picker" id="iconPicker"></div>' +
+    '<div class="page-rule"></div>' +
+    '<label class="toggle" for="globalDots" style="padding-bottom:0">' +
+      '<input type="checkbox" id="globalDots"' + (state.statusDots ? " checked" : "") + ">Show status dots on every spine</label>" +
+    '<p class="hint" style="margin:6px 0 0;font-size:.84rem">Applies to every book, clearing any dot setting made on an individual book.</p>' +
     '<div class="sheet-actions">' +
       '<button class="btn ghost" id="addCat" type="button">Add category</button>' +
       '<button class="btn" id="setClose" type="button">Done</button>' +
@@ -1285,6 +1756,8 @@ function openSettings(){
   }
   drawCats(); drawIcons();
 
+  byId("globalDots").addEventListener("change", function(){ setGlobalDots(this.checked); });
+
   ov.addEventListener("click", function(e){
     var ic = e.target.closest("[data-icon]");
     if(ic){ chosenIcon = ic.getAttribute("data-icon"); drawIcons(); return; }
@@ -1292,7 +1765,7 @@ function openSettings(){
     if(rm){
       if(state.categories.length <= 1) return;
       state.categories.splice(parseInt(rm.getAttribute("data-rm"),10),1);
-      saveCategories(); drawCats(); buildSortOptions(); render(); return;
+      savePrefs(); drawCats(); buildSortOptions(); render(); return;
     }
     var up = e.target.closest("[data-up]");
     if(up){
@@ -1301,7 +1774,7 @@ function openSettings(){
         var t = state.categories[i-1];
         state.categories[i-1] = state.categories[i];
         state.categories[i] = t;
-        saveCategories(); drawCats(); render();
+        savePrefs(); drawCats(); render();
       }
       return;
     }
@@ -1313,7 +1786,7 @@ function openSettings(){
       if(state.categories.some(function(c){ return c.key === key; })) return;
       state.categories.push({key:key,label:label,icon:chosenIcon});
       byId("newCat").value = "";
-      saveCategories(); drawCats(); buildSortOptions(); render();
+      savePrefs(); drawCats(); buildSortOptions(); render();
     }
   });
   byId("setClose").focus();
@@ -1325,19 +1798,47 @@ function closeSettings(){
 }
 
 /* ---------------- export / import ---------------- */
-function libraryPayload(){
+function libraryPayload(images){
   return {
     format:"gilded-spines",
-    version:1,
+    version:2,
     exportedAt:new Date().toISOString(),
+    statusDots:state.statusDots,
     categories:state.categories,
-    books:list()
+    books:list(),
+    images:images || {}
   };
 }
 function bookCount(){ return Object.keys(state.books).length; }
+/* Cover and spine images ride along as data URLs, or the file only restores
+   half a shelf on the other device. */
+function collectImages(){
+  return IMGDB.keys().then(function(keys){
+    return Promise.all((keys || []).map(function(k){
+      return IMGDB.get(k).then(function(v){ return [k, v]; }, function(){ return null; });
+    }));
+  }, function(){ return []; }).then(function(pairs){
+    var out = {};
+    pairs.forEach(function(pair){
+      if(pair && typeof pair[1] === "string") out[pair[0]] = pair[1];
+    });
+    return out;
+  });
+}
 function exportLibrary(){
-  var json = JSON.stringify(libraryPayload(), null, 2);
+  setSave("Gathering the shelf…", "off");
+  collectImages().then(function(images){ writeExport(images); }, function(){ writeExport({}); });
+}
+function writeExport(images){
+  var json = JSON.stringify(libraryPayload(images), null, 2);
   var name = "gilded-spines-" + new Date().toISOString().slice(0,10) + ".json";
+  var mb = json.length / (1024 * 1024);
+  if(mb > 8 && !confirm(
+      "This export is about " + mb.toFixed(1) + " MB — mostly cover and spine images.\n\n" +
+      "Files this size get awkward to move between devices. Export it anyway?")){
+    setSave("Export cancelled", "warn");
+    return;
+  }
   function viaBlob(){
     try {
       var url = URL.createObjectURL(new Blob([json], {type:"application/json"}));
@@ -1362,6 +1863,15 @@ function exportLibrary(){
 function normalizeBook(raw){
   var b = {};
   Object.keys(raw || {}).forEach(function(k){ b[k] = raw[k]; });
+  ["spineColor","spineColor2","coverColor","coverColor2","ribbonColor"].forEach(function(k){
+    if(b[k] != null) b[k] = safeColor(b[k], null);
+  });
+  if(b.spineAngle != null) b.spineAngle = safeAngle(b.spineAngle, SPINE_ANGLE);
+  if(b.coverAngle != null) b.coverAngle = safeAngle(b.coverAngle, COVER_ANGLE);
+  if(typeof b.showStatusDot !== "boolean") delete b.showStatusDot;
+  if(typeof b.order !== "number") delete b.order;
+  b.coverImage = !!b.coverImage;
+  b.spineImage = !!b.spineImage;
   b.title = String(b.title == null ? "Untitled" : b.title);
   b.author = String(b.author == null ? "" : b.author);
   b.id = String(b.id || slug(b.title + "-" + b.author));
@@ -1382,6 +1892,18 @@ function applyImport(payload, mode){
     setSave("That file has no books in it", "warn");
     return;
   }
+  /* Version 1 files carry no images; everything else is written into IndexedDB
+     before the shelf redraws, so covers are there on the first paint. */
+  var imgs = (payload.images && typeof payload.images === "object") ? payload.images : {};
+  var keys = Object.keys(imgs).filter(function(k){
+    return typeof imgs[k] === "string" && imgs[k].indexOf("data:image/") === 0;
+  });
+  setSave(keys.length ? "Restoring " + keys.length + " images…" : "Importing…", "off");
+  Promise.all(keys.map(function(k){ return imgPut(k, imgs[k]).catch(function(){}); }))
+    .then(function(){ finishImport(payload, incoming, mode); },
+          function(){ finishImport(payload, incoming, mode); });
+}
+function finishImport(payload, incoming, mode){
   var seen = {};
   incoming.forEach(function(raw){
     var b = normalizeBook(raw);
@@ -1399,9 +1921,10 @@ function applyImport(payload, mode){
   }
   if(Array.isArray(payload.categories) && payload.categories.length){
     state.categories = payload.categories;
-    saveCategories();
     buildSortOptions();
   }
+  if(typeof payload.statusDots === "boolean") state.statusDots = payload.statusDots;
+  savePrefs();
   render();
   setSave("Imported " + incoming.length + " books", "");
 }
@@ -1440,7 +1963,7 @@ function buildSortOptions(){
   var opts = [
     ["series","Series &amp; volume"],["title","Title"],["author","Author"],
     ["number","Volume number"],["status","Shelf"],["favorite","Favorites first"],
-    ["added","Date added"],["progress","Progress"]
+    ["added","Date added"],["progress","Progress"],["custom","Custom (arranged)"]
   ].map(function(o){ return '<option value="' + o[0] + '">' + o[1] + "</option>"; });
   state.categories.forEach(function(c){
     opts.push('<option value="r:' + esc(c.key) + '">Rating &middot; ' + esc(c.label) + "</option>");
@@ -1448,6 +1971,179 @@ function buildSortOptions(){
   sel.innerHTML = opts.join("");
   sel.value = keep;
   if(sel.value !== keep){ state.sortBy = "series"; sel.value = "series"; }
+}
+
+/* ---------------- arranging ----------------
+   Pointer events, not the HTML5 drag-and-drop API: DnD never fires on a
+   touchscreen, and a shelf you can't rearrange on a phone is half a feature. */
+var REDUCED = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+var drag = null;
+
+function orderOf(b){ return typeof b.order === "number" ? b.order : 0; }
+function orderSeeded(){
+  var all = list();
+  return all.length > 0 && all.every(function(b){ return typeof b.order === "number"; });
+}
+/* Seed from where the books already sit, so switching to the custom order does
+   not shuffle the shelf under the reader's hands. */
+function seedOrder(){
+  if(orderSeeded()) return;
+  list().sort(cmp).forEach(function(b, i){
+    b.order = i * 100;
+    saveBook(b);
+  });
+}
+function useCustomOrder(){
+  if(state.sortBy === "custom") return;
+  seedOrder();
+  state.sortBy = "custom";
+  state.dir = "asc";           /* arranging into a reversed shelf is nonsense */
+  var sel = byId("sortBy"), dir = byId("dir");
+  if(sel) sel.value = "custom";
+  if(dir) dir.value = "asc";
+  savePrefs();
+}
+function updateMoveSeg(){
+  var seg = byId("moveSeg");
+  seg.hidden = !state.arranging;
+  var grouped = state.groupBy !== "none";
+  var gBtn = seg.querySelector('[data-move="group"]');
+  gBtn.disabled = !grouped;
+  gBtn.style.opacity = grouped ? "" : ".45";
+  if(!grouped && state.moveMode === "group") state.moveMode = "book";
+  Array.prototype.forEach.call(seg.querySelectorAll("[data-move]"), function(x){
+    x.setAttribute("aria-pressed", String(x.getAttribute("data-move") === state.moveMode));
+  });
+}
+function bookEl(id){
+  var all = byId("library").querySelectorAll("[data-id]"), i;
+  for(i=0;i<all.length;i++) if(all[i].getAttribute("data-id") === id) return all[i];
+  return null;
+}
+function dragIds(id){
+  var b = state.books[id];
+  if(state.moveMode !== "group" || state.groupBy === "none" || !b) return [id];
+  var key = groupKey(b);
+  return list().sort(cmp).filter(function(x){ return groupKey(x) === key; })
+    .map(function(x){ return x.id; });
+}
+/* Which gap the pointer is over: find the shelf row by vertical bounds first,
+   then the first book in it whose horizontal midpoint the pointer is left of. */
+function dropTarget(items, x, y){
+  if(!items.length) return null;
+  var rows = [], owners = [], i, r;
+  items.forEach(function(el){
+    var k = owners.indexOf(el.parentNode);
+    if(k === -1){ owners.push(el.parentNode); rows.push([el]); }
+    else rows[k].push(el);
+  });
+  var row = null;
+  for(i=0;i<rows.length;i++){
+    r = rows[i][0].parentNode.getBoundingClientRect();
+    if(y < r.bottom){ row = rows[i]; break; }
+  }
+  if(!row) row = rows[rows.length-1];
+  for(i=0;i<row.length;i++){
+    r = row[i].getBoundingClientRect();
+    if(x < r.left + r.width/2){
+      return {index: items.indexOf(row[i]), x: r.left - 4, top: r.top, height: r.height};
+    }
+  }
+  r = row[row.length-1].getBoundingClientRect();
+  return {index: items.indexOf(row[row.length-1]) + 1, x: r.right + 2, top: r.top, height: r.height};
+}
+function liveItems(){
+  return Array.prototype.filter.call(byId("library").querySelectorAll("[data-id]"), function(el){
+    return !el.classList.contains("drag-source");
+  });
+}
+function startDrag(){
+  if(!drag || drag.started) return;
+  clearTimeout(drag.timer);
+  drag.started = true;
+  drag.ids = dragIds(drag.id);
+  drag.ids.forEach(function(id){
+    var el = bookEl(id);
+    if(el) el.classList.add("drag-source");
+  });
+  var r = drag.el.getBoundingClientRect();
+  var ghost = document.createElement("div");
+  ghost.className = "drag-ghost";
+  ghost.style.width = Math.round(r.width) + "px";
+  ghost.style.height = Math.round(r.height) + "px";
+  var clone = drag.el.cloneNode(true);
+  clone.classList.remove("drag-source");
+  clone.removeAttribute("data-id");
+  clone.setAttribute("aria-hidden", "true");
+  ghost.appendChild(clone);
+  if(drag.ids.length > 1){
+    ghost.insertAdjacentHTML("beforeend", '<span class="stack-count">' + drag.ids.length + "</span>");
+  }
+  document.body.appendChild(ghost);
+  var caret = document.createElement("div");
+  caret.className = "drop-caret";
+  document.body.appendChild(caret);
+  drag.ghost = ghost;
+  drag.caret = caret;
+  drag.offX = drag.x0 - r.left;
+  drag.offY = drag.y0 - r.top;
+  drag.scale = REDUCED ? 1 : 1.06;
+  moveDrag();
+}
+function moveDrag(){
+  if(!drag || !drag.started) return;
+  drag.ghost.style.transform =
+    "translate(" + Math.round(drag.x - drag.offX) + "px," + Math.round(drag.y - drag.offY) + "px)" +
+    " scale(" + drag.scale + ")";
+  var t = dropTarget(liveItems(), drag.x, drag.y);
+  drag.target = t;
+  if(t){
+    drag.caret.style.display = "block";
+    drag.caret.style.left = Math.round(t.x) + "px";
+    drag.caret.style.top = Math.round(t.top) + "px";
+    drag.caret.style.height = Math.round(t.height) + "px";
+  } else {
+    drag.caret.style.display = "none";
+  }
+}
+/* Rebuild the whole library in the new sequence and renumber it. Working over
+   every book, not just the visible ones, keeps filtered-out books in place
+   instead of scattering them to the end of the shelf. */
+function applyArrange(ids, afterId){
+  var moving = {}, i, at;
+  ids.forEach(function(id){ moving[id] = true; });
+  var full = list().sort(cmp);
+  var run = full.filter(function(b){ return moving[b.id]; });
+  var rest = full.filter(function(b){ return !moving[b.id]; });
+  if(!run.length) return render();
+  at = 0;
+  if(afterId){
+    at = rest.length;
+    for(i=0;i<rest.length;i++){ if(rest[i].id === afterId){ at = i + 1; break; } }
+  }
+  rest.slice(0, at).concat(run, rest.slice(at)).forEach(function(b, idx){
+    var o = idx * 100;
+    if(b.order !== o){ b.order = o; saveBook(b); }
+  });
+  render();
+}
+function endDrag(commit){
+  if(!drag) return;
+  clearTimeout(drag.timer);
+  var d = drag;
+  drag = null;
+  if(d.ghost) d.ghost.remove();
+  if(d.caret) d.caret.remove();
+  try { d.el.releasePointerCapture(d.pointerId); } catch(err){}
+  if(!d.started) return;
+  if(commit && d.target){
+    var items = liveItems();
+    var afterId = d.target.index > 0 && items[d.target.index - 1]
+      ? items[d.target.index - 1].getAttribute("data-id") : null;
+    applyArrange(d.ids, afterId);
+  } else {
+    render();
+  }
 }
 
 /* ---------------- events ---------------- */
@@ -1458,15 +2154,73 @@ byId("tabs").addEventListener("click", function(e){
   render();
 });
 byId("library").addEventListener("click", function(e){
+  if(state.arranging) return;
   var s = e.target.closest("[data-id]");
   if(!s) return;
   window.__lastSpine = s.getAttribute("data-id");
   openBook(s.getAttribute("data-id"), false);
 });
+byId("library").addEventListener("pointerdown", function(e){
+  if(!state.arranging || (e.button != null && e.button !== 0)) return;
+  var el = e.target.closest("[data-id]");
+  if(!el) return;
+  endDrag(false);
+  drag = {
+    id: el.getAttribute("data-id"), el: el, pointerId: e.pointerId,
+    x0: e.clientX, y0: e.clientY, x: e.clientX, y: e.clientY,
+    started: false, target: null, ids: [],
+    timer: setTimeout(function(){ startDrag(); }, 180)
+  };
+  try { el.setPointerCapture(e.pointerId); } catch(err){}
+});
+byId("library").addEventListener("pointermove", function(e){
+  if(!drag || e.pointerId !== drag.pointerId) return;
+  drag.x = e.clientX; drag.y = e.clientY;
+  if(!drag.started){
+    if(Math.abs(e.clientX - drag.x0) > 6 || Math.abs(e.clientY - drag.y0) > 6) startDrag();
+    else return;
+  }
+  e.preventDefault();
+  moveDrag();
+});
+byId("library").addEventListener("pointerup", function(e){
+  if(!drag || e.pointerId !== drag.pointerId) return;
+  endDrag(true);
+});
+byId("library").addEventListener("pointercancel", function(e){
+  if(!drag || e.pointerId !== drag.pointerId) return;
+  endDrag(false);
+});
 byId("q").addEventListener("input", function(){ state.q = this.value; render(); });
-byId("groupBy").addEventListener("change", function(){ state.groupBy = this.value; render(); });
-byId("sortBy").addEventListener("change", function(){ state.sortBy = this.value; render(); });
-byId("dir").addEventListener("change", function(){ state.dir = this.value; render(); });
+byId("groupBy").addEventListener("change", function(){
+  state.groupBy = this.value;
+  byId("groupStyleField").hidden = state.groupBy === "none";
+  updateMoveSeg();
+  render();
+});
+byId("groupStyle").addEventListener("change", function(){ state.groupStyle = this.value; render(); });
+byId("arrangeBtn").addEventListener("click", function(){
+  state.arranging = !state.arranging;
+  this.setAttribute("aria-pressed", String(state.arranging));
+  document.body.classList.toggle("arranging", state.arranging);
+  if(state.arranging) useCustomOrder(); else endDrag(false);
+  updateMoveSeg();
+  render();
+});
+byId("moveSeg").addEventListener("click", function(e){
+  var btn = e.target.closest("[data-move]");
+  if(!btn || btn.disabled) return;
+  state.moveMode = btn.getAttribute("data-move");
+  updateMoveSeg();
+});
+byId("sortBy").addEventListener("change", function(){
+  /* Seeding has to happen while the old sort is still in force — that is the
+     order the reader is looking at, and the one the shelf must not jump from. */
+  if(this.value === "custom"){ useCustomOrder(); render(); return; }
+  state.sortBy = this.value;
+  savePrefs(); render();
+});
+byId("dir").addEventListener("change", function(){ state.dir = this.value; savePrefs(); render(); });
 byId("favOnly").addEventListener("change", function(){ state.favOnly = this.checked; render(); });
 byId("setBtn").addEventListener("click", openSettings);
 byId("exportBtn").addEventListener("click", exportLibrary);
@@ -1477,7 +2231,8 @@ byId("addBtn").addEventListener("click", function(){
     id:id, title:"Untitled", author:"", series:"", seriesNumber:null,
     status:"want", favorite:false, progress:0, ratings:{},
     description:"", notes:"", theories:"", quotes:"",
-    display:"spine", coverId:null, addedAt:Date.now()
+    display:"spine", coverId:null, addedAt:Date.now(),
+    order: (list().reduce(function(m, x){ return Math.max(m, orderOf(x)); }, 0) + 100)
   };
   saveBook(state.books[id]); render(); openBook(id, true);
 });
@@ -1512,6 +2267,7 @@ document.addEventListener("keydown", function(e){
 
 /* ---------------- boot ---------------- */
 buildSortOptions();
+updateMoveSeg();
 render();
 setSave("Lighting the candles…", "off");
 
@@ -1526,11 +2282,17 @@ if(window.claude && window.claude.use){
     db = store;
     db.doc("settings/prefs").onSnapshot(function(snap){
       if(snap.exists){
-        var d = snap.data();
-        if(d && Array.isArray(d.categories) && d.categories.length){
+        var d = snap.data() || {};
+        if(Array.isArray(d.categories) && d.categories.length){
           state.categories = d.categories;
-          buildSortOptions(); render();
+          buildSortOptions();
         }
+        if(typeof d.statusDots === "boolean") state.statusDots = d.statusDots;
+        if(typeof d.sortBy === "string") state.sortBy = d.sortBy;
+        if(d.dir === "asc" || d.dir === "desc") state.dir = d.dir;
+        buildSortOptions();
+        byId("dir").value = state.dir;
+        render();
       }
     }, function(){});
     db.collection("books").onSnapshot(function(snap){
