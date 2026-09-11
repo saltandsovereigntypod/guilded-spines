@@ -29,6 +29,10 @@ your notes and theories on the verso.
   shelf, favourites, date added, progress, or any rating category. Group by
   series, author, shelf, rating, favourites or first letter.
 - **Search** across titles, authors, series and the text of your own notes.
+- **Export and import.** Every copy of the app keeps its own store, so this is
+  how a shelf moves between devices: **Export** writes the whole library —
+  books and rating categories — to a dated JSON file, and **Import** reads one
+  back, either replacing the shelf outright or merging the file into it.
 
 ## The two builds
 
@@ -86,8 +90,12 @@ background. Type is **Cinzel** for carved spine lettering and headings,
 **EB Garamond** for the book pages, **Spectral** for small data. No frameworks, no
 build step for the app itself, no external requests beyond Google Fonts.
 
-Generated covers use container query units, so the same markup draws a legible
-cover at thumbnail size on the shelf and at preview size inside the open book.
+Generated covers size everything from a `--cw` custom property holding the
+cover's width in pixels, set inline at render time, so the same markup draws a
+legible cover at thumbnail size on the shelf and at preview size inside the open
+book. (Container query units can't do this: an element's own properties resolve
+container units against its *ancestor* container, not itself, so a cover sizing
+its own padding in `cqw` collapses its content box to nothing.)
 
 ## Data shape
 
