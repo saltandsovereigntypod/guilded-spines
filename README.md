@@ -14,7 +14,12 @@ your notes and theories on the verso.
   it actually has so nothing ellipsises into mush.
 - **Open like a book.** A spread with a centre gutter and a page-turn on the
   right-hand page. Left page: title, author, series, volume, shelf, progress,
-  blurb, ratings. Right page: notes, theories & predictions, lines worth keeping.
+  blurb, ratings.
+- **Note sections you name yourself.** The right-hand page starts with Notes,
+  Theories & Predictions and Lines Worth Keeping, and every one of them can be
+  renamed, reordered, deleted or added to, per book, as many as a book needs.
+  Settings holds the set a newly added book starts with; changing it never
+  touches books already on the shelf.
 - **Ratings in half steps.** Any number of custom categories — Overall, Spice,
   Emotional Impact and Scare by default — each 0–5 in halves, each with its own
   icon. The first category is what shows as pips on the spine. Click the left or
@@ -48,7 +53,12 @@ your notes and theories on the verso.
   written, so nothing else on those books is disturbed. **Start from** fills the
   controls from any selected book, which makes "give these the same spine as that
   one" two clicks. Afterwards the status line offers a single **Undo**.
-- **Search** across titles, authors, series and the text of your own notes.
+- **Search** across titles, authors, series and the text of every note section,
+  whatever you have called it.
+- **Shelf name plates.** Engraved brass plates that sit on the plank under the
+  run of books they belong to, one per group per shelf row, so a grouped shelf
+  reads like a real library shelf. Click a plate to retype its wording, or hide
+  a single one without turning off the rest.
 - **Export and import.** Every copy of the app keeps its own store, so this is
   how a shelf moves between devices: **Export** writes the whole library — books,
   rating categories and every cover and spine image — to a dated JSON file, and
@@ -67,8 +77,8 @@ Artifact runtime capabilities:
 
 - **`db`** — the library lives in an account-backed document store, one document
   per book in a `books` collection plus a `settings/prefs` document for rating
-  categories, status dot settings and the current sort. Same shelf on every
-  device, updating live.
+  categories, status dot settings, default note sections, shelf plate wording
+  and the current sort and grouping. Same shelf on every device, updating live.
 - **`assets`** — uploaded cover images, served back to the page from its own
   origin. Preferred for covers where it exists; everything else goes to the
   browser's own image store below.
@@ -142,9 +152,10 @@ One document per book:
   "progress": 100,
   "ratings": { "overall": 5, "spice": 2.5, "impact": 4 },
   "description": "",
-  "notes": "",
-  "theories": "",
-  "quotes": "",
+  "sections": [
+    { "id": "s1a2b-1x", "label": "Notes", "text": "" },
+    { "id": "s1a2b-2y", "label": "Theories & Predictions", "text": "" }
+  ],
   "display": "spine",
   "coverId": null,
   "coverImage": false,
@@ -182,3 +193,9 @@ colours of its own. `order` is the hand-arranged shelf position, used only by th
 `showStatusDot` absent means the book follows the global default in Settings;
 `true` or `false` is the book's own answer and outranks it. `dotColor` absent
 means the dot takes the global colour for that book's status.
+
+`sections` replaced the old `notes`, `theories` and `quotes` fields. A book that
+still has those — an old export, or a record written before the change — is
+converted the first time it loads: the three become sections in that order, with
+their text carried over even when empty, the old keys are dropped, and the book
+is written back. A book with none of them gets the default set from Settings.

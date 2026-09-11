@@ -179,6 +179,46 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 /* Continuous grouping: clusters stay on one unbroken run of shelves, parted by a
    wider gap and a gilt mark scored into the plank beneath the join. */
 .cluster-gap{flex:0 0 8px;height:26px;position:relative;align-self:flex-end;pointer-events:none}
+
+/* An engraved brass plate screwed to the front face of the plank. */
+.name-plate{
+  position:absolute;bottom:-4px;transform:translateX(-50%);
+  height:18px;display:flex;align-items:center;gap:5px;
+  padding:0 11px;border-radius:2px;z-index:4;cursor:text;
+  background:linear-gradient(180deg,#E4C378 0%, #C9A24C 46%, #8A6B2E 100%);
+  border:1px solid #6B5120;
+  box-shadow:
+    inset 0 1px 0 rgba(255,241,201,.75),
+    inset 0 -1px 0 rgba(0,0,0,.3),
+    0 3px 5px -2px rgba(0,0,0,.75);
+  max-width:220px;
+}
+.name-plate::before,.name-plate::after{
+  content:"";position:absolute;top:50%;width:2.5px;height:2.5px;border-radius:50%;
+  transform:translateY(-50%);
+  background:radial-gradient(circle at 35% 30%, #FFF3D2, #7A5E28 70%);
+}
+.name-plate::before{left:4px}
+.name-plate::after{right:4px}
+.plate-text{
+  font-family:var(--f-display);font-weight:600;
+  font-size:.53rem;letter-spacing:.18em;text-transform:uppercase;
+  color:#41300F;text-shadow:0 1px 0 rgba(255,240,205,.45);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;
+  outline-offset:2px;
+}
+.plate-text:focus-visible{outline:1px solid #41300F}
+.plate-hide{
+  flex:0 0 auto;width:12px;height:12px;padding:0;display:none;place-items:center;cursor:pointer;
+  font-family:var(--f-data);font-size:.62rem;line-height:1;
+  color:#41300F;background:rgba(255,240,205,.5);
+  border:1px solid rgba(65,48,15,.45);border-radius:50%;
+}
+.name-plate:hover .plate-hide,.name-plate:focus-within .plate-hide{display:grid}
+.name-plate:hover .plate-hide:hover{background:#8E1F35;color:var(--parchment);border-color:#8E1F35}
+@media (hover:none){.plate-hide{display:grid}}
+/* Nothing on the plank may take the pointer while books are being arranged. */
+.arranging .name-plate{pointer-events:none}
 .cluster-gap::after{
   content:"";position:absolute;left:50%;bottom:-14px;width:1px;height:22px;
   background:linear-gradient(180deg,transparent,var(--gilt-bright));opacity:.5;
@@ -490,6 +530,36 @@ textarea.notes{
 }
 textarea.notes.tall{min-height:190px}
 textarea.notes::placeholder{color:#A2907C;font-style:italic}
+
+/* editable sections on the verso */
+.sec{position:relative}
+.sec-head{display:flex;align-items:flex-end;gap:8px}
+.sec-head .notes-label{flex:1 1 auto;min-width:0;outline-offset:2px}
+.sec-label:focus-visible{outline:2px solid #C9A24C;border-radius:2px}
+.sec-label:empty::before{content:"Untitled section";color:#A2907C}
+.sec-tools{display:flex;gap:3px;flex:0 0 auto;opacity:0;transition:opacity .18s;margin-bottom:6px}
+.sec:hover .sec-tools,.sec:focus-within .sec-tools{opacity:1}
+@media (hover:none){.sec-tools{opacity:1}}
+.sec-btn{
+  font-family:var(--f-data);font-size:.78rem;line-height:1;
+  width:22px;height:22px;display:grid;place-items:center;cursor:pointer;
+  color:#7A6544;background:rgba(255,255,255,.34);
+  border:1px solid rgba(138,115,81,.3);border-radius:2px;padding:0;
+  transition:color .18s,background .18s,border-color .18s;
+}
+.sec-btn:hover:not(:disabled){background:linear-gradient(180deg,#DCBB72,#C9A24C);color:#2A2119;border-color:#C9A24C}
+.sec-btn:disabled{opacity:.3;cursor:default}
+.sec-btn.danger:hover{background:linear-gradient(180deg,#C94059,#8E1F35);color:var(--parchment);border-color:#C94059}
+.sec-add{
+  width:100%;margin-top:14px;
+  font-family:var(--f-display);font-size:.6rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:#7A6544;cursor:pointer;background:rgba(255,255,255,.22);
+  border:1px dashed rgba(138,115,81,.4);border-radius:2px;padding:10px;
+  transition:color .2s,background .2s,border-color .2s;
+}
+.sec-add:hover{color:#2A2119;background:linear-gradient(180deg,#DCBB72,#C9A24C);border-style:solid;border-color:#C9A24C}
+.sec-item{grid-template-columns:1fr auto auto}
+.sec-item .cname:focus-visible{outline:2px solid var(--gilt);outline-offset:2px;border-radius:2px}
 
 /* ---------- appearance panel ---------- */
 details.appear{
@@ -862,6 +932,8 @@ input[type=range]{
       </select>
     </div>
     <label class="toggle" for="favOnly"><input type="checkbox" id="favOnly">Favorites only</label>
+    <label class="toggle" for="platesOn"><input type="checkbox" id="platesOn">Shelf plates</label>
+    <button class="btn ghost small" id="restorePlates" type="button" hidden>Restore hidden</button>
     <button class="btn" id="addBtn">Add a book</button>
     <button class="btn ghost" id="arrangeBtn" aria-pressed="false">Arrange</button>
     <button class="btn ghost" id="selectBtn" aria-pressed="false">Select</button>
@@ -931,6 +1003,18 @@ var PALETTE = ["#4A1F2E","#2C3A52","#3E2A4A","#22403A","#4A3520","#5A2330",
 var SPINE_DEFAULTS = {title:true, author:true, series:false, number:false, pips:true};
 var COVER_DEFAULTS = {title:true, author:true, series:true, number:false, pips:false};
 var DEFAULT_RIBBON = "#C94059";
+var DEFAULT_SECTIONS = ["Notes", "Theories & Predictions", "Lines Worth Keeping"];
+/* The three fields the verso used to hard-code, in the order they appeared. */
+var LEGACY_SECTIONS = [
+  {key:"notes",    label:"Notes"},
+  {key:"theories", label:"Theories & Predictions"},
+  {key:"quotes",   label:"Lines Worth Keeping"}
+];
+var SECTION_PLACEHOLDERS = {
+  "Notes": "What you thought. What wrecked you. What you\u2019d tattoo.",
+  "Theories & Predictions": "Who\u2019s lying. Who\u2019s coming back. What the author is setting up.",
+  "Lines Worth Keeping": "Quotes, last words, the one that got you."
+};
 var DEFAULT_DOT_COLORS = {
   want:"#7A5AA6", reading:"#C9A24C", paused:"#B4813C", read:"#6E8F72", dnf:"#7A2530"
 };
@@ -944,8 +1028,69 @@ var state = {
   favOnly:false, openId:null, loaded:false,
   arranging:false, moveMode:"book",
   selecting:false, selection:{},
-  statusDots:{show:true, colors:defaultDotColors()}
+  statusDots:{show:true, colors:defaultDotColors()},
+  defaultSections:DEFAULT_SECTIONS.slice(),
+  shelfPlates:{show:false, labels:{}, hidden:{}}
 };
+var secSeq = 0;
+function sectionId(){
+  return "s" + Date.now().toString(36) + "-" + (++secSeq).toString(36) +
+    Math.floor(Math.random() * 1296).toString(36);
+}
+function newSections(){
+  return state.defaultSections.map(function(label){
+    return {id:sectionId(), label:String(label), text:""};
+  });
+}
+/* Books written before sections existed carry notes/theories/quotes. Convert
+   them once, keeping empty text so nothing looks different on first open, and
+   return true when the book needs persisting. */
+function migrateSections(b){
+  if(Array.isArray(b.sections)){
+    var fixed = false;
+    b.sections = b.sections.filter(function(x){ return x && typeof x === "object"; }).map(function(x){
+      if(!x.id){ x.id = sectionId(); fixed = true; }
+      if(typeof x.label !== "string"){ x.label = "Untitled section"; fixed = true; }
+      if(typeof x.text !== "string"){ x.text = ""; fixed = true; }
+      return x;
+    });
+    return fixed;
+  }
+  var legacy = LEGACY_SECTIONS.some(function(l){ return typeof b[l.key] === "string"; });
+  b.sections = legacy
+    ? LEGACY_SECTIONS.map(function(l){
+        return {id:sectionId(), label:l.label, text: typeof b[l.key] === "string" ? b[l.key] : ""};
+      })
+    : newSections();
+  LEGACY_SECTIONS.forEach(function(l){ delete b[l.key]; });
+  return true;
+}
+function sectionText(b){
+  return Array.isArray(b.sections)
+    ? b.sections.map(function(x){ return (x && x.text) || ""; }).join(" ")
+    : "";
+}
+function normPrefsList(v, fallback){
+  if(!Array.isArray(v)) return fallback.slice();
+  var out = v.filter(function(x){ return typeof x === "string" && x.trim(); })
+             .map(function(x){ return x.trim().slice(0, 80); });
+  return out.length ? out : fallback.slice();
+}
+function normPlates(v){
+  var out = {show:false, labels:{}, hidden:{}};
+  if(v && typeof v === "object"){
+    out.show = !!v.show;
+    if(v.labels && typeof v.labels === "object"){
+      Object.keys(v.labels).forEach(function(k){
+        if(typeof v.labels[k] === "string" && v.labels[k].trim()) out.labels[k] = v.labels[k].slice(0, 120);
+      });
+    }
+    if(v.hidden && typeof v.hidden === "object"){
+      Object.keys(v.hidden).forEach(function(k){ if(v.hidden[k]) out.hidden[k] = true; });
+    }
+  }
+  return out;
+}
 function defaultDotColors(){
   var out = {};
   Object.keys(DEFAULT_DOT_COLORS).forEach(function(k){ out[k] = DEFAULT_DOT_COLORS[k]; });
@@ -1184,8 +1329,12 @@ function savePrefs(){
   db.doc("settings/prefs").set({
     categories: state.categories,
     statusDots: state.statusDots,
+    defaultSections: state.defaultSections,
+    shelfPlates: state.shelfPlates,
     sortBy: state.sortBy,
-    dir: state.dir
+    dir: state.dir,
+    groupBy: state.groupBy,
+    groupStyle: state.groupStyle
   }).catch(function(){
     setSave("Couldn't save your settings", "warn");
   });
@@ -1203,7 +1352,7 @@ function matches(b){
   if(state.favOnly && !b.favorite) return false;
   var q = state.q.trim().toLowerCase();
   if(!q) return true;
-  return [b.title,b.author,b.series,b.notes,b.theories,b.quotes,b.description]
+  return [b.title, b.author, b.series, b.description, sectionText(b)]
     .join(" ").toLowerCase().indexOf(q) !== -1;
 }
 function ratingOf(b, key){
@@ -1398,7 +1547,7 @@ function render(){
     var g = buildGroups(books);
     if(state.groupStyle === "own"){
       html = g.order.map(function(k){
-        return shelfHTML(k, g.groups[k].map(function(b){ return {b:b}; }));
+        return shelfHTML(k, g.groups[k].map(function(b){ return {b:b, gk:plateKey(k)}; }));
       }).join("");
     } else {
       /* Continuous: one unbroken run of shelves. Cluster members stay adjacent
@@ -1407,7 +1556,7 @@ function render(){
       var entries = [];
       g.order.forEach(function(k, gi){
         g.groups[k].forEach(function(b, bi){
-          entries.push({b:b, sep: gi > 0 && bi === 0});
+          entries.push({b:b, sep: gi > 0 && bi === 0, gk:plateKey(k)});
         });
       });
       html = shelfHTML("", entries);
@@ -1415,6 +1564,40 @@ function render(){
   }
   lib.innerHTML = html;
   hydrateImages(lib);
+  positionPlates(lib);
+  drawPlateControls();
+}
+/* Group names are namespaced by the grouping in force, so wording written for
+   the series "Favorites" never leaks onto the Favorites group. */
+function plateKey(name){ return state.groupBy + ":" + name; }
+function plateName(key){
+  return state.shelfPlates.labels[key] || key.slice(key.indexOf(":") + 1);
+}
+function drawPlateControls(){
+  var btn = byId("restorePlates");
+  var n = Object.keys(state.shelfPlates.hidden).length;
+  btn.hidden = !(state.shelfPlates.show && n);
+  btn.textContent = "Restore hidden (" + n + ")";
+}
+/* Plates are centred on the books they belong to by measurement, not by
+   arithmetic over paddings and gaps that a stylesheet change would silently
+   invalidate. */
+function positionPlates(root){
+  Array.prototype.forEach.call(root.querySelectorAll(".shelf"), function(shelf){
+    var plates = shelf.querySelectorAll(".name-plate");
+    if(!plates.length) return;
+    var books = shelf.querySelectorAll("[data-id]");
+    var sr = shelf.getBoundingClientRect();
+    Array.prototype.forEach.call(plates, function(p){
+      var a = books[parseInt(p.getAttribute("data-from"), 10)];
+      var z = books[parseInt(p.getAttribute("data-to"), 10)];
+      if(!a || !z){ p.hidden = true; return; }
+      var left = a.getBoundingClientRect().left - sr.left;
+      var right = z.getBoundingClientRect().right - sr.left;
+      p.style.left = Math.round((left + right) / 2) + "px";
+      p.style.maxWidth = Math.max(28, Math.round(right - left) - 12) + "px";
+    });
+  });
 }
 function buildGroups(books){
   var order = [], groups = {};
@@ -1451,7 +1634,7 @@ function packRows(entries, avail){
       rows.push(cur); cur = []; w = 0; lead = 0; sep = false;
     }
     w += lead + bw;
-    cur.push({b:e.b, sep:sep && cur.length > 0});
+    cur.push({b:e.b, sep:sep && cur.length > 0, gk:e.gk});
   });
   if(cur.length) rows.push(cur);
   return rows;
@@ -1459,6 +1642,25 @@ function packRows(entries, avail){
 function shelfWidth(){
   var lib = byId("library");
   return Math.max(120, (lib ? lib.clientWidth : 900) - 32);
+}
+function platesHTML(row){
+  if(!state.shelfPlates.show) return "";
+  var runs = [], cur = null;
+  row.forEach(function(e, i){
+    if(!e.gk) { cur = null; return; }
+    if(!cur || cur.gk !== e.gk){ cur = {gk:e.gk, from:i, to:i}; runs.push(cur); }
+    else cur.to = i;
+  });
+  return runs.map(function(r){
+    if(state.shelfPlates.hidden[r.gk]) return "";
+    var name = plateName(r.gk);
+    return '<div class="name-plate" data-pkey="' + esc(r.gk) + '" data-from="' + r.from +
+        '" data-to="' + r.to + '" title="' + esc(name) + '">' +
+      '<span class="plate-text">' + esc(name) + "</span>" +
+      '<button class="plate-hide" type="button" data-phide="' + esc(r.gk) +
+        '" aria-label="Hide this plate" title="Hide this plate">&times;</button>' +
+    "</div>";
+  }).join("");
 }
 function shelfHTML(label, entries){
   var plate = label
@@ -1470,7 +1672,8 @@ function shelfHTML(label, entries){
       return (e.sep ? '<span class="cluster-gap" aria-hidden="true"></span>' : "") +
         itemHTML(e.b, i === row.length-1, row.length);
     }).join("");
-    return '<div class="shelf"><div class="books">' + items + '</div><div class="plank"></div></div>';
+    return '<div class="shelf"><div class="books">' + items + '</div><div class="plank"></div>' +
+      platesHTML(row) + "</div>";
   }).join("");
   return '<section class="shelf-group">' + plate + shelves + "</section>";
 }
@@ -1550,6 +1753,27 @@ function paintBlockHTML(target, label, from, to, angle){
         '<span class="num-out" data-gangle-out="' + target + '">' + angle + "&deg;</span></div>" +
       "</div>" +
     "</div>" +
+  "</div>";
+}
+function sectionPlaceholder(label){
+  return SECTION_PLACEHOLDERS[label] || "Whatever belongs here.";
+}
+function sectionBlockHTML(sec, i, n){
+  return '<div class="sec" data-sec="' + esc(sec.id) + '">' +
+    '<div class="sec-head">' +
+      '<span class="notes-label sec-label" contenteditable="true" spellcheck="false"' +
+        ' role="textbox" aria-label="Section name" data-seclabel="' + esc(sec.id) + '">' + esc(sec.label) + "</span>" +
+      '<span class="sec-tools">' +
+        '<button class="sec-btn" type="button" data-secmove="up" data-sec-id="' + esc(sec.id) + '"' +
+          (i === 0 ? " disabled" : "") + ' aria-label="Move section up" title="Move up">&uarr;</button>' +
+        '<button class="sec-btn" type="button" data-secmove="down" data-sec-id="' + esc(sec.id) + '"' +
+          (i === n - 1 ? " disabled" : "") + ' aria-label="Move section down" title="Move down">&darr;</button>' +
+        '<button class="sec-btn danger" type="button" data-secdel="' + esc(sec.id) + '"' +
+          ' aria-label="Delete section" title="Delete section">&times;</button>' +
+      "</span>" +
+    "</div>" +
+    '<textarea class="notes' + (i === 0 ? " tall" : "") + '" data-sectext="' + esc(sec.id) + '"' +
+      ' placeholder="' + esc(sectionPlaceholder(sec.label)) + '">' + esc(sec.text || "") + "</textarea>" +
   "</div>";
 }
 function dotSegHTML(mode, idPrefix){
@@ -1684,12 +1908,8 @@ function openBook(id, isNew){
 
     '<div class="page page-right">' +
       '<p class="folio">Verso &middot; your marginalia</p>' +
-      '<span class="notes-label">Notes</span>' +
-      '<textarea class="notes tall" id="f-notes" data-f="notes" placeholder="What you thought. What wrecked you. What you&rsquo;d tattoo.">' + esc(b.notes || "") + "</textarea>" +
-      '<span class="notes-label">Theories &amp; predictions</span>' +
-      '<textarea class="notes" id="f-theories" data-f="theories" placeholder="Who&rsquo;s lying. Who&rsquo;s coming back. What the author is setting up.">' + esc(b.theories || "") + "</textarea>" +
-      '<span class="notes-label">Lines worth keeping</span>' +
-      '<textarea class="notes" id="f-quotes" data-f="quotes" placeholder="Quotes, last words, the one that got you.">' + esc(b.quotes || "") + "</textarea>" +
+      '<div id="sectionList"></div>' +
+      '<button class="sec-add" id="addSection" type="button">Add a section</button>' +
       '<div class="page-actions">' +
         '<button class="btn small danger" id="delBtn" type="button">Remove from shelf</button>' +
       "</div>" +
@@ -1992,6 +2212,83 @@ function openBook(id, isNew){
     }
   });
 
+  /* ---- sections ----
+     Only structural changes redraw the list; typing a label or a body must not,
+     or the caret would jump out of the field on every keystroke. */
+  function drawSections(){
+    byId("sectionList").innerHTML = b.sections.map(function(sec, i){
+      return sectionBlockHTML(sec, i, b.sections.length);
+    }).join("");
+  }
+  function secIndex(id){
+    for(var i = 0; i < b.sections.length; i++) if(b.sections[i].id === id) return i;
+    return -1;
+  }
+  drawSections();
+
+  spread.addEventListener("input", function(e){
+    var body = e.target.closest("[data-sectext]");
+    if(body){
+      var i = secIndex(body.getAttribute("data-sectext"));
+      if(i !== -1){ b.sections[i].text = body.value; saveBook(b); }
+      return;
+    }
+    var lab = e.target.closest("[data-seclabel]");
+    if(lab){
+      var j = secIndex(lab.getAttribute("data-seclabel"));
+      if(j !== -1){ b.sections[j].label = lab.textContent; saveBook(b); }
+    }
+  });
+  spread.addEventListener("focusout", function(e){
+    var lab = e.target.closest("[data-seclabel]");
+    if(!lab) return;
+    var i = secIndex(lab.getAttribute("data-seclabel"));
+    if(i === -1) return;
+    var name = lab.textContent.trim() || "Untitled section";
+    b.sections[i].label = name;
+    lab.textContent = name;
+    var body = byId("sectionList").querySelector('[data-sectext="' + b.sections[i].id + '"]');
+    if(body) body.placeholder = sectionPlaceholder(name);
+    saveBook(b);
+  });
+  byId("sectionList").addEventListener("click", function(e){
+    var mv = e.target.closest("[data-secmove]");
+    if(mv){
+      var i = secIndex(mv.getAttribute("data-sec-id"));
+      var to = i + (mv.getAttribute("data-secmove") === "up" ? -1 : 1);
+      if(i === -1 || to < 0 || to >= b.sections.length) return;
+      var t = b.sections[i];
+      b.sections[i] = b.sections[to];
+      b.sections[to] = t;
+      drawSections(); saveBook(b);
+      return;
+    }
+    var del = e.target.closest("[data-secdel]");
+    if(del){
+      var k = secIndex(del.getAttribute("data-secdel"));
+      if(k === -1) return;
+      var sec = b.sections[k];
+      if(sec.text && sec.text.trim() &&
+         !confirm("Delete \u201C" + (sec.label || "Untitled section") + "\u201D and its notes? This can't be undone.")) return;
+      b.sections.splice(k, 1);
+      drawSections(); saveBook(b);
+    }
+  });
+  byId("addSection").addEventListener("click", function(){
+    var sec = {id:sectionId(), label:"New section", text:""};
+    b.sections.push(sec);
+    drawSections();
+    saveBook(b);
+    var lab = byId("sectionList").querySelector('[data-seclabel="' + sec.id + '"]');
+    if(!lab) return;
+    lab.focus();
+    var range = document.createRange();
+    range.selectNodeContents(lab);
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    lab.scrollIntoView({block:"nearest"});
+  });
+
   /* ---- favorite / delete / close ---- */
   byId("favBtn").addEventListener("click", function(){
     b.favorite = !b.favorite;
@@ -2052,6 +2349,15 @@ function openSettings(){
       }).join("") +
     "</div>" +
     '<button class="btn small ghost" id="resetDots" type="button">Reset to defaults</button>' +
+    '<div class="page-rule"></div>' +
+    "<h4>Default sections</h4>" +
+    '<p class="hint" style="margin:0 0 10px;font-size:.84rem">The note sections a newly added book starts with. Changing this never touches books already on the shelf.</p>' +
+    '<div class="cat-list" id="secList"></div>' +
+    '<div class="field"><label class="lbl" for="newSec">Add a default section</label>' +
+      '<div class="grad-line" style="margin-top:5px">' +
+        '<input type="text" id="newSec" placeholder="Content warnings, Re-read notes…">' +
+        '<button class="btn small ghost" id="addSec" type="button">Add</button>' +
+      "</div></div>" +
     '<div class="sheet-actions">' +
       '<button class="btn ghost" id="addCat" type="button">Add category</button>' +
       '<button class="btn" id="setClose" type="button">Done</button>' +
@@ -2077,7 +2383,59 @@ function openSettings(){
         '" aria-label="' + n + '"><svg viewBox="0 0 24 24" style="fill:' + ICON_COLORS[n] + '"><use href="#ic-' + n + '"/></svg></button>';
     }).join("");
   }
-  drawCats(); drawIcons();
+  function drawSecs(){
+    byId("secList").innerHTML = state.defaultSections.map(function(label, i){
+      return '<div class="cat-item sec-item">' +
+        '<span class="cname" contenteditable="true" spellcheck="false" role="textbox"' +
+          ' aria-label="Section name" data-secedit="' + i + '">' + esc(label) + "</span>" +
+        '<button class="btn small ghost" data-secup="' + i + '" type="button"' +
+          (i === 0 ? " disabled" : "") + ' aria-label="Move up">&uarr;</button>' +
+        '<button class="btn small ghost danger" data-secrm="' + i + '" type="button" aria-label="Remove">&times;</button>' +
+      "</div>";
+    }).join("");
+  }
+  drawCats(); drawIcons(); drawSecs();
+
+  byId("secList").addEventListener("focusout", function(e){
+    var el = e.target.closest("[data-secedit]");
+    if(!el) return;
+    var i = parseInt(el.getAttribute("data-secedit"), 10);
+    var name = el.textContent.trim() || "Untitled section";
+    el.textContent = name;
+    if(state.defaultSections[i] !== name){
+      state.defaultSections[i] = name;
+      savePrefs();
+    }
+  });
+  byId("secList").addEventListener("click", function(e){
+    var up = e.target.closest("[data-secup]");
+    if(up){
+      var i = parseInt(up.getAttribute("data-secup"), 10);
+      if(i > 0){
+        var t = state.defaultSections[i-1];
+        state.defaultSections[i-1] = state.defaultSections[i];
+        state.defaultSections[i] = t;
+        savePrefs(); drawSecs();
+      }
+      return;
+    }
+    var rm = e.target.closest("[data-secrm]");
+    if(rm){
+      state.defaultSections.splice(parseInt(rm.getAttribute("data-secrm"), 10), 1);
+      savePrefs(); drawSecs();
+    }
+  });
+  function addDefaultSection(){
+    var v = byId("newSec").value.trim();
+    if(!v) return;
+    state.defaultSections.push(v.slice(0, 80));
+    byId("newSec").value = "";
+    savePrefs(); drawSecs();
+  }
+  byId("addSec").addEventListener("click", addDefaultSection);
+  byId("newSec").addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ e.preventDefault(); addDefaultSection(); }
+  });
 
   byId("globalDots").addEventListener("change", function(){
     state.statusDots.show = this.checked;
@@ -2143,6 +2501,8 @@ function libraryPayload(images){
     version:2,
     exportedAt:new Date().toISOString(),
     statusDots:state.statusDots,
+    defaultSections:state.defaultSections,
+    shelfPlates:state.shelfPlates,
     categories:state.categories,
     books:list(),
     images:images || {}
@@ -2223,6 +2583,7 @@ function normalizeBook(raw){
   });
   b.favorite = !!b.favorite;
   if(typeof b.addedAt !== "number") b.addedAt = Date.now();
+  migrateSections(b);
   return b;
 }
 function applyImport(payload, mode){
@@ -2263,6 +2624,13 @@ function finishImport(payload, incoming, mode){
     buildSortOptions();
   }
   if(payload.statusDots !== undefined) state.statusDots = normStatusDots(payload.statusDots);
+  if(payload.defaultSections !== undefined){
+    state.defaultSections = normPrefsList(payload.defaultSections, DEFAULT_SECTIONS);
+  }
+  if(payload.shelfPlates !== undefined){
+    state.shelfPlates = normPlates(payload.shelfPlates);
+    byId("platesOn").checked = state.shelfPlates.show;
+  }
   savePrefs();
   render();
   setSave("Imported " + incoming.length + " books", "");
@@ -2845,6 +3213,24 @@ byId("tabs").addEventListener("click", function(e){
 });
 byId("library").addEventListener("click", function(e){
   if(state.arranging) return;
+  var hide = e.target.closest("[data-phide]");
+  if(hide){
+    state.shelfPlates.hidden[hide.getAttribute("data-phide")] = true;
+    savePrefs(); render();
+    return;
+  }
+  var plate = e.target.closest(".name-plate");
+  if(plate){
+    var txt = plate.querySelector(".plate-text");
+    if(txt.isContentEditable) return;
+    txt.contentEditable = "true";
+    txt.focus();
+    var r = document.createRange();
+    r.selectNodeContents(txt);
+    var sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(r);
+    return;
+  }
   var s = e.target.closest("[data-id]");
   if(!s) return;
   var id = s.getAttribute("data-id");
@@ -2859,6 +3245,23 @@ byId("library").addEventListener("click", function(e){
   window.__lastSpine = id;
   clearUndo();
   openBook(id, false);
+});
+byId("library").addEventListener("focusout", function(e){
+  var txt = e.target.closest(".plate-text");
+  if(!txt || !txt.isContentEditable) return;
+  var key = txt.closest(".name-plate").getAttribute("data-pkey");
+  var name = txt.textContent.trim();
+  txt.contentEditable = "false";
+  /* Empty, or the group's own name, means there is no override to keep. */
+  if(!name || name === key.slice(key.indexOf(":") + 1)) delete state.shelfPlates.labels[key];
+  else state.shelfPlates.labels[key] = name.slice(0, 120);
+  savePrefs(); render();
+});
+byId("library").addEventListener("keydown", function(e){
+  var txt = e.target.closest(".plate-text");
+  if(!txt || !txt.isContentEditable) return;
+  if(e.key === "Enter"){ e.preventDefault(); txt.blur(); }
+  else if(e.key === "Escape"){ e.preventDefault(); txt.textContent = plateName(txt.closest(".name-plate").getAttribute("data-pkey")); txt.blur(); }
 });
 byId("library").addEventListener("pointerdown", function(e){
   if(!state.arranging || (e.button != null && e.button !== 0)) return;
@@ -2903,9 +3306,12 @@ byId("groupBy").addEventListener("change", function(){
   state.groupBy = this.value;
   byId("groupStyleField").hidden = state.groupBy === "none";
   updateMoveSeg();
-  render();
+  savePrefs(); render();
 });
-byId("groupStyle").addEventListener("change", function(){ state.groupStyle = this.value; render(); });
+byId("groupStyle").addEventListener("change", function(){
+  state.groupStyle = this.value;
+  savePrefs(); render();
+});
 byId("arrangeBtn").addEventListener("click", function(){
   clearUndo();
   setArranging(!state.arranging);
@@ -2935,6 +3341,14 @@ byId("sortBy").addEventListener("change", function(){
 });
 byId("dir").addEventListener("change", function(){ state.dir = this.value; savePrefs(); render(); });
 byId("favOnly").addEventListener("change", function(){ state.favOnly = this.checked; render(); });
+byId("platesOn").addEventListener("change", function(){
+  state.shelfPlates.show = this.checked;
+  savePrefs(); render();
+});
+byId("restorePlates").addEventListener("click", function(){
+  state.shelfPlates.hidden = {};
+  savePrefs(); render();
+});
 byId("setBtn").addEventListener("click", function(){ clearUndo(); openSettings(); });
 byId("exportBtn").addEventListener("click", exportLibrary);
 byId("importBtn").addEventListener("click", importLibrary);
@@ -2943,7 +3357,7 @@ byId("addBtn").addEventListener("click", function(){
   state.books[id] = {
     id:id, title:"Untitled", author:"", series:"", seriesNumber:null,
     status:"want", favorite:false, progress:0, ratings:{},
-    description:"", notes:"", theories:"", quotes:"",
+    description:"", sections:newSections(),
     display:"spine", coverId:null, addedAt:Date.now(),
     order: (list().reduce(function(m, x){ return Math.max(m, orderOf(x)); }, 0) + 100)
   };
@@ -3003,8 +3417,23 @@ if(window.claude && window.claude.use){
           buildSortOptions();
         }
         if(d.statusDots !== undefined) state.statusDots = normStatusDots(d.statusDots);
+        if(d.defaultSections !== undefined) state.defaultSections = normPrefsList(d.defaultSections, DEFAULT_SECTIONS);
+        if(d.shelfPlates !== undefined){
+          state.shelfPlates = normPlates(d.shelfPlates);
+          byId("platesOn").checked = state.shelfPlates.show;
+        }
         if(typeof d.sortBy === "string") state.sortBy = d.sortBy;
         if(d.dir === "asc" || d.dir === "desc") state.dir = d.dir;
+        if(typeof d.groupBy === "string" && byId("groupBy").querySelector('[value="' + d.groupBy + '"]')){
+          state.groupBy = d.groupBy;
+          byId("groupBy").value = d.groupBy;
+          byId("groupStyleField").hidden = state.groupBy === "none";
+          updateMoveSeg();
+        }
+        if(d.groupStyle === "own" || d.groupStyle === "continuous"){
+          state.groupStyle = d.groupStyle;
+          byId("groupStyle").value = d.groupStyle;
+        }
         buildSortOptions();
         byId("dir").value = state.dir;
         render();
@@ -3012,12 +3441,15 @@ if(window.claude && window.claude.use){
     }, function(){});
     db.collection("books").onSnapshot(function(snap){
       var next = {};
+      var migrated = [];
       snap.docs.forEach(function(doc){
         var d = doc.data() || {};
         d.id = doc.id;
+        if(migrateSections(d)) migrated.push(d);
         next[doc.id] = d;
       });
       state.books = next;
+      migrated.forEach(saveBook);
       state.loaded = true;
       setSaveQuiet("Saved to your account", "");
       render();
