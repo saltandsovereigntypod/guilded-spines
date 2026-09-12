@@ -149,8 +149,11 @@ read as curved, the finish's sheen, the grain at `background-blend-mode: overlay
 and then the base. The base is the *only* layer a custom colour or gradient
 touches, so a book set to a purple-to-black gradient is still visibly leather,
 with the same grain, sheen and hubs as an untouched one. There is a single
-rendering path and no branch on whether a book has been recoloured, and a slab
-in a stack is the same stack of layers with its edge shading re-aimed.
+rendering path and no branch on whether a book has been recoloured. A slab in a
+stack is a spine lying down: the same layers with the edge shading re-aimed
+across the thickness, and the same bookbinding furniture — raised hubs, gilt
+rules, case lines — turned through ninety degrees, because the layers alone
+read as flat paint next to a standing book.
 
 An angled book is planted rather than floated. Perspective magnifies whatever
 leans towards the eye, about the perspective origin, so a turned book's

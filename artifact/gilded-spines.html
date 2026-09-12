@@ -347,7 +347,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 }
 .slab{
   flex:0 0 auto;width:var(--slw);height:var(--slh);
-  border:0;margin:0;padding:0 7px;cursor:pointer;position:relative;border-radius:2px;
+  border:0;margin:0;cursor:pointer;position:relative;border-radius:2px;
+  /* Lettering sits inside the gilt rules, exactly as it does on a standing
+     spine, so the padding clears them. */
+  padding:0 19px;
   display:flex;align-items:center;gap:5px;overflow:hidden;
   box-shadow:0 3px 5px -2px rgba(0,0,0,.6);
   --leaf-edge:linear-gradient(180deg,
@@ -362,11 +365,22 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 }
 .slab:hover,.slab:focus-visible{filter:brightness(1.12);z-index:6}
 .slab.sel{outline:2px solid var(--gilt-bright);outline-offset:1px;z-index:5}
+.sl-hubs{position:absolute;left:15px;right:15px;top:2px;bottom:2px;z-index:1;background-image:var(--hubs)}
+.sl-rule{
+  content:"";position:absolute;top:5px;bottom:5px;width:1px;z-index:2;
+  background:linear-gradient(180deg,transparent,var(--gilt),transparent);opacity:.62;
+}
+.sl-rule.start{left:15px}
+.sl-rule.end{right:15px}
+.sl-case{position:absolute;top:0;bottom:0;width:1px;z-index:3;background:rgba(0,0,0,.35)}
+.sl-case.start{left:4px}
+.sl-case.end{right:4px}
 .slab-title{
   flex:1 1 auto;min-width:0;text-align:center;
   font-family:var(--f-display);font-weight:600;font-size:var(--fs);letter-spacing:.04em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
+.slab-title,.slab-num,.slab-pips{position:relative;z-index:4}
 .slab-num{flex:0 0 auto;font-family:var(--f-data);font-size:calc(var(--fs) * .82);opacity:.85}
 .slab-pips{flex:0 0 auto;display:flex;gap:2px;align-items:center}
 .slab-pips b{width:3px;height:3px;border-radius:50%;background:var(--gilt-bright);box-shadow:0 0 4px rgba(234,203,128,.8)}
@@ -1407,7 +1421,7 @@ function hubCount(h, w){
   var n = Math.max(3, Math.min(5, Math.round((h - 30) / 62)));
   return w < 40 ? Math.min(3, n) : n;
 }
-function hubsCSS(h, w){
+function hubsCSS(h, w, deg){
   var n = hubCount(h, w), step = (h - 30) / (n + 1), stops = [], i, y;
   for(i = 1; i <= n; i++){
     y = step * i;
@@ -1419,7 +1433,7 @@ function hubsCSS(h, w){
       "rgba(0,0,0,.15) " + (y + 2).toFixed(1) + "px",
       "transparent " + (y + 2).toFixed(1) + "px");
   }
-  return "linear-gradient(180deg," + stops.join(",") + ")";
+  return "linear-gradient(" + (deg || 180) + "deg," + stops.join(",") + ")";
 }
 
 function show(b){
@@ -1648,6 +1662,10 @@ function slabHTML(b, messy){
     : "";
   var st = STATUS[b.status] || STATUS.want;
   var pips = sh.pips ? pipMarks(b) : "";
+  var furniture =
+    (hubsOn(b) ? '<span class="sl-hubs" style="--hubs:' + hubsCSS(w, hgt, 90) + '"></span>' : "") +
+    '<span class="sl-rule start"></span><span class="sl-rule end"></span>' +
+    '<span class="sl-case start"></span><span class="sl-case end"></span>';
   return '<button class="slab leaf' + materialClass(b) + (isSelected(b) ? " sel" : "") +
       '" type="button" data-id="' + esc(b.id) + '"' +
     ' style="--slw:' + w + 'px;--slh:' + hgt + 'px;--c:' + esc(color(b)) + ';--fs:' + fs.toFixed(1) + 'px' +
@@ -1655,6 +1673,7 @@ function slabHTML(b, messy){
     (b.spineImage ? ' data-img-spine="' + esc(imgKey(b.id, "spine")) + '"' : "") +
     ' title="' + esc(b.title) + (b.author ? " — " + esc(b.author) : "") +
     '" aria-label="' + esc(b.title) + ", " + esc(b.author || "unknown author") + ", " + esc(st.label) + '. Open.">' +
+    furniture +
     (state.selecting && isSelected(b)
       ? '<span class="sel-tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19 7"/></svg></span>' : "") +
     (sh.number && b.seriesNumber ? '<span class="slab-num">' + esc(b.seriesNumber) + "</span>" : "") +
