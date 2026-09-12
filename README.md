@@ -45,16 +45,16 @@ your notes and theories on the verso.
   and sheen, and three lettering treatments: embossed gilt, blind emboss, and the
   flat painted look.
 - **Three ways to stand.** Spine out, front out, or **angled** — the cover turned
-  towards you with the spine still in view down its left side and a sliver of the
-  text block's top edge catching the light, built as real CSS 3D with faces that
-  carry their own lettering, planted on the shelf line with a contact shadow.
-  Both the cover and the spine can take an image of your own.
+  towards you with the spine still in view down its left side, built as real CSS
+  3D with faces that carry their own lettering, planted on the shelf line with a
+  contact shadow. Both the cover and the spine can take an image of your own.
 - **Or lay a group flat.** Any group can be a **stack** instead of a row of
   standing books: each volume becomes a slab seen from the spine, title reading
   across, widest at the bottom, in the same leather or cloth it would have had
   standing up. Neat stacks line their edges up; messy ones sit a little askew,
   seeded from each book's id so the pile looks the same every time you come
-  back. Per group, cycled from the control on its plate.
+  back. **Group layout** in the toolbar sets every group at once; the chip on a
+  group's name plate then overrides that one group.
 - **Sort and group.** Sort by series & volume, title, author, volume number,
   shelf, favourites, date added, progress, any rating category, or your own
   arrangement. Group by series, author, shelf, rating, favourites or first
@@ -157,9 +157,17 @@ leans towards the eye, about the perspective origin, so a turned book's
 near-bottom corner is thrown below the shelf line and cuts into the plank. The
 overshoot is exact — height × (1 − eye) × zNear ÷ (distance − zNear) — so the
 book is raised by precisely that rather than the shelf being tilted under every
-other book on the row. The eye itself sits a fifth of a book-height above the
-top, which is what exposes the few pixels of the text block's top edge; level
-with the case, that edge is edge-on and there is nothing to see.
+other book on the row. The eye stays level with the middle of the book: raising
+it far enough to expose the top edge of the text block also splays the cover
+into a trapezoid, as though the book were tipping over backwards, and the cover
+is what you actually look at.
+
+Name plates are one element with one shape — aged brass, blotched with patina
+and worn in streaks, over the same grain the book finishes use. Each takes the
+width its own wording needs and is centred on the run it names. Squeezing a
+plate into a narrow run only ellipsises the wording away and leaves its controls
+colliding with the next plate, so a plate that cannot clear its neighbour is
+nudged along instead, and one that still cannot fit the row steps aside.
 
 The grain is one `feTurbulence` data URI per finish, declared once on `:root` and
 shared by every book — a stack of radial gradients per spine is far too slow at
