@@ -931,6 +931,113 @@ input[type=range]{
   .bulk-row{grid-template-columns:1fr;gap:7px}
 }
 
+/* ---------- the Oracle ---------- */
+.oracle-card{
+  width:min(560px,100%);margin:auto;
+  background:linear-gradient(180deg,var(--velvet-2),var(--night));
+  border:1px solid var(--hair);border-radius:4px;
+  box-shadow:0 30px 70px rgba(0,0,0,.8);padding:24px 24px 20px;
+  animation:openBook .4s cubic-bezier(.2,.8,.25,1) both;
+}
+.or-eyebrow{
+  font-family:var(--f-display);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gilt-dim);margin:0 0 10px;display:flex;align-items:center;gap:8px;
+}
+.or-eyebrow i{flex:1;height:1px;background:linear-gradient(90deg,var(--hair),transparent)}
+.or-head{display:flex;gap:14px;align-items:flex-start}
+.or-titles{flex:1 1 auto;min-width:0}
+.or-title{
+  font-family:var(--f-display);font-weight:600;font-size:1.22rem;line-height:1.2;
+  letter-spacing:.02em;color:var(--parchment);margin:0;text-wrap:balance;
+}
+.or-by{font-family:var(--f-body);font-style:italic;font-size:1rem;color:var(--dim);margin:3px 0 0}
+.or-meta{font-family:var(--f-data);font-size:.76rem;color:var(--dimmer);margin:5px 0 0;letter-spacing:.04em}
+.or-score{
+  flex:0 0 auto;text-align:center;min-width:76px;padding:7px 10px 6px;
+  border:1px solid var(--hair);border-radius:3px;background:rgba(7,6,11,.5);
+}
+.or-score b{
+  display:block;font-family:var(--f-display);font-weight:600;font-size:1.6rem;line-height:1;
+  color:var(--gilt-bright);text-shadow:0 0 18px rgba(201,162,76,.35);
+}
+.or-score span{
+  display:block;margin-top:4px;font-family:var(--f-display);font-size:.46rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gilt-dim);line-height:1.35;
+}
+.or-hook{font-size:1rem;line-height:1.6;color:var(--parchment-2);margin:14px 0 0}
+.or-h{
+  font-family:var(--f-display);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gilt);margin:16px 0 7px;display:block;
+}
+.or-h.soft{color:var(--amber)}
+.or-fit{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.or-fit li{
+  font-family:var(--f-body);font-size:.95rem;line-height:1.5;color:var(--parchment-2);
+  padding-left:14px;position:relative;
+}
+.or-fit li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--gilt-dim)}
+.or-caution{
+  font-family:var(--f-body);font-size:.95rem;line-height:1.55;color:var(--dim);
+  margin:0;padding:10px 12px;border-left:2px solid var(--amber);
+  background:rgba(180,129,60,.08);border-radius:0 2px 2px 0;
+}
+.or-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.or-chip{
+  font-family:var(--f-data);font-size:.74rem;letter-spacing:.04em;
+  color:var(--parchment-2);background:rgba(7,6,11,.6);
+  border:1px solid var(--hair-soft);border-radius:2px;padding:3px 8px;
+}
+.or-chip.crowd{color:var(--dim);border-style:dashed}
+.or-chip.flag{color:var(--amber);border-color:rgba(180,129,60,.34)}
+details.or-fold{margin-top:10px;border:1px solid var(--hair-soft);border-radius:2px;background:rgba(7,6,11,.34)}
+details.or-fold > summary{
+  list-style:none;cursor:pointer;padding:8px 11px;
+  font-family:var(--f-display);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gilt-dim);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+details.or-fold > summary::-webkit-details-marker{display:none}
+details.or-fold > summary::after{content:"+";font-family:var(--f-data);font-size:1rem;color:var(--gilt-dim)}
+details.or-fold[open] > summary::after{content:"\2013"}
+.or-fold-body{padding:2px 11px 12px}
+.or-math{width:100%;border-collapse:collapse;font-family:var(--f-data);font-size:.76rem;color:var(--dim)}
+.or-math th{
+  text-align:right;font-weight:400;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gilt-dim);padding:0 0 5px;border-bottom:1px solid var(--hair-soft);
+}
+.or-math th:first-child{text-align:left}
+.or-math td{padding:4px 0;text-align:right;font-variant-numeric:tabular-nums}
+.or-math td:first-child{text-align:left;color:var(--parchment-2)}
+.or-math tr.sum td{border-top:1px solid var(--hair-soft);color:var(--gilt-bright)}
+.or-math tr.sum td:first-child{color:var(--gilt)}
+.or-cw{font-family:var(--f-body);font-size:.92rem;line-height:1.55;color:var(--dim);margin:8px 0 0}
+.or-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;border-top:1px solid var(--hair-soft);padding-top:16px}
+.or-actions .btn{flex:1 1 auto}
+.or-legend{font-family:var(--f-data);font-size:.74rem;color:var(--dimmer);line-height:1.5;margin:9px 0 0}
+.or-empty{font-family:var(--f-body);font-style:italic;color:var(--dim);margin:14px 0 0;line-height:1.6}
+
+.or-fixrow{
+  display:grid;grid-template-columns:minmax(74px,1fr) auto;gap:10px;align-items:center;
+  padding:8px 0;border-top:1px solid var(--hair-soft);
+}
+.or-fixrow .nm{font-family:var(--f-data);font-size:.84rem;color:var(--parchment-2)}
+.or-fixrow .nm b{display:block;font-family:var(--f-display);font-size:.5rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gilt-dim);font-weight:500;margin-top:2px}
+.or-fixrow .seg button{padding:5px 8px;font-size:.5rem}
+.or-note{width:100%;min-height:70px;resize:vertical;margin-top:4px}
+.or-out{font-family:var(--f-data);font-size:.82rem;color:var(--dim);line-height:1.5;margin:9px 0 0;min-height:1.2em}
+.or-out span{display:block}
+.or-out span+span{margin-top:4px}
+.or-out.warn{color:var(--gilt-dim)}
+
+@media (max-width:480px){
+  .oracle-card{padding:18px 15px 16px}
+  .or-head{flex-direction:column-reverse;align-items:stretch;gap:10px}
+  .or-score{display:flex;align-items:baseline;gap:9px;justify-content:flex-start;min-width:0;text-align:left}
+  .or-score b{font-size:1.35rem}
+  .or-score span{margin-top:0}
+  .or-actions .btn{flex:1 1 100%}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:760px){
   .spread{grid-template-columns:1fr;border-radius:4px}
@@ -1034,6 +1141,7 @@ input[type=range]{
       <button type="button" data-move="group" aria-pressed="false">Group</button>
     </div>
     <button class="btn ghost" id="setBtn">Settings</button>
+    <button class="btn ghost" id="oracleBtn" hidden>The Oracle</button>
     <button class="btn ghost" id="exportBtn">Export</button>
     <button class="btn ghost" id="importBtn">Import</button>
   </div>
@@ -1124,8 +1232,199 @@ var state = {
   statusDots:{show:true, colors:defaultDotColors()},
   defaultSections:DEFAULT_SECTIONS.slice(),
   shelfPlates:{show:false, labels:{}, hidden:{}},
-  groupLayout:{}, defaultGroupLayout:"shelf"
+  groupLayout:{}, defaultGroupLayout:"shelf",
+  oracle:null
 };
+
+/* ---------------- the Oracle ----------------
+   Reference data, never library data: the catalogue is read and never written
+   onto a book document or into an export. The only trace the Oracle leaves on a
+   book is its oracleTags. */
+var ORACLE = (function(){
+  var raw = window.__GILDED_ORACLE__;
+  if(!raw || typeof raw !== "object") return null;
+  var m = raw.model;
+  if(!m || !m.weights || !m.momentumScale || typeof m.intercept !== "number") return null;
+  if(!Array.isArray(raw.catalog) || !raw.catalog.length) return null;
+  var ok = raw.catalog.filter(function(c){
+    return c && c.id && c.title &&
+      typeof c.gutPunch === "number" && typeof c.prose === "number" &&
+      typeof c.fmcAgency === "number" && typeof c.momentum === "string";
+  });
+  if(!ok.length) return null;
+  return {
+    model: m,
+    catalog: ok,
+    anchors: Array.isArray(raw.anchors) ? raw.anchors : []
+  };
+})();
+
+var MOMENTUM_ORDER = ["slow","medium","fast","immediate"];
+var ORACLE_DIMS = ["gutPunch","prose","fmcAgency","momentum","darkness","spice"];
+var DIM_LABEL = {
+  gutPunch:"Emotional impact", prose:"Prose", fmcAgency:"Heroine's agency",
+  momentum:"Momentum", darkness:"Darkness", spice:"Spice"
+};
+var LANE_COLOR = {romantasy:"#1B2A44", dark:"#5A2330", craft:"#123832", "new":"#33253F"};
+var BLOCKED_BY_DEFAULT = "child-sexual-abuse";
+var SNOOZE_DRAWS = 20, SNOOZE_MS = 20 * 3600 * 1000, SNOOZE_CEIL_MS = 30 * 24 * 3600 * 1000;
+
+function defaultOracle(){
+  var filters = {};
+  filters[BLOCKED_BY_DEFAULT] = true;
+  return {snoozed:{}, refused:{}, corrections:{}, offers:{}, draws:0, weights:null, filters:filters};
+}
+/* A missing or malformed value must not be able to break the app, so every
+   branch here lands on something usable. */
+function normOracle(v){
+  var out = defaultOracle();
+  if(!v || typeof v !== "object") return out;
+  if(v.snoozed && typeof v.snoozed === "object"){
+    Object.keys(v.snoozed).forEach(function(k){
+      var e = v.snoozed[k];
+      if(!e || typeof e !== "object") return;
+      out.snoozed[k] = {
+        atDraw: typeof e.atDraw === "number" ? e.atDraw : 0,
+        atTime: typeof e.atTime === "number" ? e.atTime : 0
+      };
+    });
+  }
+  if(v.refused && typeof v.refused === "object"){
+    Object.keys(v.refused).forEach(function(k){ if(v.refused[k]) out.refused[k] = true; });
+  }
+  if(v.corrections && typeof v.corrections === "object"){
+    Object.keys(v.corrections).forEach(function(k){
+      var c = v.corrections[k];
+      if(!c || typeof c !== "object") return;
+      var keep = {};
+      ORACLE_DIMS.forEach(function(d){
+        var n = parseInt(c[d], 10);
+        if(!isNaN(n) && n) keep[d] = Math.max(-4, Math.min(4, n));
+      });
+      if(typeof c.note === "string" && c.note) keep.note = c.note.slice(0, 600);
+      if(Object.keys(keep).length) out.corrections[k] = keep;
+    });
+  }
+  if(v.offers && typeof v.offers === "object"){
+    Object.keys(v.offers).forEach(function(k){
+      var n = parseInt(v.offers[k], 10);
+      if(!isNaN(n) && n > 0) out.offers[k] = n;
+    });
+  }
+  if(typeof v.draws === "number" && v.draws >= 0) out.draws = Math.floor(v.draws);
+  if(v.weights && typeof v.weights === "object"){
+    var w = {}, good = true;
+    ["gutPunch","prose","fmcAgency","momentum","intercept"].forEach(function(k){
+      var n = parseFloat(v.weights[k]);
+      if(isNaN(n)) good = false; else w[k] = n;
+    });
+    if(good) out.weights = w;
+  }
+  if(v.filters && typeof v.filters === "object"){
+    out.filters = {};
+    Object.keys(v.filters).forEach(function(k){ if(v.filters[k]) out.filters[k] = true; });
+  }
+  return out;
+}
+function oracleState(){
+  if(!state.oracle) state.oracle = defaultOracle();
+  return state.oracle;
+}
+function oracleWeights(){
+  var o = oracleState();
+  return o.weights || ORACLE.model.weights;
+}
+function oracleIntercept(){
+  var o = oracleState();
+  return (o.weights && typeof o.weights.intercept === "number")
+    ? o.weights.intercept : ORACLE.model.intercept;
+}
+function clamp5(n){ return Math.max(0, Math.min(5, n)); }
+function stepMomentum(m, delta){
+  var i = MOMENTUM_ORDER.indexOf(m);
+  if(i === -1) i = 1;
+  return MOMENTUM_ORDER[Math.max(0, Math.min(MOMENTUM_ORDER.length - 1, i + (delta || 0)))];
+}
+/* The tags as this reader has corrected them. Corrections are hers alone: the
+   catalogue record is never altered. */
+function oracleTagsOf(rec){
+  var c = oracleState().corrections[rec.id] || {};
+  return {
+    gutPunch:  clamp5(rec.gutPunch  + (c.gutPunch  || 0)),
+    prose:     clamp5(rec.prose     + (c.prose     || 0)),
+    fmcAgency: clamp5(rec.fmcAgency + (c.fmcAgency || 0)),
+    darkness:  clamp5((rec.darkness || 0) + (c.darkness || 0)),
+    spice:     clamp5((rec.spice    || 0) + (c.spice    || 0)),
+    momentum:  stepMomentum(rec.momentum, c.momentum || 0)
+  };
+}
+/* The formula lives in the JSON, not here: these weights get re-fitted. */
+function oracleRows(tags){
+  var w = oracleWeights(), ms = ORACLE.model.momentumScale;
+  return [
+    {key:"gutPunch",  tag:tags.gutPunch,  scaled:tags.gutPunch / 5,  weight:w.gutPunch},
+    {key:"prose",     tag:tags.prose,     scaled:tags.prose / 5,     weight:w.prose},
+    {key:"fmcAgency", tag:tags.fmcAgency, scaled:tags.fmcAgency / 5, weight:w.fmcAgency},
+    {key:"momentum",  tag:tags.momentum,  scaled:(ms[tags.momentum] || 0), weight:w.momentum}
+  ].map(function(r){ r.contribution = r.scaled * r.weight; return r; });
+}
+function oraclePredict(rec){
+  var rows = oracleRows(oracleTagsOf(rec)), total = oracleIntercept();
+  rows.forEach(function(r){ total += r.contribution; });
+  return clamp5(total);
+}
+
+/* ---- gates ---- */
+function oracleNormTitle(t){
+  var s = String(t == null ? "" : t).toLowerCase().replace(/[^a-z0-9 ]+/g, " ");
+  s = s.replace(/\s+/g, " ").replace(/^ | $/g, "");
+  return s.replace(/^(the|a|an) /, "");
+}
+function libraryByTitle(){
+  var map = {};
+  list().forEach(function(b){ map[oracleNormTitle(b.title)] = b; });
+  return map;
+}
+function snoozeClear(id, now){
+  var o = oracleState(), sn = o.snoozed[id];
+  if(!sn) return true;
+  var age = now - sn.atTime;
+  if(age >= SNOOZE_CEIL_MS) return true;
+  /* Both, never either: twenty more draws AND twenty hours. With "or", sitting
+     down and pulling thirty in a row starts repeating around the twentieth. */
+  return (o.draws - sn.atDraw) >= SNOOZE_DRAWS && age >= SNOOZE_MS;
+}
+function oracleEligible(){
+  var o = oracleState(), lib = libraryByTitle(), now = Date.now();
+  return ORACLE.catalog.filter(function(rec){
+    if(lib[oracleNormTitle(rec.title)]) return false;
+    if(o.refused[rec.id]) return false;
+    if(!snoozeClear(rec.id, now)) return false;
+    var flags = Array.isArray(rec.flags) ? rec.flags : [];
+    for(var i = 0; i < flags.length; i++) if(o.filters[flags[i]]) return false;
+    var pre = rec.prerequisite;
+    if(pre && pre.needs){
+      var got = lib[oracleNormTitle(pre.needsTitle)];
+      if(!got || got.status !== "read") return false;
+    }
+    return true;
+  });
+}
+/* Top eight, not the single best, or it is the same book until she reads it.
+   Anything offered twice and not taken sinks. */
+function oraclePick(){
+  var o = oracleState();
+  var pool = oracleEligible().map(function(rec){
+    var n = o.offers[rec.id] || 0;
+    return {rec:rec, score:oraclePredict(rec) - (n >= 2 ? (n - 1) * 0.5 : 0)};
+  });
+  if(!pool.length) return null;
+  pool.sort(function(a, b){
+    return b.score - a.score || a.rec.title.localeCompare(b.rec.title);
+  });
+  var top = pool.slice(0, Math.min(8, pool.length));
+  return top[Math.floor(Math.random() * top.length)].rec;
+}
 var LAYOUTS = ["shelf","stack-neat","stack-messy"];
 var LAYOUT_LABEL = {shelf:"Shelf", "stack-neat":"Neat stack", "stack-messy":"Messy stack"};
 function normLayout(v, fallback){ return LAYOUTS.indexOf(v) === -1 ? fallback : v; }
@@ -1507,7 +1806,8 @@ function savePrefs(){
     sortBy: state.sortBy,
     dir: state.dir,
     groupBy: state.groupBy,
-    groupStyle: state.groupStyle
+    groupStyle: state.groupStyle,
+    oracle: state.oracle
   }).catch(function(){
     setSave("Couldn't save your settings", "warn");
   });
@@ -1693,6 +1993,481 @@ function stackHTML(st){
       '" data-last="' + esc(last ? last.id : "") + '" style="--sw:' + (widest + 20) + 'px">' +
     books.map(function(b){ return slabHTML(b, messy); }).join("") +
   "</div>";
+}
+
+/* ---- why it fits: the real dimension and its real number, never praise ---- */
+function oracleFitLines(rec, tags){
+  var lines = [], w = oracleWeights();
+  var ranked = [
+    {k:"gutPunch",  v:tags.gutPunch,  w:w.gutPunch},
+    {k:"prose",     v:tags.prose,     w:w.prose},
+    {k:"fmcAgency", v:tags.fmcAgency, w:w.fmcAgency}
+  ].sort(function(a, b){ return (b.v / 5) * b.w - (a.v / 5) * a.w; });
+  var best = ranked[0];
+  /* Read the standing off the weights rather than asserting it: they get
+     re-fitted, and a claim like "your strongest signal" has to stay true. */
+  var byWeight = ["gutPunch","prose","fmcAgency","momentum"].slice().sort(function(a, b){
+    return w[b] - w[a];
+  });
+  var rank = byWeight.indexOf(best.k);
+  var standing = rank === 0
+    ? "the dimension your ratings lean on hardest"
+    : (rank === 1 ? "the second thing your ratings lean on"
+                  : "a dimension your ratings still reward");
+  lines.push(DIM_LABEL[best.k] + " " + best.v + " of 5, " + standing + " at a weight of " +
+    best.w.toFixed(2) + ", and it carries " + (best.v / 5 * best.w).toFixed(2) + " of this score.");
+  var second = ranked[1];
+  if(second && second.v >= 4){
+    lines.push(DIM_LABEL[second.k] + " " + second.v + " of 5, worth another " +
+      (second.v / 5 * second.w).toFixed(2) + " at a weight of " + second.w.toFixed(2) + ".");
+  }
+  var ms = ORACLE.model.momentumScale;
+  lines.push("Momentum is " + tags.momentum + ", which scores " +
+    (ms[tags.momentum] || 0).toFixed(2) + " of 1 on your scale and is worth " +
+    (w.momentum * (ms[tags.momentum] || 0)).toFixed(2) + " of the prediction.");
+  if(rec.pov === "dual" || rec.pov === "multi"){
+    if(rec.povNote) lines.push(rec.povNote.charAt(0).toUpperCase() + rec.povNote.slice(1) + ".");
+  }
+  if(lines.length < 4 && typeof rec.darkness === "number" && tags.darkness >= 4){
+    lines.push("Darkness " + tags.darkness + " of 5, which does not enter the score but tracks what you finish.");
+  }
+  return lines.slice(0, 4);
+}
+function oracleLane(rec){
+  var lanes = Array.isArray(rec.lanes) ? rec.lanes : [];
+  for(var i = 0; i < lanes.length; i++) if(LANE_COLOR[lanes[i]]) return lanes[i];
+  return null;
+}
+function oracleMathHTML(rec, tags){
+  var rows = oracleRows(tags), total = oracleIntercept();
+  var body = rows.map(function(r){
+    total += r.contribution;
+    return "<tr><td>" + esc(DIM_LABEL[r.key]) + "</td><td>" + esc(String(r.tag)) + "</td><td>" +
+      r.scaled.toFixed(2) + "</td><td>" + r.weight.toFixed(4) + "</td><td>" +
+      r.contribution.toFixed(2) + "</td></tr>";
+  }).join("");
+  var fitted = oracleState().weights ? " Your refitted weights." : " Shipped weights.";
+  return '<table class="or-math"><thead><tr><th>Dimension</th><th>Tag</th><th>Scaled</th>' +
+      "<th>Weight</th><th>Adds</th></tr></thead><tbody>" + body +
+      "<tr><td>Baseline</td><td>&mdash;</td><td>&mdash;</td><td>" + oracleIntercept().toFixed(4) +
+        "</td><td>" + oracleIntercept().toFixed(2) + "</td></tr>" +
+      '<tr class="sum"><td>Predicted</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>' +
+        clamp5(total).toFixed(2) + "</td></tr>" +
+    "</tbody></table>" +
+    '<p class="or-cw">Tag confidence: ' + esc(rec.tagConfidence || "unstated") + "." + fitted + "</p>";
+}
+
+var oracleCurrent = null;
+function openOracle(){
+  if(!ORACLE) return;
+  closeOracle();
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "oracleOverlay";
+  ov.innerHTML = '<div class="oracle-card" role="dialog" aria-modal="true" aria-label="The Oracle" id="oracleCard"></div>';
+  document.body.appendChild(ov);
+  document.body.style.overflow = "hidden";
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeOracle(); });
+  ov.addEventListener("click", oracleCardClick);
+  drawOracle();
+}
+function closeOracle(){
+  var ov = byId("oracleOverlay");
+  if(ov) ov.remove();
+  oracleCurrent = null;
+  document.body.style.overflow = "";
+}
+function drawOracle(){
+  var card = byId("oracleCard");
+  if(!card) return;
+  var rec = oraclePick();
+  oracleCurrent = rec;
+  if(!rec){
+    card.innerHTML =
+      '<p class="or-eyebrow">The Oracle<i></i></p>' +
+      '<h3 class="or-title">Nothing left to offer tonight</h3>' +
+      '<p class="or-empty">Every candidate is already on your shelf, set aside, refused, or held back by a ' +
+        'content filter or an unread first book. Ones you set aside come back after twenty more draws ' +
+        'and twenty hours.</p>' +
+      '<div class="or-actions"><button class="btn" id="orClose" type="button">Close</button></div>';
+    return;
+  }
+  var o = oracleState();
+  o.draws += 1;
+  o.offers[rec.id] = (o.offers[rec.id] || 0) + 1;
+  savePrefs();
+
+  var tags = oracleTagsOf(rec);
+  var pred = oraclePredict(rec);
+  var series = rec.series
+    ? esc(rec.series) + (rec.seriesNumber ? " &middot; " + esc(String(rec.seriesNumber)) : "") : "";
+  var meta = [series, rec.year ? esc(String(rec.year)) : "", rec.setting ? esc(rec.setting) : ""]
+    .filter(Boolean).join(" &nbsp;&middot;&nbsp; ");
+  var comps = (Array.isArray(rec.comps) ? rec.comps : []).map(function(c){
+    return '<span class="or-chip">' + esc(c) + "</span>";
+  }).join("");
+  var crowd = typeof rec.goodreadsRating === "number"
+    ? '<span class="or-chip crowd">Goodreads ' + rec.goodreadsRating.toFixed(2) + " &mdash; the crowd, not the Oracle</span>" : "";
+  var flags = (Array.isArray(rec.flags) ? rec.flags : []).map(function(f){
+    return '<span class="or-chip flag">' + esc(f.replace(/-/g, " ")) + "</span>";
+  }).join("");
+  var cws = (Array.isArray(rec.contentWarnings) ? rec.contentWarnings : []).join("; ");
+
+  card.innerHTML =
+    '<p class="or-eyebrow">The Oracle offers<i></i></p>' +
+    '<div class="or-head">' +
+      '<div class="or-titles">' +
+        '<h3 class="or-title">' + esc(rec.title) + "</h3>" +
+        '<p class="or-by">by ' + esc(rec.author || "unknown") + "</p>" +
+        (meta ? '<p class="or-meta">' + meta + "</p>" : "") +
+      "</div>" +
+      '<div class="or-score"><b>' + pred.toFixed(1) + "</b><span>Predicted<br>on your scale</span></div>" +
+    "</div>" +
+    (rec.hook ? '<p class="or-hook">' + esc(rec.hook) + "</p>" : "") +
+    '<span class="or-h">Why it fits you</span>' +
+    '<ul class="or-fit">' + oracleFitLines(rec, tags).map(function(l){
+      return "<li>" + esc(l) + "</li>";
+    }).join("") + "</ul>" +
+    '<span class="or-h soft">Where it might lose you</span>' +
+    '<p class="or-caution">' + esc(rec.caution || "No caution recorded for this one.") + "</p>" +
+    '<span class="or-h">Reads like</span>' +
+    '<div class="or-chips">' + comps + crowd + "</div>" +
+    '<details class="or-fold"><summary>What is in it</summary><div class="or-fold-body">' +
+      '<div class="or-chips">' + (flags || '<span class="or-chip">No flags recorded</span>') + "</div>" +
+      '<p class="or-cw">' + esc(cws || "No content warnings recorded.") + "</p>" +
+    "</div></details>" +
+    '<details class="or-fold"><summary>Why this one</summary><div class="or-fold-body">' +
+      oracleMathHTML(rec, tags) +
+    "</div></details>" +
+    '<div class="or-actions">' +
+      '<button class="btn" id="orTake" type="button">Take it down</button>' +
+      '<button class="btn ghost" id="orSnooze" type="button">Not tonight</button>' +
+      '<button class="btn ghost" id="orWrong" type="button">Wrong read</button>' +
+    "</div>" +
+    '<p class="or-legend"><b>Take it down</b> puts it on your Want to Read shelf and draws the next. ' +
+      '<b>Not tonight</b> sets it aside for a while and draws the next. ' +
+      '<b>Wrong read</b> lets you tell the Oracle its tags are off.</p>';
+  card.scrollTop = 0;
+  var ov = byId("oracleOverlay");
+  if(ov) ov.scrollTop = 0;
+}
+function oracleCardClick(e){
+  if(e.target.closest("#orClose")){ closeOracle(); return; }
+  if(e.target.closest("#orTake")){ oracleTake(); return; }
+  if(e.target.closest("#orSnooze")){ oracleSnooze(); return; }
+  if(e.target.closest("#orWrong")){ openOracleFix(); return; }
+}
+function oracleSnooze(){
+  if(!oracleCurrent) return;
+  var o = oracleState();
+  o.snoozed[oracleCurrent.id] = {atDraw:o.draws, atTime:Date.now()};
+  savePrefs();
+  drawOracle();
+}
+/* Goes through the app's own creation path: same id scheme, same order
+   calculation, same save function. */
+function oracleTake(){
+  var rec = oracleCurrent;
+  if(!rec) return;
+  var tags = oracleTagsOf(rec);
+  var lane = oracleLane(rec);
+  var id = "book-" + Date.now().toString(36) + "-" + Math.floor(Math.random()*1e4).toString(36);
+  var drawn = new Date();
+  var note = [
+    "Predicted " + oraclePredict(rec).toFixed(1) + " of 5 on your own scale.",
+    "",
+    "Why it fits you:",
+    oracleFitLines(rec, tags).map(function(l){ return "• " + l; }).join("\n"),
+    "",
+    "Where it might lose you:",
+    rec.caution || "No caution recorded.",
+    "",
+    "Drawn from the Oracle on " + drawn.toISOString().slice(0, 10) + "."
+  ].join("\n");
+  var sections = newSections();
+  sections.push({id:sectionId(), label:"From the Oracle", text:note});
+
+  state.books[id] = {
+    id:id, title:rec.title, author:rec.author || "",
+    series:rec.series || "", seriesNumber:(rec.seriesNumber == null ? null : rec.seriesNumber),
+    status:"want", favorite:false, progress:0, ratings:{},
+    description:rec.hook || "", sections:sections,
+    display:"spine", coverId:null, addedAt:Date.now(),
+    order: (list().reduce(function(m, x){ return Math.max(m, orderOf(x)); }, 0) + 100),
+    oracleTags:{
+      id:rec.id, gutPunch:tags.gutPunch, prose:tags.prose, fmcAgency:tags.fmcAgency,
+      momentum:tags.momentum, darkness:tags.darkness, spice:tags.spice
+    }
+  };
+  if(lane) state.books[id].spineColor = LANE_COLOR[lane];
+  saveBook(state.books[id]);
+  render();
+  paintSaveSticky("“" + rec.title + "” is on your Want to Read shelf", "");
+  drawOracle();
+}
+
+/* ---- the correction panel: it judges the Oracle, not the book ---- */
+function openOracleFix(){
+  var rec = oracleCurrent;
+  if(!rec) return;
+  var tags = oracleTagsOf(rec);
+  var cur = oracleState().corrections[rec.id] || {};
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "oracleFixOverlay";
+  ov.innerHTML =
+  '<div class="sheet" role="dialog" aria-modal="true" aria-label="Wrong read">' +
+    "<h3>Wrong read</h3>" +
+    '<p class="hint">This corrects the Oracle’s reading of “' + esc(rec.title) +
+      '”, not the book. Your corrections stay on your copy.</p>' +
+    ORACLE_DIMS.map(function(d){
+      var shown = d === "momentum" ? tags.momentum : tags[d] + " of 5";
+      return '<div class="or-fixrow">' +
+        '<span class="nm">' + esc(DIM_LABEL[d]) + "<b>now " + esc(String(shown)) + "</b></span>" +
+        '<div class="seg" data-fixdim="' + d + '">' +
+          '<button type="button" data-fix="low" aria-pressed="false">Too low</button>' +
+          '<button type="button" data-fix="right" aria-pressed="true">Right</button>' +
+          '<button type="button" data-fix="high" aria-pressed="false">Too high</button>' +
+        "</div>" +
+      "</div>";
+    }).join("") +
+    '<div class="page-rule"></div>' +
+    '<label class="lbl" for="orNote">A note to yourself</label>' +
+    '<textarea class="or-note" id="orNote" placeholder="What the tags miss…">' + esc(cur.note || "") + "</textarea>" +
+    '<label class="toggle" for="orRefuse" style="margin-top:10px">' +
+      '<input type="checkbox" id="orRefuse">Never offer this book again</label>' +
+    '<p class="hint" style="margin:0;font-size:.84rem">Permanent. It lives in here rather than on the card so ' +
+      'a mistap cannot kill a recommendation.</p>' +
+    '<div class="sheet-actions">' +
+      '<button class="btn ghost" id="orFixCancel" type="button">Cancel</button>' +
+      '<button class="btn" id="orFixSave" type="button">Save</button>' +
+    "</div>" +
+  "</div>";
+  document.body.appendChild(ov);
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeOracleFix(); });
+  ov.addEventListener("click", function(e){
+    var b = e.target.closest("[data-fix]");
+    if(b){
+      var seg = b.closest("[data-fixdim]");
+      Array.prototype.forEach.call(seg.querySelectorAll("[data-fix]"), function(x){
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      return;
+    }
+    if(e.target.closest("#orFixCancel")){ closeOracleFix(); return; }
+    if(e.target.closest("#orFixSave")){ saveOracleFix(); return; }
+  });
+}
+function closeOracleFix(){
+  var ov = byId("oracleFixOverlay");
+  if(ov) ov.remove();
+}
+function saveOracleFix(){
+  var rec = oracleCurrent, ov = byId("oracleFixOverlay");
+  if(!rec || !ov) return;
+  var o = oracleState();
+  var c = {};
+  var prev = o.corrections[rec.id] || {};
+  ORACLE_DIMS.forEach(function(d){ if(prev[d]) c[d] = prev[d]; });
+  Array.prototype.forEach.call(ov.querySelectorAll("[data-fixdim]"), function(seg){
+    var d = seg.getAttribute("data-fixdim");
+    var on = seg.querySelector('[aria-pressed="true"]');
+    var v = on ? on.getAttribute("data-fix") : "right";
+    /* "Right" leaves the tag where the last correction put it. */
+    if(v === "low") c[d] = (c[d] || 0) + 1;
+    else if(v === "high") c[d] = (c[d] || 0) - 1;
+    if(c[d] === 0) delete c[d];
+  });
+  var note = byId("orNote").value.trim();
+  if(note) c.note = note.slice(0, 600);
+  if(Object.keys(c).length) o.corrections[rec.id] = c; else delete o.corrections[rec.id];
+  if(byId("orRefuse").checked){
+    o.refused[rec.id] = true;
+    savePrefs();
+    closeOracleFix();
+    drawOracle();
+    return;
+  }
+  savePrefs();
+  closeOracleFix();
+  /* Applied immediately: the score changes while she is still looking at it. */
+  redrawOracleScore();
+}
+/* Repaint the parts a correction can move, without spending another draw. */
+function redrawOracleScore(){
+  var rec = oracleCurrent, card = byId("oracleCard");
+  if(!rec || !card) return;
+  var tags = oracleTagsOf(rec), pred = oraclePredict(rec);
+  var score = card.querySelector(".or-score b");
+  if(score) score.textContent = pred.toFixed(1);
+  var fit = card.querySelector(".or-fit");
+  if(fit) fit.innerHTML = oracleFitLines(rec, tags).map(function(l){ return "<li>" + esc(l) + "</li>"; }).join("");
+  var folds = card.querySelectorAll(".or-fold");
+  if(folds.length > 1){
+    var open = folds[1].hasAttribute("open");
+    folds[1].querySelector(".or-fold-body").innerHTML = oracleMathHTML(rec, tags);
+    if(open) folds[1].setAttribute("open", "");
+  }
+  paintSaveSticky("Correction saved — score is now " + pred.toFixed(1), "");
+}
+
+/* ---- recalibration: least squares over her own ratings ---- */
+
+/* Every row the fit is allowed to see: the shipped anchors, plus anything the
+   Oracle put on the shelf that she has since rated. An anchor already covers
+   its own book, so a shelf copy of the same title is not counted twice. */
+function oracleFitRows(){
+  var rows = [], seen = {};
+  ORACLE.anchors.forEach(function(a){
+    if(typeof a.ashRating !== "number") return;
+    if(typeof a.gutPunch !== "number" || typeof a.prose !== "number" ||
+       typeof a.fmcAgency !== "number" || typeof a.momentum !== "string") return;
+    seen[oracleNormTitle(a.title)] = true;
+    rows.push({source:"anchor", title:a.title, y:a.ashRating, tags:{
+      gutPunch:a.gutPunch, prose:a.prose, fmcAgency:a.fmcAgency, momentum:a.momentum
+    }});
+  });
+  list().forEach(function(b){
+    var t = b.oracleTags;
+    if(!t || typeof t !== "object") return;
+    if(b.status !== "read" && b.status !== "dnf") return;
+    var y = ratingOf(b, "overall");
+    if(y < 0) return;
+    if(seen[oracleNormTitle(b.title)]) return;
+    if(typeof t.gutPunch !== "number" || typeof t.prose !== "number" ||
+       typeof t.fmcAgency !== "number" || typeof t.momentum !== "string") return;
+    seen[oracleNormTitle(b.title)] = true;
+    rows.push({source:"shelf", title:b.title, y:y, tags:{
+      gutPunch:t.gutPunch, prose:t.prose, fmcAgency:t.fmcAgency, momentum:t.momentum
+    }});
+  });
+  return rows;
+}
+/* Gauss–Jordan with partial pivoting. Five unknowns; no library for this. */
+function solveLinear(A, b){
+  var n = b.length, i, j, k, M = A.map(function(r, ri){ return r.slice().concat([b[ri]]); });
+  for(i = 0; i < n; i++){
+    var piv = i;
+    for(k = i + 1; k < n; k++) if(Math.abs(M[k][i]) > Math.abs(M[piv][i])) piv = k;
+    if(Math.abs(M[piv][i]) < 1e-12) return null;
+    var tmp = M[i]; M[i] = M[piv]; M[piv] = tmp;
+    var d = M[i][i];
+    for(j = i; j <= n; j++) M[i][j] /= d;
+    for(k = 0; k < n; k++){
+      if(k === i) continue;
+      var f = M[k][i];
+      if(!f) continue;
+      for(j = i; j <= n; j++) M[k][j] -= f * M[i][j];
+    }
+  }
+  return M.map(function(r){ return r[n]; });
+}
+var ORACLE_RIDGE = 0.05, ORACLE_MIN_ROWS = 8;
+/* Ridge on the four slopes only. Penalising the intercept would drag every
+   prediction toward zero rather than toward her average. */
+function oracleFit(rows){
+  var ms = ORACLE.model.momentumScale, n = 5, i, j, r;
+  var X = rows.map(function(row){
+    return [row.tags.gutPunch / 5, row.tags.prose / 5, row.tags.fmcAgency / 5,
+            (ms[row.tags.momentum] || 0), 1];
+  });
+  var y = rows.map(function(row){ return row.y; });
+  var A = [], bv = [];
+  for(i = 0; i < n; i++){
+    A.push([]);
+    for(j = 0; j < n; j++){
+      var sum = 0;
+      for(r = 0; r < X.length; r++) sum += X[r][i] * X[r][j];
+      if(i === j && i < 4) sum += ORACLE_RIDGE;
+      A[i].push(sum);
+    }
+    var sy = 0;
+    for(r = 0; r < X.length; r++) sy += X[r][i] * y[r];
+    bv.push(sy);
+  }
+  var sol = solveLinear(A, bv);
+  if(!sol) return null;
+  for(i = 0; i < n; i++) if(!isFinite(sol[i])) return null;
+  return {gutPunch:sol[0], prose:sol[1], fmcAgency:sol[2], momentum:sol[3], intercept:sol[4]};
+}
+function oracleWeightsNow(){
+  var w = oracleWeights();
+  return {gutPunch:w.gutPunch, prose:w.prose, fmcAgency:w.fmcAgency,
+          momentum:w.momentum, intercept:oracleIntercept()};
+}
+/* Plain language, not a table of deltas: what moved and what that means. */
+function oracleMoveReport(before, after, rows){
+  var names = {gutPunch:"emotional impact", prose:"prose", fmcAgency:"the heroine's agency",
+               momentum:"momentum", intercept:"the baseline"};
+  var keys = ["gutPunch","prose","fmcAgency","momentum"];
+  var moved = keys.map(function(k){
+    return {k:k, d:after[k] - before[k], was:before[k], now:after[k]};
+  }).sort(function(a, b){ return Math.abs(b.d) - Math.abs(a.d); });
+  var anchors = rows.filter(function(r){ return r.source === "anchor"; }).length;
+  var mine = rows.length - anchors;
+  var out = ["Refitted on " + rows.length + " rated " + (rows.length === 1 ? "book" : "books") +
+    " (" + anchors + " from the shipped set" + (mine ? ", " + mine + " of your own" : "") + ")."];
+  var big = moved.filter(function(m){ return Math.abs(m.d) >= 0.02; });
+  if(!big.length){
+    out.push("Nothing moved much — your ratings already agree with the weights you had.");
+  } else {
+    big.slice(0, 3).forEach(function(m){
+      out.push((m.d > 0 ? "The Oracle now leans harder on " : "The Oracle now leans less on ") +
+        names[m.k] + " (" + m.was.toFixed(2) + " → " + m.now.toFixed(2) + ").");
+    });
+    var top = moved[0];
+    out.push("In practice that means books strong on " + names[top.k] +
+      (top.d > 0 ? " will be offered sooner." : " will no longer jump the queue."));
+  }
+  var db = after.intercept - before.intercept;
+  if(Math.abs(db) >= 0.05){
+    out.push("The baseline " + (db > 0 ? "rose" : "fell") + " by " + Math.abs(db).toFixed(2) +
+      ", so every prediction shifts " + (db > 0 ? "up" : "down") + " a little.");
+  }
+  return out;
+}
+function oracleOut(text, cls){
+  var el = byId("orOut");
+  if(!el) return;
+  el.className = "or-out" + (cls ? " " + cls : "");
+  el.innerHTML = text;
+}
+function recalibrateOracle(){
+  var rows = oracleFitRows();
+  if(rows.length < ORACLE_MIN_ROWS){
+    oracleOut("Not enough to fit on yet: " + rows.length + " rated " +
+      (rows.length === 1 ? "book" : "books") + ", and it needs " + ORACLE_MIN_ROWS +
+      ". Rate books the Oracle gave you as Read or Did not finish, with an Overall rating, " +
+      "and it will have " + (ORACLE_MIN_ROWS - rows.length) + " more.", "warn");
+    return;
+  }
+  var before = oracleWeightsNow();
+  var after = oracleFit(rows);
+  if(!after){
+    oracleOut("Those ratings do not pin the weights down — they are too alike to tell the " +
+      "dimensions apart. Nothing changed.", "warn");
+    return;
+  }
+  oracleState().weights = after;
+  savePrefs();
+  oracleOut(oracleMoveReport(before, after, rows).map(function(l){
+    return "<span>" + esc(l) + "</span>";
+  }).join(""), "");
+  if(byId("oracleCard") && oracleCurrent) redrawOracleScore();
+}
+function resetOracleWeights(){
+  var o = oracleState();
+  if(!o.weights){
+    oracleOut("Already on the shipped weights.", "");
+    return;
+  }
+  o.weights = null;
+  savePrefs();
+  oracleOut("Back to the shipped weights: impact " + ORACLE.model.weights.gutPunch.toFixed(2) +
+    ", prose " + ORACLE.model.weights.prose.toFixed(2) +
+    ", agency " + ORACLE.model.weights.fmcAgency.toFixed(2) +
+    ", momentum " + ORACLE.model.weights.momentum.toFixed(2) + ".", "");
+  if(byId("oracleCard") && oracleCurrent) redrawOracleScore();
 }
 
 /* ---------------- shelf items ---------------- */
@@ -2718,6 +3493,27 @@ function openSettings(){
         '<input type="text" id="newSec" placeholder="Content warnings, Re-read notes…">' +
         '<button class="btn small ghost" id="addSec" type="button">Add</button>' +
       "</div></div>" +
+    (ORACLE ?
+      '<div class="page-rule"></div>' +
+      "<h4>The Oracle</h4>" +
+      '<p class="hint" style="margin:0 0 10px;font-size:.84rem">The Oracle predicts a rating from four ' +
+        'dimensions. Recalibrating re-fits those four against every book you have rated, so it learns ' +
+        'your taste rather than the shipped one. It never does this on its own.</p>' +
+      '<div class="grad-line">' +
+        '<button class="btn small" id="orRecal" type="button">Recalibrate</button>' +
+        '<button class="btn small ghost" id="orResetW" type="button">Reset to shipped weights</button>' +
+      "</div>" +
+      '<p class="or-out" id="orOut"><span>' +
+        (oracleState().weights
+          ? "Running on weights fitted to your own ratings."
+          : "Running on the shipped weights.") + "</span></p>" +
+      '<label class="toggle" for="orFilterCSA" style="padding-bottom:0">' +
+        '<input type="checkbox" id="orFilterCSA"' +
+        (oracleState().filters[BLOCKED_BY_DEFAULT] ? " checked" : "") +
+        ">Never offer books flagged for child sexual abuse</label>" +
+      '<p class="hint" style="margin:6px 0 0;font-size:.84rem">On by default. Filtered books are removed ' +
+        'from the pool silently — the Oracle will not tell you what it withheld.</p>'
+    : "") +
     '<div class="sheet-actions">' +
       '<button class="btn ghost" id="addCat" type="button">Add category</button>' +
       '<button class="btn" id="setClose" type="button">Done</button>' +
@@ -2797,6 +3593,16 @@ function openSettings(){
     if(e.key === "Enter"){ e.preventDefault(); addDefaultSection(); }
   });
 
+  if(ORACLE){
+    byId("orRecal").addEventListener("click", recalibrateOracle);
+    byId("orResetW").addEventListener("click", resetOracleWeights);
+    byId("orFilterCSA").addEventListener("change", function(){
+      var o = oracleState();
+      if(this.checked) o.filters[BLOCKED_BY_DEFAULT] = true;
+      else delete o.filters[BLOCKED_BY_DEFAULT];
+      savePrefs();
+    });
+  }
   byId("globalDots").addEventListener("change", function(){
     state.statusDots.show = this.checked;
     savePrefs(); render();
@@ -3821,6 +4627,11 @@ byId("restorePlates").addEventListener("click", function(){
   savePrefs(); render();
 });
 byId("setBtn").addEventListener("click", function(){ clearUndo(); openSettings(); });
+/* No catalogue, no Oracle: the button stays hidden and nothing else changes. */
+if(ORACLE){
+  byId("oracleBtn").hidden = false;
+  byId("oracleBtn").addEventListener("click", function(){ clearUndo(); openOracle(); });
+}
 byId("exportBtn").addEventListener("click", exportLibrary);
 byId("importBtn").addEventListener("click", importLibrary);
 byId("addBtn").addEventListener("click", function(){
@@ -3836,7 +4647,9 @@ byId("addBtn").addEventListener("click", function(){
 });
 document.addEventListener("keydown", function(e){
   if(e.key !== "Escape") return;
-  if(byId("bulkOverlay")) closeBulk();
+  if(byId("oracleFixOverlay")) closeOracleFix();
+  else if(byId("oracleOverlay")) closeOracle();
+  else if(byId("bulkOverlay")) closeBulk();
   else if(byId("setOverlay")) closeSettings();
   else if(byId("bookOverlay")) closeBook();
 });
@@ -3893,6 +4706,7 @@ if(window.claude && window.claude.use){
           state.shelfPlates = normPlates(d.shelfPlates);
           byId("platesOn").checked = state.shelfPlates.show;
         }
+        if(d.oracle !== undefined) state.oracle = normOracle(d.oracle);
         if(d.groupLayout !== undefined) state.groupLayout = normLayoutMap(d.groupLayout);
         if(d.defaultGroupLayout !== undefined){
           state.defaultGroupLayout = normLayout(d.defaultGroupLayout, "shelf");

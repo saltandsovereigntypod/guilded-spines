@@ -943,6 +943,113 @@ input[type=range]{
   .bulk-row{grid-template-columns:1fr;gap:7px}
 }
 
+/* ---------- the Oracle ---------- */
+.oracle-card{
+  width:min(560px,100%);margin:auto;
+  background:linear-gradient(180deg,var(--velvet-2),var(--night));
+  border:1px solid var(--hair);border-radius:4px;
+  box-shadow:0 30px 70px rgba(0,0,0,.8);padding:24px 24px 20px;
+  animation:openBook .4s cubic-bezier(.2,.8,.25,1) both;
+}
+.or-eyebrow{
+  font-family:var(--f-display);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gilt-dim);margin:0 0 10px;display:flex;align-items:center;gap:8px;
+}
+.or-eyebrow i{flex:1;height:1px;background:linear-gradient(90deg,var(--hair),transparent)}
+.or-head{display:flex;gap:14px;align-items:flex-start}
+.or-titles{flex:1 1 auto;min-width:0}
+.or-title{
+  font-family:var(--f-display);font-weight:600;font-size:1.22rem;line-height:1.2;
+  letter-spacing:.02em;color:var(--parchment);margin:0;text-wrap:balance;
+}
+.or-by{font-family:var(--f-body);font-style:italic;font-size:1rem;color:var(--dim);margin:3px 0 0}
+.or-meta{font-family:var(--f-data);font-size:.76rem;color:var(--dimmer);margin:5px 0 0;letter-spacing:.04em}
+.or-score{
+  flex:0 0 auto;text-align:center;min-width:76px;padding:7px 10px 6px;
+  border:1px solid var(--hair);border-radius:3px;background:rgba(7,6,11,.5);
+}
+.or-score b{
+  display:block;font-family:var(--f-display);font-weight:600;font-size:1.6rem;line-height:1;
+  color:var(--gilt-bright);text-shadow:0 0 18px rgba(201,162,76,.35);
+}
+.or-score span{
+  display:block;margin-top:4px;font-family:var(--f-display);font-size:.46rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gilt-dim);line-height:1.35;
+}
+.or-hook{font-size:1rem;line-height:1.6;color:var(--parchment-2);margin:14px 0 0}
+.or-h{
+  font-family:var(--f-display);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gilt);margin:16px 0 7px;display:block;
+}
+.or-h.soft{color:var(--amber)}
+.or-fit{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.or-fit li{
+  font-family:var(--f-body);font-size:.95rem;line-height:1.5;color:var(--parchment-2);
+  padding-left:14px;position:relative;
+}
+.or-fit li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--gilt-dim)}
+.or-caution{
+  font-family:var(--f-body);font-size:.95rem;line-height:1.55;color:var(--dim);
+  margin:0;padding:10px 12px;border-left:2px solid var(--amber);
+  background:rgba(180,129,60,.08);border-radius:0 2px 2px 0;
+}
+.or-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.or-chip{
+  font-family:var(--f-data);font-size:.74rem;letter-spacing:.04em;
+  color:var(--parchment-2);background:rgba(7,6,11,.6);
+  border:1px solid var(--hair-soft);border-radius:2px;padding:3px 8px;
+}
+.or-chip.crowd{color:var(--dim);border-style:dashed}
+.or-chip.flag{color:var(--amber);border-color:rgba(180,129,60,.34)}
+details.or-fold{margin-top:10px;border:1px solid var(--hair-soft);border-radius:2px;background:rgba(7,6,11,.34)}
+details.or-fold > summary{
+  list-style:none;cursor:pointer;padding:8px 11px;
+  font-family:var(--f-display);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gilt-dim);
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+details.or-fold > summary::-webkit-details-marker{display:none}
+details.or-fold > summary::after{content:"+";font-family:var(--f-data);font-size:1rem;color:var(--gilt-dim)}
+details.or-fold[open] > summary::after{content:"\2013"}
+.or-fold-body{padding:2px 11px 12px}
+.or-math{width:100%;border-collapse:collapse;font-family:var(--f-data);font-size:.76rem;color:var(--dim)}
+.or-math th{
+  text-align:right;font-weight:400;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gilt-dim);padding:0 0 5px;border-bottom:1px solid var(--hair-soft);
+}
+.or-math th:first-child{text-align:left}
+.or-math td{padding:4px 0;text-align:right;font-variant-numeric:tabular-nums}
+.or-math td:first-child{text-align:left;color:var(--parchment-2)}
+.or-math tr.sum td{border-top:1px solid var(--hair-soft);color:var(--gilt-bright)}
+.or-math tr.sum td:first-child{color:var(--gilt)}
+.or-cw{font-family:var(--f-body);font-size:.92rem;line-height:1.55;color:var(--dim);margin:8px 0 0}
+.or-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;border-top:1px solid var(--hair-soft);padding-top:16px}
+.or-actions .btn{flex:1 1 auto}
+.or-legend{font-family:var(--f-data);font-size:.74rem;color:var(--dimmer);line-height:1.5;margin:9px 0 0}
+.or-empty{font-family:var(--f-body);font-style:italic;color:var(--dim);margin:14px 0 0;line-height:1.6}
+
+.or-fixrow{
+  display:grid;grid-template-columns:minmax(74px,1fr) auto;gap:10px;align-items:center;
+  padding:8px 0;border-top:1px solid var(--hair-soft);
+}
+.or-fixrow .nm{font-family:var(--f-data);font-size:.84rem;color:var(--parchment-2)}
+.or-fixrow .nm b{display:block;font-family:var(--f-display);font-size:.5rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gilt-dim);font-weight:500;margin-top:2px}
+.or-fixrow .seg button{padding:5px 8px;font-size:.5rem}
+.or-note{width:100%;min-height:70px;resize:vertical;margin-top:4px}
+.or-out{font-family:var(--f-data);font-size:.82rem;color:var(--dim);line-height:1.5;margin:9px 0 0;min-height:1.2em}
+.or-out span{display:block}
+.or-out span+span{margin-top:4px}
+.or-out.warn{color:var(--gilt-dim)}
+
+@media (max-width:480px){
+  .oracle-card{padding:18px 15px 16px}
+  .or-head{flex-direction:column-reverse;align-items:stretch;gap:10px}
+  .or-score{display:flex;align-items:baseline;gap:9px;justify-content:flex-start;min-width:0;text-align:left}
+  .or-score b{font-size:1.35rem}
+  .or-score span{margin-top:0}
+  .or-actions .btn{flex:1 1 100%}
+}
+
 /* ---------- responsive ---------- */
 @media (max-width:760px){
   .spread{grid-template-columns:1fr;border-radius:4px}
@@ -963,6 +1070,7 @@ input[type=range]{
 </head>
 <body>
 <script>window.__GILDED_SEED__ = {"a-deal-with-the-devil":{"addedAt":1757000028000,"author":"S. T. Abby","description":"","favorite":false,"id":"a-deal-with-the-devil","notes":"","progress":100,"quotes":"","ratings":{"impact":3,"overall":4,"spice":2},"series":"The Mindf*ck","seriesNumber":1,"spineColor":"#153A3E","status":"read","theories":"","title":"A Deal With The Devil"},"a-great-and-terrible-beauty":{"addedAt":1757000022000,"author":"Libba Bray","description":"","favorite":false,"id":"a-great-and-terrible-beauty","notes":"","progress":100,"quotes":"","ratings":{"overall":4,"spice":0},"series":"Gemma Doyle Trilogy","seriesNumber":1,"spineColor":"#33253F","status":"read","theories":"","title":"A Great and Terrible Beauty"},"a-kingdom-of-flesh-and-fire":{"addedAt":1757000020000,"author":"Jennifer L. Armentrout","description":"","favorite":false,"id":"a-kingdom-of-flesh-and-fire","notes":"","progress":100,"quotes":"","ratings":{},"series":"From Blood & Ash","seriesNumber":2,"spineColor":"#22403A","status":"read","theories":"","title":"A Kingdom of Flesh and Fire"},"a-soul-to-keep":{"addedAt":1757000016000,"author":"Opal Reyne","description":"","favorite":false,"id":"a-soul-to-keep","notes":"","progress":100,"quotes":"","ratings":{"overall":3,"spice":3},"series":"Duskwalker Brides","seriesNumber":1,"status":"read","theories":"","title":"A Soul To Keep"},"all-the-lies":{"addedAt":1757000029000,"author":"S. T. Abby","description":"","favorite":false,"id":"all-the-lies","notes":"","progress":100,"quotes":"","ratings":{"impact":3,"overall":4,"spice":2},"series":"The Mindf*ck","seriesNumber":2,"spineColor":"#153A3E","status":"read","theories":"","title":"All The Lies"},"black-sheep":{"addedAt":1757000043000,"author":"Alexa Harlowe & Brynne Weaver","description":"Serial killer Bria and a psychologist hunting the same cult leader.","favorite":false,"id":"black-sheep","notes":"From the Sept 2026 rec list.","progress":0,"quotes":"","ratings":{},"series":"","seriesNumber":null,"status":"want","theories":"","title":"Black Sheep"},"brimstone":{"addedAt":1757000018000,"author":"Callie Hart","description":"Saeris is queen of the Blood Court now, navigating royal duties while protecting her homeland.","favorite":false,"id":"brimstone","notes":"","progress":0,"quotes":"","ratings":{},"series":"Fae & Alchemy","seriesNumber":2,"spineColor":"#2A4436","status":"want","theories":"","title":"Brimstone"},"broken-dove":{"addedAt":1757000037000,"author":"Dani Francis","description":"","favorite":false,"id":"broken-dove","notes":"","progress":8,"quotes":"","ratings":{},"series":"Silver Elite","seriesNumber":2,"spineColor":"#2C3A52","status":"reading","theories":"","title":"Broken Dove"},"butcher-and-blackbird":{"addedAt":1757000033000,"author":"Brynne Weaver","description":"","favorite":true,"id":"butcher-and-blackbird","notes":"Slow but delicious burn","progress":100,"quotes":"","ratings":{"overall":4.5,"spice":3},"series":"The Ruinous Love Trilogy","seriesNumber":1,"spineColor":"#4A1F2E","status":"read","theories":"","title":"Butcher & Blackbird"},"caught-up":{"addedAt":1757000026000,"author":"Navessa Allen","description":"","favorite":false,"id":"caught-up","notes":"It was decent.","progress":100,"quotes":"","ratings":{"impact":1,"overall":3,"spice":3},"series":"Into Darkness","seriesNumber":2,"spineColor":"#1F3348","status":"read","theories":"","title":"Caught Up"},"fourth-wing":{"addedAt":1757000001000,"author":"Rebecca Yarros","description":"","favorite":true,"id":"fourth-wing","notes":"Liam's last line is on my body — \"it's been. My honor.\" — with a red dagger tail next to it.","progress":100,"quotes":"It's been. My honor.","ratings":{"overall":5},"series":"The Empyrean","seriesNumber":1,"spineColor":"#1B2A44","status":"read","theories":"","title":"Fourth Wing"},"from-blood-and-ash":{"addedAt":1757000019000,"author":"Jennifer L. Armentrout","description":"","favorite":false,"id":"from-blood-and-ash","notes":"","progress":100,"quotes":"","ratings":{"impact":2,"overall":2.5,"spice":2},"series":"From Blood & Ash","seriesNumber":1,"spineColor":"#22403A","status":"read","theories":"","title":"From Blood & Ash"},"haunting-adeline":{"addedAt":1757000009000,"author":"H. D. Carlton","description":"","favorite":false,"id":"haunting-adeline","notes":"It's only hot in books 😬","progress":100,"quotes":"","ratings":{"impact":2,"overall":4,"spice":4},"series":"Cat & Mouse Duet","seriesNumber":1,"spineColor":"#5A2330","status":"read","theories":"","title":"Haunting Adeline"},"house-of-earth-and-blood":{"addedAt":1757000013000,"author":"Sarah J. Maas","description":"","favorite":true,"id":"house-of-earth-and-blood","notes":"Loved.","progress":100,"quotes":"","ratings":{"impact":4,"overall":4,"spice":2},"series":"Crescent City","seriesNumber":1,"spineColor":"#4A3520","status":"read","theories":"","title":"House of Earth & Blood"},"house-of-flame-and-shadow":{"addedAt":1757000015000,"author":"Sarah J. Maas","description":"","favorite":false,"id":"house-of-flame-and-shadow","notes":"","progress":100,"quotes":"","ratings":{"overall":3},"series":"Crescent City","seriesNumber":3,"spineColor":"#4A3520","status":"read","theories":"","title":"House of Flame & Shadow"},"house-of-sky-and-breath":{"addedAt":1757000014000,"author":"Sarah J. Maas","description":"","favorite":false,"id":"house-of-sky-and-breath","notes":"","progress":100,"quotes":"","ratings":{"overall":3},"series":"Crescent City","seriesNumber":2,"spineColor":"#4A3520","status":"read","theories":"","title":"House of Sky & Breath"},"hunting-adeline":{"addedAt":1757000010000,"author":"H. D. Carlton","description":"","favorite":false,"id":"hunting-adeline","notes":"The middle was ROUGH","progress":100,"quotes":"","ratings":{},"series":"Cat & Mouse Duet","seriesNumber":2,"spineColor":"#5A2330","status":"read","theories":"","title":"Hunting Adeline"},"iron-flame":{"addedAt":1757000002000,"author":"Rebecca Yarros","description":"","favorite":true,"id":"iron-flame","notes":"","progress":100,"quotes":"","ratings":{"overall":5},"series":"The Empyrean","seriesNumber":2,"spineColor":"#1B2A44","status":"read","theories":"","title":"Iron Flame"},"leather-and-lark":{"addedAt":1757000034000,"author":"Brynne Weaver","description":"","favorite":false,"id":"leather-and-lark","notes":"","progress":25,"quotes":"","ratings":{"overall":3,"spice":2},"series":"The Ruinous Love Trilogy","seriesNumber":2,"spineColor":"#4A1F2E","status":"paused","theories":"","title":"Leather & Lark"},"lights-out":{"addedAt":1757000025000,"author":"Navessa Allen","description":"","favorite":false,"id":"lights-out","notes":"Laughter and Tears","progress":100,"quotes":"","ratings":{"impact":1,"overall":4,"spice":3},"series":"Into Darkness","seriesNumber":1,"spineColor":"#1F3348","status":"read","theories":"","title":"Lights Out"},"marrow":{"addedAt":1757000042000,"author":"Trisha Wolfe & Brynne Weaver","description":"Two killers hiding in plain sight, enemies-to-lovers. A Weaver co-write — the Butcher & Blackbird voice on the Mindf*ck premise.","favorite":false,"id":"marrow","notes":"From the Sept 2026 rec list — the most on-target book on it.","progress":0,"quotes":"","ratings":{},"series":"","seriesNumber":null,"status":"want","theories":"","title":"Marrow"},"ninth-house":{"addedAt":1757000039000,"author":"Leigh Bardugo","description":"Alex Stern is the most dangerous thing in a room full of Yale occultists, and the Alex/Darlington burn runs unresolved across two entire books. Gothic, adult, excellent prose.","favorite":false,"id":"ninth-house","notes":"From the Sept 2026 rec list.","progress":0,"quotes":"","ratings":{},"series":"Alex Stern","seriesNumber":1,"spineColor":"#2E2240","status":"want","theories":"","title":"Ninth House"},"onyx-storm":{"addedAt":1757000003000,"author":"Rebecca Yarros","description":"","favorite":true,"id":"onyx-storm","notes":"","progress":100,"quotes":"","ratings":{"overall":5},"series":"The Empyrean","seriesNumber":3,"spineColor":"#1B2A44","status":"read","theories":"","title":"Onyx Storm"},"peculiar-stars":{"addedAt":1757000005000,"author":"Rebecca Yarros","description":"Yarros standalone, out 17 November 2026. Slow-burn island survival romance — Callista and Dominic. Not Empyrean.","favorite":false,"id":"peculiar-stars","notes":"","progress":0,"quotes":"","ratings":{},"series":"","seriesNumber":null,"status":"want","theories":"","title":"Peculiar Stars"},"quicksilver":{"addedAt":1757000017000,"author":"Callie Hart","description":"","favorite":false,"id":"quicksilver","notes":"","progress":100,"quotes":"","ratings":{"overall":3.5,"spice":2},"series":"Fae & Alchemy","seriesNumber":1,"spineColor":"#2A4436","status":"read","theories":"","title":"Quicksilver"},"rebel-angels":{"addedAt":1757000023000,"author":"Libba Bray","description":"","favorite":false,"id":"rebel-angels","notes":"","progress":100,"quotes":"","ratings":{"overall":4,"spice":0},"series":"Gemma Doyle Trilogy","seriesNumber":2,"spineColor":"#33253F","status":"read","theories":"","title":"Rebel Angels"},"scarlet-angel":{"addedAt":1757000030000,"author":"S. T. Abby","description":"","favorite":false,"id":"scarlet-angel","notes":"","progress":100,"quotes":"","ratings":{"impact":3,"overall":4,"spice":2},"series":"The Mindf*ck","seriesNumber":3,"spineColor":"#153A3E","status":"read","theories":"","title":"Scarlet Angel"},"scythe-and-sparrow":{"addedAt":1757000035000,"author":"Brynne Weaver","description":"Widely held to be the best of the three — worth skipping book two for.","favorite":false,"id":"scythe-and-sparrow","notes":"","progress":0,"quotes":"","ratings":{},"series":"The Ruinous Love Trilogy","seriesNumber":3,"spineColor":"#4A1F2E","status":"want","theories":"","title":"Scythe & Sparrow"},"silver-elite":{"addedAt":1757000036000,"author":"Dani Francis","description":"A psychic hiding what she is infiltrates an elite military training programme to strike at the regime from inside.","favorite":false,"id":"silver-elite","notes":"Decent, enjoyed it enough to finish, but it felt immaturely written. Wasn't emotionally attached to anyone — didn't care when Cane died or when Lidy gave her up. The sexual tension was the part that worked, and that's how I figured out I love sexual tension.","progress":100,"quotes":"","ratings":{},"series":"Silver Elite","seriesNumber":1,"spineColor":"#2C3A52","status":"read","theories":"","title":"Silver Elite"},"six-of-crows":{"addedAt":1757000038000,"author":"Leigh Bardugo","description":"Six people you get attached to, a heist that keeps them in constant danger, and Kaz and Inej running the most famous can't-touch-each-other burn in the genre at zero spice. A loss in book two. Duology, complete.","favorite":false,"id":"six-of-crows","notes":"Top of the Sept 2026 rec list — closest structural match to why Empyrean is a 5.","progress":0,"quotes":"","ratings":{},"series":"Six of Crows","seriesNumber":1,"spineColor":"#2E2240","status":"want","theories":"","title":"Six of Crows"},"the-bone-witch":{"addedAt":1757000006000,"author":"Rin Chupeco","description":"","favorite":false,"id":"the-bone-witch","notes":"So. Freaking. Good.","progress":100,"quotes":"","ratings":{"impact":2,"overall":4,"spice":0},"series":"Bone Witch Trilogy","seriesNumber":1,"spineColor":"#3E2A4A","status":"read","theories":"","title":"The Bone Witch"},"the-coven":{"addedAt":1757000012000,"author":"Harper L. Woods","description":"","favorite":false,"id":"the-coven","notes":"","progress":100,"quotes":"","ratings":{"overall":3},"series":"Coven of Bones","seriesNumber":1,"status":"read","theories":"","title":"The Coven"},"the-crown-of-gilded-bones":{"addedAt":1757000021000,"author":"Jennifer L. Armentrout","description":"","favorite":false,"id":"the-crown-of-gilded-bones","notes":"This is the one I remember quitting around halfway — tracker says finished. Fix whichever is right.","progress":100,"quotes":"","ratings":{"overall":2,"spice":2},"series":"From Blood & Ash","seriesNumber":3,"spineColor":"#22403A","status":"read","theories":"","title":"The Crown of Gilded Bones"},"the-cruel-prince":{"addedAt":1757000041000,"author":"Holly Black","description":"Jude is a mortal girl in Faerie who chooses violence — stabbings, poisonings, a coup. She and Cardan spend two books not touching.","favorite":false,"id":"the-cruel-prince","notes":"From the Sept 2026 rec list.","progress":0,"quotes":"","ratings":{},"series":"The Folk of the Air","seriesNumber":1,"status":"want","theories":"","title":"The Cruel Prince"},"the-heart-forger":{"addedAt":1757000007000,"author":"Rin Chupeco","description":"","favorite":false,"id":"the-heart-forger","notes":"So. Freaking. Good.","progress":100,"quotes":"","ratings":{"impact":3,"overall":4,"spice":0},"series":"Bone Witch Trilogy","seriesNumber":2,"spineColor":"#3E2A4A","status":"read","theories":"","title":"The Heart Forger"},"the-risk":{"addedAt":1757000031000,"author":"S. T. Abby","description":"","favorite":false,"id":"the-risk","notes":"","progress":100,"quotes":"","ratings":{"impact":3,"overall":4,"spice":2},"series":"The Mindf*ck","seriesNumber":5,"spineColor":"#153A3E","status":"read","theories":"","title":"The Risk"},"the-ritual":{"addedAt":1757000027000,"author":"Shantel Tessier","description":"","favorite":false,"id":"the-ritual","notes":"","progress":100,"quotes":"","ratings":{"overall":3,"spice":3},"series":"L.O.R.D.S","seriesNumber":1,"status":"read","theories":"","title":"The Ritual"},"the-serpent-and-the-wings-of-night":{"addedAt":1757000032000,"author":"Carissa Broadbent","description":"","favorite":false,"id":"the-serpent-and-the-wings-of-night","notes":"","progress":100,"quotes":"","ratings":{"overall":3,"spice":2},"series":"The Nightborn Duet","seriesNumber":1,"status":"read","theories":"","title":"The Serpent & the Wings of Night"},"the-shadow-glass":{"addedAt":1757000008000,"author":"Rin Chupeco","description":"","favorite":false,"id":"the-shadow-glass","notes":"They deserved a happily ever after…","progress":100,"quotes":"","ratings":{"impact":3.5,"overall":4,"spice":0},"series":"Bone Witch Trilogy","seriesNumber":3,"spineColor":"#3E2A4A","status":"read","theories":"","title":"The Shadow Glass"},"the-sweet-far-thing":{"addedAt":1757000024000,"author":"Libba Bray","description":"","favorite":false,"id":"the-sweet-far-thing","notes":"","progress":100,"quotes":"","ratings":{"overall":4,"spice":0},"series":"Gemma Doyle Trilogy","seriesNumber":3,"spineColor":"#33253F","status":"read","theories":"","title":"The Sweet Far Thing"},"these-violent-delights":{"addedAt":1757000040000,"author":"Chloe Gong","description":"1920s Shanghai, rival gang heirs who used to be in love. Juliette carries knives and uses them. Duology, complete.","favorite":false,"id":"these-violent-delights","notes":"From the Sept 2026 rec list.","progress":0,"quotes":"","ratings":{},"series":"These Violent Delights","seriesNumber":1,"status":"want","theories":"","title":"These Violent Delights"},"they-never-learn":{"addedAt":1757000044000,"author":"Layne Fargo","description":"A university professor who quietly kills predatory men. Dual timeline, literary prose, real emotional weight. Standalone.","favorite":false,"id":"they-never-learn","notes":"From the Sept 2026 rec list — best shot at moving the impact number.","progress":0,"quotes":"","ratings":{},"series":"","seriesNumber":null,"status":"want","theories":"","title":"They Never Learn"},"threshing-day":{"addedAt":1757000004000,"author":"Rebecca Yarros","description":"Thirteen short stories starring the riders and their dragons. Released 29 September 2026; the deluxe edition has sixteen full-colour illustrations.","favorite":false,"id":"threshing-day","notes":"","progress":0,"quotes":"","ratings":{},"series":"The Empyrean","seriesNumber":3.5,"spineColor":"#1B2A44","status":"want","theories":"","title":"Threshing Day"},"wheres-molly":{"addedAt":1757000011000,"author":"H. D. Carlton","description":"","favorite":false,"id":"wheres-molly","notes":"Meh.","progress":100,"quotes":"","ratings":{},"series":"Cat & Mouse Duet","seriesNumber":3,"spineColor":"#5A2330","status":"read","theories":"","title":"Where's Molly"}};</script>
+<script>window.__GILDED_ORACLE__ = {"version":1,"generated":"2026-09-15","builtFor":"Gilded Spines: the Oracle","model":{"dimensions":["gutPunch","prose","fmcAgency","momentum"],"weights":{"gutPunch":1.2544,"prose":1.3477,"fmcAgency":0.4121,"momentum":1.6292},"intercept":0.6061,"momentumScale":{"immediate":1.0,"fast":0.85,"medium":0.5,"slow":0.15},"rSquared":0.9088,"note":"Weights were fitted by least squares against Ash's own ratings of 31 books she has already read. Predicted values are on her own 0-5 Overall scale. Re-fit whenever she rates something new.","correlations":{"gutPunch":0.861,"fmcAgency":0.795,"momentum":0.747,"prose":0.549,"darkness":0.542,"pov":0.131,"spice":-0.233}},"anchors":[{"id":"fourth-wing","title":"Fourth Wing","author":"Rebecca Yarros","series":"The Empyrean","seriesNumber":1,"year":2023,"ashRating":5,"pov":"dual","momentum":"immediate","fmcAgency":5,"prose":4,"gutPunch":5,"darkness":4,"spice":3},{"id":"iron-flame","title":"Iron Flame","author":"Rebecca Yarros","series":"The Empyrean","seriesNumber":2,"year":2023,"ashRating":5,"pov":"dual","momentum":"fast","fmcAgency":5,"prose":4,"gutPunch":5,"darkness":4,"spice":3},{"id":"onyx-storm","title":"Onyx Storm","author":"Rebecca Yarros","series":"The Empyrean","seriesNumber":3,"year":2025,"ashRating":5,"pov":"multi","momentum":"fast","fmcAgency":5,"prose":4,"gutPunch":5,"darkness":4,"spice":3},{"id":"butcher-and-blackbird","title":"Butcher & Blackbird","author":"Brynne Weaver","series":"The Ruinous Love Trilogy","seriesNumber":1,"year":2023,"ashRating":4.5,"pov":"dual","momentum":"fast","fmcAgency":5,"prose":4,"gutPunch":4,"darkness":4,"spice":3},{"id":"the-bone-witch","title":"The Bone Witch","author":"Rin Chupeco","series":"The Bone Witch","seriesNumber":1,"year":2017,"ashRating":4,"pov":"single-female","momentum":"medium","fmcAgency":5,"prose":5,"gutPunch":4,"darkness":4,"spice":0},{"id":"the-heart-forger","title":"The Heart Forger","author":"Rin Chupeco","series":"The Bone Witch","seriesNumber":2,"year":2018,"ashRating":4,"pov":"single-female","momentum":"medium","fmcAgency":5,"prose":5,"gutPunch":4,"darkness":4,"spice":0},{"id":"the-shadowglass","title":"The Shadowglass","author":"Rin Chupeco","series":"The Bone Witch","seriesNumber":3,"year":2019,"ashRating":4,"pov":"single-female","momentum":"medium","fmcAgency":5,"prose":5,"gutPunch":5,"darkness":4,"spice":0},{"id":"a-great-and-terrible-beauty","title":"A Great and Terrible Beauty","author":"Libba Bray","series":"Gemma Doyle","seriesNumber":1,"year":2003,"ashRating":4,"pov":"single-female","momentum":"medium","fmcAgency":4,"prose":5,"gutPunch":3,"darkness":3,"spice":0},{"id":"rebel-angels","title":"Rebel Angels","author":"Libba Bray","series":"Gemma Doyle","seriesNumber":2,"year":2005,"ashRating":4,"pov":"single-female","momentum":"medium","fmcAgency":4,"prose":5,"gutPunch":3,"darkness":3,"spice":0},{"id":"the-sweet-far-thing","title":"The Sweet Far Thing","author":"Libba Bray","series":"Gemma Doyle","seriesNumber":3,"year":2007,"ashRating":4,"pov":"single-female","momentum":"slow","fmcAgency":4,"prose":5,"gutPunch":4,"darkness":3,"spice":0},{"id":"mindfck-book-one","title":"Mindf*ck Book One","author":"S.T. Abby","series":"Mindf*ck","seriesNumber":1,"year":2017,"ashRating":4,"pov":"dual","momentum":"fast","fmcAgency":5,"prose":3,"gutPunch":4,"darkness":4,"spice":2},{"id":"mindfck-book-five","title":"Mindf*ck Book Five","author":"S.T. Abby","series":"Mindf*ck","seriesNumber":5,"year":2018,"ashRating":4,"pov":"dual","momentum":"fast","fmcAgency":5,"prose":3,"gutPunch":4,"darkness":4,"spice":2},{"id":"house-of-earth-and-blood","title":"House of Earth and Blood","author":"Sarah J. Maas","series":"Crescent City","seriesNumber":1,"year":2020,"ashRating":4,"pov":"multi","momentum":"medium","fmcAgency":4,"prose":4,"gutPunch":4,"darkness":4,"spice":3},{"id":"haunting-adeline","title":"Haunting Adeline","author":"H.D. Carlton","series":"Cat and Mouse Duet","seriesNumber":1,"year":2021,"ashRating":4,"pov":"dual","momentum":"fast","fmcAgency":4,"prose":3,"gutPunch":4,"darkness":5,"spice":4},{"id":"lights-out","title":"Lights Out","author":"Navessa Allen","series":"Into Darkness","seriesNumber":1,"year":2024,"ashRating":4,"pov":"dual","momentum":"fast","fmcAgency":4,"prose":3,"gutPunch":4,"darkness":4,"spice":3},{"id":"hunting-adeline","title":"Hunting Adeline","author":"H.D. Carlton","series":"Cat and Mouse Duet","seriesNumber":2,"year":2022,"ashRating":3.5,"pov":"dual","momentum":"medium","fmcAgency":4,"prose":3,"gutPunch":3,"darkness":5,"spice":4},{"id":"quicksilver","title":"Quicksilver","author":"Callie Hart","series":"Fae & Alchemy","seriesNumber":1,"year":2024,"ashRating":3.5,"pov":"dual","momentum":"medium","fmcAgency":4,"prose":3,"gutPunch":3,"darkness":3,"spice":3},{"id":"the-serpent-and-the-wings-of-night","title":"The Serpent and the Wings of Night","author":"Carissa Broadbent","series":"Crowns of Nyaxia","seriesNumber":1,"year":2022,"ashRating":3,"pov":"single-female","momentum":"medium","fmcAgency":4,"prose":3,"gutPunch":1,"darkness":4,"spice":3},{"id":"house-of-sky-and-breath","title":"House of Sky and Breath","author":"Sarah J. Maas","series":"Crescent City","seriesNumber":2,"year":2022,"ashRating":3,"pov":"multi","momentum":"slow","fmcAgency":4,"prose":4,"gutPunch":3,"darkness":3,"spice":3},{"id":"house-of-flame-and-shadow","title":"House of Flame and Shadow","author":"Sarah J. Maas","series":"Crescent City","seriesNumber":3,"year":2024,"ashRating":3,"pov":"multi","momentum":"slow","fmcAgency":4,"prose":4,"gutPunch":3,"darkness":3,"spice":3},{"id":"the-coven","title":"The Coven","author":"Harper L. Woods","series":"Coven of Bones","seriesNumber":1,"year":2022,"ashRating":3,"pov":"single-female","momentum":"medium","fmcAgency":3,"prose":3,"gutPunch":2,"darkness":4,"spice":4},{"id":"a-soul-to-keep","title":"A Soul To Keep","author":"Opal Reyne","series":"Duskwalker Brides","seriesNumber":1,"year":2022,"ashRating":3,"pov":"dual","momentum":"slow","fmcAgency":3,"prose":3,"gutPunch":3,"darkness":3,"spice":3},{"id":"the-ritual","title":"The Ritual","author":"Shantel Tessier","series":"L.O.R.D.S.","seriesNumber":1,"year":2021,"ashRating":3,"pov":"dual","momentum":"medium","fmcAgency":3,"prose":2,"gutPunch":2,"darkness":4,"spice":4},{"id":"caught-up","title":"Caught Up","author":"Navessa Allen","series":"Into Darkness","seriesNumber":2,"year":2025,"ashRating":3,"pov":"dual","momentum":"medium","fmcAgency":4,"prose":3,"gutPunch":2,"darkness":3,"spice":4},{"id":"leather-and-lark","title":"Leather & Lark","author":"Brynne Weaver","series":"The Ruinous Love Trilogy","seriesNumber":2,"year":2024,"ashRating":3,"pov":"dual","momentum":"slow","fmcAgency":4,"prose":4,"gutPunch":3,"darkness":3,"spice":3},{"id":"silver-elite","title":"Silver Elite","author":"Dani Francis","series":"Silver Elite","seriesNumber":1,"year":2025,"ashRating":3,"pov":"dual","momentum":"medium","fmcAgency":4,"prose":2,"gutPunch":1,"darkness":3,"spice":3},{"id":"from-blood-and-ash","title":"From Blood and Ash","author":"Jennifer L. Armentrout","series":"Blood and Ash","seriesNumber":1,"year":2020,"ashRating":2.5,"pov":"single-female","momentum":"slow","fmcAgency":3,"prose":3,"gutPunch":2,"darkness":3,"spice":3},{"id":"broken-dove","title":"Broken Dove","author":"Dani Francis","series":"Silver Elite","seriesNumber":2,"year":2026,"ashRating":2,"pov":"dual","momentum":"medium","fmcAgency":3,"prose":2,"gutPunch":1,"darkness":3,"spice":3},{"id":"the-crown-of-gilded-bones","title":"The Crown of Gilded Bones","author":"Jennifer L. Armentrout","series":"Blood and Ash","seriesNumber":3,"year":2021,"ashRating":2,"pov":"single-female","momentum":"slow","fmcAgency":3,"prose":3,"gutPunch":2,"darkness":3,"spice":3},{"id":"a-court-of-thorns-and-roses","title":"A Court of Thorns and Roses","author":"Sarah J. Maas","series":"A Court of Thorns and Roses","seriesNumber":1,"year":2015,"ashRating":2,"pov":"single-female","momentum":"slow","fmcAgency":2,"prose":3,"gutPunch":2,"darkness":3,"spice":3},{"id":"fireborne","title":"Fireborne","author":"Rosaria Munda","series":"The Aurelian Cycle","seriesNumber":1,"year":2019,"ashRating":2,"pov":"dual","momentum":"slow","fmcAgency":4,"prose":3,"gutPunch":2,"darkness":3,"spice":1}],"catalog":[{"id":"a-dowry-of-blood","title":"A Dowry of Blood","author":"S.T. Gibson","series":"A Dowry of Blood","seriesNumber":1,"year":2021,"seriesStatus":"ongoing","setting":"gothic","pov":"single-female","povNote":"second person epistolary, written by Constanta as a long letter addressed to the husband she killed","spice":3,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":5,"tropes":["Dracula's brides retelling","polyamorous triad","escaping an abuser","immortal decadence","revenge"],"contentWarnings":["intimate partner abuse and gaslighting","sadomasochism","blood and gore","self-harm","murder","plague and famine","references to sexual assault"],"goodreadsRating":3.91,"hook":"Dracula's first bride writes to her dead husband across five centuries, recounting how he made her, isolated her, and how she and his other two consorts finally ended him.","comps":["Haunting Adeline","Silver Under Nightfall"],"caution":"It is the closest thing here to dark romance and it is short, but the second-person letter format keeps the reader at arm's length and it summarizes centuries rather than dramatizing scenes, so it can feel like a beautiful synopsis instead of a story.","tagConfidence":"high","lanes":["craft","romantasy"],"momentum":"immediate","unreleased":false,"flags":["domestic-abuse","heavy-gore","self-harm","sexual-assault"],"predicted":4.92},{"id":"daughter-of-smoke-and-bone","title":"Daughter of Smoke & Bone","author":"Laini Taylor","series":"Daughter of Smoke & Bone","seriesNumber":1,"year":2011,"seriesStatus":"complete","setting":"historical fantasy","pov":"multi","povNote":"third person centered on Karou, opening out to Akiva and a long past-life section in the back half","spice":1,"fmcAgency":4,"prose":5,"gutPunch":5,"darkness":4,"tropes":["star-crossed lovers","angels versus demons","hidden identity","reincarnation","secret errands for a monster father figure"],"contentWarnings":["war and genocide","torture","slavery","character death","body horror","attempted assault"],"goodreadsRating":3.99,"hook":"A blue-haired art student in Prague who runs errands collecting teeth for her chimaera family meets the seraph sent to destroy them, and learns what she actually is.","comps":["The Bone Witch","A Great and Terrible Beauty"],"caution":"The prose is the best argument for this lane and the reveal is a genuine gut punch, but the middle third abandons the present-day plot entirely for a long flashback, and Karou's fate is more discovered than chosen, which edges toward the passivity she hated in ACOTAR.","tagConfidence":"high","lanes":["craft"],"momentum":"fast","unreleased":false,"flags":["body-horror","captivity","heavy-gore"],"predicted":4.92},{"id":"the-ballad-of-falling-dragons","title":"The Ballad of Falling Dragons","author":"Sarah A. Parker","series":"Moonfall","seriesNumber":2,"year":2026,"seriesStatus":"ongoing","setting":"a dying world of caged dragons, moon-magic and buried memory","pov":"multi","povNote":"Raeve and Kaan anchor it but the cast widens to five or six narrators, including the antagonist","spice":2,"fmcAgency":4,"prose":4,"gutPunch":5,"darkness":4,"tropes":["dragons","reincarnation and lost memory","fated pair","grief","assassin heroine","kings and brothers"],"contentWarnings":["grief and loss","violence","captivity","animal (dragon) harm","self-destructive behavior"],"goodreadsRating":4.39,"hook":"The second Moonfall book, in which the assassin Raeve confronts what was taken out of her head and the dragons start falling out of the sky.","comps":["Onyx Storm","Iron Flame"],"caution":"Requires When the Moon Hatched (2024) first, and that book's invented dialect and withheld information are a slow, deliberately disorienting on-ramp; the opposite of Fourth Wing's opening chapters.","tagConfidence":"medium","lanes":["new"],"momentum":"immediate","unreleased":false,"flags":["captivity"],"predicted":4.9,"prerequisite":{"needs":"when-the-moon-hatched","needsTitle":"When the Moon Hatched"}},{"id":"sick-fux","title":"Sick Fux","author":"Tillie Cole","series":null,"seriesNumber":null,"year":2017,"seriesStatus":"standalone","setting":"serial killer","pov":"dual","povNote":"dual first-person from two survivors sharing one delusion, so the unreliability is built into both voices","spice":5,"fmcAgency":5,"prose":4,"gutPunch":5,"darkness":5,"tropes":["serial killer couple","revenge on abusers","childhood friends reunited","Alice in Wonderland motif","Joker/Harley dynamic"],"contentWarnings":["graphically depicted child sexual abuse","pedophilia","extreme violence","gore","forced sterilization","blood play"],"goodreadsRating":3.84,"hook":"Two childhood abuse survivors reunite after eleven years apart and go on a revenge spree against the people who destroyed them, narrating it through a shared Wonderland delusion.","comps":["the Mindf*ck series","Butcher & Blackbird"],"caution":"The CSA is depicted on the page in graphic detail, not referenced; this is the one on the list most likely to be a hard stop regardless of how dark she reads.","tagConfidence":"high","lanes":["dark"],"momentum":"fast","unreleased":false,"flags":["child-sexual-abuse","forced-pregnancy","heavy-gore"],"predicted":4.74},{"id":"harvest-season","title":"Harvest Season","author":"Brynne Weaver","series":"The Seasons of Carnage Trilogy","seriesNumber":2,"year":2026,"seriesStatus":"ongoing","setting":"Cape Carnage in the aftermath, with true-crime tourists flooding the town","pov":"multi","povNote":"Harper and Nolan alternate as before, with chapters from the antagonist La Plume opening up the threat from the other side","spice":4,"fmcAgency":5,"prose":4,"gutPunch":4,"darkness":4,"tropes":["established couple under siege","villain POV","cat and mouse with law enforcement","secrets unraveling","cliffhanger"],"contentWarnings":["graphic violence","murder","gore","stalking","explicit sex","cliffhanger ending"],"goodreadsRating":4.11,"hook":"The sequel to Tourist Season, in which the couple's body count catches up with them and a third narrator starts hunting them both.","comps":["Tourist Season","Haunting Adeline"],"caution":"Ends on a hard cliffhanger with book three unpublished, and she has already been burned by waiting on a series (From Blood and Ash); this is a two-book commitment with no landing in sight.","tagConfidence":"high","lanes":["new"],"momentum":"immediate","unreleased":false,"flags":["cliffhanger","heavy-gore"],"predicted":4.73,"prerequisite":{"needs":"tourist-season","needsTitle":"Tourist Season"}},{"id":"house-of-hollow","title":"House of Hollow","author":"Krystal Sutherland","series":null,"seriesNumber":null,"year":2021,"seriesStatus":"standalone","setting":"fairy tale retelling","pov":"single-female","povNote":"first person from Iris, the youngest of three sisters, with interleaved flashbacks to the month they all went missing","spice":1,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":5,"tropes":["three sisters","dark fairy tale","missing person hunt","unreliable memory","monstrous transformation"],"contentWarnings":["body horror and gore","kidnapping","suicide and suicidal ideation","sexual assault","drug and alcohol abuse","self-harm","animal death"],"goodreadsRating":4.0,"hook":"Three sisters who vanished as children and returned unnervingly changed are forced to confront what happened to them when the eldest disappears again, leaving a trail of rot and black flowers through London.","comps":["The Hazel Wood","Mexican Gothic"],"caution":"Under 300 pages and it moves, which suits her, but the romance is negligible and the ending is more unsettling than cathartic, so the gut punch may read as bleak rather than earned.","tagConfidence":"high","lanes":["craft"],"momentum":"fast","unreleased":false,"flags":["animal-harm","body-horror","captivity","heavy-gore","self-harm","sexual-assault"],"predicted":4.67},{"id":"take-me-with-you-jones","title":"Take Me with You","author":"Nina G. Jones","series":null,"seriesNumber":null,"year":2016,"seriesStatus":"standalone","setting":"stalker","pov":"dual","povNote":"dual first-person from the home invader and the woman he takes, his chapters unflinchingly inside his logic","spice":4,"fmcAgency":3,"prose":5,"gutPunch":4,"darkness":5,"tropes":["stalker","captivity","captor/captive","psychopath POV","protective sacrifice"],"contentWarnings":["rape","kidnapping","stalking","murder","child abuse (referenced)","Stockholm dynamics"],"goodreadsRating":3.99,"hook":"A methodical night stalker breaks into a woman's house and she offers herself in place of her disabled brother, beginning a long captivity that neither of them survives unchanged.","comps":["Haunting Adeline","Still Beating"],"caution":"The writing is the best-regarded thing about it, but the FMC spends most of the book without options; after her ACOTAR complaint, a heroine who cannot act is the fastest way to lose her.","tagConfidence":"medium","lanes":["dark"],"momentum":"fast","unreleased":false,"flags":["captivity","child-harm","sexual-assault"],"predicted":4.59},{"id":"heartless-hunter","title":"Heartless Hunter","author":"Kristen Ciccarelli","series":"The Crimson Moth","seriesNumber":1,"year":2024,"seriesStatus":"complete","setting":"post-revolution fantasy","pov":"dual","povNote":"third person alternating between Rune and Gideon, each secretly investigating the other, so the dramatic irony runs both directions from chapter one","spice":2,"fmcAgency":5,"prose":4,"gutPunch":4,"darkness":3,"tropes":["witch hunter and witch","double agent","fake courtship","enemies to lovers","revolution aftermath","brutal cliffhanger"],"contentWarnings":["execution","torture","blood magic and self-cutting","persecution","violence"],"goodreadsRating":4.16,"hook":"A witch posing as a vapid socialite runs rescue missions for condemned witches at night, and starts courting the witch hunter who is closing in on her.","comps":["Serpent & Dove","Fourth Wing"],"caution":"It's marketed and paced as YA: closed door, teenage leads, and a plot that moves fast partly because it's short; after Empyrean and Crescent City the emotional register may feel a size too small.","tagConfidence":"high","lanes":["romantasy"],"momentum":"fast","unreleased":false,"flags":["cliffhanger","heavy-gore"],"predicted":4.48},{"id":"rebel-witch","title":"Rebel Witch","author":"Kristen Ciccarelli","series":"The Crimson Moth","seriesNumber":2,"year":2025,"seriesStatus":"complete","setting":"a post-revolutionary state where witches are hunted, modeled on the Terror","pov":"dual","povNote":"close third alternating between Rune and Gideon, each one certain the other is the mistake they cannot stop making","spice":2,"fmcAgency":5,"prose":4,"gutPunch":4,"darkness":3,"tropes":["spy romance","enemies to lovers","hunter and hunted","double agent","revolution","reluctant alliance"],"contentWarnings":["execution","torture","persecution and genocide analogue","violence","betrayal"],"goodreadsRating":4.18,"hook":"The conclusion of the Crimson Moth duology, in which the vigilante witch and the witch hunter captain who loves her strike a bargain neither can survive keeping.","comps":["Mindf*ck series (for the double life)","The Bone Witch trilogy"],"caution":"Start at Heartless Hunter (2024) or nothing lands, and the duology is shelved YA, so the spice ceiling is roughly where The Bone Witch sat.","tagConfidence":"high","lanes":["new"],"momentum":"fast","unreleased":false,"flags":["heavy-gore"],"predicted":4.48,"prerequisite":{"needs":"heartless-hunter","needsTitle":"Heartless Hunter"}},{"id":"kushiels-dart","title":"Kushiel's Dart","author":"Jacqueline Carey","series":"Kushiel's Legacy","seriesNumber":1,"year":2001,"seriesStatus":"complete","setting":"Terre d'Ange, an alternate Renaissance France where love as thou wilt is law","pov":"single-female","povNote":"first person retrospective; Phedre is telling you this years later, which means she survives, and the tension comes from what it cost","spice":5,"fmcAgency":5,"prose":5,"gutPunch":5,"darkness":5,"tropes":["courtesan spy","political conspiracy","master and pupil","betrayal by a loved one","captivity and escape","BDSM","slow devastating loyalty"],"contentWarnings":["explicit BDSM","sexual content involving a young adult","grooming","sexual assault","slavery","torture","war","major character death"],"goodreadsRating":4.02,"hook":"A courtesan trained as a spy, marked by a god to find pleasure in pain, uncovers the conspiracy that will sell her country to invaders, and is betrayed by the person she trusted most.","comps":["House of Earth and Blood (scope and political machinery)","The Bone Witch trilogy (the retrospective voice)"],"caution":"It is a thousand pages, twenty-five years old, and the first hundred are training and naming conventions before the plot engages, plus the on-page sexual content involving a teenage Phedre is a hard line for a lot of modern readers.","tagConfidence":"high","lanes":["new","romantasy"],"momentum":"medium","unreleased":false,"flags":["captivity","heavy-gore","sexual-assault"],"predicted":4.43},{"id":"the-once-and-future-witches","title":"The Once and Future Witches","author":"Alix E. Harrow","series":null,"seriesNumber":null,"year":2020,"seriesStatus":"standalone","setting":"historical fantasy","pov":"multi","povNote":"rotating third person across the three Eastwood sisters, each with a genuinely distinct register","spice":1,"fmcAgency":5,"prose":5,"gutPunch":5,"darkness":4,"tropes":["three sisters","witch covens","suffrage movement","estranged siblings reconciling","sapphic romance subplot"],"contentWarnings":["child abuse","domestic violence","burning at the stake","miscarriage and childbirth","torture","homophobia","racism"],"goodreadsRating":4.02,"hook":"In an alternate 1893 where witching has been beaten down into nursery rhymes, three estranged sisters reclaim lost magic and fuse it to the women's suffrage movement.","comps":["A Great and Terrible Beauty","The Bone Witch"],"caution":"Winner of the British Fantasy Award and genuinely devastating in the back half, but it is 517 pages, the prose is thick with embedded fairy tales, and the sisters spend the first third apart and prickly.","tagConfidence":"high","lanes":["craft"],"momentum":"medium","unreleased":false,"flags":["child-harm","domestic-abuse","heavy-gore","pregnancy-loss"],"predicted":4.43},{"id":"divine-rivals","title":"Divine Rivals","author":"Rebecca Ross","series":"Letters of Enchantment","seriesNumber":1,"year":2023,"seriesStatus":"complete","setting":"historical fantasy","pov":"dual","povNote":"third person alternating between Iris and Roman, who are also writing each other anonymous letters through an enchanted typewriter without knowing who's on the other end","spice":1,"fmcAgency":4,"prose":5,"gutPunch":5,"darkness":3,"tropes":["rivals to lovers","anonymous correspondence","war correspondents","gods at war","you've got mail","devastating cliffhanger"],"contentWarnings":["war violence","parental alcoholism","death of a sibling","grief","bombing and civilian death"],"goodreadsRating":4.14,"hook":"Two rival newspaper columnists fall for each other through magically delivered letters while reporting from the front line of a war between gods.","comps":["Gemma Doyle trilogy","The Bone Witch"],"caution":"It's closed-door and the tenderness is the point; after Butcher & Blackbird and Lights Out, the complete absence of heat may register as sweet rather than charged, even though the ending hits like a truck.","tagConfidence":"high","lanes":["romantasy"],"momentum":"medium","unreleased":false,"flags":["addiction","cliffhanger"],"predicted":4.35},{"id":"the-death-of-jane-lawrence","title":"The Death of Jane Lawrence","author":"Caitlin Starling","series":null,"seriesNumber":null,"year":2021,"seriesStatus":"standalone","setting":"Great Breltain, a post-war alternate England, and the rotting manor of Lindridge Hall","pov":"single-female","povNote":"tight third on Jane, deliberately unreliable; the reader is never given ground she does not have","spice":2,"fmcAgency":5,"prose":4,"gutPunch":3,"darkness":4,"tropes":["marriage of convenience","haunted house","one rule you must not break","surgeon husband with a secret","occult ritual","gothic horror"],"contentWarnings":["body horror","graphic surgery and medical gore","blood","animal death","occult ritual","psychological breakdown"],"goodreadsRating":3.23,"hook":"A woman proposes a purely practical marriage to a reclusive surgeon, breaks his single condition on the wedding night, and finds the house is doing something to him.","comps":["Gemma Doyle trilogy (the gothic register)","Haunting Adeline (the dread)"],"caution":"The final third abandons plot logic for hallucinatory occult mathematics, and the 3.23 average is almost entirely readers who felt the book stopped answering them.","tagConfidence":"medium","lanes":["new"],"momentum":"fast","unreleased":false,"flags":["animal-harm","body-horror","heavy-gore"],"predicted":4.23},{"id":"the-death-club","title":"The Death Club","author":"Caroline Peckham & Susanne Valenti","series":"Dead Men Walking","seriesNumber":1,"year":2021,"seriesStatus":"complete","setting":"dark contemporary","pov":"multi","povNote":"rotating first-person across Brooklyn, Niall and Mateo, with Brooklyn carrying most of the voice","spice":5,"fmcAgency":5,"prose":4,"gutPunch":3,"darkness":5,"tropes":["MFM menage","psychopath FMC","captivity","mobster","gallows humor"],"contentWarnings":["human trafficking","torture","captivity","sexual violence (referenced)","murder","gore"],"goodreadsRating":4.24,"hook":"A woman trafficked and resold repeatedly ends up bought by an Irish mobster who is also a serial killer, and turns out to be more dangerous than either man holding her.","comps":["the Mindf*ck series","Butcher & Blackbird"],"caution":"It is a menage that ends on a hard cliffhanger, and the psychopathy is played broad enough that some readers find the trio immature rather than genuinely unhinged.","tagConfidence":"high","lanes":["dark"],"momentum":"fast","unreleased":false,"flags":["captivity","cliffhanger","heavy-gore","sexual-assault"],"predicted":4.23},{"id":"tourist-season","title":"Tourist Season","author":"Brynne Weaver","series":"The Seasons of Carnage Trilogy","seriesNumber":1,"year":2025,"seriesStatus":"ongoing","setting":"Cape Carnage, a tourist-choked coastal town in the present-day US","pov":"dual","povNote":"alternating first-person between Harper and Nolan, with her interiority doing most of the comedic and emotional lifting","spice":4,"fmcAgency":5,"prose":4,"gutPunch":3,"darkness":4,"tropes":["two killers, one romance","enemy-to-lover via attempted murder","small-town secrets","forced alliance","gallows humor"],"contentWarnings":["graphic violence","murder","gore","body disposal","revenge","explicit sex"],"goodreadsRating":4.12,"hook":"A gardener who quietly disposes of the town's worst tourists is hunted by the brother of one of her victims, and the two end up covering for each other when a true-crime investigator closes in.","comps":["Butcher & Blackbird","Sinners Retreat"],"caution":"It is Weaver again, and she DNF'd Leather & Lark at 25%; the banter-forward voice that worked in Butcher & Blackbird is the same voice here, so if that was the thing that soured, this will sour too.","tagConfidence":"high","lanes":["dark","new"],"momentum":"fast","unreleased":false,"flags":["heavy-gore"],"predicted":4.23},{"id":"iron-widow","title":"Iron Widow","author":"Xiran Jay Zhao","series":"Iron Widow","seriesNumber":1,"year":2021,"seriesStatus":"ongoing","setting":"Huaxia, a science-fantasy China where giant mecha are piloted by paired boys and disposable girls","pov":"single-female","povNote":"first person, present tense, entirely Zetian, and her voice is the point: she is never sympathetic and never apologizes","spice":1,"fmcAgency":5,"prose":3,"gutPunch":4,"darkness":4,"tropes":["revenge","polyamorous triad","mecha piloting","system-smashing heroine","disability and chronic pain","villain origin"],"contentWarnings":["femicide","domestic and parental abuse","footbinding","torture","alcoholism","suicidal ideation","sexual assault references"],"goodreadsRating":4.01,"hook":"A girl enlists as a sacrificial mecha co-pilot to murder the boy who killed her sister, survives the pairing that should have killed her, and starts dismantling the system that built it.","comps":["Fourth Wing (the war-college machinery, weaponized)","Mindf*ck series (the revenge engine)"],"caution":"Marketed YA with fade-to-black intimacy and blunt, functional prose; she rates prose quality highly, and this book's line level is its weakest point.","tagConfidence":"high","lanes":["new"],"momentum":"fast","unreleased":false,"flags":["addiction","heavy-gore","self-harm","sexual-assault"],"predicted":4.22},{"id":"sinners-retreat","title":"Sinners Retreat","author":"Lauren Biel","series":"Slaycation","seriesNumber":1,"year":2024,"seriesStatus":"complete","setting":"serial killer","pov":"dual","povNote":"dual first-person; both of them are lying to the other about why they came to the island","spice":4,"fmcAgency":5,"prose":3,"gutPunch":3,"darkness":4,"tropes":["serial killer couple","one night stand first","forced proximity","revenge for a sibling","dark rom-com"],"contentWarnings":["graphic violence","gore","cannibalism","murder","sexual abuse (referenced)","explicit sex"],"goodreadsRating":3.95,"hook":"Two killers who slept together the night before discover they are both attending an island retreat where murderers hunt assigned targets, and one of them knows how her brother died.","comps":["Butcher & Blackbird","Tourist Season"],"caution":"It is openly chasing Butcher & Blackbird and the humor is cruder; several reviewers call it fart jokes where Weaver had wit, so the comparison she will inevitably make works against it.","tagConfidence":"high","lanes":["dark"],"momentum":"immediate","unreleased":false,"flags":["disordered-eating","heavy-gore"],"predicted":4.21},{"id":"starling-house","title":"Starling House","author":"Alix E. Harrow","series":null,"seriesNumber":null,"year":2023,"seriesStatus":"standalone","setting":"gothic","pov":"dual","povNote":"Opal narrates in first person present, Arthur's sections come in third, plus fake footnotes and archival fragments","spice":2,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":3,"tropes":["haunted house with a will of its own","grumpy recluse and scrappy outsider","cursed bloodline","sacrificial guardian","small town rot"],"contentWarnings":["parental death","poverty and food insecurity","child endangerment","self-harm implication","coal-town environmental illness","violence"],"goodreadsRating":3.77,"hook":"A dirt-poor young woman in a dying Kentucky coal town takes a housekeeping job at the haunted mansion everyone avoids and discovers she is tied to the thing it was built to cage.","comps":["Mexican Gothic","Uprooted"],"caution":"The lowest-rated book on this list, and the split is real: the middle stalls on Opal and Arthur refusing to talk to each other, which is exactly the miscommunication engine she has no patience for.","tagConfidence":"high","lanes":["craft"],"momentum":"medium","unreleased":false,"flags":["child-harm","self-harm"],"predicted":4.18},{"id":"jane-doe","title":"Jane Doe","author":"Victoria Helen Stone","series":"Jane Doe","seriesNumber":1,"year":2018,"seriesStatus":"ongoing","setting":"dark contemporary","pov":"single-female","povNote":"first-person from a self-diagnosed sociopath, which is the entire point; the voice is the engine","spice":2,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":3,"tropes":["revenge","sociopath FMC","long con","seduce-to-destroy","avenging a friend"],"contentWarnings":["emotional abuse","suicide (of a friend, referenced)","misogyny","sexual content"],"goodreadsRating":4.0,"hook":"A sociopathic international lawyer takes a temp job at a Minneapolis insurance firm under a fake meek persona to systematically dismantle the man who drove her best friend to suicide.","comps":["the Mindf*ck series","Bad Men"],"caution":"Single POV and the romance is a subplot, not the spine; if she wants the relationship to carry the book, this will feel like a thriller that happens to have a man in it.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["self-harm"],"predicted":4.18},{"id":"when-she-unravels","title":"When She Unravels","author":"Gabrielle Sands","series":"The Fallen","seriesNumber":1,"year":2022,"seriesStatus":"ongoing","setting":"mafia","pov":"dual","povNote":"dual first-person weighted roughly 70/30 toward Valentina","spice":4,"fmcAgency":4,"prose":4,"gutPunch":3,"darkness":4,"tropes":["escaped abusive marriage","crime boss","captivity","revenge","secret identity"],"contentWarnings":["domestic abuse","violence","torture","captivity","explicit sex"],"goodreadsRating":3.95,"hook":"A woman on the run from an abusive mafia enforcer takes a job at an Ibiza nightclub owned by the island's crime boss, who has his own reason for keeping her.","comps":["The Maddest Obsession","Ruthless Creatures"],"caution":"The relationship moves in about a month and the hero turns genuinely cruel after a mid-book reveal without earning his way back; she may read that as a character acting against his own established nature.","tagConfidence":"high","lanes":["dark"],"momentum":"fast","unreleased":false,"flags":["captivity","domestic-abuse","heavy-gore"],"predicted":4.15},{"id":"my-dreadful-darling","title":"My Dreadful Darling","author":"H.D. Carlton","series":"Hollow Graves Duet","seriesNumber":1,"year":2026,"seriesStatus":"ongoing","setting":"Hollow Canyon University, present-day US","pov":"dual","povNote":"alternating first person between Reverie and Kellan/'Dread', with his obsession rendered from the inside rather than reported","spice":5,"fmcAgency":4,"prose":3,"gutPunch":4,"darkness":5,"tropes":["bully romance","enemies to lovers","serial killer's daughter","obsession","revenge courtship","copycat killer mystery"],"contentWarnings":["dubious and non-consent","stalking","psychological abuse","graphic violence","serial murder","explicit sex","cliffhanger"],"goodreadsRating":4.37,"hook":"The son of a murdered woman enrolls at the same university as the daughter of the man who killed her, intending to ruin her, while a copycat starts working the same town.","comps":["Haunting Adeline","The Ritual"],"caution":"Book two slipped to late 2026 and this ends mid-story; separately, the consent dynamics go further than Haunting Adeline did, which is the ceiling she has actually rated.","tagConfidence":"high","lanes":["new"],"momentum":"fast","unreleased":false,"flags":["cliffhanger","sexual-assault"],"predicted":4.13},{"id":"one-dark-window","title":"One Dark Window","author":"Rachel Gillig","series":"The Shepherd King","seriesNumber":1,"year":2022,"seriesStatus":"complete","setting":"gothic fantasy","pov":"single-female","povNote":"first person Elspeth, but she shares her skull with the Nightmare, a second voice that argues with her; it reads closer to two narrators than one; book two, Two Twisted Crowns, opens into true multi-POV","spice":2,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":4,"tropes":["monster in her head","highwayman love interest","cursed magic cards","forbidden magic","heist for a cure"],"contentWarnings":["body horror","violence","child endangerment","self-harm imagery","possession"],"goodreadsRating":4.25,"hook":"A woman hiding an infected magic and the ancient monster living inside her joins a prince's bastard cousin in stealing the magic cards that could break her curse.","comps":["The Bone Witch","Gemma Doyle trilogy"],"caution":"Only one POV in book one, and the romance is deliberately underplayed next to the curse plot; if she's reading for the dual-POV push-pull she got from Violet and Xaden, she'll feel the absence until book two.","tagConfidence":"high","lanes":["romantasy"],"momentum":"medium","unreleased":false,"flags":["body-horror","child-harm","self-harm"],"predicted":4.1},{"id":"the-knight-and-the-moth","title":"The Knight and the Moth","author":"Rachel Gillig","series":"The Stonewater Kingdom","seriesNumber":1,"year":2025,"seriesStatus":"complete","setting":"Aisling Cathedral and the surrounding gothic kingdom of Traum","pov":"single-female","povNote":"first person from Six throughout; the knight stays fully external, which is either the appeal or the dealbreaker","spice":2,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":3,"tropes":["false gods","cloistered heroine escapes","heretic love interest","road trip quest","sisters vanishing","cursed companion"],"contentWarnings":["religious abuse","ritual drowning","gaslighting","child death","body horror","self-harm"],"goodreadsRating":4.22,"hook":"A girl raised to drown herself for prophecy leaves the cathedral with the knight who says her visions are a lie, and finds out he is right in the worst possible way.","comps":["The Bone Witch trilogy","Gemma Doyle trilogy"],"caution":"Single POV and a cliffhanger, and Publishers Weekly flagged the middle as slack; the atmosphere is doing work that plot momentum usually does for her.","tagConfidence":"high","lanes":["new"],"momentum":"medium","unreleased":false,"flags":["body-horror","child-harm","cliffhanger","domestic-abuse","self-harm"],"predicted":4.1},{"id":"bury-our-bones-in-the-midnight-soil","title":"Bury Our Bones in the Midnight Soil","author":"V.E. Schwab","series":null,"seriesNumber":null,"year":2025,"seriesStatus":"standalone","setting":"1532 Spain, 1827 England and 2019 Boston, braided","pov":"multi","povNote":"three women's lives in three centuries, rotating, and the moment you understand how they touch is the moment the book detonates","spice":3,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":4,"tropes":["vampires","sapphic obsession","toxic maker and made","female rage","immortality as a trap"],"contentWarnings":["sexual assault","domestic and marital abuse","murder","blood drinking","homophobia and slurs","self-harm references","grief"],"goodreadsRating":3.87,"hook":"Three women across five hundred years are turned into vampires and have to decide what they will do with an appetite nobody asked them to have.","comps":["House of Earth and Blood (for scope)","The Bone Witch trilogy (for the cold, controlled prose)"],"caution":"Critics who disliked it call it vibes and repetition with no plot; it is a character study, not a momentum engine, and she has said outright she won't wait a book out.","tagConfidence":"high","lanes":["new"],"momentum":"medium","unreleased":false,"flags":["domestic-abuse","self-harm","sexual-assault"],"predicted":4.1},{"id":"when-the-moon-hatched","title":"When the Moon Hatched","author":"Sarah A. Parker","series":"Moonfall","seriesNumber":1,"year":2024,"seriesStatus":"ongoing","setting":"epic fantasy","pov":"multi","povNote":"roughly seventy percent Raeve, with chapters from the king Kaan and interleaved past-life fragments that recontextualise both","spice":4,"fmcAgency":4,"prose":4,"gutPunch":5,"darkness":4,"tropes":["dragons","assassin heroine","reincarnation","lost memories","second chance across lifetimes","king and killer"],"contentWarnings":["graphic violence","torture","grief and loss","self-harm","explicit sex","imprisonment"],"goodreadsRating":4.01,"hook":"In a world where dragons become moons when they die, a legendary assassin is caught and imprisoned by a king who recognises her from a life she doesn't remember.","comps":["Fourth Wing","Onyx Storm"],"caution":"Parker invents her own vocabulary for time, anatomy and geography and drops you in with no glossary; the opening 100 pages are genuinely disorienting, and readers who want momentum from page one are the ones who DNF it.","tagConfidence":"medium","lanes":["romantasy"],"momentum":"medium","unreleased":false,"flags":["captivity","heavy-gore","self-harm"],"predicted":4.08},{"id":"the-ministry-of-time","title":"The Ministry of Time","author":"Kaliane Bradley","series":null,"seriesNumber":null,"year":2024,"seriesStatus":"standalone","setting":"present-day London, inside a secret government department that extracts people from history","pov":"single-female","povNote":"first person from an unnamed British-Cambodian civil servant, with interleaved Arctic sections from the man she is minding","spice":2,"fmcAgency":3,"prose":5,"gutPunch":4,"darkness":3,"tropes":["forced cohabitation","handler and asset","fish out of time","government conspiracy","divided loyalty","slow burn"],"contentWarnings":["death","colonial violence and racism","refugee trauma","cannibalism reference (historical)","terrorism"],"goodreadsRating":3.55,"hook":"A civil servant is assigned to live with a Victorian naval officer pulled out of the moment of his death, and falls for the man she is paid to report on.","comps":["Katabasis","The Bone Witch trilogy (the narrator's dry interiority)"],"caution":"It is a literary novel wearing a spy-thriller coat; the romance is real but structurally secondary, and the 3.55 average is readers who came for a love story and got an essay on empire.","tagConfidence":"high","lanes":["new"],"momentum":"medium","unreleased":false,"flags":["disordered-eating"],"predicted":4.02},{"id":"lovesick-trisha-wolfe","title":"Lovesick","author":"Trisha Wolfe","series":"Darkness Behind Stars","seriesNumber":1,"year":2026,"seriesStatus":"ongoing","setting":"Stonehurst University, a dark-academia campus in the present-day US","pov":"dual","povNote":"alternating first person between the undercover analyst and the astrophysicist she is building a case against","spice":4,"fmcAgency":5,"prose":3,"gutPunch":3,"darkness":4,"tropes":["undercover investigator","cat and mouse","serial killer love interest","dark academia","obsession","forced proximity"],"contentWarnings":["serial murder","graphic crime scenes","obsessive and manipulative dynamics","OCD and mysophobia depiction","drowning","explicit sex"],"goodreadsRating":4.31,"hook":"An FBI crime analyst embeds as a campus therapist to work the astrophysicist she believes is a serial killer, and finds the investigation running in both directions.","comps":["Mindf*ck series","Lights Out"],"caution":"It is indie and small; under three hundred ratings, so the average is soft and the line-level prose has not been stress-tested the way her other picks have.","tagConfidence":"medium","lanes":["new"],"momentum":"fast","unreleased":false,"flags":[],"predicted":3.96},{"id":"say-youre-sorry-rose","title":"Say You're Sorry","author":"Karen Rose","series":"Sacramento","seriesNumber":1,"year":2019,"seriesStatus":"ongoing","setting":"romantic suspense","pov":"multi","povNote":"third-person rotating between Daisy, Gideon and the killer, so the reader is always ahead of someone","spice":3,"fmcAgency":5,"prose":4,"gutPunch":4,"darkness":4,"tropes":["FBI agent","serial killer hunt","cult survivor","survivor fights back","found family"],"contentWarnings":["serial murder","cult abuse","kidnapping","sexual assault (referenced)","violence"],"goodreadsRating":4.13,"hook":"A woman who fights off an attacker and keeps his locket draws in an FBI agent who recognizes it from the cult he escaped as a child, and the two of them chase a serial killer.","comps":["the Mindf*ck series","Butcher & Blackbird"],"caution":"This is traditional Berkley romantic suspense; 600-plus pages, characters re-litigating the same conversations, and the spice and moral blackness are both several notches below what she reads for.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["captivity","sexual-assault"],"predicted":3.91},{"id":"a-fate-inked-in-blood","title":"A Fate Inked in Blood","author":"Danielle L. Jensen","series":"Saga of the Unfated","seriesNumber":1,"year":2024,"seriesStatus":"complete","setting":"epic fantasy","pov":"dual","povNote":"Freya carries the bulk of the narration with Bjorn's POV threaded in, so you see him working her while she's working him","spice":3,"fmcAgency":4,"prose":3,"gutPunch":3,"darkness":3,"tropes":["Norse mythology","prophesied chosen one","forced oath","shield-maiden","he falls first","political marriage of convenience"],"contentWarnings":["graphic battle violence","domestic abuse","miscarriage","sexual content","misogyny"],"goodreadsRating":3.9,"hook":"A blacksmith's wife with a drop of a goddess's blood is bound by oath to a warlord who intends to use her prophecy to unite Skaland under his rule.","comps":["Fourth Wing","The Bridge Kingdom"],"caution":"For the first third Freya is genuinely being moved around the board by men; husband, jarl, Bjorn, and this reader's stated dealbreaker is a heroine who can't act without a man; Freya earns her agency, but she earns it later than this reader likes to wait.","tagConfidence":"high","lanes":["romantasy"],"momentum":"fast","unreleased":false,"flags":["domestic-abuse","pregnancy-loss"],"predicted":3.88},{"id":"ninth-house","title":"Ninth House","author":"Leigh Bardugo","series":"Alex Stern","seriesNumber":1,"year":2019,"seriesStatus":"ongoing","setting":"gothic","pov":"dual","povNote":"third person alternating between Alex Stern in the present and Darlington in the months before he vanished, plus a shifting timeline","spice":1,"fmcAgency":5,"prose":5,"gutPunch":5,"darkness":5,"tropes":["dark academia","secret societies","sees dead people","murder investigation","mentor gone missing"],"contentWarnings":["graphic rape including child rape","drug abuse and overdose","suicide","self-harm","possession","gore","coerced ingestion"],"goodreadsRating":4.0,"hook":"A Yale freshman with a criminal past and the ability to see ghosts is recruited to police the university's occult secret societies, then investigates a townie's murder nobody else wants solved.","comps":["The Diviners","A Great and Terrible Beauty"],"caution":"Alex is guarded to the point of coldness for a long stretch and the first third is dense with society lore, so the emotional attachment she needs arrives later than her patience usually allows; the sexual violence is also far more graphic than anything in her current shelf.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["addiction","child-sexual-abuse","heavy-gore","self-harm","sexual-assault"],"predicted":3.86},{"id":"gideon-the-ninth","title":"Gideon the Ninth","author":"Tamsyn Muir","series":"The Locked Tomb","seriesNumber":1,"year":2019,"seriesStatus":"ongoing","setting":"necromancy","pov":"single-female","povNote":"close third on Gideon only, which is the engine of the book because she understands almost nothing of the necromancy happening around her","spice":0,"fmcAgency":5,"prose":5,"gutPunch":5,"darkness":5,"tropes":["enemies to something","locked-room deaths","swordswoman and sorceress bonded pair","haunted decaying palace","competition trial"],"contentWarnings":["extreme gore and bone horror","child death","suicide","torture","self-mutilation","mass death"],"goodreadsRating":4.17,"hook":"An indentured swordswoman is dragged along as bodyguard to the bone witch who rules her dying House, into a crumbling palace where necromancers and their cavaliers are being murdered one by one.","comps":["The Bone Witch","Ninth House"],"caution":"The first hundred pages deliberately withhold the rules of the world and the voice is aggressively irreverent, so if she wants emotional grip early this one makes her earn it before the ending lands like a hammer.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["child-harm","heavy-gore","self-harm"],"predicted":3.86},{"id":"the-jasmine-throne","title":"The Jasmine Throne","author":"Tasha Suri","series":"The Burning Kingdoms","seriesNumber":1,"year":2021,"seriesStatus":"complete","setting":"epic fantasy","pov":"multi","povNote":"Priya and Malini carry the book, with rotating chapters from a rebel leader, a noblewoman and a prince that make the politics real rather than decorative","spice":2,"fmcAgency":5,"prose":5,"gutPunch":5,"darkness":4,"tropes":["imprisoned princess","maidservant with forbidden magic","sapphic enemies to lovers","empire in collapse","both women are dangerous"],"contentWarnings":["immolation and burning","self-harm","drug addiction","violence","misogynistic religious violence","body horror"],"goodreadsRating":4.09,"hook":"An exiled princess plotting her brother's overthrow and the temple-born maidservant assigned to her cell each decide the other is the weapon they need.","comps":["The Bone Witch trilogy","The Priory of the Orange Tree"],"caution":"The romance is a long fuse inside a genuinely political novel; nobody gets rescued and both women are terrifying, but the first 150 pages move at empire speed, not Basgiath speed.","tagConfidence":"high","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["addiction","body-horror","self-harm"],"predicted":3.86},{"id":"black-sheep-harlowe-weaver","title":"Black Sheep","author":"Alexa Harlowe & Brynne Weaver","series":null,"seriesNumber":null,"year":2022,"seriesStatus":"standalone","setting":"serial killer","pov":"dual","povNote":"dual first-person; she is hunting a cult leader as a killer, he is hunting the same man for the FBI","spice":4,"fmcAgency":5,"prose":4,"gutPunch":3,"darkness":4,"tropes":["female serial killer","cult takedown","professor/student","hunter meets hunter","secret identity"],"contentWarnings":["graphic violence","torture","physical and emotional abuse","cult abuse","BDSM","explicit sex"],"goodreadsRating":3.95,"hook":"A doctoral student who kills cult members and the professor secretly investigating the same cult for the FBI close in on the same target and on each other.","comps":["the Mindf*ck series","Butcher & Blackbird"],"caution":"The thriller half is thin; the revenge arc has real logic gaps and the romance swallows the investigation, which is the opposite of what made Mindf*ck work for her.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["heavy-gore"],"predicted":3.66},{"id":"marrow","title":"Marrow","author":"Trisha Wolfe & Brynne Weaver","series":null,"seriesNumber":null,"year":2023,"seriesStatus":"standalone","setting":"serial killer","pov":"dual","povNote":"first-person alternating between two rival killers who are each hiding what they are from the other","spice":4,"fmcAgency":5,"prose":4,"gutPunch":3,"darkness":4,"tropes":["rival serial killers","enemies to lovers","workplace (body farm)","forced alliance","sunshine-hiding-darkness FMC"],"contentWarnings":["graphic violence","torture","body horror","murder","explicit sex"],"goodreadsRating":3.92,"hook":"A forensic anthropologist and a wildlife biologist who have spent three years trying to out-kill each other at a university body farm are forced into an alliance against a shared threat.","comps":["Butcher & Blackbird","Black Sheep"],"caution":"Reviewers repeatedly call it light on plot; it is almost entirely the two of them circling each other, and the MMC is noticeably less developed than the FMC.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["body-horror","heavy-gore"],"predicted":3.66},{"id":"the-blood-trials","title":"The Blood Trials","author":"N.E. Davenport","series":"The Blood Gift Duology","seriesNumber":1,"year":2022,"seriesStatus":"complete","setting":"military academy fantasy","pov":"single-female","povNote":"first person present from Ikenna, tight and furious, no hero chapters","spice":2,"fmcAgency":5,"prose":3,"gutPunch":4,"darkness":4,"tropes":["deadly military trials","hidden magic","avenging a murdered mentor","corrupt empire","found family in a kill-or-be-killed cohort"],"contentWarnings":["graphic violence","racism and racial violence","sexual assault threat","torture","gore"],"goodreadsRating":4.07,"hook":"A young woman enters a brutal military trial to find out who assassinated her grandfather, while hiding the outlawed blood magic that would get her executed on sight.","comps":["Fourth Wing","An Ember in the Ashes"],"caution":"Single POV and the romance is a genuine subplot rather than the engine; she gets the Basgiath-style trials and the rage, but not the slow-cooked tension between two heads she reread Empyrean twenty times for.","tagConfidence":"high","lanes":["romantasy"],"momentum":"medium","unreleased":false,"flags":["heavy-gore","sexual-assault"],"predicted":3.64},{"id":"the-bridge-kingdom","title":"The Bridge Kingdom","author":"Danielle L. Jensen","series":"The Bridge Kingdom","seriesNumber":1,"year":2018,"seriesStatus":"complete","setting":"epic fantasy","pov":"dual","povNote":"alternating first-person between Lara, the assassin-bride sent to destroy the kingdom, and Aren, the king she married to destroy","spice":3,"fmcAgency":5,"prose":3,"gutPunch":4,"darkness":3,"tropes":["arranged marriage","enemies to lovers","spy in the enemy's bed","trained-warrior heroine","betrayal reveal"],"contentWarnings":["violence","torture","child abuse in backstory","war","on-page sex"],"goodreadsRating":4.04,"hook":"A princess raised from childhood as a weapon marries the king of the kingdom she was trained to bring down, and has to decide which of her loyalties is actually hers.","comps":["Fourth Wing","The Hurricane Wars"],"caution":"The prose is functional rather than beautiful; Jensen writes clean, propulsive plot, not sentences you reread, and after Quicksilver landed at a 3 for her, workmanlike writing may be the exact thing that caps this at four stars.","tagConfidence":"high","lanes":["romantasy"],"momentum":"medium","unreleased":false,"flags":["child-harm","heavy-gore"],"predicted":3.64},{"id":"the-diviners","title":"The Diviners","author":"Libba Bray","series":"The Diviners","seriesNumber":1,"year":2012,"seriesStatus":"complete","setting":"historical fantasy","pov":"multi","povNote":"rotating third person across Evie, Memphis, Theta, Sam, Mabel and Jericho, with occasional omniscient interludes from objects and weather","spice":0,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":4,"tropes":["occult murder mystery","psychic powers","ensemble found family","1920s jazz-age glamour","serial killer hunt"],"contentWarnings":["graphic ritual murder and mutilation","body horror","racism and period racial violence","eugenics","alcoholism","child abuse"],"goodreadsRating":3.93,"hook":"In 1926 Manhattan, a flapper who can read a person's secrets by touching their belongings is pulled into hunting an occult serial killer alongside a group of young people hiding supernatural gifts of their own.","comps":["A Great and Terrible Beauty","Ninth House"],"caution":"It is the same author she already rated 4, but it is 578 pages with six POV threads that do not converge until late, and the romance is a background flicker at best across the whole quartet.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["addiction","body-horror","child-harm","forced-pregnancy","heavy-gore"],"predicted":3.61},{"id":"nettle-and-bone","title":"Nettle & Bone","author":"T. Kingfisher","series":null,"seriesNumber":null,"year":2022,"seriesStatus":"standalone","setting":"fairy tale retelling","pov":"single-female","povNote":"close third on Marra, a thirty-year-old princess nobody ever bothered to watch","spice":1,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":4,"tropes":["impossible tasks","quest party of misfits","kill the prince","gravewitch and bone dog","sister rescue"],"contentWarnings":["domestic violence","infant death","miscarriage","body horror","murder","imprisonment"],"goodreadsRating":4.07,"hook":"A forgotten youngest princess builds a dog out of bones, sews a cloak of nettles and assembles a party of oddballs in order to murder her sister's abusive royal husband.","comps":["Uprooted","The Bone Witch"],"caution":"Hugo winner, genuinely funny and dark at once, but Marra is quiet and middle-aged in spirit, the romance is a slow warm afterthought, and the stakes are domestic rather than world-shaking.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["body-horror","captivity","domestic-abuse","pregnancy-loss"],"predicted":3.61},{"id":"spinning-silver","title":"Spinning Silver","author":"Naomi Novik","series":null,"seriesNumber":null,"year":2018,"seriesStatus":"standalone","setting":"fairy tale retelling","pov":"multi","povNote":"six first-person narrators with unmarked chapter switches, led by Miryem, Wanda and Irina","spice":1,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":3,"tropes":["Rumpelstiltskin retelling","cold fae king","forced marriage","women outwitting monsters","winter magic"],"contentWarnings":["antisemitism and pogrom threat","domestic violence and alcoholism","child abuse","forced marriage","demonic possession","murder"],"goodreadsRating":4.17,"hook":"A Jewish moneylender's daughter who turns silver into gold too well attracts the attention of the winter king, and her fate braids together with a peasant girl's and a tsarina's.","comps":["Uprooted","The Bear and the Nightingale"],"caution":"Three heroines with maximum agency and no rescuing, but the narrators are unlabelled and the romances are cold, restrained and mostly implied, which after Empyrean may read as emotionally withholding.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["addiction","child-harm","domestic-abuse"],"predicted":3.61},{"id":"the-priory-of-the-orange-tree","title":"The Priory of the Orange Tree","author":"Samantha Shannon","series":"The Roots of Chaos","seriesNumber":1,"year":2019,"seriesStatus":"ongoing","setting":"epic fantasy","pov":"multi","povNote":"four principal narrators across two hemispheres; a bodyguard-mage, an Eastern dragonrider, a disgraced alchemist and a courtier; braided toward one convergence","spice":2,"fmcAgency":5,"prose":5,"gutPunch":4,"darkness":3,"tropes":["dragons on both sides of a culture war","sapphic slow burn","queen who must produce an heir","sword-and-sorcery quest","ancient wyrm awakening"],"contentWarnings":["war violence","plague","execution","misogynistic pressure to bear children","character death"],"goodreadsRating":4.16,"hook":"Across a divided world where the East reveres dragons and the West fears them, four people race to stop an ancient wyrm from waking.","comps":["Fourth Wing","The Jasmine Throne"],"caution":"848 pages of genuine epic fantasy where the romance is one thread among many; this is the dragon book for the part of her that loves Tairn and Andarna, not the part that rereads for Violet and Xaden.","tagConfidence":"high","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":[],"predicted":3.61},{"id":"these-violent-delights","title":"These Violent Delights","author":"Chloe Gong","series":"These Violent Delights","seriesNumber":1,"year":2020,"seriesStatus":"complete","setting":"historical fantasy","pov":"multi","povNote":"third person alternating primarily between Juliette and Roma, with short interludes from Marshall, Kathleen and Benedikt","spice":1,"fmcAgency":5,"prose":4,"gutPunch":5,"darkness":4,"tropes":["Romeo and Juliet retelling","rival crime families","second chance romance","monster in the river","heir to a gang"],"contentWarnings":["graphic self-mutilation and suicide contagion","gore","gun violence","racism and colonial violence","drug use","character death"],"goodreadsRating":3.79,"hook":"In 1926 Shanghai, the heir to the Scarlet Gang and the heir to the rival White Flowers, former lovers who betrayed each other, must work together as a madness drives citizens to tear out their own throats.","comps":["The Diviners","The Cruel Prince"],"caution":"Juliette is a ruthless gangster heir with real command and the dual POV is exactly her preference, but the book front-loads a lot of Shanghai political exposition and the central romance stays frozen in mistrust until very late.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["addiction","heavy-gore","self-harm"],"predicted":3.6},{"id":"and-i-darken","title":"And I Darken","author":"Kiersten White","series":"The Conqueror's Saga","seriesNumber":1,"year":2016,"seriesStatus":"complete","setting":"historical fantasy","pov":"dual","povNote":"third person alternating between Lada and her brother Radu, who want incompatible things from the same man","spice":1,"fmcAgency":5,"prose":4,"gutPunch":5,"darkness":4,"tropes":["gender-flipped Vlad the Impaler","hostages at a foreign court","love triangle with a sultan","brutal antiheroine","sibling rivalry"],"contentWarnings":["graphic violence and impalement","sexual assault","child abuse and neglect","misogyny","internalized homophobia","war atrocities"],"goodreadsRating":3.8,"hook":"Vlad the Impaler reimagined as a girl: Lada Dragwlya and her gentle brother are handed to the Ottoman court as hostages, where she refuses to be anything other than a weapon.","comps":["The Cruel Prince","The Bone Witch"],"caution":"Lada is the least rescued heroine in this entire lane, but the book is historical court politics with almost no magic and a slow-building love triangle, and the romance never resolves the way romance readers expect.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["child-harm","heavy-gore","sexual-assault"],"predicted":3.6},{"id":"silver-under-nightfall","title":"Silver Under Nightfall","author":"Rin Chupeco","series":"Silver Under Nightfall","seriesNumber":1,"year":2022,"seriesStatus":"ongoing","setting":"gothic","pov":"single-male","povNote":"first person throughout from Remy Pendergast, the half-outcast vampire hunter","spice":3,"fmcAgency":4,"prose":4,"gutPunch":3,"darkness":4,"tropes":["vampire hunter turned ally","polyamorous triad","touch starved hero","plague mystery","found family"],"contentWarnings":["gore and body horror","parental abuse","implied rape and forced prostitution","unwanted sexual contact","medical experimentation","animal death"],"goodreadsRating":3.92,"hook":"A despised vampire hunter is forced to investigate a plague turning vampires into unkillable monsters alongside a vampire heiress and her ancient fiance, and falls for both of them.","comps":["The Bone Witch","A Dowry of Blood"],"caution":"This is her Bone Witch author writing with far more romance and heat, but the POV is a man and the female lead Xiaodan is the love interest rather than the driver, which inverts exactly what she liked about Tea.","tagConfidence":"high","lanes":["craft"],"momentum":"medium","unreleased":false,"flags":["animal-harm","body-horror","heavy-gore","sexual-assault"],"predicted":3.58},{"id":"katabasis","title":"Katabasis","author":"R.F. Kuang","series":null,"seriesNumber":null,"year":2025,"seriesStatus":"standalone","setting":"Cambridge's department of Analytic Magick, and the eight courts of Hell","pov":"dual","povNote":"Alice narrates the present descent; Peter's side arrives through interleaved flashbacks, so the reader learns him at the same rate she is forced to","spice":1,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":4,"tropes":["academic rivals","descent into the underworld","obsessive ambition","shared trauma","mentor who deserved worse"],"contentWarnings":["suicide and suicidal ideation","academic abuse","death","self-destruction","body horror"],"goodreadsRating":3.71,"hook":"Two graduate students in magic walk into Hell to retrieve the advisor they helped kill, mostly because they still need his letter of recommendation.","comps":["The Secret History","Ninth House"],"caution":"The romance is a subplot carried almost entirely in subtext and flashback; she wants the build to matter, and here the build is competing with two hundred pages of footnoted logic puzzles.","tagConfidence":"high","lanes":["new"],"momentum":"slow","unreleased":false,"flags":["body-horror","self-harm"],"predicted":3.53},{"id":"nocticadia","title":"Nocticadia","author":"Keri Lake","series":"Nocticadia","seriesNumber":1,"year":2023,"seriesStatus":"complete","setting":"campus","pov":"dual","povNote":"dual first-person between Lilia and the professor known as Doctor Death","spice":4,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":4,"tropes":["dark academia","professor/student","gothic island","mystery of a dead mother","touch her and die"],"contentWarnings":["body horror","medical horror","parasites","murder","gore","explicit sex"],"goodreadsRating":4.19,"hook":"A student enrolls at a remote gothic university in Maine to investigate the parasite she believes killed her mother, and ends up circling the pathologist at the center of it.","comps":["The Coven","Haunting Adeline"],"caution":"It is 680 pages and the leads barely interact for the first 40 percent; exactly the slow build she has said she will not wait through.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["body-horror","heavy-gore"],"predicted":3.53},{"id":"midnight-is-the-darkest-hour","title":"Midnight Is the Darkest Hour","author":"Ashley Winstead","series":null,"seriesNumber":null,"year":2023,"seriesStatus":"standalone","setting":"romantic suspense","pov":"single-female","povNote":"Ruth's first person across a split timeline, past and present braided","spice":3,"fmcAgency":4,"prose":5,"gutPunch":4,"darkness":4,"tropes":["small town gothic","religious fundamentalism","childhood friends","shared secret","morally grey couple"],"contentWarnings":["religious abuse","child abuse","sexual assault","domestic abuse","animal harm","murder"],"goodreadsRating":3.43,"hook":"A preacher's daughter and the town outcast she has loved since childhood have to protect a shared secret when a skull surfaces in the Louisiana swamp.","comps":["Haunting Adeline","Nocticadia"],"caution":"The prose is the best on this list but the rating is the lowest for a reason; it is slow, the twist is telegraphed, and the romance is atmospheric rather than propulsive.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["animal-harm","child-harm","domestic-abuse","sexual-assault"],"predicted":3.53},{"id":"master-of-crows","title":"Master of Crows","author":"Grace Draven","series":"Master of Crows","seriesNumber":1,"year":2009,"seriesStatus":"ongoing","setting":"dark fantasy romance","pov":"dual","povNote":"third person split between Martise, the bondwoman sent to spy, and Silhara, the sorcerer who knows exactly what she is and lets her stay","spice":3,"fmcAgency":4,"prose":4,"gutPunch":5,"darkness":4,"tropes":["spy falls for target","tortured mage hero","god possession","bondage of servitude","sacrifice for the beloved","not conventionally beautiful heroine"],"contentWarnings":["human trafficking and indenture","past sexual abuse","torture","body horror","explicit sex"],"goodreadsRating":3.91,"hook":"A bondwoman is promised her freedom if she will spy on a renegade sorcerer, who needs her help to keep a hungry god from taking his body.","comps":["Uprooted","Radiance"],"caution":"It's a fifteen-plus-year-old self-published title and reads it; the pacing is unhurried, the world is small, and there is none of the cinematic scale she gets from Basgiath or Crescent City.","tagConfidence":"medium","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["body-horror","captivity","heavy-gore"],"predicted":3.51},{"id":"still-beating","title":"Still Beating","author":"Jennifer Hartmann","series":null,"seriesNumber":null,"year":2020,"seriesStatus":"standalone","setting":"dark contemporary","pov":"dual","povNote":"dual POV split across a captivity section and a long, messy aftermath section","spice":3,"fmcAgency":4,"prose":4,"gutPunch":5,"darkness":5,"tropes":["enemies to lovers","captivity","trauma bond","sister's fiancé","survivor aftermath"],"contentWarnings":["graphic sexual assault","kidnapping","captivity","murder","suicide attempt","pregnancy loss"],"goodreadsRating":4.19,"hook":"Two people who have loathed each other for fifteen years are abducted by a serial killer who forces couples to fall in love, and most of the book is what happens to them after they get out.","comps":["the Mindf*ck series","Butcher & Blackbird"],"caution":"The emotional payoff is real but the premise is a trauma bond plus a betrayed sister, and if she reads the romance as built on captivity rather than on the characters, the whole thing collapses.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["captivity","pregnancy-loss","self-harm","sexual-assault"],"predicted":3.51},{"id":"an-ember-in-the-ashes","title":"An Ember in the Ashes","author":"Sabaa Tahir","series":"An Ember in the Ashes","seriesNumber":1,"year":2015,"seriesStatus":"complete","setting":"military academy fantasy","pov":"dual","povNote":"alternating first person between Laia, a slave spying inside the military academy, and Elias, the academy's best soldier planning to desert; later books widen to four narrators","spice":1,"fmcAgency":4,"prose":4,"gutPunch":5,"darkness":5,"tropes":["brutal military academy","slave rebellion","deadly trials","soldier who wants out","spy in the enemy house","no one is safe"],"contentWarnings":["slavery","torture","rape and threat of rape","child death","graphic violence","self-harm"],"goodreadsRating":4.23,"hook":"A girl sells herself into slavery inside an empire's military academy to save her brother, and crosses paths with the academy's finest soldier on the eve of deadly succession trials.","comps":["Fourth Wing","The Bone Witch"],"caution":"YA and largely closed-door, and the romance is a messy near-square rather than a two-person build; she'd be reading it for the deaths that land and the Basgiath-adjacent institution, not for the tension.","tagConfidence":"high","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["captivity","child-harm","heavy-gore","self-harm","sexual-assault"],"predicted":3.51},{"id":"alchemised","title":"Alchemised","author":"SenLinYu","series":null,"seriesNumber":null,"year":2025,"seriesStatus":"standalone","setting":"Paladia, a devastated magical nation under occupation after a lost war","pov":"dual","povNote":"Helena's present-day POV braided with nonlinear recovered memories and sections from the High Reeve, so the reader assembles the truth ahead of her","spice":2,"fmcAgency":3,"prose":4,"gutPunch":5,"darkness":5,"tropes":["captor and captive","amnesia","enemies to lovers","war trauma","necromancy","touch starvation"],"contentWarnings":["torture","sexual assault","rape","forced pregnancy","eugenics","medical experimentation","self-harm","suicidal ideation","body horror","graphic violence"],"goodreadsRating":4.3,"hook":"A captured Resistance healer with a hole in her memory is handed to the enemy's chief necromancer, who wants to know what she buried in her own head.","comps":["Onyx Storm (for the devastation, not the tone)","Haunting Adeline"],"caution":"Over a thousand pages built on a heroine who spends the first act imprisoned and passive; her 'no waiting for the back half' rule is exactly what this book asks her to break.","tagConfidence":"high","lanes":["new","romantasy"],"momentum":"slow","unreleased":false,"flags":["body-horror","forced-pregnancy","heavy-gore","self-harm","sexual-assault"],"predicted":3.43},{"id":"bad-men-cohen","title":"Bad Men","author":"Julie Mae Cohen","series":"Bad Men","seriesNumber":1,"year":2023,"seriesStatus":"ongoing","setting":"serial killer","pov":"dual","povNote":"alternates between Saffy and Jonathan, with more page time on him than the premise promises","spice":2,"fmcAgency":5,"prose":4,"gutPunch":2,"darkness":3,"tropes":["female vigilante serial killer","true crime podcaster","she's the stalker","framed for murder","dark comedy"],"contentWarnings":["murder","dismemberment","domestic abuse","stalking"],"goodreadsRating":3.6,"hook":"A socialite who kills abusive men engineers a meeting with the true-crime podcaster she is obsessed with after body parts turn up on his doorstep and make him a suspect.","comps":["Butcher & Blackbird","Jane Doe"],"caution":"Traditionally published and genuinely well-written, but it is low-spice and comic; the stakes never bite the way the Mindf*ck books do, so a death here will not land.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["domestic-abuse","heavy-gore"],"predicted":3.41},{"id":"irresistible-urge-to-fall-for-your-enemy","title":"The Irresistible Urge to Fall For Your Enemy","author":"Brigitte Knightley","series":"Dearly Beloathed","seriesNumber":1,"year":2025,"seriesStatus":"complete","setting":"a secondary world of rival magical orders; assassins on one side, healers on the other","pov":"dual","povNote":"close third alternating between Aurienne the healer and Osric the assassin, with both voices distinct enough to be told apart blind","spice":1,"fmcAgency":5,"prose":5,"gutPunch":3,"darkness":2,"tropes":["enemies to lovers","he falls first and harder","forced professional proximity","banter as combat","healer and killer"],"contentWarnings":["terminal illness","plague","violence","body horror (medical)"],"goodreadsRating":3.79,"hook":"A dying assassin bribes the healer who despises him into curing him, and the two spend a book dissecting each other; clinically and otherwise, while a pox spreads.","comps":["The Scum Villain's Self-Saving System (for the tone of the sniping)","A Marvellous Light"],"caution":"The payoff is one scene near the very end; if her 'the build matters more than the payoff' has a floor, this book sits right on it, and readers who wanted heat left the 3.79 average.","tagConfidence":"high","lanes":["new"],"momentum":"slow","unreleased":false,"flags":["body-horror"],"predicted":3.36},{"id":"mexican-gothic","title":"Mexican Gothic","author":"Silvia Moreno-Garcia","series":null,"seriesNumber":null,"year":2020,"seriesStatus":"standalone","setting":"gothic","pov":"single-female","povNote":"close third limited entirely to Noemi, so the house's secrets unspool only as fast as she pries them loose","spice":1,"fmcAgency":5,"prose":5,"gutPunch":3,"darkness":4,"tropes":["haunted house","sinister in-laws","rescue the relative","body horror","colonial rot"],"contentWarnings":["incest","attempted rape","eugenics and racism","body horror and fungal horror","drugging","gaslighting","suicide"],"goodreadsRating":3.66,"hook":"A glamorous 1950s Mexico City socialite travels to a decaying mansion in the mountains to rescue her cousin from a family of English mine owners, and finds the house itself is feeding on them.","comps":["A Great and Terrible Beauty","Rebecca"],"caution":"Award-decorated and atmospheric, but the first half is deliberately claustrophobic and nothing supernatural is confirmed for a long time, and there is essentially no romance to carry her through that stretch.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["body-horror","domestic-abuse","forced-pregnancy","self-harm","sexual-assault"],"predicted":3.36},{"id":"the-cruel-prince","title":"The Cruel Prince","author":"Holly Black","series":"The Folk of the Air","seriesNumber":1,"year":2018,"seriesStatus":"complete","setting":"fairy tale retelling","pov":"single-female","povNote":"first person from Jude, whose scheming is the plot rather than a reaction to it","spice":0,"fmcAgency":5,"prose":4,"gutPunch":4,"darkness":4,"tropes":["enemies to lovers","mortal in the fae court","political scheming","morally grey heroine","betrayal and power grab"],"contentWarnings":["bullying and humiliation","murder of parents","poisoning","torture","drugging","violence against children"],"goodreadsRating":4.0,"hook":"A human girl raised in the High Court of Faerie by the man who murdered her parents claws her way toward power by outmaneuvering the cruel prince who torments her.","comps":["The Bone Witch","House of Earth and Blood"],"caution":"Zero spice and the romance is mostly antagonism until the final act, so this rides entirely on whether Jude's ruthlessness carries her; if she needs an emotional anchor in the male lead early, Cardan is deliberately unlovable for most of book one.","tagConfidence":"high","lanes":["craft"],"momentum":"slow","unreleased":false,"flags":["child-harm","heavy-gore"],"predicted":3.34},{"id":"radiance-wraith-kings","title":"Radiance","author":"Grace Draven","series":"Wraith Kings","seriesNumber":1,"year":2015,"seriesStatus":"ongoing","setting":"monster romance","pov":"dual","povNote":"third person alternating between Ildiko and Brishen, who each privately find the other hideous and say so","spice":3,"fmcAgency":4,"prose":4,"gutPunch":4,"darkness":2,"tropes":["arranged interspecies marriage","friends to lovers","mutual physical revulsion to devotion","political alliance","genuinely kind hero"],"contentWarnings":["violence","body horror in later books","grief","on-page sex"],"goodreadsRating":3.98,"hook":"A human noblewoman and a Kai prince are married off to seal a treaty neither wanted, and build a real partnership out of dry humour and mutual respect before either finds the other attractive.","comps":["A Soul To Keep","The Bridge Kingdom"],"caution":"Book one is deliberately low-stakes and domestic; the series' devastating turns arrive in Eidolon, and she has said she will not wait through a slow build for a back-half payoff, let alone a next-book one.","tagConfidence":"high","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["body-horror"],"predicted":3.26},{"id":"the-maddest-obsession","title":"The Maddest Obsession","author":"Danielle Lori","series":"Made","seriesNumber":2,"year":2019,"seriesStatus":"ongoing","setting":"mafia","pov":"dual","povNote":"genuinely balanced dual POV between Gianna and Christian, unlike book one's lopsided split","spice":4,"fmcAgency":4,"prose":4,"gutPunch":4,"darkness":3,"tropes":["years-long slow burn","morally grey federal agent","banter","he-falls-first","mafia"],"contentWarnings":["substance abuse","childhood abuse (referenced)","violence","murder","explicit sex"],"goodreadsRating":4.24,"hook":"A chaotic, sharp-tongued mafia daughter and the undercover agent who has been quietly obsessed with her for years finally stop dodging each other.","comps":["Butcher & Blackbird","When Heroes Fall"],"caution":"It is book two of a connected series and the darkness is atmospheric rather than violent, after Mindf*ck and Haunting Adeline this may read as too tame to count as dark.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["addiction"],"predicted":3.26,"prerequisite":{"needs":null,"needsTitle":"The Sweetest Oblivion (reads standalone, but book 1 gives context)"}},{"id":"rose-in-chains","title":"Rose in Chains","author":"Julie Soto","series":"The Evermore Trilogy","seriesNumber":1,"year":2025,"seriesStatus":"ongoing","setting":"fae court","pov":"single-female","povNote":"third person Briony, cutting between present-day captivity and flashbacks to the magic academy where she and her captor were classmates","spice":4,"fmcAgency":4,"prose":4,"gutPunch":4,"darkness":5,"tropes":["captor and captive","fallen princess","shared history","court intrigue","long game revenge","dark fae"],"contentWarnings":["sexual slavery","sexual assault","forced sterilisation","war atrocity","character death","self-harm references"],"goodreadsRating":4.14,"hook":"After her kingdom falls, a princess stripped of her magic is auctioned to a member of the conquering faction who turns out to have known her before the war.","comps":["Alchemised","Quicksilver"],"caution":"Another captivity premise where the heroine's power is scheming rather than acting; she plots beautifully but she is in chains, and this reader has already said she loses patience with a woman who needs someone else to open the door.","tagConfidence":"medium","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["captivity","forced-pregnancy","self-harm","sexual-assault"],"predicted":3.26},{"id":"a-winters-promise","title":"A Winter's Promise","author":"Christelle Dabos","series":"The Mirror Visitor","seriesNumber":1,"year":2018,"seriesStatus":"complete","setting":"the Ark of the Pole, a frozen sky-island court, after the world shattered into floating fragments","pov":"single-female","povNote":"third limited on Ophelia with brief excursions; Thorn is kept opaque for most of the quartet by design, and the reveal of his interiority is the series' long payoff","spice":0,"fmcAgency":3,"prose":5,"gutPunch":3,"darkness":3,"tropes":["arranged marriage","court intrigue","hidden identities","unwanted bride","illusion and deception","grumpy taciturn husband"],"contentWarnings":["coercion","murder","psychological manipulation","classism and abuse of power"],"goodreadsRating":4.01,"hook":"Translated from the French by Hildegarde Serle: a clumsy museum curator who can read objects' histories is shipped across the world into an arranged marriage she was chosen for by someone with a plan.","comps":["The Bone Witch trilogy","Gemma Doyle trilogy"],"caution":"It is a genuinely slow, cold, four-book arc with zero spice and a heroine whose agency is subtle rather than kinetic; everything she says she needs early, this book withholds on purpose.","tagConfidence":"medium","lanes":["new"],"momentum":"slow","unreleased":false,"flags":[],"predicted":3.2},{"id":"when-heroes-fall","title":"When Heroes Fall","author":"Giana Darling","series":"Anti-Heroes in Love","seriesNumber":1,"year":2021,"seriesStatus":"complete","setting":"mafia","pov":"dual","povNote":"dual first-person between the defense lawyer and the capo she is defending","spice":4,"fmcAgency":5,"prose":3,"gutPunch":4,"darkness":3,"tropes":["lawyer and client","forced cohabitation","ice queen FMC","enemies to lovers","mafia"],"contentWarnings":["violence","murder","childhood trauma","sexual assault (referenced)","explicit sex"],"goodreadsRating":4.0,"hook":"A cold, ferociously competent defense attorney takes on a mafia capo accused of murder and is required to live in his house while he is under arrest.","comps":["The Maddest Obsession","When She Unravels"],"caution":"The prose swings purple and the first half is slow; the exact combination that made her DNF Leather & Lark at 25 percent.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["sexual-assault"],"predicted":3.07},{"id":"the-hurricane-wars","title":"The Hurricane Wars","author":"Thea Guanzon","series":"The Hurricane Wars","seriesNumber":1,"year":2023,"seriesStatus":"ongoing","setting":"epic fantasy","pov":"dual","povNote":"third person alternating between Talasyn, the light-magic soldier, and Alaric, the heir to the empire that burned her home","spice":2,"fmcAgency":4,"prose":4,"gutPunch":3,"darkness":3,"tropes":["enemies to lovers","forced political marriage","opposing magics that combine","war between empires","touch starved villain"],"contentWarnings":["war violence","colonialism","parental abuse","genocide references","mild sexual content"],"goodreadsRating":3.67,"hook":"A soldier who can wield light magic and the crown prince of the shadow empire hunting her are forced into a marriage alliance when their opposing powers turn out to fuse.","comps":["The Bridge Kingdom","Fourth Wing"],"caution":"The first third is almost pure worldbuilding and the burn is genuinely slow; this is the single book on the list most likely to trip her stated rule about not waiting for a back-half payoff.","tagConfidence":"high","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":[],"predicted":3.01},{"id":"born-darkly","title":"Born, Darkly","author":"Trisha Wolfe","series":"Darkly, Madly","seriesNumber":1,"year":2017,"seriesStatus":"complete","setting":"serial killer","pov":"dual","povNote":"alternating first-person between the psychologist and the death-row killer she is evaluating","spice":4,"fmcAgency":4,"prose":4,"gutPunch":3,"darkness":4,"tropes":["psychologist and patient","vigilante serial killer","mind games","forbidden","Joker/Harley dynamic"],"contentWarnings":["murder","torture","sexual assault (referenced)","psychological manipulation","explicit sex"],"goodreadsRating":3.63,"hook":"A criminal psychologist treating a death-row serial killer who only kills predators finds his games reshaping her faster than her analysis reshapes him.","comps":["the Mindf*ck series","Marrow"],"caution":"It opens slow, the thriller keeps elbowing the romance aside, and it ends on a cliffhanger into book two; three separate ways for her to lose patience early.","tagConfidence":"high","lanes":["dark"],"momentum":"slow","unreleased":false,"flags":["cliffhanger","heavy-gore","sexual-assault"],"predicted":3.01},{"id":"there-are-no-saints","title":"There Are No Saints","author":"Sophie Lark","series":"Sinners Duet","seriesNumber":1,"year":2021,"seriesStatus":"complete","setting":"serial killer","pov":"dual","povNote":"dual first-person; his chapters are the stalking, hers are the not-knowing","spice":5,"fmcAgency":3,"prose":2,"gutPunch":3,"darkness":5,"tropes":["serial killer hero","stalker","artist/mentor","dark obsession","rival killer"],"contentWarnings":["sexual assault","stalking","surveillance","torture","murder","dubious consent"],"goodreadsRating":3.78,"hook":"A celebrated San Francisco artist who kills for pleasure fixes on a struggling painter after a rival serial killer attacks her, and installs himself as her mentor.","comps":["Haunting Adeline","Marrow"],"caution":"This is the prose problem title on the list; reviewers consistently call the writing choppy and the leads one-dimensional, which is her single biggest complaint about a book.","tagConfidence":"high","lanes":["dark"],"momentum":"medium","unreleased":false,"flags":["heavy-gore","sexual-assault"],"predicted":2.96},{"id":"we-who-will-die","title":"We Who Will Die","author":"Stacia Stark","series":"Empire of Blood","seriesNumber":1,"year":2025,"seriesStatus":"ongoing","setting":"vampire fantasy","pov":"single-female","povNote":"first person Arvelle only, though the audiobook uses duet narration that can make it feel broader than it is","spice":3,"fmcAgency":5,"prose":3,"gutPunch":3,"darkness":4,"tropes":["deadly arena trials","blood vow","assassination plot","second chance","vampire court politics","love triangle setup"],"contentWarnings":["graphic violence","blood and gore","slavery","torture","character death","sexual content"],"goodreadsRating":4.07,"hook":"Bound by a blood vow to assassinate the emperor, a young woman fights her way through a magical gladiator tournament in a Rome ruled by vampires to reach his personal guard.","comps":["Fourth Wing","The Serpent and the Wings of Night"],"caution":"Single POV, and reviewers consistently say the back half rushes; big events land and the book immediately moves on, which blunts exactly the deaths and betrayals she reads for.","tagConfidence":"medium","lanes":["romantasy"],"momentum":"slow","unreleased":false,"flags":["captivity","heavy-gore"],"predicted":2.82},{"id":"shield-of-sparrows","title":"Shield of Sparrows","author":"Devney Perry","series":"Shield of Sparrows","seriesNumber":1,"year":2025,"seriesStatus":"ongoing","setting":"the kingdoms of Quentis and Turah, separated by monster-infested wilds","pov":"single-female","povNote":"Odessa carries essentially the whole book; the male lead gets one late chapter, so calling it dual POV is marketing","spice":3,"fmcAgency":3,"prose":3,"gutPunch":3,"darkness":3,"tropes":["arranged marriage","spare princess","bodyguard attraction","perilous journey","monsters","political alliance"],"contentWarnings":["violence","monster attacks","character death","arranged marriage coercion"],"goodreadsRating":4.37,"hook":"A disregarded princess is married off to a hostile kingdom as a political shield and falls for her betrothed's guardian on the road there.","comps":["Fourth Wing","Quicksilver"],"caution":"Multiple reviewers say nothing happens until the last 30 percent and the heroine is reactive for most of it; this is the exact shape of the slow build she has said she will not sit through.","tagConfidence":"high","lanes":["new"],"momentum":"slow","unreleased":false,"flags":[],"predicted":2.66}]};</script>
 
 <script>
 /* ------------------------------------------------------------------
@@ -1188,6 +1296,7 @@ input[type=range]{
       <button type="button" data-move="group" aria-pressed="false">Group</button>
     </div>
     <button class="btn ghost" id="setBtn">Settings</button>
+    <button class="btn ghost" id="oracleBtn" hidden>The Oracle</button>
     <button class="btn ghost" id="exportBtn">Export</button>
     <button class="btn ghost" id="importBtn">Import</button>
   </div>
@@ -1278,8 +1387,199 @@ var state = {
   statusDots:{show:true, colors:defaultDotColors()},
   defaultSections:DEFAULT_SECTIONS.slice(),
   shelfPlates:{show:false, labels:{}, hidden:{}},
-  groupLayout:{}, defaultGroupLayout:"shelf"
+  groupLayout:{}, defaultGroupLayout:"shelf",
+  oracle:null
 };
+
+/* ---------------- the Oracle ----------------
+   Reference data, never library data: the catalogue is read and never written
+   onto a book document or into an export. The only trace the Oracle leaves on a
+   book is its oracleTags. */
+var ORACLE = (function(){
+  var raw = window.__GILDED_ORACLE__;
+  if(!raw || typeof raw !== "object") return null;
+  var m = raw.model;
+  if(!m || !m.weights || !m.momentumScale || typeof m.intercept !== "number") return null;
+  if(!Array.isArray(raw.catalog) || !raw.catalog.length) return null;
+  var ok = raw.catalog.filter(function(c){
+    return c && c.id && c.title &&
+      typeof c.gutPunch === "number" && typeof c.prose === "number" &&
+      typeof c.fmcAgency === "number" && typeof c.momentum === "string";
+  });
+  if(!ok.length) return null;
+  return {
+    model: m,
+    catalog: ok,
+    anchors: Array.isArray(raw.anchors) ? raw.anchors : []
+  };
+})();
+
+var MOMENTUM_ORDER = ["slow","medium","fast","immediate"];
+var ORACLE_DIMS = ["gutPunch","prose","fmcAgency","momentum","darkness","spice"];
+var DIM_LABEL = {
+  gutPunch:"Emotional impact", prose:"Prose", fmcAgency:"Heroine's agency",
+  momentum:"Momentum", darkness:"Darkness", spice:"Spice"
+};
+var LANE_COLOR = {romantasy:"#1B2A44", dark:"#5A2330", craft:"#123832", "new":"#33253F"};
+var BLOCKED_BY_DEFAULT = "child-sexual-abuse";
+var SNOOZE_DRAWS = 20, SNOOZE_MS = 20 * 3600 * 1000, SNOOZE_CEIL_MS = 30 * 24 * 3600 * 1000;
+
+function defaultOracle(){
+  var filters = {};
+  filters[BLOCKED_BY_DEFAULT] = true;
+  return {snoozed:{}, refused:{}, corrections:{}, offers:{}, draws:0, weights:null, filters:filters};
+}
+/* A missing or malformed value must not be able to break the app, so every
+   branch here lands on something usable. */
+function normOracle(v){
+  var out = defaultOracle();
+  if(!v || typeof v !== "object") return out;
+  if(v.snoozed && typeof v.snoozed === "object"){
+    Object.keys(v.snoozed).forEach(function(k){
+      var e = v.snoozed[k];
+      if(!e || typeof e !== "object") return;
+      out.snoozed[k] = {
+        atDraw: typeof e.atDraw === "number" ? e.atDraw : 0,
+        atTime: typeof e.atTime === "number" ? e.atTime : 0
+      };
+    });
+  }
+  if(v.refused && typeof v.refused === "object"){
+    Object.keys(v.refused).forEach(function(k){ if(v.refused[k]) out.refused[k] = true; });
+  }
+  if(v.corrections && typeof v.corrections === "object"){
+    Object.keys(v.corrections).forEach(function(k){
+      var c = v.corrections[k];
+      if(!c || typeof c !== "object") return;
+      var keep = {};
+      ORACLE_DIMS.forEach(function(d){
+        var n = parseInt(c[d], 10);
+        if(!isNaN(n) && n) keep[d] = Math.max(-4, Math.min(4, n));
+      });
+      if(typeof c.note === "string" && c.note) keep.note = c.note.slice(0, 600);
+      if(Object.keys(keep).length) out.corrections[k] = keep;
+    });
+  }
+  if(v.offers && typeof v.offers === "object"){
+    Object.keys(v.offers).forEach(function(k){
+      var n = parseInt(v.offers[k], 10);
+      if(!isNaN(n) && n > 0) out.offers[k] = n;
+    });
+  }
+  if(typeof v.draws === "number" && v.draws >= 0) out.draws = Math.floor(v.draws);
+  if(v.weights && typeof v.weights === "object"){
+    var w = {}, good = true;
+    ["gutPunch","prose","fmcAgency","momentum","intercept"].forEach(function(k){
+      var n = parseFloat(v.weights[k]);
+      if(isNaN(n)) good = false; else w[k] = n;
+    });
+    if(good) out.weights = w;
+  }
+  if(v.filters && typeof v.filters === "object"){
+    out.filters = {};
+    Object.keys(v.filters).forEach(function(k){ if(v.filters[k]) out.filters[k] = true; });
+  }
+  return out;
+}
+function oracleState(){
+  if(!state.oracle) state.oracle = defaultOracle();
+  return state.oracle;
+}
+function oracleWeights(){
+  var o = oracleState();
+  return o.weights || ORACLE.model.weights;
+}
+function oracleIntercept(){
+  var o = oracleState();
+  return (o.weights && typeof o.weights.intercept === "number")
+    ? o.weights.intercept : ORACLE.model.intercept;
+}
+function clamp5(n){ return Math.max(0, Math.min(5, n)); }
+function stepMomentum(m, delta){
+  var i = MOMENTUM_ORDER.indexOf(m);
+  if(i === -1) i = 1;
+  return MOMENTUM_ORDER[Math.max(0, Math.min(MOMENTUM_ORDER.length - 1, i + (delta || 0)))];
+}
+/* The tags as this reader has corrected them. Corrections are hers alone: the
+   catalogue record is never altered. */
+function oracleTagsOf(rec){
+  var c = oracleState().corrections[rec.id] || {};
+  return {
+    gutPunch:  clamp5(rec.gutPunch  + (c.gutPunch  || 0)),
+    prose:     clamp5(rec.prose     + (c.prose     || 0)),
+    fmcAgency: clamp5(rec.fmcAgency + (c.fmcAgency || 0)),
+    darkness:  clamp5((rec.darkness || 0) + (c.darkness || 0)),
+    spice:     clamp5((rec.spice    || 0) + (c.spice    || 0)),
+    momentum:  stepMomentum(rec.momentum, c.momentum || 0)
+  };
+}
+/* The formula lives in the JSON, not here: these weights get re-fitted. */
+function oracleRows(tags){
+  var w = oracleWeights(), ms = ORACLE.model.momentumScale;
+  return [
+    {key:"gutPunch",  tag:tags.gutPunch,  scaled:tags.gutPunch / 5,  weight:w.gutPunch},
+    {key:"prose",     tag:tags.prose,     scaled:tags.prose / 5,     weight:w.prose},
+    {key:"fmcAgency", tag:tags.fmcAgency, scaled:tags.fmcAgency / 5, weight:w.fmcAgency},
+    {key:"momentum",  tag:tags.momentum,  scaled:(ms[tags.momentum] || 0), weight:w.momentum}
+  ].map(function(r){ r.contribution = r.scaled * r.weight; return r; });
+}
+function oraclePredict(rec){
+  var rows = oracleRows(oracleTagsOf(rec)), total = oracleIntercept();
+  rows.forEach(function(r){ total += r.contribution; });
+  return clamp5(total);
+}
+
+/* ---- gates ---- */
+function oracleNormTitle(t){
+  var s = String(t == null ? "" : t).toLowerCase().replace(/[^a-z0-9 ]+/g, " ");
+  s = s.replace(/\s+/g, " ").replace(/^ | $/g, "");
+  return s.replace(/^(the|a|an) /, "");
+}
+function libraryByTitle(){
+  var map = {};
+  list().forEach(function(b){ map[oracleNormTitle(b.title)] = b; });
+  return map;
+}
+function snoozeClear(id, now){
+  var o = oracleState(), sn = o.snoozed[id];
+  if(!sn) return true;
+  var age = now - sn.atTime;
+  if(age >= SNOOZE_CEIL_MS) return true;
+  /* Both, never either: twenty more draws AND twenty hours. With "or", sitting
+     down and pulling thirty in a row starts repeating around the twentieth. */
+  return (o.draws - sn.atDraw) >= SNOOZE_DRAWS && age >= SNOOZE_MS;
+}
+function oracleEligible(){
+  var o = oracleState(), lib = libraryByTitle(), now = Date.now();
+  return ORACLE.catalog.filter(function(rec){
+    if(lib[oracleNormTitle(rec.title)]) return false;
+    if(o.refused[rec.id]) return false;
+    if(!snoozeClear(rec.id, now)) return false;
+    var flags = Array.isArray(rec.flags) ? rec.flags : [];
+    for(var i = 0; i < flags.length; i++) if(o.filters[flags[i]]) return false;
+    var pre = rec.prerequisite;
+    if(pre && pre.needs){
+      var got = lib[oracleNormTitle(pre.needsTitle)];
+      if(!got || got.status !== "read") return false;
+    }
+    return true;
+  });
+}
+/* Top eight, not the single best, or it is the same book until she reads it.
+   Anything offered twice and not taken sinks. */
+function oraclePick(){
+  var o = oracleState();
+  var pool = oracleEligible().map(function(rec){
+    var n = o.offers[rec.id] || 0;
+    return {rec:rec, score:oraclePredict(rec) - (n >= 2 ? (n - 1) * 0.5 : 0)};
+  });
+  if(!pool.length) return null;
+  pool.sort(function(a, b){
+    return b.score - a.score || a.rec.title.localeCompare(b.rec.title);
+  });
+  var top = pool.slice(0, Math.min(8, pool.length));
+  return top[Math.floor(Math.random() * top.length)].rec;
+}
 var LAYOUTS = ["shelf","stack-neat","stack-messy"];
 var LAYOUT_LABEL = {shelf:"Shelf", "stack-neat":"Neat stack", "stack-messy":"Messy stack"};
 function normLayout(v, fallback){ return LAYOUTS.indexOf(v) === -1 ? fallback : v; }
@@ -1661,7 +1961,8 @@ function savePrefs(){
     sortBy: state.sortBy,
     dir: state.dir,
     groupBy: state.groupBy,
-    groupStyle: state.groupStyle
+    groupStyle: state.groupStyle,
+    oracle: state.oracle
   }).catch(function(){
     setSave("Couldn't save your settings", "warn");
   });
@@ -1847,6 +2148,481 @@ function stackHTML(st){
       '" data-last="' + esc(last ? last.id : "") + '" style="--sw:' + (widest + 20) + 'px">' +
     books.map(function(b){ return slabHTML(b, messy); }).join("") +
   "</div>";
+}
+
+/* ---- why it fits: the real dimension and its real number, never praise ---- */
+function oracleFitLines(rec, tags){
+  var lines = [], w = oracleWeights();
+  var ranked = [
+    {k:"gutPunch",  v:tags.gutPunch,  w:w.gutPunch},
+    {k:"prose",     v:tags.prose,     w:w.prose},
+    {k:"fmcAgency", v:tags.fmcAgency, w:w.fmcAgency}
+  ].sort(function(a, b){ return (b.v / 5) * b.w - (a.v / 5) * a.w; });
+  var best = ranked[0];
+  /* Read the standing off the weights rather than asserting it: they get
+     re-fitted, and a claim like "your strongest signal" has to stay true. */
+  var byWeight = ["gutPunch","prose","fmcAgency","momentum"].slice().sort(function(a, b){
+    return w[b] - w[a];
+  });
+  var rank = byWeight.indexOf(best.k);
+  var standing = rank === 0
+    ? "the dimension your ratings lean on hardest"
+    : (rank === 1 ? "the second thing your ratings lean on"
+                  : "a dimension your ratings still reward");
+  lines.push(DIM_LABEL[best.k] + " " + best.v + " of 5, " + standing + " at a weight of " +
+    best.w.toFixed(2) + ", and it carries " + (best.v / 5 * best.w).toFixed(2) + " of this score.");
+  var second = ranked[1];
+  if(second && second.v >= 4){
+    lines.push(DIM_LABEL[second.k] + " " + second.v + " of 5, worth another " +
+      (second.v / 5 * second.w).toFixed(2) + " at a weight of " + second.w.toFixed(2) + ".");
+  }
+  var ms = ORACLE.model.momentumScale;
+  lines.push("Momentum is " + tags.momentum + ", which scores " +
+    (ms[tags.momentum] || 0).toFixed(2) + " of 1 on your scale and is worth " +
+    (w.momentum * (ms[tags.momentum] || 0)).toFixed(2) + " of the prediction.");
+  if(rec.pov === "dual" || rec.pov === "multi"){
+    if(rec.povNote) lines.push(rec.povNote.charAt(0).toUpperCase() + rec.povNote.slice(1) + ".");
+  }
+  if(lines.length < 4 && typeof rec.darkness === "number" && tags.darkness >= 4){
+    lines.push("Darkness " + tags.darkness + " of 5, which does not enter the score but tracks what you finish.");
+  }
+  return lines.slice(0, 4);
+}
+function oracleLane(rec){
+  var lanes = Array.isArray(rec.lanes) ? rec.lanes : [];
+  for(var i = 0; i < lanes.length; i++) if(LANE_COLOR[lanes[i]]) return lanes[i];
+  return null;
+}
+function oracleMathHTML(rec, tags){
+  var rows = oracleRows(tags), total = oracleIntercept();
+  var body = rows.map(function(r){
+    total += r.contribution;
+    return "<tr><td>" + esc(DIM_LABEL[r.key]) + "</td><td>" + esc(String(r.tag)) + "</td><td>" +
+      r.scaled.toFixed(2) + "</td><td>" + r.weight.toFixed(4) + "</td><td>" +
+      r.contribution.toFixed(2) + "</td></tr>";
+  }).join("");
+  var fitted = oracleState().weights ? " Your refitted weights." : " Shipped weights.";
+  return '<table class="or-math"><thead><tr><th>Dimension</th><th>Tag</th><th>Scaled</th>' +
+      "<th>Weight</th><th>Adds</th></tr></thead><tbody>" + body +
+      "<tr><td>Baseline</td><td>&mdash;</td><td>&mdash;</td><td>" + oracleIntercept().toFixed(4) +
+        "</td><td>" + oracleIntercept().toFixed(2) + "</td></tr>" +
+      '<tr class="sum"><td>Predicted</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>' +
+        clamp5(total).toFixed(2) + "</td></tr>" +
+    "</tbody></table>" +
+    '<p class="or-cw">Tag confidence: ' + esc(rec.tagConfidence || "unstated") + "." + fitted + "</p>";
+}
+
+var oracleCurrent = null;
+function openOracle(){
+  if(!ORACLE) return;
+  closeOracle();
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "oracleOverlay";
+  ov.innerHTML = '<div class="oracle-card" role="dialog" aria-modal="true" aria-label="The Oracle" id="oracleCard"></div>';
+  document.body.appendChild(ov);
+  document.body.style.overflow = "hidden";
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeOracle(); });
+  ov.addEventListener("click", oracleCardClick);
+  drawOracle();
+}
+function closeOracle(){
+  var ov = byId("oracleOverlay");
+  if(ov) ov.remove();
+  oracleCurrent = null;
+  document.body.style.overflow = "";
+}
+function drawOracle(){
+  var card = byId("oracleCard");
+  if(!card) return;
+  var rec = oraclePick();
+  oracleCurrent = rec;
+  if(!rec){
+    card.innerHTML =
+      '<p class="or-eyebrow">The Oracle<i></i></p>' +
+      '<h3 class="or-title">Nothing left to offer tonight</h3>' +
+      '<p class="or-empty">Every candidate is already on your shelf, set aside, refused, or held back by a ' +
+        'content filter or an unread first book. Ones you set aside come back after twenty more draws ' +
+        'and twenty hours.</p>' +
+      '<div class="or-actions"><button class="btn" id="orClose" type="button">Close</button></div>';
+    return;
+  }
+  var o = oracleState();
+  o.draws += 1;
+  o.offers[rec.id] = (o.offers[rec.id] || 0) + 1;
+  savePrefs();
+
+  var tags = oracleTagsOf(rec);
+  var pred = oraclePredict(rec);
+  var series = rec.series
+    ? esc(rec.series) + (rec.seriesNumber ? " &middot; " + esc(String(rec.seriesNumber)) : "") : "";
+  var meta = [series, rec.year ? esc(String(rec.year)) : "", rec.setting ? esc(rec.setting) : ""]
+    .filter(Boolean).join(" &nbsp;&middot;&nbsp; ");
+  var comps = (Array.isArray(rec.comps) ? rec.comps : []).map(function(c){
+    return '<span class="or-chip">' + esc(c) + "</span>";
+  }).join("");
+  var crowd = typeof rec.goodreadsRating === "number"
+    ? '<span class="or-chip crowd">Goodreads ' + rec.goodreadsRating.toFixed(2) + " &mdash; the crowd, not the Oracle</span>" : "";
+  var flags = (Array.isArray(rec.flags) ? rec.flags : []).map(function(f){
+    return '<span class="or-chip flag">' + esc(f.replace(/-/g, " ")) + "</span>";
+  }).join("");
+  var cws = (Array.isArray(rec.contentWarnings) ? rec.contentWarnings : []).join("; ");
+
+  card.innerHTML =
+    '<p class="or-eyebrow">The Oracle offers<i></i></p>' +
+    '<div class="or-head">' +
+      '<div class="or-titles">' +
+        '<h3 class="or-title">' + esc(rec.title) + "</h3>" +
+        '<p class="or-by">by ' + esc(rec.author || "unknown") + "</p>" +
+        (meta ? '<p class="or-meta">' + meta + "</p>" : "") +
+      "</div>" +
+      '<div class="or-score"><b>' + pred.toFixed(1) + "</b><span>Predicted<br>on your scale</span></div>" +
+    "</div>" +
+    (rec.hook ? '<p class="or-hook">' + esc(rec.hook) + "</p>" : "") +
+    '<span class="or-h">Why it fits you</span>' +
+    '<ul class="or-fit">' + oracleFitLines(rec, tags).map(function(l){
+      return "<li>" + esc(l) + "</li>";
+    }).join("") + "</ul>" +
+    '<span class="or-h soft">Where it might lose you</span>' +
+    '<p class="or-caution">' + esc(rec.caution || "No caution recorded for this one.") + "</p>" +
+    '<span class="or-h">Reads like</span>' +
+    '<div class="or-chips">' + comps + crowd + "</div>" +
+    '<details class="or-fold"><summary>What is in it</summary><div class="or-fold-body">' +
+      '<div class="or-chips">' + (flags || '<span class="or-chip">No flags recorded</span>') + "</div>" +
+      '<p class="or-cw">' + esc(cws || "No content warnings recorded.") + "</p>" +
+    "</div></details>" +
+    '<details class="or-fold"><summary>Why this one</summary><div class="or-fold-body">' +
+      oracleMathHTML(rec, tags) +
+    "</div></details>" +
+    '<div class="or-actions">' +
+      '<button class="btn" id="orTake" type="button">Take it down</button>' +
+      '<button class="btn ghost" id="orSnooze" type="button">Not tonight</button>' +
+      '<button class="btn ghost" id="orWrong" type="button">Wrong read</button>' +
+    "</div>" +
+    '<p class="or-legend"><b>Take it down</b> puts it on your Want to Read shelf and draws the next. ' +
+      '<b>Not tonight</b> sets it aside for a while and draws the next. ' +
+      '<b>Wrong read</b> lets you tell the Oracle its tags are off.</p>';
+  card.scrollTop = 0;
+  var ov = byId("oracleOverlay");
+  if(ov) ov.scrollTop = 0;
+}
+function oracleCardClick(e){
+  if(e.target.closest("#orClose")){ closeOracle(); return; }
+  if(e.target.closest("#orTake")){ oracleTake(); return; }
+  if(e.target.closest("#orSnooze")){ oracleSnooze(); return; }
+  if(e.target.closest("#orWrong")){ openOracleFix(); return; }
+}
+function oracleSnooze(){
+  if(!oracleCurrent) return;
+  var o = oracleState();
+  o.snoozed[oracleCurrent.id] = {atDraw:o.draws, atTime:Date.now()};
+  savePrefs();
+  drawOracle();
+}
+/* Goes through the app's own creation path: same id scheme, same order
+   calculation, same save function. */
+function oracleTake(){
+  var rec = oracleCurrent;
+  if(!rec) return;
+  var tags = oracleTagsOf(rec);
+  var lane = oracleLane(rec);
+  var id = "book-" + Date.now().toString(36) + "-" + Math.floor(Math.random()*1e4).toString(36);
+  var drawn = new Date();
+  var note = [
+    "Predicted " + oraclePredict(rec).toFixed(1) + " of 5 on your own scale.",
+    "",
+    "Why it fits you:",
+    oracleFitLines(rec, tags).map(function(l){ return "• " + l; }).join("\n"),
+    "",
+    "Where it might lose you:",
+    rec.caution || "No caution recorded.",
+    "",
+    "Drawn from the Oracle on " + drawn.toISOString().slice(0, 10) + "."
+  ].join("\n");
+  var sections = newSections();
+  sections.push({id:sectionId(), label:"From the Oracle", text:note});
+
+  state.books[id] = {
+    id:id, title:rec.title, author:rec.author || "",
+    series:rec.series || "", seriesNumber:(rec.seriesNumber == null ? null : rec.seriesNumber),
+    status:"want", favorite:false, progress:0, ratings:{},
+    description:rec.hook || "", sections:sections,
+    display:"spine", coverId:null, addedAt:Date.now(),
+    order: (list().reduce(function(m, x){ return Math.max(m, orderOf(x)); }, 0) + 100),
+    oracleTags:{
+      id:rec.id, gutPunch:tags.gutPunch, prose:tags.prose, fmcAgency:tags.fmcAgency,
+      momentum:tags.momentum, darkness:tags.darkness, spice:tags.spice
+    }
+  };
+  if(lane) state.books[id].spineColor = LANE_COLOR[lane];
+  saveBook(state.books[id]);
+  render();
+  paintSaveSticky("“" + rec.title + "” is on your Want to Read shelf", "");
+  drawOracle();
+}
+
+/* ---- the correction panel: it judges the Oracle, not the book ---- */
+function openOracleFix(){
+  var rec = oracleCurrent;
+  if(!rec) return;
+  var tags = oracleTagsOf(rec);
+  var cur = oracleState().corrections[rec.id] || {};
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "oracleFixOverlay";
+  ov.innerHTML =
+  '<div class="sheet" role="dialog" aria-modal="true" aria-label="Wrong read">' +
+    "<h3>Wrong read</h3>" +
+    '<p class="hint">This corrects the Oracle’s reading of “' + esc(rec.title) +
+      '”, not the book. Your corrections stay on your copy.</p>' +
+    ORACLE_DIMS.map(function(d){
+      var shown = d === "momentum" ? tags.momentum : tags[d] + " of 5";
+      return '<div class="or-fixrow">' +
+        '<span class="nm">' + esc(DIM_LABEL[d]) + "<b>now " + esc(String(shown)) + "</b></span>" +
+        '<div class="seg" data-fixdim="' + d + '">' +
+          '<button type="button" data-fix="low" aria-pressed="false">Too low</button>' +
+          '<button type="button" data-fix="right" aria-pressed="true">Right</button>' +
+          '<button type="button" data-fix="high" aria-pressed="false">Too high</button>' +
+        "</div>" +
+      "</div>";
+    }).join("") +
+    '<div class="page-rule"></div>' +
+    '<label class="lbl" for="orNote">A note to yourself</label>' +
+    '<textarea class="or-note" id="orNote" placeholder="What the tags miss…">' + esc(cur.note || "") + "</textarea>" +
+    '<label class="toggle" for="orRefuse" style="margin-top:10px">' +
+      '<input type="checkbox" id="orRefuse">Never offer this book again</label>' +
+    '<p class="hint" style="margin:0;font-size:.84rem">Permanent. It lives in here rather than on the card so ' +
+      'a mistap cannot kill a recommendation.</p>' +
+    '<div class="sheet-actions">' +
+      '<button class="btn ghost" id="orFixCancel" type="button">Cancel</button>' +
+      '<button class="btn" id="orFixSave" type="button">Save</button>' +
+    "</div>" +
+  "</div>";
+  document.body.appendChild(ov);
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeOracleFix(); });
+  ov.addEventListener("click", function(e){
+    var b = e.target.closest("[data-fix]");
+    if(b){
+      var seg = b.closest("[data-fixdim]");
+      Array.prototype.forEach.call(seg.querySelectorAll("[data-fix]"), function(x){
+        x.setAttribute("aria-pressed", String(x === b));
+      });
+      return;
+    }
+    if(e.target.closest("#orFixCancel")){ closeOracleFix(); return; }
+    if(e.target.closest("#orFixSave")){ saveOracleFix(); return; }
+  });
+}
+function closeOracleFix(){
+  var ov = byId("oracleFixOverlay");
+  if(ov) ov.remove();
+}
+function saveOracleFix(){
+  var rec = oracleCurrent, ov = byId("oracleFixOverlay");
+  if(!rec || !ov) return;
+  var o = oracleState();
+  var c = {};
+  var prev = o.corrections[rec.id] || {};
+  ORACLE_DIMS.forEach(function(d){ if(prev[d]) c[d] = prev[d]; });
+  Array.prototype.forEach.call(ov.querySelectorAll("[data-fixdim]"), function(seg){
+    var d = seg.getAttribute("data-fixdim");
+    var on = seg.querySelector('[aria-pressed="true"]');
+    var v = on ? on.getAttribute("data-fix") : "right";
+    /* "Right" leaves the tag where the last correction put it. */
+    if(v === "low") c[d] = (c[d] || 0) + 1;
+    else if(v === "high") c[d] = (c[d] || 0) - 1;
+    if(c[d] === 0) delete c[d];
+  });
+  var note = byId("orNote").value.trim();
+  if(note) c.note = note.slice(0, 600);
+  if(Object.keys(c).length) o.corrections[rec.id] = c; else delete o.corrections[rec.id];
+  if(byId("orRefuse").checked){
+    o.refused[rec.id] = true;
+    savePrefs();
+    closeOracleFix();
+    drawOracle();
+    return;
+  }
+  savePrefs();
+  closeOracleFix();
+  /* Applied immediately: the score changes while she is still looking at it. */
+  redrawOracleScore();
+}
+/* Repaint the parts a correction can move, without spending another draw. */
+function redrawOracleScore(){
+  var rec = oracleCurrent, card = byId("oracleCard");
+  if(!rec || !card) return;
+  var tags = oracleTagsOf(rec), pred = oraclePredict(rec);
+  var score = card.querySelector(".or-score b");
+  if(score) score.textContent = pred.toFixed(1);
+  var fit = card.querySelector(".or-fit");
+  if(fit) fit.innerHTML = oracleFitLines(rec, tags).map(function(l){ return "<li>" + esc(l) + "</li>"; }).join("");
+  var folds = card.querySelectorAll(".or-fold");
+  if(folds.length > 1){
+    var open = folds[1].hasAttribute("open");
+    folds[1].querySelector(".or-fold-body").innerHTML = oracleMathHTML(rec, tags);
+    if(open) folds[1].setAttribute("open", "");
+  }
+  paintSaveSticky("Correction saved — score is now " + pred.toFixed(1), "");
+}
+
+/* ---- recalibration: least squares over her own ratings ---- */
+
+/* Every row the fit is allowed to see: the shipped anchors, plus anything the
+   Oracle put on the shelf that she has since rated. An anchor already covers
+   its own book, so a shelf copy of the same title is not counted twice. */
+function oracleFitRows(){
+  var rows = [], seen = {};
+  ORACLE.anchors.forEach(function(a){
+    if(typeof a.ashRating !== "number") return;
+    if(typeof a.gutPunch !== "number" || typeof a.prose !== "number" ||
+       typeof a.fmcAgency !== "number" || typeof a.momentum !== "string") return;
+    seen[oracleNormTitle(a.title)] = true;
+    rows.push({source:"anchor", title:a.title, y:a.ashRating, tags:{
+      gutPunch:a.gutPunch, prose:a.prose, fmcAgency:a.fmcAgency, momentum:a.momentum
+    }});
+  });
+  list().forEach(function(b){
+    var t = b.oracleTags;
+    if(!t || typeof t !== "object") return;
+    if(b.status !== "read" && b.status !== "dnf") return;
+    var y = ratingOf(b, "overall");
+    if(y < 0) return;
+    if(seen[oracleNormTitle(b.title)]) return;
+    if(typeof t.gutPunch !== "number" || typeof t.prose !== "number" ||
+       typeof t.fmcAgency !== "number" || typeof t.momentum !== "string") return;
+    seen[oracleNormTitle(b.title)] = true;
+    rows.push({source:"shelf", title:b.title, y:y, tags:{
+      gutPunch:t.gutPunch, prose:t.prose, fmcAgency:t.fmcAgency, momentum:t.momentum
+    }});
+  });
+  return rows;
+}
+/* Gauss–Jordan with partial pivoting. Five unknowns; no library for this. */
+function solveLinear(A, b){
+  var n = b.length, i, j, k, M = A.map(function(r, ri){ return r.slice().concat([b[ri]]); });
+  for(i = 0; i < n; i++){
+    var piv = i;
+    for(k = i + 1; k < n; k++) if(Math.abs(M[k][i]) > Math.abs(M[piv][i])) piv = k;
+    if(Math.abs(M[piv][i]) < 1e-12) return null;
+    var tmp = M[i]; M[i] = M[piv]; M[piv] = tmp;
+    var d = M[i][i];
+    for(j = i; j <= n; j++) M[i][j] /= d;
+    for(k = 0; k < n; k++){
+      if(k === i) continue;
+      var f = M[k][i];
+      if(!f) continue;
+      for(j = i; j <= n; j++) M[k][j] -= f * M[i][j];
+    }
+  }
+  return M.map(function(r){ return r[n]; });
+}
+var ORACLE_RIDGE = 0.05, ORACLE_MIN_ROWS = 8;
+/* Ridge on the four slopes only. Penalising the intercept would drag every
+   prediction toward zero rather than toward her average. */
+function oracleFit(rows){
+  var ms = ORACLE.model.momentumScale, n = 5, i, j, r;
+  var X = rows.map(function(row){
+    return [row.tags.gutPunch / 5, row.tags.prose / 5, row.tags.fmcAgency / 5,
+            (ms[row.tags.momentum] || 0), 1];
+  });
+  var y = rows.map(function(row){ return row.y; });
+  var A = [], bv = [];
+  for(i = 0; i < n; i++){
+    A.push([]);
+    for(j = 0; j < n; j++){
+      var sum = 0;
+      for(r = 0; r < X.length; r++) sum += X[r][i] * X[r][j];
+      if(i === j && i < 4) sum += ORACLE_RIDGE;
+      A[i].push(sum);
+    }
+    var sy = 0;
+    for(r = 0; r < X.length; r++) sy += X[r][i] * y[r];
+    bv.push(sy);
+  }
+  var sol = solveLinear(A, bv);
+  if(!sol) return null;
+  for(i = 0; i < n; i++) if(!isFinite(sol[i])) return null;
+  return {gutPunch:sol[0], prose:sol[1], fmcAgency:sol[2], momentum:sol[3], intercept:sol[4]};
+}
+function oracleWeightsNow(){
+  var w = oracleWeights();
+  return {gutPunch:w.gutPunch, prose:w.prose, fmcAgency:w.fmcAgency,
+          momentum:w.momentum, intercept:oracleIntercept()};
+}
+/* Plain language, not a table of deltas: what moved and what that means. */
+function oracleMoveReport(before, after, rows){
+  var names = {gutPunch:"emotional impact", prose:"prose", fmcAgency:"the heroine's agency",
+               momentum:"momentum", intercept:"the baseline"};
+  var keys = ["gutPunch","prose","fmcAgency","momentum"];
+  var moved = keys.map(function(k){
+    return {k:k, d:after[k] - before[k], was:before[k], now:after[k]};
+  }).sort(function(a, b){ return Math.abs(b.d) - Math.abs(a.d); });
+  var anchors = rows.filter(function(r){ return r.source === "anchor"; }).length;
+  var mine = rows.length - anchors;
+  var out = ["Refitted on " + rows.length + " rated " + (rows.length === 1 ? "book" : "books") +
+    " (" + anchors + " from the shipped set" + (mine ? ", " + mine + " of your own" : "") + ")."];
+  var big = moved.filter(function(m){ return Math.abs(m.d) >= 0.02; });
+  if(!big.length){
+    out.push("Nothing moved much — your ratings already agree with the weights you had.");
+  } else {
+    big.slice(0, 3).forEach(function(m){
+      out.push((m.d > 0 ? "The Oracle now leans harder on " : "The Oracle now leans less on ") +
+        names[m.k] + " (" + m.was.toFixed(2) + " → " + m.now.toFixed(2) + ").");
+    });
+    var top = moved[0];
+    out.push("In practice that means books strong on " + names[top.k] +
+      (top.d > 0 ? " will be offered sooner." : " will no longer jump the queue."));
+  }
+  var db = after.intercept - before.intercept;
+  if(Math.abs(db) >= 0.05){
+    out.push("The baseline " + (db > 0 ? "rose" : "fell") + " by " + Math.abs(db).toFixed(2) +
+      ", so every prediction shifts " + (db > 0 ? "up" : "down") + " a little.");
+  }
+  return out;
+}
+function oracleOut(text, cls){
+  var el = byId("orOut");
+  if(!el) return;
+  el.className = "or-out" + (cls ? " " + cls : "");
+  el.innerHTML = text;
+}
+function recalibrateOracle(){
+  var rows = oracleFitRows();
+  if(rows.length < ORACLE_MIN_ROWS){
+    oracleOut("Not enough to fit on yet: " + rows.length + " rated " +
+      (rows.length === 1 ? "book" : "books") + ", and it needs " + ORACLE_MIN_ROWS +
+      ". Rate books the Oracle gave you as Read or Did not finish, with an Overall rating, " +
+      "and it will have " + (ORACLE_MIN_ROWS - rows.length) + " more.", "warn");
+    return;
+  }
+  var before = oracleWeightsNow();
+  var after = oracleFit(rows);
+  if(!after){
+    oracleOut("Those ratings do not pin the weights down — they are too alike to tell the " +
+      "dimensions apart. Nothing changed.", "warn");
+    return;
+  }
+  oracleState().weights = after;
+  savePrefs();
+  oracleOut(oracleMoveReport(before, after, rows).map(function(l){
+    return "<span>" + esc(l) + "</span>";
+  }).join(""), "");
+  if(byId("oracleCard") && oracleCurrent) redrawOracleScore();
+}
+function resetOracleWeights(){
+  var o = oracleState();
+  if(!o.weights){
+    oracleOut("Already on the shipped weights.", "");
+    return;
+  }
+  o.weights = null;
+  savePrefs();
+  oracleOut("Back to the shipped weights: impact " + ORACLE.model.weights.gutPunch.toFixed(2) +
+    ", prose " + ORACLE.model.weights.prose.toFixed(2) +
+    ", agency " + ORACLE.model.weights.fmcAgency.toFixed(2) +
+    ", momentum " + ORACLE.model.weights.momentum.toFixed(2) + ".", "");
+  if(byId("oracleCard") && oracleCurrent) redrawOracleScore();
 }
 
 /* ---------------- shelf items ---------------- */
@@ -2872,6 +3648,27 @@ function openSettings(){
         '<input type="text" id="newSec" placeholder="Content warnings, Re-read notes…">' +
         '<button class="btn small ghost" id="addSec" type="button">Add</button>' +
       "</div></div>" +
+    (ORACLE ?
+      '<div class="page-rule"></div>' +
+      "<h4>The Oracle</h4>" +
+      '<p class="hint" style="margin:0 0 10px;font-size:.84rem">The Oracle predicts a rating from four ' +
+        'dimensions. Recalibrating re-fits those four against every book you have rated, so it learns ' +
+        'your taste rather than the shipped one. It never does this on its own.</p>' +
+      '<div class="grad-line">' +
+        '<button class="btn small" id="orRecal" type="button">Recalibrate</button>' +
+        '<button class="btn small ghost" id="orResetW" type="button">Reset to shipped weights</button>' +
+      "</div>" +
+      '<p class="or-out" id="orOut"><span>' +
+        (oracleState().weights
+          ? "Running on weights fitted to your own ratings."
+          : "Running on the shipped weights.") + "</span></p>" +
+      '<label class="toggle" for="orFilterCSA" style="padding-bottom:0">' +
+        '<input type="checkbox" id="orFilterCSA"' +
+        (oracleState().filters[BLOCKED_BY_DEFAULT] ? " checked" : "") +
+        ">Never offer books flagged for child sexual abuse</label>" +
+      '<p class="hint" style="margin:6px 0 0;font-size:.84rem">On by default. Filtered books are removed ' +
+        'from the pool silently — the Oracle will not tell you what it withheld.</p>'
+    : "") +
     '<div class="sheet-actions">' +
       '<button class="btn ghost" id="addCat" type="button">Add category</button>' +
       '<button class="btn" id="setClose" type="button">Done</button>' +
@@ -2951,6 +3748,16 @@ function openSettings(){
     if(e.key === "Enter"){ e.preventDefault(); addDefaultSection(); }
   });
 
+  if(ORACLE){
+    byId("orRecal").addEventListener("click", recalibrateOracle);
+    byId("orResetW").addEventListener("click", resetOracleWeights);
+    byId("orFilterCSA").addEventListener("change", function(){
+      var o = oracleState();
+      if(this.checked) o.filters[BLOCKED_BY_DEFAULT] = true;
+      else delete o.filters[BLOCKED_BY_DEFAULT];
+      savePrefs();
+    });
+  }
   byId("globalDots").addEventListener("change", function(){
     state.statusDots.show = this.checked;
     savePrefs(); render();
@@ -3975,6 +4782,11 @@ byId("restorePlates").addEventListener("click", function(){
   savePrefs(); render();
 });
 byId("setBtn").addEventListener("click", function(){ clearUndo(); openSettings(); });
+/* No catalogue, no Oracle: the button stays hidden and nothing else changes. */
+if(ORACLE){
+  byId("oracleBtn").hidden = false;
+  byId("oracleBtn").addEventListener("click", function(){ clearUndo(); openOracle(); });
+}
 byId("exportBtn").addEventListener("click", exportLibrary);
 byId("importBtn").addEventListener("click", importLibrary);
 byId("addBtn").addEventListener("click", function(){
@@ -3990,7 +4802,9 @@ byId("addBtn").addEventListener("click", function(){
 });
 document.addEventListener("keydown", function(e){
   if(e.key !== "Escape") return;
-  if(byId("bulkOverlay")) closeBulk();
+  if(byId("oracleFixOverlay")) closeOracleFix();
+  else if(byId("oracleOverlay")) closeOracle();
+  else if(byId("bulkOverlay")) closeBulk();
   else if(byId("setOverlay")) closeSettings();
   else if(byId("bookOverlay")) closeBook();
 });
@@ -4047,6 +4861,7 @@ if(window.claude && window.claude.use){
           state.shelfPlates = normPlates(d.shelfPlates);
           byId("platesOn").checked = state.shelfPlates.show;
         }
+        if(d.oracle !== undefined) state.oracle = normOracle(d.oracle);
         if(d.groupLayout !== undefined) state.groupLayout = normLayoutMap(d.groupLayout);
         if(d.defaultGroupLayout !== undefined){
           state.defaultGroupLayout = normLayout(d.defaultGroupLayout, "shelf");

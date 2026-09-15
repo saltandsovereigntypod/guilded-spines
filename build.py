@@ -8,7 +8,8 @@ those) and it persists through the Artifact `db` and `assets` capabilities.
 
 This script wraps that source in a full HTML document and prepends a small
 localStorage shim so the same app runs anywhere — GitHub Pages, a file:// open,
-any static host — seeded with the library in src/library.seed.json.
+any static host — seeded with the library in src/library.seed.json and, when it
+is present, the Oracle's catalogue in src/oracle-catalog.json.
 
     python3 build.py
 
@@ -21,6 +22,7 @@ import pathlib
 ROOT = pathlib.Path(__file__).parent
 SOURCE = ROOT / "artifact" / "gilded-spines.html"
 SEED = ROOT / "src" / "library.seed.json"
+ORACLE = ROOT / "src" / "oracle-catalog.json"
 OUT = ROOT / "index.html"
 
 SHIM = """
@@ -189,6 +191,19 @@ def main():
         + ";</script>\n"
     )
 
+    # The Oracle's catalogue rides along the same way. It is reference data, not
+    # library data: the app reads it and never writes any of it onto a book. If
+    # the file is absent the app simply hides the Oracle button.
+    oracle = None
+    oracle_script = ""
+    if ORACLE.exists():
+        oracle = json.loads(ORACLE.read_text(encoding="utf-8"))
+        oracle_script = (
+            "<script>window.__GILDED_ORACLE__ = "
+            + json.dumps(oracle, ensure_ascii=False, separators=(",", ":"))
+            + ";</script>\n"
+        )
+
     # The source starts with <title> and <link>/<style>; those belong in <head>.
     # Everything from the first <svg ...> onward is body content.
     split_at = source.index("<svg style=\"display:none\"")
@@ -196,10 +211,15 @@ def main():
     body_part = source[split_at:]
 
     OUT.write_text(
-        HEAD + head_part + "</head>\n<body>\n" + seed_script + SHIM + body_part + "\n</body>\n</html>\n",
+        HEAD + head_part + "</head>\n<body>\n" + seed_script + oracle_script + SHIM + body_part + "\n</body>\n</html>\n",
         encoding="utf-8",
     )
-    print(f"wrote {OUT.relative_to(ROOT)}  ({OUT.stat().st_size:,} bytes, {len(seed)} books seeded)")
+    note = ""
+    if oracle:
+        note = f", oracle {len(oracle.get('catalog', []))} candidates"
+    else:
+        note = ", no oracle catalogue"
+    print(f"wrote {OUT.relative_to(ROOT)}  ({OUT.stat().st_size:,} bytes, {len(seed)} books seeded{note})")
 
 
 if __name__ == "__main__":
