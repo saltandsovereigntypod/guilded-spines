@@ -173,8 +173,9 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
 /* An engraved brass plate screwed to the front face of the plank. */
 .name-plate{
   position:absolute;bottom:-4px;transform:translateX(-50%);
-  height:19px;display:flex;align-items:center;gap:6px;
+  height:19px;display:flex;align-items:center;gap:0;
   padding:0 11px;border-radius:2px;z-index:4;cursor:text;
+  max-width:100%;overflow:hidden;
   /* Brass left on a shelf for fifty years: dulled, blotched with patina, the
      lacquer worn off in streaks. Colour-independent layers over a desaturated
      base, the same trick the book finishes use. */
@@ -205,10 +206,47 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   font-family:var(--f-display);font-weight:600;
   font-size:.53rem;letter-spacing:.17em;text-transform:uppercase;
   color:#382A0C;text-shadow:0 1px 0 rgba(244,228,182,.34);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:128px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;max-width:240px;
   outline-offset:2px;
 }
 .plate-text:focus-visible{outline:1px solid #382A0C}
+/* At rest a plate carries its wording and nothing else — that is what lets it
+   fit over the handful of books it names. The controls collapse to no width.
+   Not display:none: that takes them out of the tab order, and since they only
+   come back on :focus-within, nothing inside could ever take the focus that
+   would bring them back. Zero width with overflow hidden keeps them focusable,
+   so tabbing to one opens the plate, and on a phone tapping the wording
+   focuses the contenteditable and does the same. */
+.name-plate .grp-layout,
+.name-plate .plate-hide{
+  width:0;max-width:0;min-width:0;padding-left:0;padding-right:0;
+  border-left-width:0;border-right-width:0;margin-left:0;
+  opacity:0;overflow:hidden;
+  /* Opacity only. Animating the width would slide the buttons out from under a
+     cursor already reaching for them, and it would also leave positionPlates
+     measuring a plate mid-transition if it ever ran over live elements. */
+  transition:opacity .12s ease;
+}
+.name-plate:hover,.name-plate:focus-within{
+  /* Beats the inline max-width positionPlates writes, so the full wording and
+     both controls can show. Overlapping a neighbour for that moment is the
+     point; the raised z-index keeps it on top while it does. */
+  max-width:none!important;z-index:9;overflow:visible;
+}
+.name-plate:hover .plate-text,.name-plate:focus-within .plate-text{
+  max-width:none;overflow:visible;text-overflow:clip;
+}
+.name-plate:hover .grp-layout,.name-plate:focus-within .grp-layout{
+  width:auto;max-width:none;padding-left:5px;padding-right:5px;
+  border-left-width:1px;border-right-width:1px;margin-left:6px;opacity:1;
+}
+.name-plate:hover .plate-hide,.name-plate:focus-within .plate-hide{
+  width:12px;max-width:12px;border-left-width:1px;border-right-width:1px;
+  margin-left:6px;opacity:1;
+}
+@media (prefers-reduced-motion:reduce){
+  .name-plate .grp-layout,.name-plate .plate-hide{transition:none}
+}
 .plate-hide{
   flex:0 0 auto;width:12px;height:12px;padding:0;display:grid;place-items:center;cursor:pointer;
   font-family:var(--f-data);font-size:.62rem;line-height:1;
@@ -2633,35 +2671,91 @@ function drawPlateControls(){
 /* Plates are centred on the books they belong to by measurement, not by
    arithmetic over paddings and gaps that a stylesheet change would silently
    invalidate. */
-/* Each plate takes the width its own wording needs and is centred on the run it
-   names. Squeezing one into a narrow run only ellipsises the wording away and
-   leaves the controls colliding with the next plate, so instead a plate that
-   cannot clear its neighbour is nudged along, and one that still cannot fit the
-   row steps aside entirely. */
-var PLATE_MIN_RUN = 66, PLATE_GAP = 6;
+/* A plate is never slid off the run it names. Sliding was what produced the
+   crowded strip: one plate too wide for its books pushed the next one off its
+   own, and so on down the rail until the last fell off the end and vanished.
+   So a plate stays centred on its run, and an overlap is settled by trimming
+   both plates toward their centres, or, failing that, by dropping the one whose
+   run is shorter — the bigger series is the one worth labelling.
+   `left` is the plate's centre; the stylesheet supplies translateX(-50%). */
+var PLATE_MIN_RUN = 48,      /* shorter than this and there is nothing to label */
+    PLATE_GAP = 6,           /* clear brass between two plates */
+    PLATE_OVERHANG = 18,     /* a plate may sit this far past its run, each side */
+    PLATE_MIN_W = 54,        /* trimming floor: below this the wording is gone */
+    PLATE_EDGE = 4;          /* keep off the ends of the plank */
 function positionPlates(root){
   Array.prototype.forEach.call(root.querySelectorAll(".shelf"), function(shelf){
     var plates = Array.prototype.slice.call(shelf.querySelectorAll(".name-plate"));
     if(!plates.length) return;
     var items = shelf.querySelectorAll("[data-item]");
     var sr = shelf.getBoundingClientRect();
-    var lastRight = -Infinity;
+
+    /* Reset every plate first, then measure every plate: a style written in the
+       middle of a measuring loop invalidates everything measured after it. */
+    plates.forEach(function(p){ p.hidden = false; p.style.maxWidth = ""; });
+    var live = [];
     plates.forEach(function(p){
       var a = items[parseInt(p.getAttribute("data-from"), 10)];
       var z = items[parseInt(p.getAttribute("data-to"), 10)];
-      p.hidden = false;
       if(!a || !z){ p.hidden = true; return; }
-      var left = a.getBoundingClientRect().left - sr.left;
-      var right = z.getBoundingClientRect().right - sr.left;
-      if(right - left < PLATE_MIN_RUN){ p.hidden = true; return; }
-      p.style.left = "0px";
-      var w = p.getBoundingClientRect().width;
-      var x = (left + right) / 2 - w / 2;
-      if(x < lastRight + PLATE_GAP) x = lastRight + PLATE_GAP;
-      if(x < 0) x = 0;
-      if(x + w > sr.width){ p.hidden = true; return; }
-      p.style.left = Math.round(x + w / 2) + "px";
-      lastRight = x + w;
+      var l = a.getBoundingClientRect().left - sr.left;
+      var r = z.getBoundingClientRect().right - sr.left;
+      if(r - l < PLATE_MIN_RUN){ p.hidden = true; return; }
+      live.push({p:p, runL:l, runR:r, run:r - l, mid:(l + r) / 2,
+                 nat:p.getBoundingClientRect().width});
+    });
+    if(!live.length) return;
+
+    /* Centre on the run, clamped to a little overhang each side, then nudged
+       clear of the ends of the plank. Nudging, not hiding: dropping a plate is
+       the last resort. */
+    function place(m){
+      m.x = m.mid - m.w / 2;
+      if(m.x + m.w > sr.width - PLATE_EDGE) m.x = sr.width - PLATE_EDGE - m.w;
+      if(m.x < PLATE_EDGE) m.x = PLATE_EDGE;
+    }
+    live.forEach(function(m){
+      m.w = Math.min(m.nat, Math.max(m.run + 2 * PLATE_OVERHANG, PLATE_MIN_W));
+      place(m);
+    });
+    live.sort(function(a, b){ return a.runL - b.runL; });
+
+    var prev = null;
+    live.forEach(function(m){
+      if(!prev){ prev = m; return; }
+      var over = (prev.x + prev.w + PLATE_GAP) - m.x;
+      if(over > 0){
+        /* A plate re-centres as it narrows, so shrinking it by d only walks its
+           facing edge back by d/2. Closing a gap of `over` therefore costs 2*over
+           of width between the pair, not `over` — halve that and the plates are
+           still touching, which is how a solvable overlap turns into a drop. */
+        var need = 2 * over;
+        var slackA = Math.max(0, prev.w - PLATE_MIN_W);
+        var slackB = Math.max(0, m.w - PLATE_MIN_W);
+        if(slackA + slackB >= need){
+          var takeA = Math.min(slackA, need / 2);
+          var takeB = Math.min(slackB, need - takeA);
+          takeA = Math.min(slackA, need - takeB);
+          prev.w -= takeA; m.w -= takeB;
+          place(prev); place(m);
+          over = (prev.x + prev.w + PLATE_GAP) - m.x;
+        }
+      }
+      if(over > 0){
+        var drop = prev.run <= m.run ? prev : m;
+        drop.p.hidden = true;
+        drop.dropped = true;
+        if(drop === prev) prev = m;
+        return;
+      }
+      prev = m;
+    });
+
+    live.forEach(function(m){
+      if(m.dropped) return;
+      /* Hover and focus beat this with !important, so the full wording can show. */
+      m.p.style.maxWidth = Math.round(m.w) + "px";
+      m.p.style.left = Math.round(m.x + m.w / 2) + "px";
     });
   });
 }
