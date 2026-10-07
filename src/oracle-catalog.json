@@ -558,6 +558,10 @@
    "year": 2021,
    "seriesStatus": "ongoing",
    "setting": "gothic",
+   "genres": [
+    "gothic",
+    "historical"
+   ],
    "pov": "single-female",
    "povNote": "second person epistolary, written by Constanta as a long letter addressed to the husband she killed",
    "spice": 3,
@@ -612,6 +616,9 @@
    "year": 2011,
    "seriesStatus": "complete",
    "setting": "historical fantasy",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "multi",
    "povNote": "third person centered on Karou, opening out to Akiva and a long past-life section in the back half",
    "spice": 1,
@@ -663,6 +670,10 @@
    "year": 2026,
    "seriesStatus": "ongoing",
    "setting": "a dying world of caged dragons, moon-magic and buried memory",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "multi",
    "povNote": "Raeve and Kaan anchor it but the cast widens to five or six narrators, including the antagonist",
    "spice": 2,
@@ -716,6 +727,10 @@
    "year": 2017,
    "seriesStatus": "standalone",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "dual first-person from two survivors sharing one delusion, so the unreliability is built into both voices",
    "spice": 5,
@@ -767,6 +782,10 @@
    "year": 2026,
    "seriesStatus": "ongoing",
    "setting": "Cape Carnage in the aftermath, with true-crime tourists flooding the town",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "multi",
    "povNote": "Harper and Nolan alternate as before, with chapters from the antagonist La Plume opening up the threat from the other side",
    "spice": 4,
@@ -821,6 +840,10 @@
    "year": 2021,
    "seriesStatus": "standalone",
    "setting": "fairy tale retelling",
+   "genres": [
+    "fairytale",
+    "gothic"
+   ],
    "pov": "single-female",
    "povNote": "first person from Iris, the youngest of three sisters, with interleaved flashbacks to the month they all went missing",
    "spice": 1,
@@ -876,6 +899,9 @@
    "year": 2016,
    "seriesStatus": "standalone",
    "setting": "stalker",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "dual",
    "povNote": "dual first-person from the home invader and the woman he takes, his chapters unflinchingly inside his logic",
    "spice": 4,
@@ -927,6 +953,9 @@
    "year": 2024,
    "seriesStatus": "complete",
    "setting": "post-revolution fantasy",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Rune and Gideon, each secretly investigating the other, so the dramatic irony runs both directions from chapter one",
    "spice": 2,
@@ -977,6 +1006,9 @@
    "year": 2025,
    "seriesStatus": "complete",
    "setting": "a post-revolutionary state where witches are hunted, modeled on the Terror",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "close third alternating between Rune and Gideon, each one certain the other is the mistake they cannot stop making",
    "spice": 2,
@@ -1030,6 +1062,10 @@
    "year": 2001,
    "seriesStatus": "complete",
    "setting": "Terre d'Ange, an alternate Renaissance France where love as thou wilt is law",
+   "genres": [
+    "epic",
+    "historical"
+   ],
    "pov": "single-female",
    "povNote": "first person retrospective; Phedre is telling you this years later, which means she survives, and the tension comes from what it cost",
    "spice": 5,
@@ -1086,6 +1122,10 @@
    "year": 2023,
    "seriesStatus": "complete",
    "setting": "historical fantasy",
+   "genres": [
+    "romantasy",
+    "historical"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Iris and Roman, who are also writing each other anonymous letters through an enchanted typewriter without knowing who's on the other end",
    "spice": 1,
@@ -1136,6 +1176,10 @@
    "year": 2021,
    "seriesStatus": "standalone",
    "setting": "Great Breltain, a post-war alternate England, and the rotting manor of Lindridge Hall",
+   "genres": [
+    "gothic",
+    "historical"
+   ],
    "pov": "single-female",
    "povNote": "tight third on Jane, deliberately unreliable; the reader is never given ground she does not have",
    "spice": 2,
@@ -1188,6 +1232,9 @@
    "year": 2021,
    "seriesStatus": "complete",
    "setting": "dark contemporary",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "multi",
    "povNote": "rotating first-person across Brooklyn, Niall and Mateo, with Brooklyn carrying most of the voice",
    "spice": 5,
@@ -1240,6 +1287,10 @@
    "year": 2025,
    "seriesStatus": "ongoing",
    "setting": "Cape Carnage, a tourist-choked coastal town in the present-day US",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "alternating first-person between Harper and Nolan, with her interiority doing most of the comedic and emotional lifting",
    "spice": 4,
@@ -1290,6 +1341,9 @@
    "year": 2021,
    "seriesStatus": "ongoing",
    "setting": "Huaxia, a science-fantasy China where giant mecha are piloted by paired boys and disposable girls",
+   "genres": [
+    "scifi"
+   ],
    "pov": "single-female",
    "povNote": "first person, present tense, entirely Zetian, and her voice is the point: she is never sympathetic and never apologizes",
    "spice": 1,
@@ -1344,6 +1398,10 @@
    "year": 2024,
    "seriesStatus": "complete",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "dual first-person; both of them are lying to the other about why they came to the island",
    "spice": 4,
@@ -1394,6 +1452,9 @@
    "year": 2023,
    "seriesStatus": "standalone",
    "setting": "gothic",
+   "genres": [
+    "gothic"
+   ],
    "pov": "dual",
    "povNote": "Opal narrates in first person present, Arthur's sections come in third, plus fake footnotes and archival fragments",
    "spice": 2,
@@ -1444,6 +1505,9 @@
    "year": 2018,
    "seriesStatus": "ongoing",
    "setting": "dark contemporary",
+   "genres": [
+    "thriller"
+   ],
    "pov": "single-female",
    "povNote": "first-person from a self-diagnosed sociopath, which is the entire point; the voice is the engine",
    "spice": 2,
@@ -1491,6 +1555,9 @@
    "year": 2022,
    "seriesStatus": "ongoing",
    "setting": "mafia",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "dual",
    "povNote": "dual first-person weighted roughly 70/30 toward Valentina",
    "spice": 4,
@@ -1541,6 +1608,10 @@
    "year": 2026,
    "seriesStatus": "ongoing",
    "setting": "Hollow Canyon University, present-day US",
+   "genres": [
+    "darkromance",
+    "academia"
+   ],
    "pov": "dual",
    "povNote": "alternating first person between Reverie and Kellan/'Dread', with his obsession rendered from the inside rather than reported",
    "spice": 5,
@@ -1593,6 +1664,10 @@
    "year": 2022,
    "seriesStatus": "complete",
    "setting": "gothic fantasy",
+   "genres": [
+    "romantasy",
+    "gothic"
+   ],
    "pov": "single-female",
    "povNote": "first person Elspeth, but she shares her skull with the Nightmare, a second voice that argues with her; it reads closer to two narrators than one; book two, Two Twisted Crowns, opens into true multi-POV",
    "spice": 2,
@@ -1643,6 +1718,10 @@
    "year": 2025,
    "seriesStatus": "complete",
    "setting": "Aisling Cathedral and the surrounding gothic kingdom of Traum",
+   "genres": [
+    "gothic",
+    "romantasy"
+   ],
    "pov": "single-female",
    "povNote": "first person from Six throughout; the knight stays fully external, which is either the appeal or the dealbreaker",
    "spice": 2,
@@ -1697,6 +1776,10 @@
    "year": 2025,
    "seriesStatus": "standalone",
    "setting": "1532 Spain, 1827 England and 2019 Boston, braided",
+   "genres": [
+    "gothic",
+    "historical"
+   ],
    "pov": "multi",
    "povNote": "three women's lives in three centuries, rotating, and the moment you understand how they touch is the moment the book detonates",
    "spice": 3,
@@ -1749,6 +1832,10 @@
    "year": 2024,
    "seriesStatus": "ongoing",
    "setting": "epic fantasy",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "multi",
    "povNote": "roughly seventy percent Raeve, with chapters from the king Kaan and interleaved past-life fragments that recontextualise both",
    "spice": 4,
@@ -1801,6 +1888,9 @@
    "year": 2024,
    "seriesStatus": "standalone",
    "setting": "present-day London, inside a secret government department that extracts people from history",
+   "genres": [
+    "scifi"
+   ],
    "pov": "single-female",
    "povNote": "first person from an unnamed British-Cambodian civil servant, with interleaved Arctic sections from the man she is minding",
    "spice": 2,
@@ -1850,6 +1940,11 @@
    "year": 2026,
    "seriesStatus": "ongoing",
    "setting": "Stonehurst University, a dark-academia campus in the present-day US",
+   "genres": [
+    "darkromance",
+    "thriller",
+    "academia"
+   ],
    "pov": "dual",
    "povNote": "alternating first person between the undercover analyst and the astrophysicist she is building a case against",
    "spice": 4,
@@ -1898,6 +1993,9 @@
    "year": 2019,
    "seriesStatus": "ongoing",
    "setting": "romantic suspense",
+   "genres": [
+    "thriller"
+   ],
    "pov": "multi",
    "povNote": "third-person rotating between Daisy, Gideon and the killer, so the reader is always ahead of someone",
    "spice": 3,
@@ -1947,6 +2045,10 @@
    "year": 2024,
    "seriesStatus": "complete",
    "setting": "epic fantasy",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "dual",
    "povNote": "Freya carries the bulk of the narration with Bjorn's POV threaded in, so you see him working her while she's working him",
    "spice": 3,
@@ -1997,6 +2099,10 @@
    "year": 2019,
    "seriesStatus": "ongoing",
    "setting": "gothic",
+   "genres": [
+    "academia",
+    "gothic"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Alex Stern in the present and Darlington in the months before he vanished, plus a shifting timeline",
    "spice": 1,
@@ -2051,6 +2157,10 @@
    "year": 2019,
    "seriesStatus": "ongoing",
    "setting": "necromancy",
+   "genres": [
+    "scifi",
+    "gothic"
+   ],
    "pov": "single-female",
    "povNote": "close third on Gideon only, which is the engine of the book because she understands almost nothing of the necromancy happening around her",
    "spice": 0,
@@ -2102,6 +2212,9 @@
    "year": 2021,
    "seriesStatus": "complete",
    "setting": "epic fantasy",
+   "genres": [
+    "epic"
+   ],
    "pov": "multi",
    "povNote": "Priya and Malini carry the book, with rotating chapters from a rebel leader, a noblewoman and a prince that make the politics real rather than decorative",
    "spice": 2,
@@ -2153,6 +2266,11 @@
    "year": 2022,
    "seriesStatus": "standalone",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller",
+    "academia"
+   ],
    "pov": "dual",
    "povNote": "dual first-person; she is hunting a cult leader as a killer, he is hunting the same man for the FBI",
    "spice": 4,
@@ -2202,6 +2320,10 @@
    "year": 2023,
    "seriesStatus": "standalone",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "first-person alternating between two rival killers who are each hiding what they are from the other",
    "spice": 4,
@@ -2251,6 +2373,10 @@
    "year": 2022,
    "seriesStatus": "complete",
    "setting": "military academy fantasy",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "single-female",
    "povNote": "first person present from Ikenna, tight and furious, no hero chapters",
    "spice": 2,
@@ -2300,6 +2426,9 @@
    "year": 2018,
    "seriesStatus": "complete",
    "setting": "epic fantasy",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "alternating first-person between Lara, the assassin-bride sent to destroy the kingdom, and Aren, the king she married to destroy",
    "spice": 3,
@@ -2349,6 +2478,10 @@
    "year": 2012,
    "seriesStatus": "complete",
    "setting": "historical fantasy",
+   "genres": [
+    "historical",
+    "gothic"
+   ],
    "pov": "multi",
    "povNote": "rotating third person across Evie, Memphis, Theta, Sam, Mabel and Jericho, with occasional omniscient interludes from objects and weather",
    "spice": 0,
@@ -2402,6 +2535,9 @@
    "year": 2022,
    "seriesStatus": "standalone",
    "setting": "fairy tale retelling",
+   "genres": [
+    "fairytale"
+   ],
    "pov": "single-female",
    "povNote": "close third on Marra, a thirty-year-old princess nobody ever bothered to watch",
    "spice": 1,
@@ -2454,6 +2590,10 @@
    "year": 2018,
    "seriesStatus": "standalone",
    "setting": "fairy tale retelling",
+   "genres": [
+    "fairytale",
+    "historical"
+   ],
    "pov": "multi",
    "povNote": "six first-person narrators with unmarked chapter switches, led by Miryem, Wanda and Irina",
    "spice": 1,
@@ -2505,6 +2645,9 @@
    "year": 2019,
    "seriesStatus": "ongoing",
    "setting": "epic fantasy",
+   "genres": [
+    "epic"
+   ],
    "pov": "multi",
    "povNote": "four principal narrators across two hemispheres; a bodyguard-mage, an Eastern dragonrider, a disgraced alchemist and a courtier; braided toward one convergence",
    "spice": 2,
@@ -2551,6 +2694,9 @@
    "year": 2020,
    "seriesStatus": "complete",
    "setting": "historical fantasy",
+   "genres": [
+    "historical"
+   ],
    "pov": "multi",
    "povNote": "third person alternating primarily between Juliette and Roma, with short interludes from Marshall, Kathleen and Benedikt",
    "spice": 1,
@@ -2602,6 +2748,9 @@
    "year": 2016,
    "seriesStatus": "complete",
    "setting": "historical fantasy",
+   "genres": [
+    "historical"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Lada and her brother Radu, who want incompatible things from the same man",
    "spice": 1,
@@ -2653,6 +2802,10 @@
    "year": 2022,
    "seriesStatus": "ongoing",
    "setting": "gothic",
+   "genres": [
+    "romantasy",
+    "gothic"
+   ],
    "pov": "single-male",
    "povNote": "first person throughout from Remy Pendergast, the half-outcast vampire hunter",
    "spice": 3,
@@ -2705,6 +2858,9 @@
    "year": 2025,
    "seriesStatus": "standalone",
    "setting": "Cambridge's department of Analytic Magick, and the eight courts of Hell",
+   "genres": [
+    "academia"
+   ],
    "pov": "dual",
    "povNote": "Alice narrates the present descent; Peter's side arrives through interleaved flashbacks, so the reader learns him at the same rate she is forced to",
    "spice": 1,
@@ -2754,6 +2910,11 @@
    "year": 2023,
    "seriesStatus": "complete",
    "setting": "campus",
+   "genres": [
+    "darkromance",
+    "academia",
+    "gothic"
+   ],
    "pov": "dual",
    "povNote": "dual first-person between Lilia and the professor known as Doctor Death",
    "spice": 4,
@@ -2804,6 +2965,10 @@
    "year": 2023,
    "seriesStatus": "standalone",
    "setting": "romantic suspense",
+   "genres": [
+    "gothic",
+    "thriller"
+   ],
    "pov": "single-female",
    "povNote": "Ruth's first person across a split timeline, past and present braided",
    "spice": 3,
@@ -2856,6 +3021,9 @@
    "year": 2009,
    "seriesStatus": "ongoing",
    "setting": "dark fantasy romance",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "third person split between Martise, the bondwoman sent to spy, and Silhara, the sorcerer who knows exactly what she is and lets her stay",
    "spice": 3,
@@ -2907,6 +3075,9 @@
    "year": 2020,
    "seriesStatus": "standalone",
    "setting": "dark contemporary",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "dual",
    "povNote": "dual POV split across a captivity section and a long, messy aftermath section",
    "spice": 3,
@@ -2959,6 +3130,9 @@
    "year": 2015,
    "seriesStatus": "complete",
    "setting": "military academy fantasy",
+   "genres": [
+    "epic"
+   ],
    "pov": "dual",
    "povNote": "alternating first person between Laia, a slave spying inside the military academy, and Elias, the academy's best soldier planning to desert; later books widen to four narrators",
    "spice": 1,
@@ -3013,6 +3187,10 @@
    "year": 2025,
    "seriesStatus": "standalone",
    "setting": "Paladia, a devastated magical nation under occupation after a lost war",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "dual",
    "povNote": "Helena's present-day POV braided with nonlinear recovered memories and sections from the High Reeve, so the reader assembles the truth ahead of her",
    "spice": 2,
@@ -3072,6 +3250,9 @@
    "year": 2023,
    "seriesStatus": "ongoing",
    "setting": "serial killer",
+   "genres": [
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "alternates between Saffy and Jonathan, with more page time on him than the premise promises",
    "spice": 2,
@@ -3120,6 +3301,9 @@
    "year": 2025,
    "seriesStatus": "complete",
    "setting": "a secondary world of rival magical orders; assassins on one side, healers on the other",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "close third alternating between Aurienne the healer and Osric the assassin, with both voices distinct enough to be told apart blind",
    "spice": 1,
@@ -3167,6 +3351,10 @@
    "year": 2020,
    "seriesStatus": "standalone",
    "setting": "gothic",
+   "genres": [
+    "gothic",
+    "historical"
+   ],
    "pov": "single-female",
    "povNote": "close third limited entirely to Noemi, so the house's secrets unspool only as fast as she pries them loose",
    "spice": 1,
@@ -3221,6 +3409,9 @@
    "year": 2018,
    "seriesStatus": "complete",
    "setting": "fairy tale retelling",
+   "genres": [
+    "fairytale"
+   ],
    "pov": "single-female",
    "povNote": "first person from Jude, whose scheming is the plot rather than a reaction to it",
    "spice": 0,
@@ -3271,6 +3462,9 @@
    "year": 2015,
    "seriesStatus": "ongoing",
    "setting": "monster romance",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Ildiko and Brishen, who each privately find the other hideous and say so",
    "spice": 3,
@@ -3318,6 +3512,9 @@
    "year": 2019,
    "seriesStatus": "ongoing",
    "setting": "mafia",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "dual",
    "povNote": "genuinely balanced dual POV between Gianna and Christian, unlike book one's lopsided split",
    "spice": 4,
@@ -3370,6 +3567,10 @@
    "year": 2025,
    "seriesStatus": "ongoing",
    "setting": "fae court",
+   "genres": [
+    "romantasy",
+    "fairytale"
+   ],
    "pov": "single-female",
    "povNote": "third person Briony, cutting between present-day captivity and flashbacks to the magic academy where she and her captor were classmates",
    "spice": 4,
@@ -3423,6 +3624,9 @@
    "year": 2018,
    "seriesStatus": "complete",
    "setting": "the Ark of the Pole, a frozen sky-island court, after the world shattered into floating fragments",
+   "genres": [
+    "epic"
+   ],
    "pov": "single-female",
    "povNote": "third limited on Ophelia with brief excursions; Thorn is kept opaque for most of the quartet by design, and the reveal of his interiority is the series' long payoff",
    "spice": 0,
@@ -3469,6 +3673,9 @@
    "year": 2021,
    "seriesStatus": "complete",
    "setting": "mafia",
+   "genres": [
+    "darkromance"
+   ],
    "pov": "dual",
    "povNote": "dual first-person between the defense lawyer and the capo she is defending",
    "spice": 4,
@@ -3517,6 +3724,10 @@
    "year": 2023,
    "seriesStatus": "ongoing",
    "setting": "epic fantasy",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
    "pov": "dual",
    "povNote": "third person alternating between Talasyn, the light-magic soldier, and Alaric, the heir to the empire that burned her home",
    "spice": 2,
@@ -3563,6 +3774,10 @@
    "year": 2017,
    "seriesStatus": "complete",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "alternating first-person between the psychologist and the death-row killer she is evaluating",
    "spice": 4,
@@ -3613,6 +3828,10 @@
    "year": 2021,
    "seriesStatus": "complete",
    "setting": "serial killer",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
    "pov": "dual",
    "povNote": "dual first-person; his chapters are the stalking, hers are the not-knowing",
    "spice": 5,
@@ -3663,6 +3882,9 @@
    "year": 2025,
    "seriesStatus": "ongoing",
    "setting": "vampire fantasy",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "single-female",
    "povNote": "first person Arvelle only, though the audiobook uses duet narration that can make it feel broader than it is",
    "spice": 3,
@@ -3714,6 +3936,9 @@
    "year": 2025,
    "seriesStatus": "ongoing",
    "setting": "the kingdoms of Quentis and Turah, separated by monster-infested wilds",
+   "genres": [
+    "romantasy"
+   ],
    "pov": "single-female",
    "povNote": "Odessa carries essentially the whole book; the male lead gets one late chapter, so calling it dual POV is marketing",
    "spice": 3,

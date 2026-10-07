@@ -1053,6 +1053,35 @@ details.or-fold[open] > summary::after{content:"\2013"}
 .or-legend{font-family:var(--f-data);font-size:.74rem;color:var(--dimmer);line-height:1.5;margin:9px 0 0}
 .or-empty{font-family:var(--f-body);font-style:italic;color:var(--dim);margin:14px 0 0;line-height:1.6}
 
+.or-want{
+  display:flex;align-items:center;gap:10px;margin:0 0 14px;padding:7px 8px 7px 11px;
+  border:1px dashed var(--hair-soft);border-radius:2px;background:rgba(7,6,11,.34);
+}
+.or-want.on{border-style:solid;border-color:var(--hair)}
+.or-want-sum{flex:1 1 auto;min-width:0;font-family:var(--f-data);font-size:.76rem;line-height:1.45;color:var(--dim)}
+.or-want.on .or-want-sum{color:var(--parchment-2)}
+.or-want .btn{flex:0 0 auto}
+.or-wsheet{width:min(600px,100%)}
+.or-wsheet .or-h:first-of-type{margin-top:0}
+.or-picks{display:flex;flex-wrap:wrap;gap:6px}
+.or-pick{
+  font-family:var(--f-data);font-size:.78rem;letter-spacing:.03em;cursor:pointer;
+  color:var(--dim);background:rgba(7,6,11,.55);
+  border:1px solid var(--hair-soft);border-radius:2px;padding:5px 10px;
+}
+.or-pick:hover{color:var(--parchment-2);border-color:var(--hair)}
+.or-pick[aria-pressed="true"]{
+  color:var(--ink);background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));border-color:var(--gilt-bright);
+}
+.or-wmode{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:9px}
+.or-wmode .seg button,.or-wrow .seg button{padding:5px 9px;font-size:.52rem}
+.or-wnote{font-family:var(--f-body);font-style:italic;font-size:.86rem;color:var(--dimmer);flex:1 1 200px}
+.or-wrow{
+  display:grid;grid-template-columns:minmax(110px,1fr) auto;gap:10px;align-items:center;
+  padding:7px 0;border-top:1px solid var(--hair-soft);
+}
+.or-wlbl{font-family:var(--f-data);font-size:.84rem;color:var(--parchment-2)}
+
 .or-fixrow{
   display:grid;grid-template-columns:minmax(74px,1fr) auto;gap:10px;align-items:center;
   padding:8px 0;border-top:1px solid var(--hair-soft);
@@ -1074,6 +1103,8 @@ details.or-fold[open] > summary::after{content:"\2013"}
   .or-score b{font-size:1.35rem}
   .or-score span{margin-top:0}
   .or-actions .btn{flex:1 1 100%}
+  .or-wrow{grid-template-columns:1fr}
+  .or-want{flex-wrap:wrap}
 }
 
 /* ---------- responsive ---------- */
@@ -1307,10 +1338,87 @@ var LANE_COLOR = {romantasy:"#1B2A44", dark:"#5A2330", craft:"#123832", "new":"#
 var BLOCKED_BY_DEFAULT = "child-sexual-abuse";
 var SNOOZE_DRAWS = 20, SNOOZE_MS = 20 * 3600 * 1000, SNOOZE_CEIL_MS = 30 * 24 * 3600 * 1000;
 
+/* ---- what she asks for: filters on the draw, never on the score ----
+   An empty list means "any". Minimums of 0 mean "any". */
+var GENRES = [
+  {k:"romantasy",   l:"Romantasy"},
+  {k:"darkromance", l:"Dark romance"},
+  {k:"gothic",      l:"Gothic & horror"},
+  {k:"thriller",    l:"Thriller & killers"},
+  {k:"epic",        l:"Epic fantasy"},
+  {k:"historical",  l:"Historical fantasy"},
+  {k:"academia",    l:"Dark academia"},
+  {k:"fairytale",   l:"Fairy tale & fae"},
+  {k:"scifi",       l:"Sci-fi & speculative"}
+];
+/* Records from before genres were tagged still get a reading from their lanes. */
+var LANE_GENRE = {romantasy:"romantasy", dark:"darkromance"};
+var WANT_LISTS = {
+  genres:   GENRES.map(function(g){ return g.k; }),
+  spice:    [0,1,2,3,4,5],
+  darkness: [1,2,3,4,5],
+  momentum: ["slow","medium","fast","immediate"],
+  pov:      ["single-female","dual","multi","single-male"],
+  seriesStatus: ["standalone","complete","ongoing"]
+};
+var WANT_MINS = {minOverall:[0,3.5,4,4.5], minGutPunch:[0,3,4,5], minProse:[0,3,4,5], minFmcAgency:[0,3,4,5]};
+var POV_LABEL = {"single-female":"Her POV only", dual:"Dual POV", multi:"Multi POV", "single-male":"His POV only"};
+var SERIES_LABEL = {standalone:"Standalone", complete:"Finished series", ongoing:"Ongoing series"};
+var SPICE_LABEL = ["None","Closed door","Mild","Steamy","Spicy","Scorching"];
+function defaultWant(){
+  return {genres:[], genreMode:"any", minOverall:0, minGutPunch:0, minProse:0, minFmcAgency:0,
+          spice:[], darkness:[], momentum:[], pov:[], seriesStatus:[]};
+}
+function normWant(v){
+  var out = defaultWant();
+  if(!v || typeof v !== "object") return out;
+  Object.keys(WANT_LISTS).forEach(function(k){
+    if(!Array.isArray(v[k])) return;
+    out[k] = WANT_LISTS[k].filter(function(x){ return v[k].indexOf(x) !== -1; });
+  });
+  out.genreMode = v.genreMode === "all" ? "all" : "any";
+  Object.keys(WANT_MINS).forEach(function(k){
+    var n = parseFloat(v[k]);
+    if(WANT_MINS[k].indexOf(n) !== -1) out[k] = n;
+  });
+  return out;
+}
+function wantCount(w){
+  var n = 0;
+  Object.keys(WANT_LISTS).forEach(function(k){ if(w[k].length) n++; });
+  Object.keys(WANT_MINS).forEach(function(k){ if(w[k]) n++; });
+  return n;
+}
+function oracleGenresOf(rec){
+  if(Array.isArray(rec.genres) && rec.genres.length) return rec.genres;
+  return (Array.isArray(rec.lanes) ? rec.lanes : [])
+    .map(function(l){ return LANE_GENRE[l]; }).filter(Boolean);
+}
+/* Judged on her corrected tags, so a Wrong read also moves what a filter lets through. */
+function oracleWants(rec, w){
+  var tags = oracleTagsOf(rec);
+  if(w.genres.length){
+    var g = oracleGenresOf(rec);
+    var hit = w.genres.filter(function(k){ return g.indexOf(k) !== -1; }).length;
+    if(w.genreMode === "all" ? hit < w.genres.length : !hit) return false;
+  }
+  if(w.spice.length && w.spice.indexOf(Math.round(tags.spice)) === -1) return false;
+  if(w.darkness.length && w.darkness.indexOf(Math.round(tags.darkness)) === -1) return false;
+  if(w.momentum.length && w.momentum.indexOf(tags.momentum) === -1) return false;
+  if(w.pov.length && w.pov.indexOf(rec.pov) === -1) return false;
+  if(w.seriesStatus.length && w.seriesStatus.indexOf(rec.seriesStatus) === -1) return false;
+  if(tags.gutPunch < w.minGutPunch) return false;
+  if(tags.prose < w.minProse) return false;
+  if(tags.fmcAgency < w.minFmcAgency) return false;
+  if(w.minOverall && oraclePredict(rec) < w.minOverall) return false;
+  return true;
+}
+
 function defaultOracle(){
   var filters = {};
   filters[BLOCKED_BY_DEFAULT] = true;
-  return {snoozed:{}, refused:{}, corrections:{}, offers:{}, draws:0, weights:null, filters:filters};
+  return {snoozed:{}, refused:{}, corrections:{}, offers:{}, draws:0, weights:null, filters:filters,
+          want:defaultWant()};
 }
 /* A missing or malformed value must not be able to break the app, so every
    branch here lands on something usable. */
@@ -1362,6 +1470,7 @@ function normOracle(v){
     out.filters = {};
     Object.keys(v.filters).forEach(function(k){ if(v.filters[k]) out.filters[k] = true; });
   }
+  out.want = normWant(v.want);
   return out;
 }
 function oracleState(){
@@ -1432,9 +1541,12 @@ function snoozeClear(id, now){
      down and pulling thirty in a row starts repeating around the twentieth. */
   return (o.draws - sn.atDraw) >= SNOOZE_DRAWS && age >= SNOOZE_MS;
 }
-function oracleEligible(){
+/* Pass a want to judge a draft; pass false to ignore what she asked for. */
+function oracleEligible(want){
   var o = oracleState(), lib = libraryByTitle(), now = Date.now();
+  var w = want === undefined ? (o.want || defaultWant()) : want;
   return ORACLE.catalog.filter(function(rec){
+    if(w && !oracleWants(rec, w)) return false;
     if(lib[oracleNormTitle(rec.title)]) return false;
     if(o.refused[rec.id]) return false;
     if(!snoozeClear(rec.id, now)) return false;
@@ -2121,13 +2233,24 @@ function drawOracle(){
   var rec = oraclePick();
   oracleCurrent = rec;
   if(!rec){
+    var asked = wantCount(oracleState().want) > 0 && oracleEligible(false).length > 0;
     card.innerHTML =
       '<p class="or-eyebrow">The Oracle<i></i></p>' +
-      '<h3 class="or-title">Nothing left to offer tonight</h3>' +
-      '<p class="or-empty">Every candidate is already on your shelf, set aside, refused, or held back by a ' +
-        'content filter or an unread first book. Ones you set aside come back after twenty more draws ' +
-        'and twenty hours.</p>' +
-      '<div class="or-actions"><button class="btn" id="orClose" type="button">Close</button></div>';
+      oracleWantBar() +
+      (asked
+        ? '<h3 class="or-title">Nothing fits what you asked for</h3>' +
+          '<p class="or-empty">There are books left to offer, just none that meet every filter at once. ' +
+            'Loosen one or two and draw again.</p>' +
+          '<div class="or-actions">' +
+            '<button class="btn" id="orWant" type="button">Change what you want</button>' +
+            '<button class="btn ghost" id="orWantClear" type="button">Clear filters</button>' +
+            '<button class="btn ghost" id="orClose" type="button">Close</button>' +
+          "</div>"
+        : '<h3 class="or-title">Nothing left to offer tonight</h3>' +
+          '<p class="or-empty">Every candidate is already on your shelf, set aside, refused, or held back by a ' +
+            'content filter or an unread first book. Ones you set aside come back after twenty more draws ' +
+            'and twenty hours.</p>' +
+          '<div class="or-actions"><button class="btn" id="orClose" type="button">Close</button></div>');
     return;
   }
   var o = oracleState();
@@ -2153,6 +2276,7 @@ function drawOracle(){
 
   card.innerHTML =
     '<p class="or-eyebrow">The Oracle offers<i></i></p>' +
+    oracleWantBar() +
     '<div class="or-head">' +
       '<div class="or-titles">' +
         '<h3 class="or-title">' + esc(rec.title) + "</h3>" +
@@ -2194,6 +2318,13 @@ function oracleCardClick(e){
   if(e.target.closest("#orTake")){ oracleTake(); return; }
   if(e.target.closest("#orSnooze")){ oracleSnooze(); return; }
   if(e.target.closest("#orWrong")){ openOracleFix(); return; }
+  if(e.target.closest("#orWant")){ openOracleWant(); return; }
+  if(e.target.closest("#orWantClear")){
+    oracleState().want = defaultWant();
+    savePrefs();
+    drawOracle();
+    return;
+  }
 }
 function oracleSnooze(){
   if(!oracleCurrent) return;
@@ -2241,6 +2372,173 @@ function oracleTake(){
   saveBook(state.books[id]);
   render();
   paintSaveSticky("“" + rec.title + "” is on your Want to Read shelf", "");
+  drawOracle();
+}
+
+/* ---- what you want: the filter sheet ---- */
+function wantSummary(w){
+  var out = [];
+  if(w.genres.length){
+    out.push(w.genres.map(function(k){
+      for(var i = 0; i < GENRES.length; i++) if(GENRES[i].k === k) return GENRES[i].l;
+      return k;
+    }).join(w.genreMode === "all" ? " + " : " or "));
+  }
+  if(w.minOverall) out.push("Predicted " + w.minOverall + "+");
+  if(w.minGutPunch) out.push("Impact " + w.minGutPunch + (w.minGutPunch < 5 ? "+" : ""));
+  if(w.minProse) out.push("Prose " + w.minProse + (w.minProse < 5 ? "+" : ""));
+  if(w.minFmcAgency) out.push("Agency " + w.minFmcAgency + (w.minFmcAgency < 5 ? "+" : ""));
+  if(w.spice.length) out.push("Spice " + w.spice.join(", "));
+  if(w.darkness.length) out.push("Darkness " + w.darkness.join(", "));
+  if(w.momentum.length) out.push(w.momentum.join(" or ") + " pace");
+  if(w.pov.length) out.push(w.pov.map(function(k){ return POV_LABEL[k]; }).join(" or "));
+  if(w.seriesStatus.length) out.push(w.seriesStatus.map(function(k){ return SERIES_LABEL[k]; }).join(" or "));
+  return out;
+}
+function oracleWantBar(){
+  var w = oracleState().want || defaultWant();
+  var sum = wantSummary(w);
+  var label = sum.length
+    ? "Drawing from " + oracleEligible().length + " of " + oracleEligible(false).length + ": " + sum.join(" · ")
+    : "Drawing from everything you have not read";
+  return '<div class="or-want' + (sum.length ? " on" : "") + '">' +
+    '<span class="or-want-sum">' + esc(label) + "</span>" +
+    '<button class="btn small ghost" id="orWant" type="button">' +
+      (sum.length ? "Change" : "What you want") + "</button>" +
+  "</div>";
+}
+function wantChips(list, values, labelOf, picked){
+  return '<div class="or-picks" data-wlist="' + list + '">' + values.map(function(v){
+    return '<button type="button" class="or-pick" data-wv="' + esc(String(v)) + '" aria-pressed="' +
+      (picked.indexOf(v) !== -1) + '">' + esc(labelOf(v)) + "</button>";
+  }).join("") + "</div>";
+}
+function wantSeg(key, values, labelOf, cur){
+  return '<div class="seg" data-wmin="' + key + '">' + values.map(function(v){
+    return '<button type="button" data-wv="' + v + '" aria-pressed="' + (v === cur) + '">' +
+      esc(labelOf(v)) + "</button>";
+  }).join("") + "</div>";
+}
+function minLabel(v){ return v ? (v === 5 ? "5" : v + "+") : "Any"; }
+function openOracleWant(){
+  closeOracleWant();
+  var w = oracleState().want || defaultWant();
+  var row = function(label, ctl){
+    return '<div class="or-wrow"><span class="or-wlbl">' + esc(label) + "</span>" + ctl + "</div>";
+  };
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "oracleWantOverlay";
+  ov.innerHTML =
+  '<div class="sheet or-wsheet" role="dialog" aria-modal="true" aria-label="What you want">' +
+    "<h3>What you want</h3>" +
+    '<p class="hint">The Oracle only draws from books that meet every line you set. Leave a line ' +
+      'empty and it does not care. Ratings use your corrected tags.</p>' +
+    '<span class="or-h">Genre</span>' +
+    wantChips("genres", WANT_LISTS.genres, function(k){
+      for(var i = 0; i < GENRES.length; i++) if(GENRES[i].k === k) return GENRES[i].l;
+      return k;
+    }, w.genres) +
+    '<div class="or-wmode">' +
+      '<div class="seg" data-wmode="1">' +
+        '<button type="button" data-wv="any" aria-pressed="' + (w.genreMode !== "all") + '">Any of these</button>' +
+        '<button type="button" data-wv="all" aria-pressed="' + (w.genreMode === "all") + '">All of these</button>' +
+      "</div>" +
+      '<span class="or-wnote">All of these finds the crossovers, like dark romance that is also a thriller.</span>' +
+    "</div>" +
+    '<span class="or-h">Ratings, at least</span>' +
+    row("Predicted overall", wantSeg("minOverall", WANT_MINS.minOverall, minLabel, w.minOverall)) +
+    row(DIM_LABEL.gutPunch, wantSeg("minGutPunch", WANT_MINS.minGutPunch, minLabel, w.minGutPunch)) +
+    row(DIM_LABEL.prose, wantSeg("minProse", WANT_MINS.minProse, minLabel, w.minProse)) +
+    row(DIM_LABEL.fmcAgency, wantSeg("minFmcAgency", WANT_MINS.minFmcAgency, minLabel, w.minFmcAgency)) +
+    '<span class="or-h">Spice</span>' +
+    wantChips("spice", WANT_LISTS.spice, function(v){ return v + " " + SPICE_LABEL[v]; }, w.spice) +
+    '<span class="or-h">Darkness</span>' +
+    wantChips("darkness", WANT_LISTS.darkness, function(v){ return v + " of 5"; }, w.darkness) +
+    '<span class="or-h">Pace</span>' +
+    wantChips("momentum", WANT_LISTS.momentum, function(v){
+      return v.charAt(0).toUpperCase() + v.slice(1);
+    }, w.momentum) +
+    '<span class="or-h">Point of view</span>' +
+    wantChips("pov", WANT_LISTS.pov, function(v){ return POV_LABEL[v]; }, w.pov) +
+    '<span class="or-h">Commitment</span>' +
+    wantChips("seriesStatus", WANT_LISTS.seriesStatus, function(v){ return SERIES_LABEL[v]; }, w.seriesStatus) +
+    '<p class="or-out" id="orWantCount"></p>' +
+    '<div class="sheet-actions">' +
+      '<button class="btn ghost" id="orWantReset" type="button">Clear all</button>' +
+      '<button class="btn ghost" id="orWantCancel" type="button">Cancel</button>' +
+      '<button class="btn" id="orWantSave" type="button">Draw with these</button>' +
+    "</div>" +
+  "</div>";
+  document.body.appendChild(ov);
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeOracleWant(); });
+  ov.addEventListener("click", function(e){
+    var pick = e.target.closest(".or-pick");
+    if(pick){
+      pick.setAttribute("aria-pressed", String(pick.getAttribute("aria-pressed") !== "true"));
+      countOracleWant();
+      return;
+    }
+    var segb = e.target.closest(".seg [data-wv]");
+    if(segb){
+      Array.prototype.forEach.call(segb.parentNode.querySelectorAll("[data-wv]"), function(x){
+        x.setAttribute("aria-pressed", String(x === segb));
+      });
+      countOracleWant();
+      return;
+    }
+    if(e.target.closest("#orWantReset")){
+      Array.prototype.forEach.call(ov.querySelectorAll(".or-pick"), function(x){
+        x.setAttribute("aria-pressed", "false");
+      });
+      Array.prototype.forEach.call(ov.querySelectorAll(".seg"), function(seg){
+        Array.prototype.forEach.call(seg.querySelectorAll("[data-wv]"), function(x, i){
+          x.setAttribute("aria-pressed", String(i === 0));
+        });
+      });
+      countOracleWant();
+      return;
+    }
+    if(e.target.closest("#orWantCancel")){ closeOracleWant(); return; }
+    if(e.target.closest("#orWantSave")){ saveOracleWant(); return; }
+  });
+  countOracleWant();
+}
+function readOracleWant(){
+  var ov = byId("oracleWantOverlay"), w = defaultWant();
+  if(!ov) return w;
+  Array.prototype.forEach.call(ov.querySelectorAll("[data-wlist]"), function(box){
+    var k = box.getAttribute("data-wlist");
+    Array.prototype.forEach.call(box.querySelectorAll('.or-pick[aria-pressed="true"]'), function(b){
+      var v = b.getAttribute("data-wv");
+      w[k].push(typeof WANT_LISTS[k][0] === "number" ? Number(v) : v);
+    });
+  });
+  Array.prototype.forEach.call(ov.querySelectorAll("[data-wmin]"), function(seg){
+    var on = seg.querySelector('[aria-pressed="true"]');
+    w[seg.getAttribute("data-wmin")] = on ? Number(on.getAttribute("data-wv")) : 0;
+  });
+  var mode = ov.querySelector('[data-wmode] [aria-pressed="true"]');
+  w.genreMode = mode && mode.getAttribute("data-wv") === "all" ? "all" : "any";
+  return normWant(w);
+}
+function countOracleWant(){
+  var out = byId("orWantCount");
+  if(!out) return;
+  var n = oracleEligible(readOracleWant()).length, of = oracleEligible(false).length;
+  out.className = "or-out" + (n ? "" : " warn");
+  out.textContent = n
+    ? n + " of " + of + " books you could be offered " + (n === 1 ? "fits." : "fit.")
+    : "Nothing fits all of that yet. Loosen something.";
+}
+function closeOracleWant(){
+  var ov = byId("oracleWantOverlay");
+  if(ov) ov.remove();
+}
+function saveOracleWant(){
+  oracleState().want = readOracleWant();
+  savePrefs();
+  closeOracleWant();
   drawOracle();
 }
 
@@ -4742,6 +5040,7 @@ byId("addBtn").addEventListener("click", function(){
 document.addEventListener("keydown", function(e){
   if(e.key !== "Escape") return;
   if(byId("oracleFixOverlay")) closeOracleFix();
+  else if(byId("oracleWantOverlay")) closeOracleWant();
   else if(byId("oracleOverlay")) closeOracle();
   else if(byId("bulkOverlay")) closeBulk();
   else if(byId("setOverlay")) closeSettings();

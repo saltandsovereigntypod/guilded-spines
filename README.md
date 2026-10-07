@@ -85,6 +85,11 @@ your notes and theories on the verso.
   note on where the book might lose you. Take it down and it lands on Want to
   Read; set it aside and it stays out of the way for twenty more draws *and*
   twenty hours; tell it the tags are wrong and the score moves while you watch.
+  **What you want** narrows the draw before it happens: genre (any of several,
+  or only the crossovers that are all of them), minimum predicted overall,
+  emotional impact, prose and heroine's agency, plus spice, darkness, pace,
+  point of view and standalone or series. It shows how many books still fit as
+  you set it, and it remembers your choices until you change them.
   Recalibrate in Settings to re-fit its weights against the books you have
   rated. Nothing about the catalogue is ever written onto a book or into an
   export. Drop the file and the button simply disappears.
