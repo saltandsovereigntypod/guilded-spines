@@ -1,5 +1,5 @@
 {
- "version": 2,
+ "version": 3,
  "generated": "2026-10-07",
  "builtFor": "Gilded Spines: the Oracle",
  "model": {
@@ -3975,6 +3975,2028 @@
    "unreleased": false,
    "flags": [],
    "predicted": 2.6
+  },
+  {
+   "id": "the-everlasting",
+   "title": "The Everlasting",
+   "author": "Alix E. Harrow",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2025,
+   "seriesStatus": "standalone",
+   "setting": "Fictional nation of Dominion, a 1920s-ish postwar present and its medieval past",
+   "genres": [
+    "historical",
+    "fairytale"
+   ],
+   "pov": "single-male",
+   "povNote": "Told mostly through Owen Mallory, with a late section that replays events through Una's perspective.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 5,
+   "darkness": 3,
+   "tropes": [
+    "time loop",
+    "legend vs truth",
+    "star-crossed lovers",
+    "knight heroine",
+    "reincarnation"
+   ],
+   "contentWarnings": [
+    "war violence",
+    "death",
+    "grief"
+   ],
+   "goodreadsRating": 4.24,
+   "hook": "A failed soldier turned historian obsessed with a legendary knight, Una Everlasting, is sent into the past and told his job is to make sure she dies as the story says.",
+   "comps": [
+    "The Once and Future Witches",
+    "The Shadowglass"
+   ],
+   "caution": "It is mostly a male POV and reviewers say the first part is slow and confusing before it clicks, which tests her rule about slow openings.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "craft",
+    "new"
+   ],
+   "momentum": "slow",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.93
+  },
+  {
+   "id": "our-strange-duet",
+   "title": "Our Strange Duet",
+   "author": "Erin A. Craig",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2026,
+   "seriesStatus": "standalone",
+   "setting": "Paris Opera Populaire, 1895",
+   "genres": [
+    "gothic",
+    "historical",
+    "fairytale"
+   ],
+   "pov": "single-female",
+   "povNote": "Stays close inside Christine Daae's head as she rises from the chorus.",
+   "spice": 1,
+   "fmcAgency": 4,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "Phantom of the Opera retelling",
+    "love triangle",
+    "masked mentor",
+    "ambition vs love",
+    "haunted opera house"
+   ],
+   "contentWarnings": [
+    "obsession",
+    "manipulation",
+    "death"
+   ],
+   "goodreadsRating": null,
+   "hook": "Christine Daae, an orphaned chorus singer, is torn between her childhood friend Raoul and the masked Phantom who coaches her toward stardom.",
+   "comps": [
+    "A Great and Terrible Beauty",
+    "The Bone Witch"
+   ],
+   "caution": "It is a YA reimagining of a musical whose ending many readers already know, and the love triangle structure risks the passive-heroine pull she disliked in ACOTAR.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "craft",
+    "new"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.64
+  },
+  {
+   "id": "the-ten-thousand-doors-of-january",
+   "title": "The Ten Thousand Doors of January",
+   "author": "Alix E. Harrow",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2019,
+   "seriesStatus": "standalone",
+   "setting": "Early 1900s Vermont mansion and worlds beyond doorways",
+   "genres": [
+    "historical",
+    "fairytale"
+   ],
+   "pov": "single-female",
+   "povNote": "January narrates in first person, interleaved with chapters from a book-within-the-book about her parents.",
+   "spice": 0,
+   "fmcAgency": 4,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 2,
+   "tropes": [
+    "portal fantasy",
+    "found book",
+    "ward of a rich collector",
+    "doors to other worlds",
+    "love letters across time"
+   ],
+   "contentWarnings": [
+    "institutionalization",
+    "racism",
+    "parental loss"
+   ],
+   "goodreadsRating": 4.01,
+   "hook": "A girl raised as the ward of a wealthy collector finds a book that reveals doors to other worlds and the truth about her missing father.",
+   "comps": [
+    "The Once and Future Witches",
+    "A Great and Terrible Beauty"
+   ],
+   "caution": "Harrow's debut opens quietly and January starts out sheltered and reactive, so the momentum she wants arrives later than in Once and Future Witches.",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "slow",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.59
+  },
+  {
+   "id": "sorcery-of-thorns",
+   "title": "Sorcery of Thorns",
+   "author": "Margaret Rogerson",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2019,
+   "seriesStatus": "standalone",
+   "setting": "Austermeer, a kingdom of magical Great Libraries",
+   "genres": [
+    "romantasy",
+    "gothic"
+   ],
+   "pov": "single-female",
+   "povNote": "Third person close on Elisabeth throughout.",
+   "spice": 0,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "sorcerer and librarian",
+    "demon companion",
+    "living grimoires",
+    "sword-wielding heroine"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "demon bargains"
+   ],
+   "goodreadsRating": 4.04,
+   "hook": "A library apprentice is blamed when a dangerous grimoire is set loose and must team up with a sorcerer she was raised to distrust.",
+   "comps": [
+    "The Bone Witch",
+    "Fourth Wing"
+   ],
+   "caution": "It is a clean YA romance with a tidy ending, so it may feel light next to the darker books and gut punches she rates highest.",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.35
+  },
+  {
+   "id": "house-of-salt-and-sorrows",
+   "title": "House of Salt and Sorrows",
+   "author": "Erin A. Craig",
+   "series": "Sisters of the Salt",
+   "seriesNumber": 1,
+   "year": 2019,
+   "seriesStatus": "complete",
+   "setting": "Isolated island estate in a seafaring kingdom",
+   "genres": [
+    "gothic",
+    "fairytale"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from Annaleigh, sixth of twelve sisters.",
+   "spice": 0,
+   "fmcAgency": 4,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 4,
+   "tropes": [
+    "Twelve Dancing Princesses retelling",
+    "family curse",
+    "ghosts",
+    "mysterious stranger",
+    "murder mystery"
+   ],
+   "contentWarnings": [
+    "death of siblings",
+    "suicide",
+    "body horror",
+    "grief"
+   ],
+   "goodreadsRating": null,
+   "hook": "After four of her eleven sisters die, Annaleigh suspects the deaths are not accidents and starts following her surviving sisters to secret nightly balls.",
+   "comps": [
+    "A Great and Terrible Beauty",
+    "The Bone Witch"
+   ],
+   "caution": "The romance is thin and the twist leans horror, so she may feel less attached than with Gemma Doyle; book one is self-contained and later Sisters of the Salt books are companions.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [
+    "body-horror",
+    "self-harm"
+   ],
+   "predicted": 3.64
+  },
+  {
+   "id": "uprooted",
+   "title": "Uprooted",
+   "author": "Naomi Novik",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2015,
+   "seriesStatus": "standalone",
+   "setting": "Polish-folklore valley beside a corrupted Wood",
+   "genres": [
+    "fairytale",
+    "epic"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from Agnieszka, the village girl taken by the wizard.",
+   "spice": 2,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 4,
+   "tropes": [
+    "grumpy wizard",
+    "chosen by a dragon",
+    "sentient evil forest",
+    "wild magic vs rigid magic",
+    "age-gap romance"
+   ],
+   "contentWarnings": [
+    "violence",
+    "possession",
+    "attempted sexual assault",
+    "war"
+   ],
+   "goodreadsRating": 4.02,
+   "hook": "Every ten years a wizard called the Dragon takes a village girl into his tower, and this time he chooses clumsy Agnieszka instead of her best friend.",
+   "comps": [
+    "The Bone Witch",
+    "The Once and Future Witches"
+   ],
+   "caution": "The Dragon is cold and condescending for much of the book and the romance is minor, which may frustrate her if she wants tension to carry the story.",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "sexual-assault"
+   ],
+   "predicted": 4.88
+  },
+  {
+   "id": "the-bear-and-the-nightingale",
+   "title": "The Bear and the Nightingale",
+   "author": "Katherine Arden",
+   "series": "Winternight Trilogy",
+   "seriesNumber": 1,
+   "year": 2017,
+   "seriesStatus": "complete",
+   "setting": "Medieval Rus, a village at the edge of the northern forest",
+   "genres": [
+    "historical",
+    "fairytale"
+   ],
+   "pov": "multi",
+   "povNote": "Centered on Vasya but moves among her family, a priest and the frost-demon.",
+   "spice": 0,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "Russian folklore",
+    "household spirits",
+    "winter king",
+    "defiant daughter",
+    "faith vs old gods"
+   ],
+   "contentWarnings": [
+    "death of a parent",
+    "religious abuse",
+    "forced marriage pressure"
+   ],
+   "goodreadsRating": 4.08,
+   "hook": "A girl who can see the household spirits of medieval Rus defends them when a zealous priest and a new stepmother turn the village against the old ways.",
+   "comps": [
+    "The Bone Witch",
+    "The Once and Future Witches"
+   ],
+   "caution": "Book one spends a long stretch on Vasya's childhood before the plot tightens; the payoff and the slow-burn romance build mostly in books two and three.",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "slow",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.72
+  },
+  {
+   "id": "a-deadly-education",
+   "title": "A Deadly Education",
+   "author": "Naomi Novik",
+   "series": "The Scholomance",
+   "seriesNumber": 1,
+   "year": 2020,
+   "seriesStatus": "complete",
+   "setting": "The Scholomance, a monster-infested school of magic with no teachers",
+   "genres": [
+    "academia"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from El, a sarcastic outcast with a prophecy of doom.",
+   "spice": 0,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 4,
+   "tropes": [
+    "dark academia",
+    "prophesied villain",
+    "grumpy heroine",
+    "golden boy hero",
+    "survival school"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death of students",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": 3.93,
+   "hook": "El has a prophesied talent for mass destruction and is trying to survive a magic school that tries to eat its students, while the school's golden boy keeps saving her.",
+   "comps": [
+    "Fourth Wing",
+    "A Great and Terrible Beauty"
+   ],
+   "caution": "The first chapters are heavy on info-dumps about how the school works, and book one ends on a cliffhanger (the trilogy is finished, so she can binge).",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "cliffhanger"
+   ],
+   "predicted": 4.35
+  },
+  {
+   "id": "circe",
+   "title": "Circe",
+   "author": "Madeline Miller",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2018,
+   "seriesStatus": "standalone",
+   "setting": "Greek myth, the island of Aiaia",
+   "genres": [
+    "historical",
+    "fairytale"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from Circe across thousands of years.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 5,
+   "darkness": 3,
+   "tropes": [
+    "mythology retelling",
+    "exiled witch",
+    "immortal heroine",
+    "motherhood",
+    "gods vs mortals"
+   ],
+   "contentWarnings": [
+    "sexual assault",
+    "violence",
+    "death",
+    "child endangerment"
+   ],
+   "goodreadsRating": 4.22,
+   "hook": "Circe, a lesser daughter of the sun god, is exiled to an island where she grows into a witch and crosses paths with Hermes, Daedalus and Odysseus.",
+   "comps": [
+    "The Once and Future Witches",
+    "The Shadowglass"
+   ],
+   "caution": "It is episodic and reflective rather than plot-driven, and the romance is not a sustained build, so it relies entirely on prose and character.",
+   "tagConfidence": "high",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [
+    "child-harm",
+    "sexual-assault"
+   ],
+   "predicted": 4.51
+  },
+  {
+   "id": "strange-the-dreamer",
+   "title": "Strange the Dreamer",
+   "author": "Laini Taylor",
+   "series": "Strange the Dreamer",
+   "seriesNumber": 1,
+   "year": 2017,
+   "seriesStatus": "complete",
+   "setting": "The lost city of Weep, under a floating citadel",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates mainly between librarian Lazlo Strange and the blue-skinned godspawn Sarai, with a few side POVs.",
+   "spice": 1,
+   "fmcAgency": 4,
+   "prose": 5,
+   "gutPunch": 5,
+   "darkness": 4,
+   "tropes": [
+    "dreamwalking",
+    "star-crossed lovers",
+    "orphan librarian",
+    "children of murdered gods",
+    "forbidden love"
+   ],
+   "contentWarnings": [
+    "genocide",
+    "sexual slavery (past)",
+    "death",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": 4.28,
+   "hook": "An orphan librarian joins an expedition to a city whose name was stolen, and meets the daughter of the gods who once enslaved it in his dreams.",
+   "comps": [
+    "The Bone Witch",
+    "Fourth Wing"
+   ],
+   "caution": "The opening third belongs to Lazlo and moves slowly, and the book ends on a brutal cliffhanger, though the sequel Muse of Nightmares is already out.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "slow",
+   "unreleased": false,
+   "flags": [
+    "captivity",
+    "cliffhanger"
+   ],
+   "predicted": 3.8
+  },
+  {
+   "id": "hemlock-and-silver",
+   "title": "Hemlock & Silver",
+   "author": "T. Kingfisher",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2025,
+   "seriesStatus": "standalone",
+   "setting": "A fairy-tale kingdom and the world behind a mirror",
+   "genres": [
+    "gothic",
+    "fairytale"
+   ],
+   "pov": "single-female",
+   "povNote": "Third person close on Anja, a healer who studies poisons.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 4,
+   "tropes": [
+    "Snow White retelling",
+    "poison healer",
+    "mirror world",
+    "adult heroine",
+    "found companions"
+   ],
+   "contentWarnings": [
+    "poisoning",
+    "child abuse",
+    "violence"
+   ],
+   "goodreadsRating": 4.04,
+   "hook": "A healer who drinks poisons to find cures is summoned by a king whose daughter is dying, and the case pulls her through a mirror.",
+   "comps": [
+    "The Bone Witch",
+    "A Great and Terrible Beauty"
+   ],
+   "caution": "Kingfisher's dry, joking voice undercuts the gothic dread at times, and the romance is low-key, so it may not hit the emotional highs she wants.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "craft"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "child-harm"
+   ],
+   "predicted": 4.35
+  },
+  {
+   "id": "heir-of-illusion",
+   "title": "Heir of Illusion",
+   "author": "Madeline Taylor",
+   "series": "The Verran Isles",
+   "seriesNumber": 1,
+   "year": 2025,
+   "seriesStatus": "ongoing",
+   "setting": "island kingdom ruled by a tyrant king",
+   "genres": [
+    "romantasy"
+   ],
+   "pov": "single-female",
+   "povNote": "Told from Ivy (Iverson) Pomeroy's point of view; the print edition adds one bonus chapter from Thorne.",
+   "spice": 3,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "female assassin",
+    "slow burn",
+    "unlikely alliance",
+    "magic collar",
+    "morally grey reaper"
+   ],
+   "contentWarnings": [
+    "coercive captivity",
+    "violence",
+    "sexual content",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": 4.4,
+   "hook": "An illusionist bound to a cruel king as his assassin by an enchanted collar competes with a mysterious reaper for the one artifact that can free her.",
+   "comps": [
+    "Fourth Wing",
+    "The Serpent and the Wings of Night"
+   ],
+   "caution": "First book of a trilogy that is still being written, so expect to wait on later volumes, which is exactly what burned her with From Blood and Ash; it is also a debut, so the prose may sit closer to Silver Elite than to Harrow.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "captivity",
+    "cliffhanger"
+   ],
+   "predicted": 4.02
+  },
+  {
+   "id": "this-kingdom-will-not-kill-me",
+   "title": "This Kingdom Will Not Kill Me",
+   "author": "Ilona Andrews",
+   "series": "Maggie the Undying",
+   "seriesNumber": 1,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "portal fantasy realm with heroic-fantasy and tabletop RPG flavor",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "single-female",
+   "povNote": "Centred on Maggie, the heroine who refuses to stay dead; the authors typically write a single female first-person lead.",
+   "spice": 2,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 2,
+   "tropes": [
+    "portal fantasy",
+    "competent heroine",
+    "found family",
+    "banter",
+    "slow burn"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death"
+   ],
+   "goodreadsRating": 4.45,
+   "hook": "The opening volume of a planned trilogy in which Maggie is dropped into a fantasy kingdom and has to survive its wars, politics and a romance.",
+   "comps": [
+    "Fourth Wing"
+   ],
+   "caution": "Ilona Andrews leans on humor and banter, so it is lighter and less devastating than Empyrean, and as book one of a trilogy it leaves her waiting on the rest.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.35
+  },
+  {
+   "id": "innamorata",
+   "title": "Innamorata",
+   "author": "Ava Reid",
+   "series": "The House of Teeth",
+   "seriesNumber": 1,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "conquered island of necromantic noble houses",
+   "genres": [
+    "gothic",
+    "romantasy"
+   ],
+   "pov": "single-female",
+   "povNote": "Follows Lady Agnes, who has not spoken in seven years, with the reader inside her thoughts while she stays silent.",
+   "spice": 2,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 5,
+   "tropes": [
+    "revenge plot",
+    "forbidden love",
+    "necromancy",
+    "arranged betrothal",
+    "mute heroine",
+    "morally grey heroine"
+   ],
+   "contentWarnings": [
+    "torture",
+    "gore",
+    "body horror",
+    "violence",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": null,
+   "hook": "The silent heir to a fallen house of necromancers arranges her cousin's betrothal to the conqueror's son to reach his forbidden library, then falls for him herself.",
+   "comps": [
+    "The Bone Witch",
+    "A Great and Terrible Beauty"
+   ],
+   "caution": "It is the first half of a duology and reviewers say it ends on a breathless cliffhanger, and the bleak, grotesque tone gives the romance only brief moments of warmth.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "craft",
+    "dark",
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "body-horror",
+    "cliffhanger",
+    "heavy-gore"
+   ],
+   "predicted": 4.88
+  },
+  {
+   "id": "fallen-city",
+   "title": "Fallen City",
+   "author": "Adrienne Young",
+   "series": "Fallen City",
+   "seriesNumber": 1,
+   "year": 2025,
+   "seriesStatus": "ongoing",
+   "setting": "walled holy city of Isara on the brink of rebellion",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Maris and Luca, and also between a Before and a Now timeline.",
+   "spice": 1,
+   "fmcAgency": 4,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "forbidden love",
+    "star-crossed lovers",
+    "rebellion",
+    "opposite sides",
+    "dual timeline"
+   ],
+   "contentWarnings": [
+    "execution",
+    "religious violence",
+    "war",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": null,
+   "hook": "A legionnaire and a Magistrate's daughter fall in love as a century-old rebellion and a holy war tear their city apart.",
+   "comps": [
+    "The Once and Future Witches",
+    "House of Earth and Blood"
+   ],
+   "caution": "The dual timeline takes a while to click and the book ends on a twist that sets up a sequel not yet out, so momentum and the wait are both risks for her.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "craft",
+    "romantasy"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [
+    "cliffhanger"
+   ],
+   "predicted": 4.17
+  },
+  {
+   "id": "the-poet-empress",
+   "title": "The Poet Empress",
+   "author": "Shen Tao",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2026,
+   "seriesStatus": "standalone",
+   "setting": "imperial palace in the dying years of the Azalea Dynasty",
+   "genres": [
+    "epic",
+    "historical"
+   ],
+   "pov": "single-female",
+   "povNote": "Follows Wei Yin, a starving village girl who becomes a concubine to the heir.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 5,
+   "gutPunch": 5,
+   "darkness": 5,
+   "tropes": [
+    "court intrigue",
+    "villainess arc",
+    "forbidden literacy",
+    "cruel prince",
+    "survival"
+   ],
+   "contentWarnings": [
+    "famine",
+    "death of siblings",
+    "abuse",
+    "sexual violence",
+    "violence"
+   ],
+   "goodreadsRating": null,
+   "hook": "After famine kills five of her siblings, Wei Yin offers herself as concubine to a cruel heir and turns into a dangerous player in a palace near civil war.",
+   "comps": [
+    "The Bone Witch",
+    "The Shadowglass"
+   ],
+   "caution": "There is little romantic or sexual tension to carry her, and the cruelty toward Wei is relentless, so it reads as a grim survival story rather than a love story.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "craft",
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "sexual-assault"
+   ],
+   "predicted": 5.09
+  },
+  {
+   "id": "weavingshaw",
+   "title": "Weavingshaw",
+   "author": "Heba Al-Wasity",
+   "series": "Weavingshaw",
+   "seriesNumber": 1,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "gothic colonial-era estate haunted by ghosts and demons",
+   "genres": [
+    "gothic",
+    "historical",
+    "romantasy"
+   ],
+   "pov": "single-female",
+   "povNote": "Follows the young woman who can see ghosts and signs her life away to the Saint of Silence.",
+   "spice": 1,
+   "fmcAgency": 4,
+   "prose": 5,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "ghosts",
+    "bargain with a dark figure",
+    "gothic manor",
+    "slow burn",
+    "outsider heroine"
+   ],
+   "contentWarnings": [
+    "colonialism",
+    "death",
+    "haunting"
+   ],
+   "goodreadsRating": null,
+   "hook": "A girl who sees ghosts trades her darkest secret to a merchant of confessions and can only break the contract by finding the ghost he is hunting.",
+   "comps": [
+    "A Great and Terrible Beauty",
+    "The Once and Future Witches"
+   ],
+   "caution": "The romance is only a sprinkle, and it is book one of a trilogy whose second book is not due until April 2027.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "craft"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.97
+  },
+  {
+   "id": "blackthorn",
+   "title": "Blackthorn",
+   "author": "J.T. Geissinger",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2025,
+   "seriesStatus": "standalone",
+   "setting": "small gothic town in Vermont",
+   "genres": [
+    "gothic",
+    "darkromance"
+   ],
+   "pov": "dual",
+   "povNote": "First-person present chapters alternate between Maven Blackthorn and Ronan Croft.",
+   "spice": 4,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 5,
+   "tropes": [
+    "second chance",
+    "enemies to lovers",
+    "family feud",
+    "witchcraft",
+    "possessive hero"
+   ],
+   "contentWarnings": [
+    "abusive relationship dynamics",
+    "death of a parent",
+    "dark magic",
+    "explicit sexual content"
+   ],
+   "goodreadsRating": null,
+   "hook": "Back home for her grandmother's funeral, Maven finds the body missing and runs into the son of the man she believes killed her mother.",
+   "comps": [
+    "Haunting Adeline",
+    "The Coven"
+   ],
+   "caution": "Reviewers say the push and pull feels immature in first-person present, close to what bothered her in Silver Elite, and Ronan's possessiveness tips into outright abuse for some readers.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "domestic-abuse"
+   ],
+   "predicted": 3.89
+  },
+  {
+   "id": "game-on",
+   "title": "Game On",
+   "author": "Navessa Allen",
+   "series": "Into Darkness",
+   "seriesNumber": 3,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "contemporary city among wealthy elite families",
+   "genres": [
+    "darkromance"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Stella McCormick and Tyler Neumann, as in the earlier Into Darkness books.",
+   "spice": 4,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 2,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "fake dating",
+    "blackmail",
+    "brat and tamer",
+    "revenge plot",
+    "morally grey hero"
+   ],
+   "contentWarnings": [
+    "blackmail",
+    "manipulation",
+    "explicit sexual content"
+   ],
+   "goodreadsRating": null,
+   "hook": "A man hunting the father who abandoned him blackmails Stella into posing as his girlfriend to get inside her family's circle.",
+   "comps": [
+    "Lights Out",
+    "Caught Up"
+   ],
+   "caution": "It features a new couple and leans rom-com, so it may land closer to Caught Up (3) than Lights Out (4), with less emotional weight than she wants.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.68
+  },
+  {
+   "id": "pink-ink",
+   "title": "Pink Ink",
+   "author": "Avina St. Graves",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2026,
+   "seriesStatus": "standalone",
+   "setting": "university film school",
+   "genres": [
+    "darkromance",
+    "thriller",
+    "academia"
+   ],
+   "pov": "dual",
+   "povNote": "Moves between the horror-obsessed film student and her professor, who is secretly the killer she is tracking.",
+   "spice": 4,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 5,
+   "tropes": [
+    "serial killer hero",
+    "professor and student",
+    "forbidden romance",
+    "obsession",
+    "dark humor"
+   ],
+   "contentWarnings": [
+    "murder",
+    "graphic violence",
+    "student and teacher relationship",
+    "explicit sexual content"
+   ],
+   "goodreadsRating": null,
+   "hook": "A film student secretly investigating a serial killer's murders doesn't realise the killer is her brooding professor.",
+   "comps": [
+    "Butcher & Blackbird",
+    "Haunting Adeline"
+   ],
+   "caution": "Released in August 2026 with few reviews yet, so the quality of the middle act, her recurring weak point with dark romance, is unproven.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore"
+   ],
+   "predicted": 3.89
+  },
+  {
+   "id": "songbird-in-the-gallows",
+   "title": "Songbird in the Gallows",
+   "author": "Alta Hensley",
+   "series": "Grimlock",
+   "seriesNumber": 1,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "cliffside gothic mansion in the murderous seaside town of Grimlock",
+   "genres": [
+    "darkromance",
+    "gothic"
+   ],
+   "pov": "dual",
+   "povNote": "Follows both Saylor Mitchell and Blue, the retired killer who takes her in.",
+   "spice": 4,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 5,
+   "tropes": [
+    "serial killer hero",
+    "mentor and protegee",
+    "Bluebeard retelling",
+    "age gap",
+    "obsession",
+    "dark humor"
+   ],
+   "contentWarnings": [
+    "parent murdered on page",
+    "graphic violence",
+    "explicit sexual content",
+    "age gap"
+   ],
+   "goodreadsRating": null,
+   "hook": "Hunted by the men who killed her father, Saylor is rescued by his closest friend, a murder-sober assassin who starts teaching her his trade.",
+   "comps": [
+    "Butcher & Blackbird",
+    "Haunting Adeline"
+   ],
+   "caution": "Early Goodreads ratings skew to 4s and 3s rather than raves, and the mentor and age-gap dynamic could leave Saylor reactive at first, without the equal footing Butcher & Blackbird has.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "new",
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore"
+   ],
+   "predicted": 3.89
+  },
+  {
+   "id": "serpent-and-dove",
+   "title": "Serpent & Dove",
+   "author": "Shelby Mahurin",
+   "series": "Serpent & Dove",
+   "seriesNumber": 1,
+   "year": 2019,
+   "seriesStatus": "complete",
+   "setting": "witch-hunting, church-ruled French-inspired city",
+   "genres": [
+    "romantasy",
+    "historical"
+   ],
+   "pov": "dual",
+   "povNote": "First person alternating between Lou, a runaway witch, and Reid, the Church huntsman she is forced to marry; later books widen to more narrators.",
+   "spice": 2,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "forced marriage",
+    "witch and witch hunter",
+    "forbidden love"
+   ],
+   "contentWarnings": [
+    "violence",
+    "burning at the stake themes",
+    "religious zealotry",
+    "child abuse references"
+   ],
+   "goodreadsRating": 3.97,
+   "hook": "A witch hiding from her coven is forced into marriage with a witch hunter sworn to burn her kind.",
+   "comps": [
+    "The Once and Future Witches",
+    "Fourth Wing",
+    "The Bone Witch"
+   ],
+   "caution": "It is YA with a jokey, irreverent heroine voice, so the opening book can read younger than Empyrean and the real gut-punches arrive in books two and three.",
+   "tagConfidence": "high",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "child-harm"
+   ],
+   "predicted": 4.22
+  },
+  {
+   "id": "throne-of-glass",
+   "title": "Throne of Glass",
+   "author": "Sarah J. Maas",
+   "series": "Throne of Glass",
+   "seriesNumber": 1,
+   "year": 2012,
+   "seriesStatus": "complete",
+   "setting": "tyrant's glass castle, assassin competition",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "multi",
+   "povNote": "Third person led by assassin Celaena with chapters from Chaol and Dorian; the cast of narrators grows across the eight books.",
+   "spice": 0,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "deadly competition",
+    "assassin heroine",
+    "love triangle",
+    "slow-building war epic"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "slavery",
+    "grief"
+   ],
+   "goodreadsRating": 4.19,
+   "hook": "An imprisoned teenage assassin is offered her freedom if she wins a lethal contest to become the king's champion.",
+   "comps": [
+    "House of Earth and Blood",
+    "Fourth Wing",
+    "A Court of Thorns and Roses"
+   ],
+   "caution": "Book one is a lighter YA competition story with a love triangle; the war, deaths and payoff she wants build from book three onward, and it is the same author whose ACOTAR heroine she disliked (though Celaena is far more active).",
+   "tagConfidence": "high",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "captivity"
+   ],
+   "predicted": 4.22
+  },
+  {
+   "id": "night-of-the-witch",
+   "title": "Night of the Witch",
+   "author": "Sara Raasch and Beth Revis",
+   "series": "Witch and Hunter",
+   "seriesNumber": 1,
+   "year": 2023,
+   "seriesStatus": "complete",
+   "setting": "witch-trial era Germany and the Black Forest",
+   "genres": [
+    "romantasy",
+    "historical"
+   ],
+   "pov": "dual",
+   "povNote": "Alternating chapters between Fritzi, the lone survivor of a slaughtered coven, and Otto, a witch hunter secretly plotting revenge on his own order.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "witch and hunter",
+    "forced alliance",
+    "revenge"
+   ],
+   "contentWarnings": [
+    "witch burnings",
+    "religious violence",
+    "death of family",
+    "torture"
+   ],
+   "goodreadsRating": 3.74,
+   "hook": "A witch hunting the zealots who killed her coven is forced into a truce with one of them in a fantasy version of the German witch trials.",
+   "comps": [
+    "The Once and Future Witches",
+    "Fourth Wing"
+   ],
+   "caution": "It is YA with closed-door romance, so the sexual tension she loves stays mild, and the duology ending is tidier than Empyrean-level stakes.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore"
+   ],
+   "predicted": 4.35
+  },
+  {
+   "id": "we-hunt-the-flame",
+   "title": "We Hunt the Flame",
+   "author": "Hafsah Faizal",
+   "series": "Sands of Arawiya",
+   "seriesNumber": 1,
+   "year": 2019,
+   "seriesStatus": "complete",
+   "setting": "cursed Arabian-inspired kingdom and a dark forest",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "dual",
+   "povNote": "Third person alternating between Zafira, a disguised huntress, and Nasir, the sultan's assassin son, who are sent on the same quest.",
+   "spice": 0,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "quest",
+    "found family",
+    "hidden identity"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "child abuse by a parent",
+    "grief"
+   ],
+   "goodreadsRating": 3.86,
+   "hook": "A huntress hiding her identity and a prince forced to be his father's assassin chase the same lost relic through a cursed island.",
+   "comps": [
+    "The Bone Witch",
+    "Fourth Wing"
+   ],
+   "caution": "The quest takes a while to leave port and the romance is very slow and chaste, so readers looking for Empyrean-speed openings sometimes stall in the first third.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [
+    "child-harm"
+   ],
+   "predicted": 3.97
+  },
+  {
+   "id": "the-games-gods-play",
+   "title": "The Games Gods Play",
+   "author": "Abigail Owen",
+   "series": "The Crucible",
+   "seriesNumber": 1,
+   "year": 2024,
+   "seriesStatus": "ongoing",
+   "setting": "Greek-myth world, a deadly contest of the gods",
+   "genres": [
+    "romantasy"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from Lyra, a cursed thief chosen as Hades' champion in the Crucible.",
+   "spice": 2,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "deadly trials",
+    "Hades romance",
+    "slow burn",
+    "fake relationship",
+    "cursed heroine"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": 4.13,
+   "hook": "A thief cursed by Zeus to be unlovable is picked as Hades' champion in a lethal competition between the gods.",
+   "comps": [
+    "Fourth Wing",
+    "Quicksilver"
+   ],
+   "caution": "Single POV and banter-heavy, and the finale (The Wrath Gods Reap) is not out until November 17, 2026, so she would be waiting after a cliffhanger again.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "cliffhanger"
+   ],
+   "predicted": 3.89
+  },
+  {
+   "id": "powerless",
+   "title": "Powerless",
+   "author": "Lauren Roberts",
+   "series": "The Powerless Trilogy",
+   "seriesNumber": 1,
+   "year": 2023,
+   "seriesStatus": "complete",
+   "setting": "kingdom where the powerless are executed, royal Purging Trials",
+   "genres": [
+    "romantasy"
+   ],
+   "pov": "dual",
+   "povNote": "Third person alternating between Paedyn, an Ordinary hiding among the Elites, and Kai, the prince's enforcer.",
+   "spice": 0,
+   "fmcAgency": 4,
+   "prose": 2,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "deadly trials",
+    "enemies to lovers",
+    "forbidden love",
+    "hidden identity"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "grief"
+   ],
+   "goodreadsRating": 4.15,
+   "hook": "A girl with no power, in a kingdom that kills the powerless, is forced into lethal trials alongside the prince's enforcer.",
+   "comps": [
+    "Fourth Wing",
+    "Silver Elite"
+   ],
+   "caution": "Closer to Silver Elite than Empyrean in writing maturity; the prose is simple YA, which is exactly what made her shrug at Silver Elite.",
+   "tagConfidence": "high",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "immediate",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.01
+  },
+  {
+   "id": "the-wrath-and-the-dawn",
+   "title": "The Wrath and the Dawn",
+   "author": "Renée Ahdieh",
+   "series": "The Wrath and the Dawn",
+   "seriesNumber": 1,
+   "year": 2015,
+   "seriesStatus": "complete",
+   "setting": "Khorasan, a 1001 Nights-inspired desert empire",
+   "genres": [
+    "romantasy",
+    "fairytale"
+   ],
+   "pov": "multi",
+   "povNote": "Mostly Shahrzad, with chapters from the caliph Khalid, her first love Tariq and others moving the war plot.",
+   "spice": 1,
+   "fmcAgency": 5,
+   "prose": 4,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "enemies to lovers",
+    "retelling",
+    "revenge",
+    "marriage of convenience"
+   ],
+   "contentWarnings": [
+    "murder of brides",
+    "violence",
+    "grief"
+   ],
+   "goodreadsRating": 4.04,
+   "hook": "A young woman volunteers to marry the caliph who executes a bride every dawn, planning to survive and kill him.",
+   "comps": [
+    "The Once and Future Witches",
+    "Butcher & Blackbird"
+   ],
+   "caution": "The second half of the duology has a love triangle wobble and less war than the setup promises, and it is YA so the tension stays on the page rather than the bedroom.",
+   "tagConfidence": "high",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.35
+  },
+  {
+   "id": "wild-reverence",
+   "title": "Wild Reverence",
+   "author": "Rebecca Ross",
+   "series": "Letters of Enchantment",
+   "seriesNumber": 0,
+   "year": 2025,
+   "seriesStatus": "standalone",
+   "setting": "a land of warring gods, prequel world of Divine Rivals",
+   "genres": [
+    "romantasy",
+    "fairytale"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Matilda, a young goddess of messenger magic, and the mortal Vincent.",
+   "spice": 1,
+   "fmcAgency": 4,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 3,
+   "tropes": [
+    "god and mortal",
+    "forbidden love",
+    "slow burn",
+    "letters"
+   ],
+   "contentWarnings": [
+    "violence",
+    "death",
+    "war"
+   ],
+   "goodreadsRating": 4.41,
+   "hook": "In a land where gods kill each other to steal power, the youngest goddess of her clan hides a secret while falling for a mortal.",
+   "comps": [
+    "The Once and Future Witches",
+    "The Bone Witch"
+   ],
+   "caution": "Ross writes lyrical and gentle; the danger is real but the pace is literary, and she already has Divine Rivals on her shelf, so this works best if that world appealed.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.17
+  },
+  {
+   "id": "blood-and-steel",
+   "title": "Blood & Steel",
+   "author": "Helen Scheuerer",
+   "series": "The Legends of Thezmarr",
+   "seriesNumber": 1,
+   "year": 2023,
+   "seriesStatus": "complete",
+   "setting": "warrior fortress where women are forbidden to hold blades",
+   "genres": [
+    "romantasy",
+    "epic"
+   ],
+   "pov": "dual",
+   "povNote": "Mostly Thea's perspective, with occasional chapters from her chaperone Wilder.",
+   "spice": 3,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 3,
+   "tropes": [
+    "warrior training",
+    "forbidden mentor romance",
+    "prophecy",
+    "slow burn"
+   ],
+   "contentWarnings": [
+    "violence",
+    "hazing",
+    "death foretold"
+   ],
+   "goodreadsRating": 4.13,
+   "hook": "Told she will die in three years, a woman trains in secret to become a warrior in a guild that bans women, under a reluctant chaperone she cannot stop wanting.",
+   "comps": [
+    "Fourth Wing",
+    "Iron Flame"
+   ],
+   "caution": "It is the closest Fourth Wing structure here, but the stakes are more training-yard than war in book one and the Wilder POV chapters are few.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.02
+  },
+  {
+   "id": "the-book-of-azrael",
+   "title": "The Book of Azrael",
+   "author": "Amber V. Nicole",
+   "series": "Gods & Monsters",
+   "seriesNumber": 1,
+   "year": 2022,
+   "seriesStatus": "ongoing",
+   "setting": "the Etherworld, gods and monsters at war",
+   "genres": [
+    "romantasy",
+    "darkromance"
+   ],
+   "pov": "single-female",
+   "povNote": "Book one is told mainly through Dianna, a monster bound to a worse one; later books open up more perspectives.",
+   "spice": 4,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 5,
+   "darkness": 4,
+   "tropes": [
+    "enemies to lovers",
+    "morally grey heroine",
+    "forced alliance",
+    "found family"
+   ],
+   "contentWarnings": [
+    "graphic violence",
+    "death of a loved one",
+    "abuse",
+    "explicit sex"
+   ],
+   "goodreadsRating": 4.12,
+   "hook": "A monster who sold herself to save her dying sister is ordered to steal a relic from the god-king who leads her enemies.",
+   "comps": [
+    "House of Earth and Blood",
+    "Butcher & Blackbird",
+    "Fourth Wing"
+   ],
+   "caution": "Long and slow in its early chapters before the big turn, which risks the sagging-middle problem she hit with Hunting Adeline, and the series is still running.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy"
+   ],
+   "momentum": "medium",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore"
+   ],
+   "predicted": 3.85
+  },
+  {
+   "id": "the-emperor-s-enemy",
+   "title": "The Emperor's Enemy",
+   "author": "Jasmine Mas",
+   "series": "Unsurvivable Love Duet",
+   "seriesNumber": 1,
+   "year": 2026,
+   "seriesStatus": "ongoing",
+   "setting": "northern rebels against a ravenous magical empire",
+   "genres": [
+    "romantasy",
+    "darkromance"
+   ],
+   "pov": "single-female",
+   "povNote": "First person from Zora, the rebel Knight Mage hunted by the emperor.",
+   "spice": 4,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 4,
+   "darkness": 5,
+   "tropes": [
+    "enemies to lovers",
+    "villain love interest",
+    "war",
+    "hunter and hunted"
+   ],
+   "contentWarnings": [
+    "graphic violence and dismemberment",
+    "torture",
+    "murder of a friend",
+    "childhood starvation",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": null,
+   "hook": "A rebel knight mage, her people's last hope, and the sadistic emperor hunting her become obsessed with destroying each other.",
+   "comps": [
+    "Haunting Adeline",
+    "Fourth Wing"
+   ],
+   "caution": "Book two of the duet is not out yet, and reviewers flag thin worldbuilding and chaotic tone, which is the same immaturity risk she named with Silver Elite.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "romantasy",
+    "new"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "cliffhanger",
+    "disordered-eating",
+    "heavy-gore"
+   ],
+   "predicted": 4.22
+  },
+  {
+   "id": "ruthless-people",
+   "title": "Ruthless People",
+   "author": "J.J. McAvoy",
+   "series": "Ruthless People",
+   "seriesNumber": 1,
+   "year": 2014,
+   "seriesStatus": "complete",
+   "setting": "Chicago, Irish and Italian crime families",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates first-person chapters between Melody and Liam, so each spouse's scheming is visible to the reader but not to the other.",
+   "spice": 3,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 4,
+   "tropes": [
+    "arranged marriage",
+    "enemies to lovers",
+    "villain heroine",
+    "power couple",
+    "mafia"
+   ],
+   "contentWarnings": [
+    "graphic violence",
+    "torture",
+    "murder",
+    "pregnancy"
+   ],
+   "goodreadsRating": 3.87,
+   "hook": "The secret head of an Italian crime family is married off to the heir of the rival Irish family, and neither intends to give up control.",
+   "comps": [
+    "Mindf*ck Book One",
+    "Butcher & Blackbird"
+   ],
+   "caution": "Both leads are near-invincible from page one, so the stakes can feel low and the book leans on swagger rather than the slow-built tension she says she loves; the prose is functional, not lovely.",
+   "tagConfidence": "high",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "immediate",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore"
+   ],
+   "predicted": 4.27
+  },
+  {
+   "id": "killing-sarai",
+   "title": "Killing Sarai",
+   "author": "J.A. Redmerski",
+   "series": "In the Company of Killers",
+   "seriesNumber": 1,
+   "year": 2013,
+   "seriesStatus": "ongoing",
+   "setting": "Mexico and the American Southwest, on the run",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
+   "pov": "dual",
+   "povNote": "Mostly Sarai's first-person narration, with chapters from Victor, the assassin, woven in.",
+   "spice": 2,
+   "fmcAgency": 4,
+   "prose": 3,
+   "gutPunch": 4,
+   "darkness": 4,
+   "tropes": [
+    "assassin hero",
+    "captive turned partner",
+    "on the run",
+    "slow burn",
+    "found family"
+   ],
+   "contentWarnings": [
+    "sexual assault (referenced and on page)",
+    "captivity",
+    "graphic violence",
+    "murder"
+   ],
+   "goodreadsRating": 4.08,
+   "hook": "A woman held for nine years on a Mexican drug lord's compound escapes with the hired killer sent there on business, and he cannot decide whether to protect her or dispose of her.",
+   "comps": [
+    "Mindf*ck Book One",
+    "Butcher & Blackbird"
+   ],
+   "caution": "Sarai begins the book dependent on Victor for survival, and her growth into an operator happens gradually; the full Sarai and Victor arc runs across several books in a long series.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "captivity",
+    "heavy-gore",
+    "sexual-assault"
+   ],
+   "predicted": 4.09
+  },
+  {
+   "id": "does-it-hurt",
+   "title": "Does It Hurt?",
+   "author": "H.D. Carlton",
+   "series": null,
+   "seriesNumber": null,
+   "year": 2022,
+   "seriesStatus": "standalone",
+   "setting": "Coastal Australia and a stranded island lighthouse",
+   "genres": [
+    "darkromance",
+    "thriller",
+    "gothic"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Sawyer, a con artist on the run, and Enzo, the man she robbed.",
+   "spice": 4,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 4,
+   "darkness": 5,
+   "tropes": [
+    "enemies to lovers",
+    "forced proximity",
+    "shipwreck",
+    "revenge",
+    "survival horror"
+   ],
+   "contentWarnings": [
+    "childhood sexual abuse",
+    "incest (backstory)",
+    "rape",
+    "dubious consent",
+    "murder",
+    "gore"
+   ],
+   "goodreadsRating": 3.89,
+   "hook": "An identity thief who killed her abusive brother robs the wrong man, and his revenge strands them both on an island run by a deranged lighthouse keeper.",
+   "comps": [
+    "Haunting Adeline",
+    "Lights Out"
+   ],
+   "caution": "Same author as Haunting Adeline and with similarly extreme abuse content; the island survival section is tighter than Hunting Adeline's middle, but the prose is no step up from Carlton's other books.",
+   "tagConfidence": "high",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "heavy-gore",
+    "sexual-assault"
+   ],
+   "predicted": 4.22
+  },
+  {
+   "id": "captive-in-the-dark",
+   "title": "Captive in the Dark",
+   "author": "C.J. Roberts",
+   "series": "The Dark Duet",
+   "seriesNumber": 1,
+   "year": 2011,
+   "seriesStatus": "complete",
+   "setting": "The trafficking underworld, US to Mexico",
+   "genres": [
+    "darkromance",
+    "thriller"
+   ],
+   "pov": "dual",
+   "povNote": "Third-person chapters alternate between Livvie, the captive, and Caleb, the man who took her.",
+   "spice": 3,
+   "fmcAgency": 3,
+   "prose": 4,
+   "gutPunch": 4,
+   "darkness": 5,
+   "tropes": [
+    "captor and captive",
+    "revenge plot",
+    "morally black hero",
+    "slow corruption"
+   ],
+   "contentWarnings": [
+    "kidnapping",
+    "sex trafficking",
+    "sexual assault",
+    "physical abuse",
+    "cliffhanger ending"
+   ],
+   "goodreadsRating": 3.93,
+   "hook": "A man raised in sexual slavery kidnaps an eighteen-year-old to train as part of a revenge plan against the trafficker who sold him.",
+   "comps": [
+    "Haunting Adeline",
+    "Mindf*ck Book One"
+   ],
+   "caution": "Livvie has very little power for most of the book, the material is among the darkest in the genre, and book one ends on a cliffhanger, though the duet is complete so she would not have to wait.",
+   "tagConfidence": "high",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "captivity",
+    "cliffhanger",
+    "sexual-assault"
+   ],
+   "predicted": 4.29
+  },
+  {
+   "id": "hooked",
+   "title": "Hooked",
+   "author": "Emily McIntire",
+   "series": "Never After",
+   "seriesNumber": 1,
+   "year": 2021,
+   "seriesStatus": "complete",
+   "setting": "Contemporary city, a crime lord's bar and estate",
+   "genres": [
+    "darkromance",
+    "fairytale"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Wendy and James, the man running a long revenge plan against her father.",
+   "spice": 4,
+   "fmcAgency": 3,
+   "prose": 3,
+   "gutPunch": 3,
+   "darkness": 4,
+   "tropes": [
+    "Peter Pan retelling",
+    "revenge seduction",
+    "age gap",
+    "villain gets the girl",
+    "drug lord"
+   ],
+   "contentWarnings": [
+    "violence",
+    "murder",
+    "parental neglect",
+    "drugs"
+   ],
+   "goodreadsRating": 3.76,
+   "hook": "A drug lord seduces his enemy's twenty-year-old daughter to get at her father, in a loose contemporary Peter Pan retelling.",
+   "comps": [
+    "Butcher & Blackbird",
+    "Haunting Adeline"
+   ],
+   "caution": "Wendy is reactive for much of the book and the fairy tale nods can read as gimmick; the series is complete, but each book is a separate villain couple.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 3.76
+  },
+  {
+   "id": "bad-bishop",
+   "title": "Bad Bishop",
+   "author": "L.J. Shen",
+   "series": "Society of Villains",
+   "seriesNumber": 1,
+   "year": 2025,
+   "seriesStatus": "ongoing",
+   "setting": "Contemporary US mafia world, Camorra and Irish families",
+   "genres": [
+    "darkromance"
+   ],
+   "pov": "dual",
+   "povNote": "Dual first-person POV between Lila, the Camorra daughter, and Tiernan, the Irish mafia heir who wins her hand.",
+   "spice": 4,
+   "fmcAgency": 4,
+   "prose": 4,
+   "gutPunch": 4,
+   "darkness": 4,
+   "tropes": [
+    "marriage of convenience",
+    "age gap",
+    "enemies to lovers",
+    "scarred hero",
+    "underestimated heroine"
+   ],
+   "contentWarnings": [
+    "sexual assault (past)",
+    "teen pregnancy",
+    "violence",
+    "murder",
+    "age gap"
+   ],
+   "goodreadsRating": 4.21,
+   "hook": "A Camorra daughter hiding the aftermath of a teenage pregnancy is married off to a feared Irish mafia heir who thinks she is a pawn.",
+   "comps": [
+    "Butcher & Blackbird",
+    "Mindf*ck Book One"
+   ],
+   "caution": "Lila is eighteen and the age gap is ten years; the series is ongoing with interlinked couples, though this book resolves its own romance.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "dark",
+    "new"
+   ],
+   "momentum": "fast",
+   "unreleased": false,
+   "flags": [
+    "sexual-assault"
+   ],
+   "predicted": 4.42
+  },
+  {
+   "id": "you",
+   "title": "You",
+   "author": "Caroline Kepnes",
+   "series": "You",
+   "seriesNumber": 1,
+   "year": 2014,
+   "seriesStatus": "ongoing",
+   "setting": "New York City, bookstores and the Upper East Side",
+   "genres": [
+    "thriller"
+   ],
+   "pov": "single-male",
+   "povNote": "Joe narrates in second person, addressing Beck directly, so the reader is trapped inside the stalker's head.",
+   "spice": 2,
+   "fmcAgency": 2,
+   "prose": 5,
+   "gutPunch": 4,
+   "darkness": 4,
+   "tropes": [
+    "stalker narrator",
+    "unreliable narrator",
+    "obsession",
+    "dark satire"
+   ],
+   "contentWarnings": [
+    "stalking",
+    "murder",
+    "kidnapping",
+    "sexual content"
+   ],
+   "goodreadsRating": null,
+   "hook": "A bookstore clerk becomes obsessed with an aspiring writer who walks into his shop and starts systematically removing everyone around her.",
+   "comps": [
+    "Haunting Adeline",
+    "Mindf*ck Book One"
+   ],
+   "caution": "It is not a romance and Beck is the victim, not a partner, so there is no heroine with agency and no payoff; she should pick it up for voice and menace, not for a love story.",
+   "tagConfidence": "high",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "immediate",
+   "unreleased": false,
+   "flags": [
+    "captivity"
+   ],
+   "predicted": 4.74
+  },
+  {
+   "id": "brutal-prince",
+   "title": "Brutal Prince",
+   "author": "Sophie Lark",
+   "series": "Brutal Birthright",
+   "seriesNumber": 1,
+   "year": 2020,
+   "seriesStatus": "complete",
+   "setting": "Chicago, rival Irish and Italian mafia families",
+   "genres": [
+    "darkromance"
+   ],
+   "pov": "dual",
+   "povNote": "Alternates between Aida Gallo and Callum Griffin.",
+   "spice": 4,
+   "fmcAgency": 5,
+   "prose": 3,
+   "gutPunch": 2,
+   "darkness": 3,
+   "tropes": [
+    "arranged marriage",
+    "enemies to lovers",
+    "feisty heroine",
+    "mafia"
+   ],
+   "contentWarnings": [
+    "violence",
+    "murder",
+    "poisoning"
+   ],
+   "goodreadsRating": 3.72,
+   "hook": "After Aida accidentally sets fire to a rival family's library, her father marries her to their cold heir to stop a war, and she poisons him on their wedding night.",
+   "comps": [
+    "Butcher & Blackbird",
+    "Mindf*ck Book One"
+   ],
+   "caution": "Aida acts from page one, but the emotional stakes stay light and the writing is serviceable, so she may enjoy it without anything landing the way Fourth Wing did.",
+   "tagConfidence": "medium",
+   "lanes": [
+    "dark"
+   ],
+   "momentum": "immediate",
+   "unreleased": false,
+   "flags": [],
+   "predicted": 4.06
   }
  ]
 }
