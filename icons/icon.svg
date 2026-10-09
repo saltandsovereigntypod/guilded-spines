@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="34%" r="78%">
+      <stop offset="0" stop-color="#34253F"/>
+      <stop offset=".6" stop-color="#17111F"/>
+      <stop offset="1" stop-color="#07060B"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="30%" r="30%">
+      <stop offset="0" stop-color="#EACB80" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#EACB80" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gilt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3D894"/><stop offset=".55" stop-color="#C9A24C"/><stop offset="1" stop-color="#8A7139"/>
+    </linearGradient>
+    <linearGradient id="giltH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8A7139"/><stop offset=".5" stop-color="#EACB80"/><stop offset="1" stop-color="#8A7139"/>
+    </linearGradient>
+    <linearGradient id="curve" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset=".3" stop-color="#fff" stop-opacity=".10"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect width="512" height="512" fill="url(#halo)"/>
+  <!-- crescent and stars -->
+  <path d="M268 92a46 46 0 1 0 40 68 37 37 0 1 1-40-68z" fill="url(#gilt)"/>
+  <circle cx="330" cy="104" r="4.5" fill="#EACB80"/><circle cx="196" cy="128" r="3.2" fill="#EACB80" opacity=".8"/>
+  <circle cx="352" cy="150" r="2.6" fill="#EACB80" opacity=".7"/>
+  <!-- spines -->
+  <g>
+    <rect x="150" y="214" width="62" height="178" rx="5" fill="#5A2330"/>
+    <rect x="150" y="214" width="62" height="178" rx="5" fill="url(#curve)"/>
+    <rect x="218" y="186" width="72" height="206" rx="5" fill="#2E2240"/>
+    <rect x="218" y="186" width="72" height="206" rx="5" fill="url(#curve)"/>
+    <g transform="rotate(9 330 392)">
+      <rect x="298" y="226" width="58" height="166" rx="5" fill="#123832"/>
+      <rect x="298" y="226" width="58" height="166" rx="5" fill="url(#curve)"/>
+      <rect x="298" y="246" width="58" height="4" fill="url(#giltH)"/><rect x="298" y="364" width="58" height="4" fill="url(#giltH)"/>
+      <rect x="318" y="270" width="18" height="70" rx="2" fill="none" stroke="url(#gilt)" stroke-width="2.5"/>
+    </g>
+    <rect x="150" y="236" width="62" height="4" fill="url(#giltH)"/><rect x="150" y="364" width="62" height="4" fill="url(#giltH)"/>
+    <rect x="171" y="258" width="20" height="82" rx="2" fill="none" stroke="url(#gilt)" stroke-width="2.5"/>
+    <rect x="218" y="208" width="72" height="4" fill="url(#giltH)"/><rect x="218" y="216" width="72" height="2" fill="url(#giltH)" opacity=".7"/>
+    <rect x="218" y="360" width="72" height="2" fill="url(#giltH)" opacity=".7"/><rect x="218" y="366" width="72" height="4" fill="url(#giltH)"/>
+    <path d="M254 254l14 22-14 22-14-22z" fill="none" stroke="url(#gilt)" stroke-width="3"/>
+    <circle cx="254" cy="276" r="4" fill="url(#gilt)"/>
+  </g>
+  <!-- shelf -->
+  <rect x="112" y="392" width="288" height="14" rx="2" fill="url(#giltH)"/>
+  <rect x="120" y="406" width="272" height="10" fill="#1E1410" opacity=".9"/>
+</svg>

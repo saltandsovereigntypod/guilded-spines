@@ -760,7 +760,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--gilt-dim);box-shadow:
   background:rgba(255,255,255,.4);border:1px solid rgba(138,115,81,.3);
   color:var(--page-ink);font-family:var(--f-body);padding:5px 8px;border-radius:2px;
 }
-.meta select{background-image:linear-gradient(45deg,transparent 50%,#8A7351 50%),linear-gradient(135deg,#8A7351 50%,transparent 50%)}
+.meta select{
+  background-image:linear-gradient(45deg,transparent 50%,#8A7351 50%),linear-gradient(135deg,#8A7351 50%,transparent 50%);
+  background-position:calc(100% - 15px) 55%, calc(100% - 10px) 55%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;
+  padding-right:28px;
+}
 .meta input:focus,.meta select:focus{border-color:#8A7351;box-shadow:0 0 0 3px rgba(138,115,81,.14)}
 .row2{display:flex;gap:8px}
 .row2 input.num{width:76px}
@@ -1122,6 +1126,232 @@ details.or-fold[open] > summary::after{content:"\2013"}
   .field.grow{flex:1 1 100%}
   .cover-area{flex-direction:column}
 }
+
+/* ---------- app mode: the phone shell ----------
+   Everything below applies only when body.app is set (narrow screens). The
+   desktop layout is untouched; on a phone the same controls are moved into a
+   top bar, a tab bar and two bottom sheets rather than duplicated. */
+.appbar,.tabbar,.bsheet-wrap,.app-shelfbar,.app-search,.app-arrange,.app-only{display:none}
+
+body.app{-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+body.app .masthead,body.app .toolbar{display:none}
+body.app .wrap{
+  padding-top:calc(env(safe-area-inset-top) + 68px);
+  padding-bottom:calc(env(safe-area-inset-bottom) + 104px);
+  padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));
+}
+body.app input,body.app select,body.app textarea{font-size:16px}
+body.app .appbar,body.app .tabbar,body.app .bsheet,body.app .app-shelfbar,body.app .tabs{
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;
+}
+
+/* top bar */
+body.app .appbar{
+  display:flex;align-items:center;gap:10px;
+  position:fixed;top:0;left:0;right:0;z-index:55;
+  padding:calc(env(safe-area-inset-top) + 8px) max(14px,env(safe-area-inset-right)) 9px max(16px,env(safe-area-inset-left));
+  background:linear-gradient(180deg,rgba(26,20,36,.97),rgba(16,12,23,.9));
+  -webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom:1px solid var(--hair-soft);
+  box-shadow:0 10px 26px rgba(0,0,0,.45);
+}
+.app-moon{width:19px;height:19px;fill:var(--gilt);filter:drop-shadow(0 0 6px rgba(234,203,128,.45));flex:0 0 auto}
+.app-title{
+  flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-family:var(--f-display);font-weight:600;font-size:1.06rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--parchment);text-shadow:0 0 20px rgba(201,162,76,.35);
+}
+.icon-btn{
+  width:42px;height:42px;flex:0 0 auto;display:grid;place-items:center;cursor:pointer;
+  border-radius:50%;border:1px solid var(--hair);color:var(--gilt);
+  background:radial-gradient(circle at 50% 35%,var(--velvet-3),var(--velvet));
+}
+.icon-btn svg{width:19px;height:19px;fill:currentColor}
+.icon-btn[aria-pressed="true"]{color:var(--ink);background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));border-color:var(--gilt-bright)}
+body.app.on-oracle #appSearchBtn{visibility:hidden}
+
+/* search drawer under the bar */
+body.app .app-search{display:block;max-height:0;overflow:hidden;opacity:0;transition:max-height .28s ease,opacity .2s,margin .28s}
+body.app .app-search.open{max-height:96px;opacity:1;margin-bottom:12px}
+body.app .app-search .lbl{display:none}
+body.app .app-search input{padding:12px 14px;border-radius:12px;border-color:var(--hair)}
+
+/* shelf chips + view pill */
+body.app .tabs{justify-content:flex-start;gap:7px;margin:0 0 12px}
+body.app .tab{font-size:.6rem;letter-spacing:.13em;padding:10px 12px;border-radius:20px;min-height:38px}
+body.app .tab:hover{transform:none}
+body.app .app-shelfbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 22px}
+.app-view-sum{font-family:var(--f-data);font-size:.8rem;color:var(--dimmer);letter-spacing:.03em;min-width:0;line-height:1.35}
+.view-pill{
+  flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 15px;cursor:pointer;
+  font-family:var(--f-display);font-size:.6rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gilt-bright);background:rgba(7,6,11,.6);border:1px solid var(--hair);border-radius:20px;
+}
+.view-pill svg{width:15px;height:15px;fill:currentColor}
+body.app .plate h2{font-size:.72rem}
+body.app .footer{flex-direction:column;align-items:flex-start;gap:8px;font-size:.8rem}
+
+/* tab bar */
+body.app .tabbar{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  position:fixed;left:0;right:0;bottom:0;z-index:55;
+  padding:7px max(8px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 7px) max(8px,env(safe-area-inset-left));
+  background:linear-gradient(180deg,rgba(26,20,36,.94),rgba(10,8,15,.98));
+  -webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);
+  border-top:1px solid var(--hair);
+  box-shadow:0 -14px 32px rgba(0,0,0,.6), inset 0 1px 0 rgba(234,203,128,.08);
+}
+.tabbar button{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  min-height:54px;padding:4px 0;cursor:pointer;background:none;border:0;position:relative;
+  color:var(--dimmer);font-family:var(--f-display);font-size:.54rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
+  transition:color .2s;
+}
+.tabbar button svg{width:23px;height:23px;fill:currentColor;transition:transform .2s,filter .2s}
+.tabbar button[aria-current="page"]{color:var(--gilt-bright)}
+.tabbar button[aria-current="page"] svg{filter:drop-shadow(0 0 8px rgba(234,203,128,.55))}
+.tabbar button[aria-current="page"]::before{
+  content:"";position:absolute;top:-8px;left:50%;width:26px;height:2px;transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,var(--gilt-bright),transparent);
+}
+.tabbar button:active svg{transform:scale(.9)}
+.tabbar .add i{
+  width:40px;height:40px;margin-top:-4px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));
+  box-shadow:0 0 18px rgba(201,162,76,.45), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.tabbar .add i svg{width:22px;height:22px;fill:var(--ink)}
+.tabbar .add{color:var(--gilt)}
+.tabbar [hidden]{display:none}
+
+/* bottom sheets */
+body.app .bsheet-wrap{position:fixed;inset:0;z-index:70}
+body.app .bsheet-wrap.open{display:block}
+.bsheet-wrap .scrim{position:absolute;inset:0;background:rgba(3,2,6,.72);animation:fadeIn .2s ease both}
+.bsheet,body.app .overlay > .sheet{
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(201,162,76,.09), transparent 60%),
+    linear-gradient(180deg,var(--velvet-2),var(--night));
+  border-top:1px solid var(--hair);border-radius:18px 18px 0 0;
+  box-shadow:0 -22px 54px rgba(0,0,0,.75);
+}
+.bsheet{
+  position:absolute;left:0;right:0;bottom:0;max-height:88vh;overflow-y:auto;overscroll-behavior:contain;
+  padding:10px max(18px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 22px) max(18px,env(safe-area-inset-left));
+  animation:sheetUp .34s cubic-bezier(.2,.8,.25,1) both;
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.bsheet,body.app .overlay > .sheet{animation:none}}
+.bsheet .grab,body.app .overlay > .sheet::before{
+  content:"";display:block;width:40px;height:4px;border-radius:2px;background:rgba(201,162,76,.3);margin:0 auto 14px;
+}
+.bsheet h3{font-family:var(--f-display);font-weight:600;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gilt);margin:0 0 4px}
+.bsheet .hint{font-size:.94rem;color:var(--dim);margin:0 0 18px;font-style:italic}
+.bs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
+.bs-grid .field select{min-height:46px;border-radius:10px}
+.bs-grid .field[hidden]{display:none}
+.bs-toggles{display:flex;flex-direction:column;margin-top:14px;border-top:1px solid var(--hair-soft)}
+.bs-toggles .toggle{min-height:50px;padding:0;border-bottom:1px solid var(--hair-soft);font-size:.98rem;color:var(--parchment-2);gap:12px}
+.bs-toggles .toggle input{width:20px;height:20px}
+.bs-toggles .btn{margin-top:12px;align-self:flex-start}
+.bs-done{width:100%;min-height:48px;margin-top:20px}
+.bs-label{
+  font-family:var(--f-display);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gilt-dim);
+  margin:18px 0 8px;display:flex;align-items:center;gap:10px;
+}
+.bs-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hair),transparent)}
+.bsheet h3 + .bs-label{margin-top:12px}
+.bs-note{font-size:.95rem;color:var(--dim);margin:0 0 10px;line-height:1.5}
+.bs-list{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.bs-list .btn,#installBtn{min-height:50px;font-size:.66rem;border-radius:10px;white-space:normal}
+.bs-list .btn:last-child:nth-child(odd){grid-column:1 / -1}
+.bs-list .btn[aria-pressed="true"]{color:var(--ink);background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));border-color:var(--gilt-bright)}
+#installBtn{width:100%}
+
+/* arranging and selecting float above the tab bar */
+body.app.arranging .app-arrange{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  position:fixed;left:10px;right:10px;z-index:54;bottom:calc(env(safe-area-inset-bottom) + 80px);
+  padding:10px 12px;border-radius:14px;border:1px solid var(--hair);
+  background:linear-gradient(180deg,rgba(46,34,64,.97),rgba(16,12,23,.97));box-shadow:0 12px 30px rgba(0,0,0,.6);
+  font-family:var(--f-display);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gilt);
+}
+.app-arrange > span:first-child{flex:1 1 auto}
+.app-arrange-slot .seg button{min-height:34px}
+body.app .select-bar{
+  position:fixed;left:10px;right:10px;z-index:54;bottom:calc(env(safe-area-inset-bottom) + 80px);margin:0;
+  border-radius:14px;padding:10px 12px;gap:7px;box-shadow:0 12px 30px rgba(0,0,0,.6);
+  background:linear-gradient(180deg,rgba(46,34,64,.98),rgba(16,12,23,.98));
+}
+body.app .select-bar .spacer{display:none}
+body.app .select-bar .count{flex:1 1 100%}
+body.app .app-only{display:inline-block}
+
+/* overlays become sheets; the open book becomes a page of its own */
+body.app .overlay{padding:0;align-items:flex-end;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.app .overlay > .sheet{
+  width:100%;margin:auto 0 0;border-left:0;border-right:0;border-bottom:0;
+  max-height:92vh;overflow-y:auto;overscroll-behavior:contain;
+  padding:10px max(18px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 20px) max(18px,env(safe-area-inset-left));
+  animation:sheetUp .34s cubic-bezier(.2,.8,.25,1) both;
+}
+body.app .overlay > .sheet .sheet-actions{
+  position:sticky;bottom:calc(-20px - env(safe-area-inset-bottom));margin-left:-18px;margin-right:-18px;
+  padding:14px 18px calc(env(safe-area-inset-bottom) + 14px);background:var(--night);
+  border-top:1px solid var(--hair-soft);box-shadow:0 -12px 22px rgba(10,8,15,.9);
+}
+body.app .overlay > .sheet .sheet-actions{flex-wrap:wrap}
+body.app .overlay > .sheet .sheet-actions .btn{min-height:46px;flex:1 1 auto}
+body.app .or-wrow{grid-template-columns:1fr;gap:8px}
+body.app .or-wrow .seg{justify-self:start}
+body.app .or-wrow .seg button,body.app .or-wmode .seg button{min-height:38px;padding:0 13px;font-size:.56rem}
+body.app .or-pick{min-height:38px;border-radius:19px;padding:6px 14px}
+body.app .or-want .btn{min-height:40px}
+
+body.app #bookOverlay{
+  align-items:stretch;background:var(--parchment-2);
+  animation:pageIn .3s cubic-bezier(.2,.8,.25,1) both;
+}
+@keyframes pageIn{from{transform:translateX(28%);opacity:0}to{transform:none;opacity:1}}
+body.app #bookOverlay::before{
+  content:"";position:fixed;top:0;left:0;right:0;z-index:7;
+  height:calc(env(safe-area-inset-top) + 58px);
+  background:linear-gradient(180deg,rgba(26,20,36,.98),rgba(16,12,23,.94));
+  border-bottom:1px solid var(--hair-soft);box-shadow:0 8px 20px rgba(0,0,0,.35);
+}
+body.app #bookOverlay .spread{
+  width:100%;margin:0;min-height:100%;animation:none;filter:none;transform-style:flat;
+  padding-top:calc(env(safe-area-inset-top) + 58px);
+}
+body.app #bookOverlay .page{border-radius:0}
+body.app #bookOverlay .page-right{padding-bottom:calc(env(safe-area-inset-bottom) + 48px)}
+body.app #bookOverlay .close-book{
+  position:fixed;z-index:8;top:calc(env(safe-area-inset-top) + 9px);left:max(12px,env(safe-area-inset-left));bottom:auto;
+  transform:none;padding:0 16px 0 10px;min-height:40px;font-size:.6rem;letter-spacing:.16em;
+  background:rgba(7,6,11,.5);border:1px solid var(--hair);color:var(--gilt-bright);box-shadow:none;
+}
+body.app #bookOverlay .close-book:hover{transform:none}
+body.app #bookOverlay .close-book svg{display:none}
+body.app #bookOverlay .close-book::before{
+  content:"";width:16px;height:16px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.4 4.6 16.8 6l-6 6 6 6-1.4 1.4L8 12z'/%3E%3C/svg%3E") center/contain no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.4 4.6 16.8 6l-6 6 6 6-1.4 1.4L8 12z'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+
+/* the Oracle is a tab, so it sits under the bars rather than over them */
+body.app #oracleOverlay{
+  z-index:50;align-items:flex-start;
+  padding:calc(env(safe-area-inset-top) + 64px) 0 calc(env(safe-area-inset-bottom) + 84px);
+  background:
+    radial-gradient(700px 420px at 50% 0%, rgba(201,162,76,.12), transparent 70%),
+    linear-gradient(180deg,var(--night),var(--ink));
+  animation:fadeIn .2s ease both;
+}
+body.app #oracleOverlay .oracle-card{
+  width:100%;margin:0;border:0;border-radius:0;box-shadow:none;background:transparent;animation:none;
+  padding:6px max(18px,env(safe-area-inset-right)) 20px max(18px,env(safe-area-inset-left));
+}
+body.app #oracleOverlay .or-actions .btn{min-height:48px}
 </style>
 
 <svg style="display:none" aria-hidden="true">
@@ -1137,11 +1367,23 @@ details.or-fold[open] > summary::after{content:"\2013"}
   <symbol id="ic-eye" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 4.5c-5 0-9.1 3.3-11 7.5 1.9 4.2 6 7.5 11 7.5s9.1-3.3 11-7.5c-1.9-4.2-6-7.5-11-7.5zm0 12.2a4.7 4.7 0 1 1 0-9.4 4.7 4.7 0 0 1 0 9.4zm0-2.2a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></symbol>
   <symbol id="ic-wing" viewBox="0 0 24 24"><path d="M2 18c3.4-1.4 5.6-3.6 7-6.3C10.4 9 11.2 6 11.5 2.4c1.3 3.8 3.2 6.7 5.6 8.8 2.4 2.1 4.3 3.4 4.9 3.6-2.1.5-4.3.4-6.5-.3 1 1.3 2.3 2.4 3.9 3.2-2.6.4-5 0-7.2-1.1.5 1.1 1.3 2.1 2.4 3-3.8-.2-7-1.4-9.6-3.6z"/></symbol>
   <symbol id="ic-close" viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12z"/></symbol>
+  <symbol id="ic-shelf" viewBox="0 0 24 24"><path d="M3.5 3.5h3.6v15H3.5zM8.4 5.5h3.4v13H8.4zM13 4.6l3.3-.9 3.9 14.5-3.3.9zM2 19.8h20v1.7H2z"/></symbol>
+  <symbol id="ic-plus" viewBox="0 0 24 24"><path d="M11 4h2v7h7v2h-7v7h-2v-7H4v-2h7z"/></symbol>
+  <symbol id="ic-more" viewBox="0 0 24 24"><path d="M5 10.2a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm7 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6zm7 0a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6z"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><path d="M10.2 3a7.2 7.2 0 0 1 5.8 11.5l5 5-1.5 1.5-5-5A7.2 7.2 0 1 1 10.2 3zm0 2a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4z"/></symbol>
+  <symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M3 6h9.2a2.6 2.6 0 0 1 5 0H21v2h-3.8a2.6 2.6 0 0 1-5 0H3zm0 10h3.8a2.6 2.6 0 0 1 5 0H21v2h-9.2a2.6 2.6 0 0 1-5 0H3z"/></symbol>
+  <symbol id="ic-back" viewBox="0 0 24 24"><path d="M15.4 4.6 16.8 6l-6 6 6 6-1.4 1.4L8 12z"/></symbol>
   <symbol id="ic-drop" viewBox="0 0 24 24"><path d="M12 2.4 6.6 9.8a6.8 6.8 0 1 0 10.8 0zM12 6l3.8 5.3a4.7 4.7 0 1 1-7.6 0z"/></symbol>
 </svg>
 
 <div class="chamber" aria-hidden="true"></div>
 <div class="motes" id="motes" aria-hidden="true"></div>
+
+<header class="appbar" id="appBar">
+  <svg class="app-moon" viewBox="0 0 24 24" aria-hidden="true"><use href="#ic-moon"/></svg>
+  <span class="app-title" id="appTitle">Gilded Spines</span>
+  <button class="icon-btn" id="appSearchBtn" type="button" aria-label="Search the shelf" aria-pressed="false"><svg viewBox="0 0 24 24"><use href="#ic-search"/></svg></button>
+</header>
 
 <div class="wrap">
   <header class="masthead">
@@ -1154,7 +1396,12 @@ details.or-fold[open] > summary::after{content:"\2013"}
     <p class="tagline">A shelf by candlelight</p>
   </header>
 
+  <div class="app-search" id="appSearch"></div>
   <nav class="tabs" id="tabs" role="tablist" aria-label="Shelves"></nav>
+  <div class="app-shelfbar">
+    <span class="app-view-sum" id="appViewSum"></span>
+    <button class="view-pill" id="appViewBtn" type="button"><svg viewBox="0 0 24 24"><use href="#ic-sliders"/></svg>View</button>
+  </div>
 
   <div class="toolbar">
     <div class="field grow">
@@ -1225,6 +1472,7 @@ details.or-fold[open] > summary::after{content:"\2013"}
     <span class="spacer"></span>
     <button class="btn peril" type="button" id="deleteBtn">Delete selected</button>
     <button class="btn" type="button" id="bulkBtn">Apply styling</button>
+    <button class="btn app-only" type="button" id="selDone">Done</button>
   </div>
 
   <main id="library"></main>
@@ -1232,6 +1480,49 @@ details.or-fold[open] > summary::after{content:"\2013"}
   <div class="footer">
     <div class="save-state" id="saveState"><span class="lamp"></span><span id="saveText">Lighting the candles…</span><button class="btn small" type="button" id="undoBtn" hidden>Undo</button></div>
     <div class="stats" id="stats"></div>
+  </div>
+</div>
+
+<div class="app-arrange" id="appArrange">
+  <span>Arranging the shelf</span>
+  <span class="app-arrange-slot" id="appArrangeSlot"></span>
+  <button class="btn small" type="button" id="appArrangeDone">Done</button>
+</div>
+
+<nav class="tabbar" id="tabBar" aria-label="Gilded Spines">
+  <button type="button" data-app-tab="shelf" aria-current="page"><svg viewBox="0 0 24 24"><use href="#ic-shelf"/></svg><span>Shelf</span></button>
+  <button type="button" data-app-tab="oracle" id="appOracleTab"><svg viewBox="0 0 24 24"><use href="#ic-eye"/></svg><span>Oracle</span></button>
+  <button type="button" data-app-tab="add" class="add"><i><svg viewBox="0 0 24 24"><use href="#ic-plus"/></svg></i><span>Add</span></button>
+  <button type="button" data-app-tab="more"><svg viewBox="0 0 24 24"><use href="#ic-more"/></svg><span>More</span></button>
+</nav>
+
+<div class="bsheet-wrap" id="viewSheet" aria-hidden="true">
+  <div class="scrim" data-close-sheet></div>
+  <div class="bsheet" role="dialog" aria-modal="true" aria-label="View">
+    <div class="grab" data-close-sheet></div>
+    <h3>View</h3>
+    <p class="hint">How the shelf is grouped, sorted and shown.</p>
+    <div class="bs-grid" id="viewSlot"></div>
+    <div class="bs-toggles" id="viewToggles"></div>
+    <button class="btn bs-done" type="button" data-close-sheet>Done</button>
+  </div>
+</div>
+
+<div class="bsheet-wrap" id="moreSheet" aria-hidden="true">
+  <div class="scrim" data-close-sheet></div>
+  <div class="bsheet" role="dialog" aria-modal="true" aria-label="More">
+    <div class="grab" data-close-sheet></div>
+    <h3>More</h3>
+    <p class="bs-label">The shelf</p>
+    <div class="bs-list" id="moreShelf"></div>
+    <p class="bs-label">Keep it safe</p>
+    <p class="bs-note" id="backupNote">Your shelf lives on this phone. Export a copy now and then, so it can never be lost.</p>
+    <div class="bs-list" id="moreBackup"></div>
+    <div id="installBlock" hidden>
+      <p class="bs-label">Put it on your home screen</p>
+      <p class="bs-note" id="installNote"></p>
+      <button class="btn" type="button" id="installBtn" hidden>Install Gilded Spines</button>
+    </div>
   </div>
 </div>
 
@@ -5054,6 +5345,201 @@ document.addEventListener("keydown", function(e){
     clearTimeout(t);
     t = setTimeout(render, 180);
   });
+})();
+
+/* ---------------- app mode: the phone shell ----------------
+   On narrow screens the toolbar's own controls are moved, not copied, into the
+   top bar, the View sheet and the More sheet, so every listener keeps working.
+   A placeholder marks each one's home so widening the window puts it back. */
+(function(){
+  var mq = window.matchMedia ? window.matchMedia("(max-width: 760px)") : null;
+  var moved = [];
+  var isOn = false;
+
+  function park(el, target){
+    if(!el || !target) return;
+    var mark = document.createComment("app-home");
+    el.parentNode.insertBefore(mark, el);
+    moved.push({el:el, mark:mark});
+    target.appendChild(el);
+  }
+  function fieldOf(id){ var el = byId(id); return el ? el.closest(".field") : null; }
+  function enter(){
+    if(isOn) return;
+    isOn = true;
+    document.body.classList.add("app");
+    park(fieldOf("q"), byId("appSearch"));
+    ["groupBy","sortBy","dir"].forEach(function(id){ park(fieldOf(id), byId("viewSlot")); });
+    park(byId("groupStyleField"), byId("viewSlot"));
+    park(byId("groupLayoutField"), byId("viewSlot"));
+    park(document.querySelector('label[for="favOnly"]'), byId("viewToggles"));
+    park(document.querySelector('label[for="platesOn"]'), byId("viewToggles"));
+    park(byId("restorePlates"), byId("viewToggles"));
+    ["arrangeBtn","selectBtn","setBtn"].forEach(function(id){ park(byId(id), byId("moreShelf")); });
+    ["exportBtn","importBtn"].forEach(function(id){ park(byId(id), byId("moreBackup")); });
+    park(byId("moveSeg"), byId("appArrangeSlot"));
+    syncSearch();
+    syncTabs();
+    viewSummary();
+  }
+  function leave(){
+    if(!isOn) return;
+    isOn = false;
+    closeSheets();
+    moved.reverse().forEach(function(m){
+      if(m.mark.parentNode){ m.mark.parentNode.insertBefore(m.el, m.mark); m.mark.remove(); }
+    });
+    moved = [];
+    document.body.classList.remove("app", "on-oracle");
+  }
+  function decide(){ if(mq && mq.matches) enter(); else leave(); }
+
+  /* ---- sheets ---- */
+  function openSheet(id){
+    closeSheets();
+    var sh = byId(id);
+    sh.classList.add("open");
+    sh.setAttribute("aria-hidden", "false");
+    if(id === "moreSheet") backupNote();
+    if(id === "viewSheet") viewSummary();
+  }
+  function closeSheets(){
+    Array.prototype.forEach.call(document.querySelectorAll(".bsheet-wrap.open"), function(sh){
+      sh.classList.remove("open");
+      sh.setAttribute("aria-hidden", "true");
+    });
+    viewSummary();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".bsheet-wrap"), function(sh){
+    sh.addEventListener("click", function(e){
+      if(e.target.closest("[data-close-sheet]")){ closeSheets(); return; }
+      /* An action in More closes the sheet first, then does its work. */
+      if(sh.id === "moreSheet" && e.target.closest(".bs-list .btn")) closeSheets();
+    });
+  });
+
+  /* ---- the summary beside the View pill ---- */
+  function optText(id){
+    var el = byId(id);
+    return el && el.selectedIndex >= 0 ? el.options[el.selectedIndex].text : "";
+  }
+  function viewSummary(){
+    var out = byId("appViewSum");
+    if(!out) return;
+    var g = byId("groupBy") ? byId("groupBy").value : "none";
+    var parts = [];
+    if(g !== "none") parts.push("By " + optText("groupBy").toLowerCase());
+    parts.push("Sorted by " + optText("sortBy").toLowerCase());
+    if(byId("favOnly") && byId("favOnly").checked) parts.push("favorites only");
+    out.textContent = parts.join(" · ");
+  }
+  ["groupBy","sortBy","dir","favOnly"].forEach(function(id){
+    var el = byId(id);
+    if(el) el.addEventListener("change", function(){ setTimeout(viewSummary, 0); });
+  });
+
+  /* ---- search drawer ---- */
+  function syncSearch(){
+    var q = byId("q"), open = !!(q && q.value);
+    byId("appSearch").classList.toggle("open", open);
+    byId("appSearchBtn").setAttribute("aria-pressed", String(open));
+  }
+  byId("appSearchBtn").addEventListener("click", function(){
+    var box = byId("appSearch"), q = byId("q");
+    var open = !box.classList.contains("open");
+    if(!open && q && q.value){
+      q.value = "";
+      q.dispatchEvent(new Event("input", {bubbles:true}));
+    }
+    box.classList.toggle("open", open);
+    this.setAttribute("aria-pressed", String(open));
+    if(open && q){ window.scrollTo({top:0, behavior:"smooth"}); setTimeout(function(){ q.focus(); }, 60); }
+  });
+
+  /* ---- tab bar ---- */
+  function syncTabs(){
+    var onOracle = !!byId("oracleOverlay");
+    document.body.classList.toggle("on-oracle", onOracle);
+    byId("appTitle").textContent = onOracle ? "The Oracle" : "Gilded Spines";
+    Array.prototype.forEach.call(document.querySelectorAll("[data-app-tab]"), function(b){
+      var t = b.getAttribute("data-app-tab");
+      var on = (t === "oracle" && onOracle) || (t === "shelf" && !onOracle);
+      if(on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+    });
+  }
+  if(!ORACLE) byId("appOracleTab").hidden = true;
+  byId("tabBar").addEventListener("click", function(e){
+    var b = e.target.closest("[data-app-tab]");
+    if(!b) return;
+    var t = b.getAttribute("data-app-tab");
+    closeSheets();
+    if(t === "shelf"){
+      if(byId("oracleOverlay")) closeOracle();
+      else window.scrollTo({top:0, behavior:"smooth"});
+    } else if(t === "oracle"){
+      if(!byId("oracleOverlay")) byId("oracleBtn").click();
+    } else if(t === "add"){
+      if(byId("oracleOverlay")) closeOracle();
+      byId("addBtn").click();
+    } else if(t === "more"){
+      openSheet("moreSheet");
+    }
+    syncTabs();
+  });
+  byId("appViewBtn").addEventListener("click", function(){ openSheet("viewSheet"); });
+  byId("appArrangeDone").addEventListener("click", function(){ if(state.arranging) byId("arrangeBtn").click(); });
+  byId("selDone").addEventListener("click", function(){ if(state.selecting) byId("selectBtn").click(); });
+  new MutationObserver(syncTabs).observe(document.body, {childList:true});
+  /* The sort list is filled in after load; the summary follows it. */
+  if(byId("sortBy")) new MutationObserver(viewSummary).observe(byId("sortBy"), {childList:true});
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && document.querySelector(".bsheet-wrap.open")) closeSheets();
+  });
+
+  /* ---- keeping it safe: when this phone last exported ---- */
+  var EXPORT_KEY = "gilded-spines.lastExport";
+  function backupNote(){
+    var when = null;
+    try { when = parseInt(localStorage.getItem(EXPORT_KEY), 10) || null; } catch(e){}
+    byId("backupNote").textContent = when
+      ? "Your shelf lives on this phone. Last exported " +
+        new Date(when).toLocaleDateString(undefined, {day:"numeric", month:"long", year:"numeric"}) + "."
+      : "Your shelf lives on this phone. Export a copy now and then, so it can never be lost.";
+  }
+  byId("exportBtn").addEventListener("click", function(){
+    try { localStorage.setItem(EXPORT_KEY, String(Date.now())); } catch(e){}
+  });
+
+  /* ---- install help, only where it applies ---- */
+  var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+    window.navigator.standalone === true;
+  var deferred = null;
+  function installHelp(){
+    var block = byId("installBlock");
+    /* Only the standalone build can be installed; the Artifact lives inside claude.ai. */
+    if(standalone || !window.__GILDED_SEED__){ block.hidden = true; return; }
+    var ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
+    block.hidden = false;
+    byId("installBtn").hidden = !deferred;
+    byId("installNote").textContent = deferred
+      ? "Install it and it opens like an app, full screen and without signal."
+      : ios
+        ? "In Safari, tap the Share button, then Add to Home Screen. It opens like an app, full screen and without signal."
+        : "Use your browser menu and choose Install app or Add to Home screen.";
+  }
+  window.addEventListener("beforeinstallprompt", function(e){ e.preventDefault(); deferred = e; installHelp(); });
+  byId("installBtn").addEventListener("click", function(){
+    if(!deferred) return;
+    deferred.prompt();
+    deferred.userChoice.then(function(){ deferred = null; installHelp(); });
+  });
+  installHelp();
+
+  decide();
+  if(mq){
+    if(mq.addEventListener) mq.addEventListener("change", decide);
+    else if(mq.addListener) mq.addListener(decide);
+  }
 })();
 
 /* ---------------- motes ---------------- */

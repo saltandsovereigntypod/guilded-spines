@@ -139,6 +139,33 @@ python3 build.py      # artifact source + src/*.json -> index.html
 Edit `artifact/gilded-spines.html` and re-run the build; never edit `index.html`
 by hand.
 
+### The phone app at books.saltandsovereignty.com
+
+The standalone build is also an installable web app. `build.py` writes
+`manifest.webmanifest` and `sw.js` next to `index.html`; the icons live in
+`icons/` (`icon.svg` is the source for the PNGs). Once it has been opened with
+signal it opens offline, and a new build reaches the phone the next time it is
+opened with signal.
+
+On a screen 760px wide or narrower the app switches to a phone layout: a slim
+top bar with search, shelf chips, a **View** sheet for grouping and sorting,
+and a tab bar (**Shelf**, **Oracle**, **Add**, **More**). The open book becomes a
+page of its own and settings panels rise from the bottom. These are the same
+controls as the desktop toolbar, moved rather than copied, so the desktop layout
+is unchanged.
+
+To install: in Safari, Share, then Add to Home Screen; on Android, Chrome
+offers Install. The installed app keeps its own copy of the shelf on the phone,
+starting from `src/library.seed.json`; Export and Import (under More) move a
+shelf between devices.
+
+**Publishing.** `.github/workflows/deploy.yml` builds and publishes to GitHub
+Pages on every push to `main`. One-time setup, the same as
+app.saltandsovereignty.com: in Settings, Pages, set Source to *GitHub Actions*
+and Custom domain to `books.saltandsovereignty.com` (then tick Enforce HTTPS);
+at the domain's DNS host, add a `CNAME` record for `books` pointing to
+`saltandsovereigntypod.github.io`.
+
 ## Layout
 
 ```
@@ -147,6 +174,9 @@ src/library.seed.json         seed library for the standalone build
 src/oracle-catalog.json       the Oracle's vetted candidates and fitted model
 build.py                      wraps the artifact source into index.html
 index.html                    generated — standalone build
+manifest.webmanifest, sw.js   generated — the installable app and its offline cache
+icons/                        app icon (icon.svg) and its PNGs
+.github/workflows/deploy.yml  publishes to books.saltandsovereignty.com
 docs/shelf.png                screenshot
 ```
 

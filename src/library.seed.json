@@ -5,19 +5,41 @@
     "description": "",
     "favorite": false,
     "id": "a-deal-with-the-devil",
-    "notes": "",
+    "order": 3100,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3,
       "overall": 4,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucok-1d5",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucok-25d",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucok-3ed",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Mindf*ck",
     "seriesNumber": 1,
     "spineColor": "#153A3E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "A Deal With The Devil"
   },
   "a-great-and-terrible-beauty": {
@@ -26,18 +48,40 @@
     "description": "",
     "favorite": false,
     "id": "a-great-and-terrible-beauty",
-    "notes": "",
+    "order": 1700,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-4t0",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-5cp",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-68e",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Gemma Doyle Trilogy",
     "seriesNumber": 1,
     "spineColor": "#33253F",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "A Great and Terrible Beauty"
   },
   "a-kingdom-of-flesh-and-fire": {
@@ -46,15 +90,37 @@
     "description": "",
     "favorite": false,
     "id": "a-kingdom-of-flesh-and-fire",
-    "notes": "",
+    "order": 1500,
     "progress": 100,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-7i1",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-8e8",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-9gf",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "From Blood & Ash",
     "seriesNumber": 2,
     "spineColor": "#22403A",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "A Kingdom of Flesh and Fire"
   },
   "a-soul-to-keep": {
@@ -63,17 +129,39 @@
     "description": "",
     "favorite": false,
     "id": "a-soul-to-keep",
-    "notes": "",
+    "order": 1100,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3,
       "spice": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-an2",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-brm",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-ccu",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Duskwalker Brides",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "A Soul To Keep"
   },
   "all-the-lies": {
@@ -82,19 +170,41 @@
     "description": "",
     "favorite": false,
     "id": "all-the-lies",
-    "notes": "",
+    "order": 3200,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3,
       "overall": 4,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-do6",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-el8",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-fd3",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Mindf*ck",
     "seriesNumber": 2,
     "spineColor": "#153A3E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "All The Lies"
   },
   "black-sheep": {
@@ -103,15 +213,254 @@
     "description": "Serial killer Bria and a psychologist hunting the same cult leader.",
     "favorite": false,
     "id": "black-sheep",
-    "notes": "From the Sept 2026 rec list.",
+    "order": 4000,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-gbh",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list."
+      },
+      {
+        "id": "smtxhucol-hhi",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-iii",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "",
     "seriesNumber": null,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Black Sheep"
+  },
+  "book-muyew8d1-1hu": {
+    "addedAt": 1791395948629,
+    "author": "Laini Taylor",
+    "coverId": null,
+    "description": "A blue-haired art student in Prague who runs errands collecting teeth for her chimaera family meets the seraph sent to destroy them, and learns what she actually is.",
+    "display": "spine",
+    "favorite": false,
+    "id": "book-muyew8d1-1hu",
+    "oracleTags": {
+      "darkness": 4,
+      "fmcAgency": 4,
+      "gutPunch": 5,
+      "id": "daughter-of-smoke-and-bone",
+      "momentum": "fast",
+      "prose": 5,
+      "spice": 1
+    },
+    "order": 4400,
+    "progress": 0,
+    "ratings": {},
+    "sections": [
+      {
+        "id": "smuyew8d1-1qd",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smuyew8d1-2c8",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smuyew8d1-3a6",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      },
+      {
+        "id": "smuyew8d1-44l",
+        "label": "From the Oracle",
+        "text": "Predicted 5.0 of 5 on your own scale.\n\nWhy it fits you:\n• Prose 5 of 5, the second thing your ratings lean on at a weight of 1.64, and it carries 1.64 of this score.\n• Emotional impact 5 of 5, worth another 1.03 at a weight of 1.03.\n• Momentum is fast, which scores 0.85 of 1 on your scale and is worth 1.41 of the prediction.\n• Third person centered on Karou, opening out to Akiva and a long past-life section in the back half.\n\nWhere it might lose you:\nThe prose is the best argument for this lane and the reveal is a genuine gut punch, but the middle third abandons the present-day plot entirely for a long flashback, and Karou's fate is more discovered than chosen, which edges toward the passivity she hated in ACOTAR.\n\nDrawn from the Oracle on 2026-10-07."
+      }
+    ],
+    "series": "Daughter of Smoke & Bone",
+    "seriesNumber": 1,
+    "spineColor": "#123832",
+    "status": "want",
+    "title": "Daughter of Smoke & Bone"
+  },
+  "book-muyezjmq-718": {
+    "addedAt": 1791396103203,
+    "author": "Kristen Ciccarelli",
+    "coverId": null,
+    "description": "A witch posing as a vapid socialite runs rescue missions for condemned witches at night, and starts courting the witch hunter who is closing in on her.",
+    "display": "spine",
+    "favorite": false,
+    "id": "book-muyezjmq-718",
+    "oracleTags": {
+      "darkness": 3,
+      "fmcAgency": 5,
+      "gutPunch": 4,
+      "id": "heartless-hunter",
+      "momentum": "fast",
+      "prose": 4,
+      "spice": 2
+    },
+    "order": 4500,
+    "progress": 0,
+    "ratings": {},
+    "sections": [
+      {
+        "id": "smuyezjmr-5og",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smuyezjmr-6pk",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smuyezjmr-7de",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      },
+      {
+        "id": "smuyezjmr-8t9",
+        "label": "From the Oracle",
+        "text": "Predicted 4.6 of 5 on your own scale.\n\nWhy it fits you:\n• Prose 4 of 5, the second thing your ratings lean on at a weight of 1.64, and it carries 1.31 of this score.\n• Emotional impact 4 of 5, worth another 0.82 at a weight of 1.03.\n• Momentum is fast, which scores 0.85 of 1 on your scale and is worth 1.41 of the prediction.\n• Third person alternating between Rune and Gideon, each secretly investigating the other, so the dramatic irony runs both directions from chapter one.\n\nWhere it might lose you:\nIt's marketed and paced as YA: closed door, teenage leads, and a plot that moves fast partly because it's short; after Empyrean and Crescent City the emotional register may feel a size too small.\n\nDrawn from the Oracle on 2026-10-07."
+      }
+    ],
+    "series": "The Crimson Moth",
+    "seriesNumber": 1,
+    "spineColor": "#1B2A44",
+    "status": "want",
+    "title": "Heartless Hunter"
+  },
+  "book-mv0ot5w5-49f": {
+    "addedAt": 1791533533974,
+    "author": "V.E. Schwab",
+    "coverId": null,
+    "description": "Three women across five hundred years are turned into vampires and have to decide what they will do with an appetite nobody asked them to have.",
+    "display": "spine",
+    "favorite": false,
+    "id": "book-mv0ot5w5-49f",
+    "oracleTags": {
+      "darkness": 4,
+      "fmcAgency": 4,
+      "gutPunch": 4,
+      "id": "bury-our-bones-in-the-midnight-soil",
+      "momentum": "medium",
+      "prose": 5,
+      "spice": 3
+    },
+    "order": 4600,
+    "progress": 0,
+    "ratings": {},
+    "sections": [
+      {
+        "id": "smv0ot5w6-1b3",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smv0ot5w6-21k",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smv0ot5w6-3x2",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      },
+      {
+        "id": "smv0ot5w6-4n",
+        "label": "From the Oracle",
+        "text": "Predicted 4.1 of 5 on your own scale.\n\nWhy it fits you:\n• Prose 5 of 5, the second thing your ratings lean on at a weight of 1.40, and it carries 1.40 of this score.\n• Emotional impact 4 of 5, worth another 1.04 at a weight of 1.30.\n• Momentum is medium, which scores 0.50 of 1 on your scale and is worth 0.73 of the prediction.\n• Three women's lives in three centuries, rotating, and the moment you understand how they touch is the moment the book detonates.\n\nWhere it might lose you:\nCritics who disliked it call it vibes and repetition with no plot; it is a character study, not a momentum engine, and she has said outright she won't wait a book out.\n\nDrawn from the Oracle on 2026-10-09."
+      }
+    ],
+    "series": "",
+    "seriesNumber": null,
+    "spineColor": "#33253F",
+    "status": "want",
+    "title": "Bury Our Bones in the Midnight Soil"
+  },
+  "book-mv0p0xyh-73s": {
+    "addedAt": 1791533896937,
+    "author": "Alix E. Harrow",
+    "coverId": null,
+    "description": "",
+    "display": "spine",
+    "favorite": true,
+    "id": "book-mv0p0xyh-73s",
+    "order": 4700,
+    "progress": 100,
+    "ratings": {
+      "impact": 3,
+      "overall": 5
+    },
+    "sections": [
+      {
+        "id": "smv0p0xyh-1ju",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smv0p0xyh-2ct",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smv0p0xyh-3z0",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
+    "series": "",
+    "seriesNumber": null,
+    "status": "read",
+    "title": "The Once and Future Witches"
+  },
+  "book-mv0p267b-52s": {
+    "addedAt": 1791533954279,
+    "author": "Sara Raasch",
+    "coverId": null,
+    "description": "",
+    "display": "spine",
+    "favorite": false,
+    "id": "book-mv0p267b-52s",
+    "order": 4800,
+    "progress": 100,
+    "ratings": {
+      "impact": 2.5,
+      "overall": 3.5,
+      "spice": 1
+    },
+    "sections": [
+      {
+        "id": "smv0p267b-41i",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smv0p267b-5zv",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smv0p267b-6p1",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
+    "series": "",
+    "seriesNumber": null,
+    "status": "read",
+    "title": "Night of the Witch"
   },
   "brimstone": {
     "addedAt": 1757000018000,
@@ -119,15 +468,37 @@
     "description": "Saeris is queen of the Blood Court now, navigating royal duties while protecting her homeland.",
     "favorite": false,
     "id": "brimstone",
-    "notes": "",
+    "order": 1300,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-jta",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-ksl",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-li2",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Fae & Alchemy",
     "seriesNumber": 2,
     "spineColor": "#2A4436",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Brimstone"
   },
   "broken-dove": {
@@ -136,15 +507,37 @@
     "description": "",
     "favorite": false,
     "id": "broken-dove",
-    "notes": "",
+    "order": 2400,
     "progress": 8,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-mum",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-npn",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-opa",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Silver Elite",
     "seriesNumber": 2,
     "spineColor": "#2C3A52",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "reading",
-    "theories": "",
     "title": "Broken Dove"
   },
   "butcher-and-blackbird": {
@@ -153,18 +546,40 @@
     "description": "",
     "favorite": true,
     "id": "butcher-and-blackbird",
-    "notes": "Slow but delicious burn",
+    "order": 3600,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 4.5,
       "spice": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-pko",
+        "label": "Notes",
+        "text": "Slow but delicious burn"
+      },
+      {
+        "id": "smtxhucol-qp2",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-r57",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Ruinous Love Trilogy",
     "seriesNumber": 1,
     "spineColor": "#4A1F2E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Butcher & Blackbird"
   },
   "caught-up": {
@@ -173,19 +588,41 @@
     "description": "",
     "favorite": false,
     "id": "caught-up",
-    "notes": "It was decent.",
+    "order": 2100,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 1,
       "overall": 3,
       "spice": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-s6t",
+        "label": "Notes",
+        "text": "It was decent."
+      },
+      {
+        "id": "smtxhucol-ter",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-utk",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Into Darkness",
     "seriesNumber": 2,
     "spineColor": "#1F3348",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Caught Up"
   },
   "fourth-wing": {
@@ -194,17 +631,39 @@
     "description": "",
     "favorite": true,
     "id": "fourth-wing",
-    "notes": "Liam's last line is on my body — \"it's been. My honor.\" — with a red dagger tail next to it.",
+    "order": 2600,
     "progress": 100,
-    "quotes": "It's been. My honor.",
     "ratings": {
       "overall": 5
     },
+    "sections": [
+      {
+        "id": "smtxhucol-vj4",
+        "label": "Notes",
+        "text": "Liam's last line is on my body — \"it's been. My honor.\" — with a red dagger tail next to it."
+      },
+      {
+        "id": "smtxhucol-wsg",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-xxz",
+        "label": "Lines Worth Keeping",
+        "text": "It's been. My honor."
+      }
+    ],
     "series": "The Empyrean",
     "seriesNumber": 1,
     "spineColor": "#1B2A44",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Fourth Wing"
   },
   "from-blood-and-ash": {
@@ -213,19 +672,41 @@
     "description": "",
     "favorite": false,
     "id": "from-blood-and-ash",
-    "notes": "",
+    "order": 1400,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 2,
       "overall": 2.5,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-ylt",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-zq6",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-10x9",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "From Blood & Ash",
     "seriesNumber": 1,
     "spineColor": "#22403A",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "From Blood & Ash"
   },
   "haunting-adeline": {
@@ -234,19 +715,41 @@
     "description": "",
     "favorite": false,
     "id": "haunting-adeline",
-    "notes": "It's only hot in books 😬",
+    "order": 400,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 2,
       "overall": 4,
       "spice": 4
     },
+    "sections": [
+      {
+        "id": "smtxhucol-11c3",
+        "label": "Notes",
+        "text": "It's only hot in books 😬"
+      },
+      {
+        "id": "smtxhucol-12wv",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-13eh",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Cat & Mouse Duet",
     "seriesNumber": 1,
     "spineColor": "#5A2330",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Haunting Adeline"
   },
   "house-of-earth-and-blood": {
@@ -255,19 +758,41 @@
     "description": "",
     "favorite": true,
     "id": "house-of-earth-and-blood",
-    "notes": "Loved.",
+    "order": 800,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 4,
       "overall": 4,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-14un",
+        "label": "Notes",
+        "text": "Loved."
+      },
+      {
+        "id": "smtxhucol-156o",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-161i",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Crescent City",
     "seriesNumber": 1,
     "spineColor": "#4A3520",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "House of Earth & Blood"
   },
   "house-of-flame-and-shadow": {
@@ -276,17 +801,40 @@
     "description": "",
     "favorite": false,
     "id": "house-of-flame-and-shadow",
-    "notes": "",
+    "lettering": "painted",
+    "order": 1000,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-17xn",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-18eh",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-192y",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Crescent City",
     "seriesNumber": 3,
     "spineColor": "#4A3520",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "House of Flame & Shadow"
   },
   "house-of-sky-and-breath": {
@@ -295,34 +843,79 @@
     "description": "",
     "favorite": false,
     "id": "house-of-sky-and-breath",
-    "notes": "",
+    "order": 900,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-1a4j",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1bri",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1cba",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Crescent City",
     "seriesNumber": 2,
     "spineColor": "#4A3520",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "House of Sky & Breath"
   },
   "hunting-adeline": {
     "addedAt": 1757000010000,
     "author": "H. D. Carlton",
     "description": "",
+    "display": "angle",
     "favorite": false,
     "id": "hunting-adeline",
-    "notes": "The middle was ROUGH",
+    "order": 500,
     "progress": 100,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-1dcq",
+        "label": "Notes",
+        "text": "The middle was ROUGH"
+      },
+      {
+        "id": "smtxhucol-1enj",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1f64",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Cat & Mouse Duet",
     "seriesNumber": 2,
     "spineColor": "#5A2330",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Hunting Adeline"
   },
   "iron-flame": {
@@ -331,17 +924,39 @@
     "description": "",
     "favorite": true,
     "id": "iron-flame",
-    "notes": "",
+    "order": 2700,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 5
     },
+    "sections": [
+      {
+        "id": "smtxhucol-1g4s",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1hs5",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1i48",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Empyrean",
     "seriesNumber": 2,
     "spineColor": "#1B2A44",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Iron Flame"
   },
   "leather-and-lark": {
@@ -350,18 +965,40 @@
     "description": "",
     "favorite": false,
     "id": "leather-and-lark",
-    "notes": "",
+    "order": 3700,
     "progress": 25,
-    "quotes": "",
     "ratings": {
       "overall": 3,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-1jal",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1kxb",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1lat",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Ruinous Love Trilogy",
     "seriesNumber": 2,
     "spineColor": "#4A1F2E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "paused",
-    "theories": "",
     "title": "Leather & Lark"
   },
   "lights-out": {
@@ -370,19 +1007,41 @@
     "description": "",
     "favorite": false,
     "id": "lights-out",
-    "notes": "Laughter and Tears",
+    "order": 2000,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 1,
       "overall": 4,
       "spice": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-1mc",
+        "label": "Notes",
+        "text": "Laughter and Tears"
+      },
+      {
+        "id": "smtxhucol-1nqp",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1o7w",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Into Darkness",
     "seriesNumber": 1,
     "spineColor": "#1F3348",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Lights Out"
   },
   "marrow": {
@@ -391,45 +1050,37 @@
     "description": "Two killers hiding in plain sight, enemies-to-lovers. A Weaver co-write — the Butcher & Blackbird voice on the Mindf*ck premise.",
     "favorite": false,
     "id": "marrow",
-    "notes": "From the Sept 2026 rec list — the most on-target book on it.",
+    "order": 4100,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-1pvw",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list — the most on-target book on it."
+      },
+      {
+        "id": "smtxhucol-1q74",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1rmr",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "",
     "seriesNumber": null,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Marrow"
-  },
-  "night-of-the-witch": {
-    "addedAt": 1791504000000,
-    "author": "Sara Raasch and Beth Revis",
-    "description": "",
-    "favorite": false,
-    "id": "night-of-the-witch",
-    "notes": "",
-    "oracleTags": {
-      "darkness": 3,
-      "fmcAgency": 4.5,
-      "gutPunch": 2,
-      "id": "night-of-the-witch",
-      "momentum": "fast",
-      "prose": 4,
-      "spice": 1
-    },
-    "progress": 100,
-    "quotes": "",
-    "ratings": {
-      "impact": 2,
-      "overall": 3.5,
-      "spice": 1
-    },
-    "series": "Witch and Hunter",
-    "seriesNumber": 1,
-    "spineColor": "#1B2A44",
-    "status": "read",
-    "theories": "",
-    "title": "Night of the Witch"
   },
   "ninth-house": {
     "addedAt": 1757000039000,
@@ -437,15 +1088,37 @@
     "description": "Alex Stern is the most dangerous thing in a room full of Yale occultists, and the Alex/Darlington burn runs unresolved across two entire books. Gothic, adult, excellent prose.",
     "favorite": false,
     "id": "ninth-house",
-    "notes": "From the Sept 2026 rec list.",
+    "order": 0,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-1sgj",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list."
+      },
+      {
+        "id": "smtxhucol-1tfl",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1u5i",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Alex Stern",
     "seriesNumber": 1,
     "spineColor": "#2E2240",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Ninth House"
   },
   "onyx-storm": {
@@ -454,17 +1127,39 @@
     "description": "",
     "favorite": true,
     "id": "onyx-storm",
-    "notes": "",
+    "order": 2800,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 5
     },
+    "sections": [
+      {
+        "id": "smtxhucol-1vky",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1wgo",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1xtj",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Empyrean",
     "seriesNumber": 3,
     "spineColor": "#1B2A44",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Onyx Storm"
   },
   "peculiar-stars": {
@@ -473,14 +1168,36 @@
     "description": "Yarros standalone, out 17 November 2026. Slow-burn island survival romance — Callista and Dominic. Not Empyrean.",
     "favorite": false,
     "id": "peculiar-stars",
-    "notes": "",
+    "order": 4200,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-1yp8",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-1zuz",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-20m6",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "",
     "seriesNumber": null,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Peculiar Stars"
   },
   "quicksilver": {
@@ -489,18 +1206,40 @@
     "description": "",
     "favorite": false,
     "id": "quicksilver",
-    "notes": "",
+    "order": 1200,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3.5,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-213f",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-229y",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-235",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Fae & Alchemy",
     "seriesNumber": 1,
     "spineColor": "#2A4436",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Quicksilver"
   },
   "rebel-angels": {
@@ -509,18 +1248,40 @@
     "description": "",
     "favorite": false,
     "id": "rebel-angels",
-    "notes": "",
+    "order": 1800,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-24zh",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-25u5",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-26ty",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Gemma Doyle Trilogy",
     "seriesNumber": 2,
     "spineColor": "#33253F",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Rebel Angels"
   },
   "scarlet-angel": {
@@ -529,19 +1290,41 @@
     "description": "",
     "favorite": false,
     "id": "scarlet-angel",
-    "notes": "",
+    "order": 3300,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3,
       "overall": 4,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-27ud",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-28yc",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-29ai",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Mindf*ck",
     "seriesNumber": 3,
     "spineColor": "#153A3E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Scarlet Angel"
   },
   "scythe-and-sparrow": {
@@ -550,15 +1333,37 @@
     "description": "Widely held to be the best of the three — worth skipping book two for.",
     "favorite": false,
     "id": "scythe-and-sparrow",
-    "notes": "",
+    "order": 3800,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-2a5r",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2ba5",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2cp5",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Ruinous Love Trilogy",
     "seriesNumber": 3,
     "spineColor": "#4A1F2E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Scythe & Sparrow"
   },
   "silver-elite": {
@@ -567,15 +1372,37 @@
     "description": "A psychic hiding what she is infiltrates an elite military training programme to strike at the regime from inside.",
     "favorite": false,
     "id": "silver-elite",
-    "notes": "Decent, enjoyed it enough to finish, but it felt immaturely written. Wasn't emotionally attached to anyone — didn't care when Cane died or when Lidy gave her up. The sexual tension was the part that worked, and that's how I figured out I love sexual tension.",
+    "order": 2300,
     "progress": 100,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-2dye",
+        "label": "Notes",
+        "text": "Decent, enjoyed it enough to finish, but it felt immaturely written. Wasn't emotionally attached to anyone — didn't care when Cane died or when Lidy gave her up. The sexual tension was the part that worked, and that's how I figured out I love sexual tension."
+      },
+      {
+        "id": "smtxhucol-2e6c",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2fff",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Silver Elite",
     "seriesNumber": 1,
     "spineColor": "#2C3A52",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Silver Elite"
   },
   "six-of-crows": {
@@ -584,36 +1411,81 @@
     "description": "Six people you get attached to, a heist that keeps them in constant danger, and Kaz and Inej running the most famous can't-touch-each-other burn in the genre at zero spice. A loss in book two. Duology, complete.",
     "favorite": false,
     "id": "six-of-crows",
-    "notes": "Top of the Sept 2026 rec list — closest structural match to why Empyrean is a 5.",
+    "order": 2500,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-2g9p",
+        "label": "Notes",
+        "text": "Top of the Sept 2026 rec list — closest structural match to why Empyrean is a 5."
+      },
+      {
+        "id": "smtxhucol-2hb9",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2ia6",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Six of Crows",
     "seriesNumber": 1,
     "spineColor": "#2E2240",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Six of Crows"
   },
   "the-bone-witch": {
     "addedAt": 1757000006000,
     "author": "Rin Chupeco",
     "description": "",
+    "display": "front",
     "favorite": false,
     "id": "the-bone-witch",
-    "notes": "So. Freaking. Good.",
+    "order": 100,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 2,
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-2jhr",
+        "label": "Notes",
+        "text": "So. Freaking. Good."
+      },
+      {
+        "id": "smtxhucol-2kaj",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2l9r",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Bone Witch Trilogy",
     "seriesNumber": 1,
     "spineColor": "#3E2A4A",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Bone Witch"
   },
   "the-coven": {
@@ -622,16 +1494,38 @@
     "description": "",
     "favorite": false,
     "id": "the-coven",
-    "notes": "",
+    "order": 700,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-2mb9",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2nbb",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2o9n",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Coven of Bones",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Coven"
   },
   "the-crown-of-gilded-bones": {
@@ -640,18 +1534,40 @@
     "description": "",
     "favorite": false,
     "id": "the-crown-of-gilded-bones",
-    "notes": "This is the one I remember quitting around halfway — tracker says finished. Fix whichever is right.",
+    "order": 1600,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 2,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-2pjy",
+        "label": "Notes",
+        "text": "This is the one I remember quitting around halfway — tracker says finished. Fix whichever is right."
+      },
+      {
+        "id": "smtxhucol-2qfc",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2r5d",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "From Blood & Ash",
     "seriesNumber": 3,
     "spineColor": "#22403A",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Crown of Gilded Bones"
   },
   "the-cruel-prince": {
@@ -660,14 +1576,36 @@
     "description": "Jude is a mortal girl in Faerie who chooses violence — stabbings, poisonings, a coup. She and Cardan spend two books not touching.",
     "favorite": false,
     "id": "the-cruel-prince",
-    "notes": "From the Sept 2026 rec list.",
+    "order": 3000,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-2s42",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list."
+      },
+      {
+        "id": "smtxhucol-2tk0",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2u2f",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Folk of the Air",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "The Cruel Prince"
   },
   "the-heart-forger": {
@@ -676,41 +1614,42 @@
     "description": "",
     "favorite": false,
     "id": "the-heart-forger",
-    "notes": "So. Freaking. Good.",
+    "order": 200,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3,
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-2vcc",
+        "label": "Notes",
+        "text": "So. Freaking. Good."
+      },
+      {
+        "id": "smtxhucol-2wcv",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2xc2",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Bone Witch Trilogy",
     "seriesNumber": 2,
     "spineColor": "#3E2A4A",
-    "status": "read",
-    "theories": "",
-    "title": "The Heart Forger"
-  },
-  "the-once-and-future-witches": {
-    "addedAt": 1791331200000,
-    "author": "Alix E. Harrow",
-    "description": "",
-    "favorite": false,
-    "id": "the-once-and-future-witches",
-    "notes": "",
-    "progress": 100,
-    "quotes": "",
-    "ratings": {
-      "impact": 3.5,
-      "overall": 5,
-      "spice": 0
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
     },
-    "series": "",
-    "seriesNumber": null,
-    "spineColor": "#123832",
     "status": "read",
-    "theories": "",
-    "title": "The Once and Future Witches"
+    "title": "The Heart Forger"
   },
   "the-risk": {
     "addedAt": 1757000031000,
@@ -718,19 +1657,41 @@
     "description": "",
     "favorite": false,
     "id": "the-risk",
-    "notes": "",
+    "order": 3400,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3,
       "overall": 4,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-2y63",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-2zw4",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-301w",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Mindf*ck",
     "seriesNumber": 5,
     "spineColor": "#153A3E",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Risk"
   },
   "the-ritual": {
@@ -739,17 +1700,39 @@
     "description": "",
     "favorite": false,
     "id": "the-ritual",
-    "notes": "",
+    "order": 2200,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3,
       "spice": 3
     },
+    "sections": [
+      {
+        "id": "smtxhucol-31mm",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-32q",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-33f2",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "L.O.R.D.S",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Ritual"
   },
   "the-serpent-and-the-wings-of-night": {
@@ -758,17 +1741,39 @@
     "description": "",
     "favorite": false,
     "id": "the-serpent-and-the-wings-of-night",
-    "notes": "",
+    "order": 3500,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 3,
       "spice": 2
     },
+    "sections": [
+      {
+        "id": "smtxhucol-34or",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-358o",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-369i",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Nightborn Duet",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Serpent & the Wings of Night"
   },
   "the-shadow-glass": {
@@ -777,19 +1782,41 @@
     "description": "",
     "favorite": false,
     "id": "the-shadow-glass",
-    "notes": "They deserved a happily ever after…",
+    "order": 300,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "impact": 3.5,
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-37fq",
+        "label": "Notes",
+        "text": "They deserved a happily ever after…"
+      },
+      {
+        "id": "smtxhucol-38ld",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-39uj",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Bone Witch Trilogy",
     "seriesNumber": 3,
     "spineColor": "#3E2A4A",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Shadow Glass"
   },
   "the-sweet-far-thing": {
@@ -798,18 +1825,40 @@
     "description": "",
     "favorite": false,
     "id": "the-sweet-far-thing",
-    "notes": "",
+    "order": 1900,
     "progress": 100,
-    "quotes": "",
     "ratings": {
       "overall": 4,
       "spice": 0
     },
+    "sections": [
+      {
+        "id": "smtxhucol-3aeo",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3bpb",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3cqz",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Gemma Doyle Trilogy",
     "seriesNumber": 3,
     "spineColor": "#33253F",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "The Sweet Far Thing"
   },
   "these-violent-delights": {
@@ -818,14 +1867,36 @@
     "description": "1920s Shanghai, rival gang heirs who used to be in love. Juliette carries knives and uses them. Duology, complete.",
     "favorite": false,
     "id": "these-violent-delights",
-    "notes": "From the Sept 2026 rec list.",
+    "order": 3900,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-3d9h",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list."
+      },
+      {
+        "id": "smtxhucol-3er5",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3fai",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "These Violent Delights",
     "seriesNumber": 1,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "These Violent Delights"
   },
   "they-never-learn": {
@@ -834,14 +1905,36 @@
     "description": "A university professor who quietly kills predatory men. Dual timeline, literary prose, real emotional weight. Standalone.",
     "favorite": false,
     "id": "they-never-learn",
-    "notes": "From the Sept 2026 rec list — best shot at moving the impact number.",
+    "order": 4300,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-3g92",
+        "label": "Notes",
+        "text": "From the Sept 2026 rec list — best shot at moving the impact number."
+      },
+      {
+        "id": "smtxhucol-3htr",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3ind",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "",
     "seriesNumber": null,
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "They Never Learn"
   },
   "threshing-day": {
@@ -850,15 +1943,37 @@
     "description": "Thirteen short stories starring the riders and their dragons. Released 29 September 2026; the deluxe edition has sixteen full-colour illustrations.",
     "favorite": false,
     "id": "threshing-day",
-    "notes": "",
+    "order": 2900,
     "progress": 0,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-3jew",
+        "label": "Notes",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3kta",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3l48",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "The Empyrean",
     "seriesNumber": 3.5,
     "spineColor": "#1B2A44",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "want",
-    "theories": "",
     "title": "Threshing Day"
   },
   "wheres-molly": {
@@ -867,15 +1982,37 @@
     "description": "",
     "favorite": false,
     "id": "wheres-molly",
-    "notes": "Meh.",
+    "order": 600,
     "progress": 100,
-    "quotes": "",
     "ratings": {},
+    "sections": [
+      {
+        "id": "smtxhucol-3m49",
+        "label": "Notes",
+        "text": "Meh."
+      },
+      {
+        "id": "smtxhucol-3nbr",
+        "label": "Theories & Predictions",
+        "text": ""
+      },
+      {
+        "id": "smtxhucol-3ori",
+        "label": "Lines Worth Keeping",
+        "text": ""
+      }
+    ],
     "series": "Cat & Mouse Duet",
     "seriesNumber": 3,
     "spineColor": "#5A2330",
+    "spineShow": {
+      "author": false,
+      "number": true,
+      "pips": true,
+      "series": false,
+      "title": true
+    },
     "status": "read",
-    "theories": "",
     "title": "Where's Molly"
   }
 }
