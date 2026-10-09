@@ -1,6 +1,6 @@
 {
- "version": 3,
- "generated": "2026-10-07",
+ "version": 4,
+ "generated": "2026-10-09",
  "builtFor": "Gilded Spines: the Oracle",
  "model": {
   "dimensions": [
@@ -10,28 +10,28 @@
    "momentum"
   ],
   "weights": {
-   "gutPunch": 1.0258,
-   "prose": 1.641,
-   "fmcAgency": 0.647,
-   "momentum": 1.6563
+   "gutPunch": 1.3023,
+   "prose": 1.3976,
+   "fmcAgency": 0.6652,
+   "momentum": 1.4551
   },
-  "intercept": 0.364,
+  "intercept": 0.4369,
   "momentumScale": {
    "immediate": 1.0,
    "fast": 0.85,
    "medium": 0.5,
    "slow": 0.15
   },
-  "rSquared": 0.8881,
-  "note": "Weights were fitted by least squares against Ash's own ratings of 32 books she has already read. Predicted values are on her own 0-5 Overall scale. Re-fit whenever she rates something new.",
+  "rSquared": 0.8772,
+  "note": "Weights were fitted by least squares against Ash's own ratings of 33 books she has already read. Predicted values are on her own 0-5 Overall scale. Re-fit whenever she rates something new.",
   "correlations": {
-   "gutPunch": 0.837,
-   "fmcAgency": 0.805,
-   "momentum": 0.715,
-   "prose": 0.586,
-   "darkness": 0.461,
-   "pov": 0.175,
-   "spice": -0.303
+   "gutPunch": 0.826,
+   "fmcAgency": 0.801,
+   "momentum": 0.694,
+   "prose": 0.583,
+   "darkness": 0.456,
+   "pov": 0.172,
+   "spice": -0.298
   }
  },
  "anchors": [
@@ -98,6 +98,22 @@
    "gutPunch": 3.5,
    "darkness": 3,
    "spice": 0
+  },
+  {
+   "id": "night-of-the-witch",
+   "title": "Night of the Witch",
+   "author": "Sara Raasch and Beth Revis",
+   "series": "Witch and Hunter",
+   "seriesNumber": 1,
+   "year": 2023,
+   "ashRating": 3.5,
+   "pov": "dual",
+   "momentum": "fast",
+   "fmcAgency": 4.5,
+   "prose": 4,
+   "gutPunch": 2,
+   "darkness": 3,
+   "spice": 1
   },
   {
    "id": "butcher-and-blackbird",
@@ -605,7 +621,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 5.0
+   "predicted": 4.86
   },
   {
    "id": "daughter-of-smoke-and-bone",
@@ -659,7 +675,7 @@
     "captivity",
     "heavy-gore"
    ],
-   "predicted": 4.96
+   "predicted": 4.91
   },
   {
    "id": "the-ballad-of-falling-dragons",
@@ -712,7 +728,7 @@
    "flags": [
     "captivity"
    ],
-   "predicted": 4.88,
+   "predicted": 4.84,
    "prerequisite": {
     "needs": "when-the-moon-hatched",
     "needsTitle": "When the Moon Hatched"
@@ -825,7 +841,7 @@
     "cliffhanger",
     "heavy-gore"
    ],
-   "predicted": 4.8,
+   "predicted": 4.72,
    "prerequisite": {
     "needs": "tourist-season",
     "needsTitle": "Tourist Season"
@@ -888,7 +904,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 4.75
+   "predicted": 4.65
   },
   {
    "id": "take-me-with-you-jones",
@@ -942,7 +958,7 @@
     "child-harm",
     "sexual-assault"
    ],
-   "predicted": 4.62
+   "predicted": 4.51
   },
   {
    "id": "heartless-hunter",
@@ -995,7 +1011,7 @@
     "cliffhanger",
     "heavy-gore"
    ],
-   "predicted": 4.55
+   "predicted": 4.5
   },
   {
    "id": "rebel-witch",
@@ -1047,7 +1063,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 4.55,
+   "predicted": 4.5,
    "prerequisite": {
     "needs": "heartless-hunter",
     "needsTitle": "Heartless Hunter"
@@ -1111,7 +1127,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 4.51
+   "predicted": 4.53
   },
   {
    "id": "divine-rivals",
@@ -1165,7 +1181,7 @@
     "addiction",
     "cliffhanger"
    ],
-   "predicted": 4.38
+   "predicted": 4.4
   },
   {
    "id": "the-death-of-jane-lawrence",
@@ -1221,7 +1237,7 @@
     "body-horror",
     "heavy-gore"
    ],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "the-death-club",
@@ -1276,7 +1292,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "tourist-season",
@@ -1330,7 +1346,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "iron-widow",
@@ -1441,7 +1457,7 @@
     "disordered-eating",
     "heavy-gore"
    ],
-   "predicted": 4.27
+   "predicted": 4.18
   },
   {
    "id": "starling-house",
@@ -1494,7 +1510,7 @@
     "child-harm",
     "self-harm"
    ],
-   "predicted": 4.3
+   "predicted": 4.27
   },
   {
    "id": "jane-doe",
@@ -1544,7 +1560,7 @@
    "flags": [
     "self-harm"
    ],
-   "predicted": 4.3
+   "predicted": 4.27
   },
   {
    "id": "when-she-unravels",
@@ -1597,7 +1613,7 @@
     "domestic-abuse",
     "heavy-gore"
    ],
-   "predicted": 4.22
+   "predicted": 4.11
   },
   {
    "id": "my-dreadful-darling",
@@ -1707,7 +1723,7 @@
     "child-harm",
     "self-harm"
    ],
-   "predicted": 4.17
+   "predicted": 4.14
   },
   {
    "id": "the-knight-and-the-moth",
@@ -1765,7 +1781,7 @@
     "domestic-abuse",
     "self-harm"
    ],
-   "predicted": 4.17
+   "predicted": 4.14
   },
   {
    "id": "bury-our-bones-in-the-midnight-soil",
@@ -1821,7 +1837,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 4.17
+   "predicted": 4.14
   },
   {
    "id": "when-the-moon-hatched",
@@ -1877,7 +1893,7 @@
     "heavy-gore",
     "self-harm"
    ],
-   "predicted": 4.05
+   "predicted": 4.12
   },
   {
    "id": "the-ministry-of-time",
@@ -1929,7 +1945,7 @@
    "flags": [
     "disordered-eating"
    ],
-   "predicted": 4.04
+   "predicted": 4.0
   },
   {
    "id": "lovesick-trisha-wolfe",
@@ -1982,7 +1998,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.02
+   "predicted": 3.96
   },
   {
    "id": "say-youre-sorry-rose",
@@ -2034,7 +2050,7 @@
     "captivity",
     "sexual-assault"
    ],
-   "predicted": 3.97
+   "predicted": 3.99
   },
   {
    "id": "a-fate-inked-in-blood",
@@ -2088,7 +2104,7 @@
     "domestic-abuse",
     "pregnancy-loss"
    ],
-   "predicted": 3.89
+   "predicted": 3.83
   },
   {
    "id": "ninth-house",
@@ -2146,7 +2162,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.93
+   "predicted": 4.02
   },
   {
    "id": "gideon-the-ninth",
@@ -2201,7 +2217,7 @@
     "heavy-gore",
     "self-harm"
    ],
-   "predicted": 3.93
+   "predicted": 4.02
   },
   {
    "id": "the-jasmine-throne",
@@ -2255,7 +2271,7 @@
     "body-horror",
     "self-harm"
    ],
-   "predicted": 3.93
+   "predicted": 4.02
   },
   {
    "id": "black-sheep-harlowe-weaver",
@@ -2309,7 +2325,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 3.77
+   "predicted": 3.73
   },
   {
    "id": "marrow",
@@ -2362,7 +2378,7 @@
     "body-horror",
     "heavy-gore"
    ],
-   "predicted": 3.77
+   "predicted": 3.73
   },
   {
    "id": "the-blood-trials",
@@ -2415,7 +2431,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 3.64
+   "predicted": 3.71
   },
   {
    "id": "the-bridge-kingdom",
@@ -2467,7 +2483,7 @@
     "child-harm",
     "heavy-gore"
    ],
-   "predicted": 3.64
+   "predicted": 3.71
   },
   {
    "id": "the-diviners",
@@ -2524,7 +2540,7 @@
     "forced-pregnancy",
     "heavy-gore"
    ],
-   "predicted": 3.72
+   "predicted": 3.76
   },
   {
    "id": "nettle-and-bone",
@@ -2579,7 +2595,7 @@
     "domestic-abuse",
     "pregnancy-loss"
    ],
-   "predicted": 3.72
+   "predicted": 3.76
   },
   {
    "id": "spinning-silver",
@@ -2634,7 +2650,7 @@
     "child-harm",
     "domestic-abuse"
    ],
-   "predicted": 3.72
+   "predicted": 3.76
   },
   {
    "id": "the-priory-of-the-orange-tree",
@@ -2683,7 +2699,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.72
+   "predicted": 3.76
   },
   {
    "id": "these-violent-delights",
@@ -2737,7 +2753,7 @@
     "heavy-gore",
     "self-harm"
    ],
-   "predicted": 3.6
+   "predicted": 3.74
   },
   {
    "id": "and-i-darken",
@@ -2791,7 +2807,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 3.6
+   "predicted": 3.74
   },
   {
    "id": "silver-under-nightfall",
@@ -2847,7 +2863,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 3.64
+   "predicted": 3.6
   },
   {
    "id": "katabasis",
@@ -2899,7 +2915,7 @@
     "body-horror",
     "self-harm"
    ],
-   "predicted": 3.59
+   "predicted": 3.63
   },
   {
    "id": "nocticadia",
@@ -2954,7 +2970,7 @@
     "body-horror",
     "heavy-gore"
    ],
-   "predicted": 3.59
+   "predicted": 3.63
   },
   {
    "id": "midnight-is-the-darkest-hour",
@@ -3010,7 +3026,7 @@
     "domestic-abuse",
     "sexual-assault"
    ],
-   "predicted": 3.59
+   "predicted": 3.63
   },
   {
    "id": "master-of-crows",
@@ -3064,7 +3080,7 @@
     "captivity",
     "heavy-gore"
    ],
-   "predicted": 3.47
+   "predicted": 3.61
   },
   {
    "id": "still-beating",
@@ -3119,7 +3135,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.47
+   "predicted": 3.61
   },
   {
    "id": "an-ember-in-the-ashes",
@@ -3176,7 +3192,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.47
+   "predicted": 3.61
   },
   {
    "id": "alchemised",
@@ -3239,7 +3255,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.34
+   "predicted": 3.47
   },
   {
    "id": "bad-men-cohen",
@@ -3290,7 +3306,7 @@
     "domestic-abuse",
     "heavy-gore"
    ],
-   "predicted": 3.56
+   "predicted": 3.47
   },
   {
    "id": "irresistible-urge-to-fall-for-your-enemy",
@@ -3340,7 +3356,7 @@
    "flags": [
     "body-horror"
    ],
-   "predicted": 3.52
+   "predicted": 3.5
   },
   {
    "id": "mexican-gothic",
@@ -3398,7 +3414,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.52
+   "predicted": 3.5
   },
   {
    "id": "the-cruel-prince",
@@ -3451,7 +3467,7 @@
     "child-harm",
     "heavy-gore"
    ],
-   "predicted": 3.39
+   "predicted": 3.48
   },
   {
    "id": "radiance-wraith-kings",
@@ -3501,7 +3517,7 @@
    "flags": [
     "body-horror"
    ],
-   "predicted": 3.26
+   "predicted": 3.35
   },
   {
    "id": "the-maddest-obsession",
@@ -3552,7 +3568,7 @@
    "flags": [
     "addiction"
    ],
-   "predicted": 3.26,
+   "predicted": 3.35,
    "prerequisite": {
     "needs": null,
     "needsTitle": "The Sweetest Oblivion (reads standalone, but book 1 gives context)"
@@ -3613,7 +3629,7 @@
     "self-harm",
     "sexual-assault"
    ],
-   "predicted": 3.26
+   "predicted": 3.35
   },
   {
    "id": "a-winters-promise",
@@ -3662,7 +3678,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.26
+   "predicted": 3.23
   },
   {
    "id": "when-heroes-fall",
@@ -3713,7 +3729,7 @@
    "flags": [
     "sexual-assault"
    ],
-   "predicted": 3.06
+   "predicted": 3.2
   },
   {
    "id": "the-hurricane-wars",
@@ -3763,7 +3779,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.06
+   "predicted": 3.09
   },
   {
    "id": "born-darkly",
@@ -3817,7 +3833,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 3.06
+   "predicted": 3.09
   },
   {
    "id": "there-are-no-saints",
@@ -3871,7 +3887,7 @@
     "heavy-gore",
     "sexual-assault"
    ],
-   "predicted": 2.85
+   "predicted": 2.9
   },
   {
    "id": "we-who-will-die",
@@ -3925,7 +3941,7 @@
     "captivity",
     "heavy-gore"
    ],
-   "predicted": 2.86
+   "predicted": 2.94
   },
   {
    "id": "shield-of-sparrows",
@@ -3974,7 +3990,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 2.6
+   "predicted": 2.67
   },
   {
    "id": "the-everlasting",
@@ -4023,7 +4039,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.93
+   "predicted": 4.02
   },
   {
    "id": "our-strange-duet",
@@ -4073,7 +4089,7 @@
    "momentum": "medium",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.64
+   "predicted": 3.6
   },
   {
    "id": "the-ten-thousand-doors-of-january",
@@ -4121,7 +4137,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.59
+   "predicted": 3.63
   },
   {
    "id": "sorcery-of-thorns",
@@ -4169,7 +4185,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "house-of-salt-and-sorrows",
@@ -4221,7 +4237,7 @@
     "body-horror",
     "self-harm"
    ],
-   "predicted": 3.64
+   "predicted": 3.6
   },
   {
    "id": "uprooted",
@@ -4272,7 +4288,7 @@
    "flags": [
     "sexual-assault"
    ],
-   "predicted": 4.88
+   "predicted": 4.78
   },
   {
    "id": "the-bear-and-the-nightingale",
@@ -4320,7 +4336,7 @@
    "momentum": "slow",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.72
+   "predicted": 3.76
   },
   {
    "id": "a-deadly-education",
@@ -4369,7 +4385,7 @@
    "flags": [
     "cliffhanger"
    ],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "circe",
@@ -4421,7 +4437,7 @@
     "child-harm",
     "sexual-assault"
    ],
-   "predicted": 4.51
+   "predicted": 4.53
   },
   {
    "id": "strange-the-dreamer",
@@ -4473,7 +4489,7 @@
     "captivity",
     "cliffhanger"
    ],
-   "predicted": 3.8
+   "predicted": 3.89
   },
   {
    "id": "hemlock-and-silver",
@@ -4523,7 +4539,7 @@
    "flags": [
     "child-harm"
    ],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "heir-of-illusion",
@@ -4576,7 +4592,7 @@
     "captivity",
     "cliffhanger"
    ],
-   "predicted": 4.02
+   "predicted": 3.96
   },
   {
    "id": "this-kingdom-will-not-kill-me",
@@ -4623,7 +4639,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "innamorata",
@@ -4681,7 +4697,7 @@
     "cliffhanger",
     "heavy-gore"
    ],
-   "predicted": 4.88
+   "predicted": 4.78
   },
   {
    "id": "fallen-city",
@@ -4734,7 +4750,7 @@
    "flags": [
     "cliffhanger"
    ],
-   "predicted": 4.17
+   "predicted": 4.14
   },
   {
    "id": "the-poet-empress",
@@ -4788,7 +4804,7 @@
    "flags": [
     "sexual-assault"
    ],
-   "predicted": 5.09
+   "predicted": 5.04
   },
   {
    "id": "weavingshaw",
@@ -4838,7 +4854,7 @@
    "momentum": "medium",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.97
+   "predicted": 3.88
   },
   {
    "id": "blackthorn",
@@ -4890,7 +4906,7 @@
    "flags": [
     "domestic-abuse"
    ],
-   "predicted": 3.89
+   "predicted": 3.83
   },
   {
    "id": "game-on",
@@ -4939,7 +4955,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.68
+   "predicted": 3.57
   },
   {
    "id": "pink-ink",
@@ -4992,7 +5008,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 3.89
+   "predicted": 3.83
   },
   {
    "id": "songbird-in-the-gallows",
@@ -5045,7 +5061,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 3.89
+   "predicted": 3.83
   },
   {
    "id": "serpent-and-dove",
@@ -5150,56 +5166,6 @@
    "predicted": 4.22
   },
   {
-   "id": "night-of-the-witch",
-   "title": "Night of the Witch",
-   "author": "Sara Raasch and Beth Revis",
-   "series": "Witch and Hunter",
-   "seriesNumber": 1,
-   "year": 2023,
-   "seriesStatus": "complete",
-   "setting": "witch-trial era Germany and the Black Forest",
-   "genres": [
-    "romantasy",
-    "historical"
-   ],
-   "pov": "dual",
-   "povNote": "Alternating chapters between Fritzi, the lone survivor of a slaughtered coven, and Otto, a witch hunter secretly plotting revenge on his own order.",
-   "spice": 1,
-   "fmcAgency": 5,
-   "prose": 4,
-   "gutPunch": 3,
-   "darkness": 3,
-   "tropes": [
-    "enemies to lovers",
-    "witch and hunter",
-    "forced alliance",
-    "revenge"
-   ],
-   "contentWarnings": [
-    "witch burnings",
-    "religious violence",
-    "death of family",
-    "torture"
-   ],
-   "goodreadsRating": 3.74,
-   "hook": "A witch hunting the zealots who killed her coven is forced into a truce with one of them in a fantasy version of the German witch trials.",
-   "comps": [
-    "The Once and Future Witches",
-    "Fourth Wing"
-   ],
-   "caution": "It is YA with closed-door romance, so the sexual tension she loves stays mild, and the duology ending is tidier than Empyrean-level stakes.",
-   "tagConfidence": "medium",
-   "lanes": [
-    "romantasy"
-   ],
-   "momentum": "fast",
-   "unreleased": false,
-   "flags": [
-    "heavy-gore"
-   ],
-   "predicted": 4.35
-  },
-  {
    "id": "we-hunt-the-flame",
    "title": "We Hunt the Flame",
    "author": "Hafsah Faizal",
@@ -5247,7 +5213,7 @@
    "flags": [
     "child-harm"
    ],
-   "predicted": 3.97
+   "predicted": 3.99
   },
   {
    "id": "the-games-gods-play",
@@ -5296,7 +5262,7 @@
    "flags": [
     "cliffhanger"
    ],
-   "predicted": 3.89
+   "predicted": 3.83
   },
   {
    "id": "powerless",
@@ -5342,7 +5308,7 @@
    "momentum": "immediate",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.01
+   "predicted": 4.03
   },
   {
    "id": "the-wrath-and-the-dawn",
@@ -5389,7 +5355,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.35
+   "predicted": 4.24
   },
   {
    "id": "wild-reverence",
@@ -5436,7 +5402,7 @@
    "momentum": "medium",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.17
+   "predicted": 4.14
   },
   {
    "id": "blood-and-steel",
@@ -5483,7 +5449,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.02
+   "predicted": 3.96
   },
   {
    "id": "the-book-of-azrael",
@@ -5534,7 +5500,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 3.85
+   "predicted": 3.97
   },
   {
    "id": "the-emperor-s-enemy",
@@ -5639,7 +5605,7 @@
    "flags": [
     "heavy-gore"
    ],
-   "predicted": 4.27
+   "predicted": 4.18
   },
   {
    "id": "killing-sarai",
@@ -5800,7 +5766,7 @@
     "cliffhanger",
     "sexual-assault"
    ],
-   "predicted": 4.29
+   "predicted": 4.23
   },
   {
    "id": "hooked",
@@ -5849,7 +5815,7 @@
    "momentum": "fast",
    "unreleased": false,
    "flags": [],
-   "predicted": 3.76
+   "predicted": 3.69
   },
   {
    "id": "bad-bishop",
@@ -5901,7 +5867,7 @@
    "flags": [
     "sexual-assault"
    ],
-   "predicted": 4.42
+   "predicted": 4.37
   },
   {
    "id": "you",
@@ -5950,7 +5916,7 @@
    "flags": [
     "captivity"
    ],
-   "predicted": 4.74
+   "predicted": 4.6
   },
   {
    "id": "brutal-prince",
@@ -5996,7 +5962,7 @@
    "momentum": "immediate",
    "unreleased": false,
    "flags": [],
-   "predicted": 4.06
+   "predicted": 3.92
   }
  ]
 }

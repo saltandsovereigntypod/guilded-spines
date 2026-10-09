@@ -401,6 +401,36 @@
     "theories": "",
     "title": "Marrow"
   },
+  "night-of-the-witch": {
+    "addedAt": 1791504000000,
+    "author": "Sara Raasch and Beth Revis",
+    "description": "",
+    "favorite": false,
+    "id": "night-of-the-witch",
+    "notes": "",
+    "oracleTags": {
+      "darkness": 3,
+      "fmcAgency": 4.5,
+      "gutPunch": 2,
+      "id": "night-of-the-witch",
+      "momentum": "fast",
+      "prose": 4,
+      "spice": 1
+    },
+    "progress": 100,
+    "quotes": "",
+    "ratings": {
+      "impact": 2,
+      "overall": 3.5,
+      "spice": 1
+    },
+    "series": "Witch and Hunter",
+    "seriesNumber": 1,
+    "spineColor": "#1B2A44",
+    "status": "read",
+    "theories": "",
+    "title": "Night of the Witch"
+  },
   "ninth-house": {
     "addedAt": 1757000039000,
     "author": "Leigh Bardugo",
@@ -660,6 +690,27 @@
     "status": "read",
     "theories": "",
     "title": "The Heart Forger"
+  },
+  "the-once-and-future-witches": {
+    "addedAt": 1791331200000,
+    "author": "Alix E. Harrow",
+    "description": "",
+    "favorite": false,
+    "id": "the-once-and-future-witches",
+    "notes": "",
+    "progress": 100,
+    "quotes": "",
+    "ratings": {
+      "impact": 3.5,
+      "overall": 5,
+      "spice": 0
+    },
+    "series": "",
+    "seriesNumber": null,
+    "spineColor": "#123832",
+    "status": "read",
+    "theories": "",
+    "title": "The Once and Future Witches"
   },
   "the-risk": {
     "addedAt": 1757000031000,
