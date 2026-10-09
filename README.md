@@ -174,7 +174,7 @@ src/library.seed.json         seed library for the standalone build
 src/oracle-catalog.json       the Oracle's vetted candidates and fitted model
 build.py                      wraps the artifact source into index.html
 index.html                    generated — standalone build
-manifest.webmanifest, sw.js   generated — the installable app and its offline cache
+manifest.webmanifest, sw.js   generated: the installable app and its offline cache
 icons/                        app icon (icon.svg) and its PNGs
 .github/workflows/deploy.yml  publishes to books.saltandsovereignty.com
 docs/shelf.png                screenshot
