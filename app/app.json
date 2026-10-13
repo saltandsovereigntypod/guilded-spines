@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Gilded Spines",
+    "slug": "gilded-spines",
+    "scheme": "gildedspines",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#07060B",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.saltandsovereignty.gildedspines",
+      "config": {
+        "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow $(PRODUCT_NAME) to use the photos you choose as covers and spines for your books.",
+        "NSCameraUsageDescription": "Allow $(PRODUCT_NAME) to take a photo of a book to use as its cover or spine."
+      }
+    },
+    "android": {
+      "package": "com.saltandsovereignty.gildedspines",
+      "adaptiveIcon": {
+        "backgroundColor": "#07060B",
+        "foregroundImage": "./assets/icon.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "backgroundColor": "#07060B"
+        }
+      ],
+      "expo-sharing"
+    ],
+    "owner": "ashley19175s-team",
+    "extra": {
+      "eas": {
+        "projectId": "1d13f4c5-5940-4644-90c1-2b152e649348"
+      }
+    }
+  }
+}

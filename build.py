@@ -15,7 +15,14 @@ is present, the Oracle's catalogue in src/oracle-catalog.json.
 
 Output: index.html, plus manifest.webmanifest and sw.js, which make the page an
 installable app that opens offline (icons live in icons/).
+
+It also writes app/assets/web/gilded-spines.html, the copy the iPhone app runs:
+the same page with its fonts embedded (so it never needs a connection) and a
+bridge that keeps the shelf and its images in the app's own files.
 """
+
+import base64
+import re
 
 import hashlib
 import json
@@ -47,12 +54,18 @@ SHIM = """
 
   var KEY = "gilded-spines.library.v1";
   var SEED = window.__GILDED_SEED__ || {};
+  /* The iPhone app keeps the shelf in its own files rather than in WebKit's
+     storage, which iOS may clear. It hands over what it saved, and takes each
+     change back, through window.__GILDED_NATIVE__. */
+  var NATIVE = window.__GILDED_NATIVE__ || null;
 
   function read(){
+    if(NATIVE) return NATIVE.store || null;
     try { return JSON.parse(localStorage.getItem(KEY)) || null; }
     catch(e){ return null; }
   }
   function write(s){
+    if(NATIVE){ NATIVE.save(s); return; }
     try { localStorage.setItem(KEY, JSON.stringify(s)); }
     catch(e){ /* private mode, quota — the session still works in memory */ }
   }
@@ -163,6 +176,7 @@ SHIM = """
   window.claude = {
     use: function(name){
       if(name === "db") return Promise.resolve(localDb);
+      if(name === "downloads" && NATIVE) return Promise.resolve(NATIVE.downloads);
       return Promise.resolve(null);   // no asset uploads outside the Artifact
     }
   };
@@ -270,6 +284,118 @@ if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
 """
 
 
+# ---------------------------------------------------------------- iPhone app
+
+APP_DIR = ROOT / "app"
+APP_OUT = APP_DIR / "assets" / "web" / "gilded-spines.html"
+FONTS_DIR = APP_DIR / "fonts"
+
+# The app swaps this placeholder for the shelf it has saved (or null on the
+# first run) before handing the page to the web view.
+STORE_PLACEHOLDER = "/*__GILDED_STORE__*/null"
+
+APP_HEAD = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="format-detection" content="telephone=no">
+<style>
+  html,body{margin:0;background:#07060B}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  html{-webkit-text-size-adjust:100%}
+  body{-webkit-tap-highlight-color:transparent}
+</style>
+"""
+
+# Talks to app/src/bridge.ts. Requests go up with postMessage and the app
+# answers by calling window.__gsReply(id, ok, value).
+APP_BRIDGE = """
+<script>
+(function(){
+  var RN = window.ReactNativeWebView;
+  var seq = 0, pending = {};
+  function call(op, args){
+    return new Promise(function(res, rej){
+      if(!RN){ rej(new Error("No app bridge")); return; }
+      var id = ++seq;
+      pending[id] = { res: res, rej: rej };
+      RN.postMessage(JSON.stringify({ id: id, op: op, args: args === undefined ? null : args }));
+    });
+  }
+  window.__gsReply = function(id, ok, value){
+    var p = pending[id];
+    if(!p) return;
+    delete pending[id];
+    if(ok) p.res(value); else p.rej(new Error(value || "Failed"));
+  };
+
+  /* Saves are coalesced: a drag or a burst of typing writes once, a moment later.
+     Leaving the page (or the app going to the background) writes at once. */
+  var latest = null, timer = null;
+  function flush(){
+    if(timer){ clearTimeout(timer); timer = null; }
+    if(latest === null) return;
+    var body = latest; latest = null;
+    call("store.save", body).catch(function(){});
+  }
+  document.addEventListener("visibilitychange", function(){ if(document.hidden) flush(); });
+  window.addEventListener("pagehide", flush);
+
+  window.__GILDED_NATIVE__ = {
+    store: """ + STORE_PLACEHOLDER + """,
+    save: function(s){
+      latest = JSON.stringify(s);
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(flush, 200);
+    },
+    flush: flush,
+    downloads: {
+      save: function(file){ return call("share", { filename: file.filename, data: file.data }); }
+    }
+  };
+
+  /* Cover and spine images, kept as files by the app. Same surface as the
+     page's IndexedDB store, which it replaces. */
+  window.__GILDED_IMAGES__ = {
+    get:  function(k){ return call("img.get", k); },
+    put:  function(k, v){ return call("img.put", { key: k, value: v }); },
+    del:  function(k){ return call("img.del", k); },
+    keys: function(){ return call("img.keys"); }
+  };
+})();
+</script>
+"""
+
+
+def embedded_fonts():
+    """The Google Fonts stylesheet with every font file inlined, so the app
+    looks the same with no signal."""
+    css = (FONTS_DIR / "fonts.css").read_text(encoding="utf-8")
+
+    def inline(m):
+        data = base64.b64encode((FONTS_DIR / m.group(1)).read_bytes()).decode("ascii")
+        return "url(data:font/woff2;base64," + data + ")"
+
+    return "<style>\n" + re.sub(r"url\(([^)]+\.woff2)\)", inline, css) + "</style>\n"
+
+
+def build_app(head_part, body_part, seed_script, oracle_script):
+    # Google Fonts links are replaced by the embedded copy.
+    head_part = re.sub(r'<link rel="(?:preconnect|stylesheet)" href="https://fonts\.(?:googleapis|gstatic)\.com[^>]*>\n?', "", head_part)
+    if "fonts.googleapis.com" in head_part:
+        raise SystemExit("build.py: a Google Fonts link was left in the app build")
+    page = (APP_HEAD + embedded_fonts() + head_part + "</head>\n<body>\n" +
+            seed_script + oracle_script + APP_BRIDGE + SHIM + body_part + "</body>\n</html>\n")
+    if page.count(STORE_PLACEHOLDER) != 1:
+        raise SystemExit("build.py: the app page must hold exactly one store placeholder")
+    APP_OUT.parent.mkdir(parents=True, exist_ok=True)
+    APP_OUT.write_text(page, encoding="utf-8")
+    print(f"wrote {APP_OUT.relative_to(ROOT)}  ({APP_OUT.stat().st_size:,} bytes, iPhone app)")
+
+
 def main():
     source = SOURCE.read_text(encoding="utf-8")
     seed = json.loads(SEED.read_text(encoding="utf-8"))
@@ -311,6 +437,8 @@ def main():
     else:
         note = ", no oracle catalogue"
     print(f"wrote {OUT.relative_to(ROOT)}  ({OUT.stat().st_size:,} bytes, {len(seed)} books seeded{note})")
+    if FONTS_DIR.exists():
+        build_app(head_part, body_part, seed_script, oracle_script)
 
 
 if __name__ == "__main__":

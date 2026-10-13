@@ -1,0 +1,37 @@
+name: iPhone app checks
+
+# The iPhone app runs app/assets/web/gilded-spines.html, which build.py makes
+# from the artifact source. This keeps that copy current and the app's own
+# code typed, linted and tested.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: The app's page matches the artifact source
+        run: |
+          python3 ../build.py
+          git diff --exit-code -- assets/web ../index.html ../sw.js || {
+            echo "::error::Run python3 build.py and commit the result."; exit 1; }
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npx expo lint
+      - run: npm test

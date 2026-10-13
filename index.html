@@ -1406,12 +1406,18 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
 
   var KEY = "gilded-spines.library.v1";
   var SEED = window.__GILDED_SEED__ || {};
+  /* The iPhone app keeps the shelf in its own files rather than in WebKit's
+     storage, which iOS may clear. It hands over what it saved, and takes each
+     change back, through window.__GILDED_NATIVE__. */
+  var NATIVE = window.__GILDED_NATIVE__ || null;
 
   function read(){
+    if(NATIVE) return NATIVE.store || null;
     try { return JSON.parse(localStorage.getItem(KEY)) || null; }
     catch(e){ return null; }
   }
   function write(s){
+    if(NATIVE){ NATIVE.save(s); return; }
     try { localStorage.setItem(KEY, JSON.stringify(s)); }
     catch(e){ /* private mode, quota — the session still works in memory */ }
   }
@@ -1522,6 +1528,7 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
   window.claude = {
     use: function(name){
       if(name === "db") return Promise.resolve(localDb);
+      if(name === "downloads" && NATIVE) return Promise.resolve(NATIVE.downloads);
       return Promise.resolve(null);   // no asset uploads outside the Artifact
     }
   };
@@ -2135,8 +2142,10 @@ var saveTimers = {};
 /* ---------------- image store (IndexedDB) ----------------
    Covers and spine images live here rather than in the book document: they are
    data URLs of a few tens of KB, far too big for a document store, and they have
-   to work in the standalone build where the Artifact `assets` capability is gone. */
-var IMGDB = (function(){
+   to work in the standalone build where the Artifact `assets` capability is gone.
+   A host that keeps images itself (the iPhone app) provides window.__GILDED_IMAGES__
+   with the same get/put/del/keys surface, and that wins. */
+var IMGDB = window.__GILDED_IMAGES__ || (function(){
   var NAME = "gilded-spines-images", STORE = "images", dbp = null;
   function open(){
     if(dbp) return dbp;
@@ -5693,7 +5702,7 @@ document.addEventListener("keydown", function(e){
   function installHelp(){
     var block = byId("installBlock");
     /* Only the standalone build can be installed; the Artifact lives inside claude.ai. */
-    if(standalone || !window.__GILDED_SEED__){ block.hidden = true; return; }
+    if(standalone || !window.__GILDED_SEED__ || window.__GILDED_NATIVE__){ block.hidden = true; return; }
     var ios = /iPhone|iPad|iPod/.test(navigator.userAgent);
     block.hidden = false;
     byId("installBtn").hidden = !deferred;

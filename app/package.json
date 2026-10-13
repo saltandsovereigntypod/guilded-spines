@@ -1,0 +1,35 @@
+{
+  "name": "gilded-spines-app",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "private": true,
+  "scripts": {
+    "start": "expo start",
+    "ios": "expo start --ios",
+    "build:web": "python3 ../build.py",
+    "typecheck": "tsc --noEmit",
+    "lint": "expo lint",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "expo": "~57.0.25",
+    "expo-asset": "~57.0.19",
+    "expo-constants": "~57.0.21",
+    "expo-file-system": "~57.0.7",
+    "expo-sharing": "~57.0.23",
+    "expo-splash-screen": "~57.0.10",
+    "expo-status-bar": "~57.0.1",
+    "expo-system-ui": "~57.0.4",
+    "react": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-webview": "13.16.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "@types/react": "~19.2.2",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~57.0.2",
+    "typescript": "~6.0.3"
+  }
+}
