@@ -37,6 +37,11 @@
       ],
       "expo-sharing"
     ],
-    "owner": "ashley19175s-team"
+    "owner": "ashley19175s-team",
+    "extra": {
+      "eas": {
+        "projectId": "1d13f4c5-5940-4644-90c1-2b152e649348"
+      }
+    }
   }
 }
