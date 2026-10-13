@@ -166,6 +166,37 @@ and Custom domain to `books.saltandsovereignty.com` (then tick Enforce HTTPS);
 at the domain's DNS host, add a `CNAME` record for `books` pointing to
 `saltandsovereigntypod.github.io`.
 
+### The iPhone app (`app/`)
+
+An Expo app for TestFlight and the App Store, built the same way as the
+Salt & Sovereignty app (EAS Build, no Mac needed). It is the same page again:
+`build.py` also writes `app/assets/web/gilded-spines.html`, with the three
+fonts embedded so nothing is fetched, and the app shows it full screen. Every
+feature above is there, unchanged, in the phone layout.
+
+What the app does natively:
+
+- **The shelf is kept in the app's own files** (`Documents/library.json`, with
+  the copy from the last opening beside it as `library.previous.json`), not in
+  web storage, which iOS may clear. Each change is written a moment after it is
+  made, and at once when the app leaves the screen.
+- **Cover and spine images** are files too (`Documents/images/`), through the
+  `window.__GILDED_IMAGES__` hook the page checks before using IndexedDB.
+- **Export** opens the share sheet (Save to Files, AirDrop, Mail…).
+  **Import** and adding a cover use the iPhone's own file and photo pickers.
+- The app starts from `src/library.seed.json` on its first run, like the web app.
+
+```sh
+python3 build.py                 # after any change to the artifact source
+cd app && npm install
+npm test && npm run typecheck && npx expo lint
+npx expo start                   # try it in Expo Go
+```
+
+Builds: `eas build -p ios --profile production --auto-submit` (or the Expo
+dashboard) sends a build to TestFlight once the EAS project and App Store
+Connect app exist; see `app/eas.json`.
+
 ## Layout
 
 ```
@@ -178,6 +209,8 @@ manifest.webmanifest, sw.js   generated: the installable app and its offline cac
 icons/                        app icon (icon.svg) and its PNGs
 .github/workflows/deploy.yml  publishes to books.saltandsovereignty.com
 docs/shelf.png                screenshot
+app/                          the iPhone app (Expo); app/assets/web/ is generated
+.github/workflows/app-checks.yml  keeps the app's page current and its code checked
 ```
 
 ## Design notes
