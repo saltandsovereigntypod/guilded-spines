@@ -2762,7 +2762,9 @@ function cycleLayout(gk){
   else state.groupLayout[gk] = next;
   savePrefs(); render();
 }
-function slabWidth(b){ return Math.round(spineH(b) * 0.66); }
+/* A book laid flat is the same book: its length is its standing height and its
+   thickness its standing width, so a stack never shrinks what it holds. */
+function slabWidth(b){ return spineH(b); }
 /* A minimum so a thin volume is still tappable. */
 function slabHeight(b){ return Math.max(14, spineW(b)); }
 /* Seeded from the book's id through the existing hash, so a messy stack looks
@@ -2778,7 +2780,9 @@ function layoutBtnHTML(gk){
 }
 function slabHTML(b, messy){
   var w = slabWidth(b), hgt = slabHeight(b), sh = show(b);
-  var fs = Math.max(8, Math.min(13, hgt * 0.48));
+  /* The same lettering the book carries standing up, unless its thickness
+     cannot hold it. */
+  var fs = Math.max(8, Math.min(parseFloat(spineFontSize(b, w, "")), hgt * 0.5));
   var base = spineBaseCSS(b);
   var tf = messy
     ? ";transform:translateX(" + messyShift(b.id).toFixed(1) + "px) rotate(" + messyTilt(b.id).toFixed(2) + "deg)"
@@ -2812,8 +2816,12 @@ function stackHTML(st){
   var books = st.books.slice().sort(function(x, y){ return slabWidth(y) - slabWidth(x); });
   var widest = books.reduce(function(m, b){ return Math.max(m, slabWidth(b)); }, 0);
   var last = st.books[st.books.length - 1];
+  /* Only where a laid-down book is longer than the whole plank (a phone) is
+     the stack drawn smaller, all of it at once, so it keeps its proportions. */
+  var fit = stackFit(widest);
   return '<div class="stack" data-item="" data-stack="' + esc(st.gk) +
-      '" data-last="' + esc(last ? last.id : "") + '" style="--sw:' + (widest + 20) + 'px">' +
+      '" data-last="' + esc(last ? last.id : "") + '" style="--sw:' + (widest + 20) + 'px' +
+      (fit < 1 ? ";zoom:" + fit.toFixed(3) : "") + '">' +
     books.map(function(b){ return slabHTML(b, messy); }).join("") +
   "</div>";
 }
@@ -3761,9 +3769,11 @@ function itemWidth(b){
   if(m === "angle") return angledWidth(b);
   return spineW(b);
 }
+function stackFit(widest){ return Math.min(1, shelfWidth() / (widest + 20)); }
 function entryWidth(e){
   if(e.stack){
-    return e.stack.books.reduce(function(m, b){ return Math.max(m, slabWidth(b)); }, 0) + 20;
+    var widest = e.stack.books.reduce(function(m, b){ return Math.max(m, slabWidth(b)); }, 0);
+    return Math.floor((widest + 20) * stackFit(widest));
   }
   return itemWidth(e.b);
 }
