@@ -1100,6 +1100,181 @@ details.or-fold[open] > summary::after{content:"\2013"}
 .or-out span+span{margin-top:4px}
 .or-out.warn{color:var(--gilt-dim)}
 
+
+/* ---------- the Ledger ---------- */
+.ledger-card{
+  width:min(780px,100%);margin:auto;
+  background:linear-gradient(180deg,var(--velvet-2),var(--night));
+  border:1px solid var(--hair);border-radius:4px;
+  box-shadow:0 30px 70px rgba(0,0,0,.8);padding:24px 24px 26px;
+  animation:openBook .4s cubic-bezier(.2,.8,.25,1) both;
+}
+.lg-top{display:flex;flex-direction:column;gap:12px;margin-bottom:6px}
+.lg-years{gap:6px}
+.lg-tools{display:flex;flex-wrap:wrap;gap:8px}
+.lg-tools .lg-close{margin-left:auto}
+.lg-sec{margin-top:22px}
+.lg-sec > .or-h{margin-top:0;display:flex;align-items:center;gap:8px}
+.lg-sec > .or-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hair-soft),transparent)}
+.lg-empty{font-family:var(--f-body);font-style:italic;color:var(--dim);margin:4px 0 0;line-height:1.55}
+.lg-fresh{margin-top:18px;padding:12px 14px;border:1px dashed var(--hair);border-radius:2px;background:rgba(7,6,11,.34)}
+.lg-note{font-family:var(--f-data);font-size:.76rem;color:var(--dimmer);line-height:1.5;margin:9px 0 0}
+.lg-sub{font-family:var(--f-data);font-size:.82rem;color:var(--parchment-2);margin:0 0 6px}
+
+/* goals */
+.lg-goals{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.lg-goal{
+  display:flex;gap:14px;align-items:center;text-align:left;cursor:pointer;
+  padding:12px 14px;background:rgba(7,6,11,.5);border:1px solid var(--hair-soft);border-radius:3px;
+  color:inherit;font:inherit;transition:border-color .2s;
+}
+.lg-goal:hover{border-color:var(--hair)}
+.lg-goal.met{border-color:rgba(201,162,76,.4);background:radial-gradient(120% 120% at 0% 50%,rgba(201,162,76,.1),rgba(7,6,11,.5) 60%)}
+.lg-ringbox{position:relative;width:64px;height:64px;flex:0 0 auto}
+.lg-ring{width:100%;height:100%;transform:rotate(-90deg)}
+.lg-ring circle{fill:none;stroke-width:5}
+.lg-ring .track{stroke:rgba(201,162,76,.14)}
+.lg-ring .fill{stroke:var(--gilt);stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(234,203,128,.45));transition:stroke-dasharray .6s cubic-bezier(.2,.8,.25,1)}
+.lg-goal.met .lg-ring{opacity:.35}
+.lg-ringbox .lg-seal{position:absolute;inset:8px;width:auto;height:auto}
+.lg-seal .wax{fill:#8E1F35}
+.lg-seal .rim{fill:none;stroke:rgba(0,0,0,.28);stroke-width:2.2}
+.lg-seal .mark{fill:rgba(234,203,128,.85)}
+.lg-seal{filter:drop-shadow(0 2px 3px rgba(0,0,0,.6))}
+.lg-gtext{display:flex;flex-direction:column;min-width:0}
+.lg-gtitle{font-family:var(--f-display);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gilt-dim);line-height:1.4}
+.lg-gbig{font-family:var(--f-display);font-weight:600;font-size:1.5rem;line-height:1.15;color:var(--parchment);font-variant-numeric:tabular-nums}
+.lg-gbig small{font-size:.9rem;color:var(--dimmer);font-weight:500;margin-left:2px}
+.lg-gline{font-family:var(--f-data);font-size:.76rem;color:var(--dim);line-height:1.4}
+.lg-gline b{font-weight:500}
+.lg-gline b.up{color:#9FC0A2}
+.lg-gline b.down{color:#E3A06A}
+
+/* the moment a goal is met */
+.lg-moment{
+  position:fixed;left:50%;top:50%;z-index:90;transform:translate(-50%,-50%);
+  width:min(300px,82vw);padding:26px 22px 22px;text-align:center;cursor:pointer;
+  background:linear-gradient(180deg,var(--velvet-2),var(--night));
+  border:1px solid var(--gilt-dim);border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.85),0 0 60px rgba(201,162,76,.18);
+  animation:fadeIn .25s ease both;transition:opacity .6s;
+}
+.lg-moment.out{opacity:0}
+.lg-moment .lg-seal{width:92px;height:92px;display:block;margin:0 auto 12px;animation:sealPress .7s cubic-bezier(.3,1.4,.4,1) both}
+@keyframes sealPress{from{transform:scale(1.8) rotate(-18deg);opacity:0}to{transform:none;opacity:1}}
+.lg-moment p{font-family:var(--f-display);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gilt);margin:0 0 4px}
+.lg-moment b{font-family:var(--f-body);font-weight:500;font-size:1.15rem;color:var(--parchment)}
+@media (prefers-reduced-motion:reduce){.lg-moment .lg-seal{animation:none}}
+
+/* tiles */
+.lg-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lg-tile{padding:11px 12px;background:rgba(7,6,11,.5);border:1px solid var(--hair-soft);border-radius:3px;min-width:0}
+.lg-tile b{display:block;font-family:var(--f-display);font-weight:600;font-size:1.35rem;line-height:1.1;color:var(--gilt-bright);font-variant-numeric:tabular-nums}
+.lg-tile span{display:block;font-family:var(--f-display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gilt-dim);margin-top:5px}
+.lg-tile small{display:block;font-family:var(--f-data);font-size:.72rem;color:var(--dimmer);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* month columns */
+.lg-cols{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;height:150px;align-items:stretch}
+.lg-col{display:flex;flex-direction:column;align-items:stretch;gap:5px;padding:0;border:0;background:none;cursor:pointer;color:inherit;min-width:0}
+.lg-cbar{flex:1;position:relative;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;border-bottom:1px solid var(--hair);border-radius:3px 3px 0 0;transition:background .2s}
+.lg-col:hover .lg-cbar,.lg-col.on .lg-cbar{background:rgba(201,162,76,.07)}
+.lg-cbar i{display:block;width:62%;max-width:26px;background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));border-radius:4px 4px 0 0;transition:height .5s cubic-bezier(.2,.8,.25,1)}
+.lg-col.on .lg-cbar i{box-shadow:0 0 12px rgba(234,203,128,.5)}
+.lg-cbar b{font-family:var(--f-data);font-weight:400;font-size:.72rem;color:var(--parchment-2);margin-bottom:3px;font-variant-numeric:tabular-nums}
+.lg-clbl{font-family:var(--f-display);font-size:.56rem;letter-spacing:.08em;color:var(--dimmer);text-align:center}
+.lg-col.on .lg-clbl{color:var(--gilt-bright)}
+.lg-col.future{opacity:.45}
+.lg-monthlist{margin-top:12px;padding:10px 12px;border:1px solid var(--hair-soft);border-radius:2px;background:rgba(7,6,11,.34)}
+.lg-books,.lg-olist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lg-books li + li,.lg-olist li + li{border-top:1px solid var(--hair-soft)}
+.lg-books button,.lg-olist button{
+  display:flex;flex-direction:column;gap:1px;width:100%;text-align:left;cursor:pointer;
+  background:none;border:0;padding:8px 2px;color:inherit;font:inherit;
+}
+.lg-books .t{font-family:var(--f-body);font-size:1rem;color:var(--parchment)}
+.lg-books .t em{font-family:var(--f-data);font-size:.72rem;color:var(--amber);font-style:normal;margin-left:4px}
+.lg-books .m{font-family:var(--f-data);font-size:.74rem;color:var(--dimmer)}
+
+/* horizontal bars */
+.lg-hbars{display:flex;flex-direction:column;gap:7px}
+.lg-hrow{display:grid;grid-template-columns:minmax(96px,34%) 1fr auto;gap:10px;align-items:center}
+.lg-hlbl{font-family:var(--f-data);font-size:.84rem;color:var(--parchment-2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3}
+.lg-hlbl small{display:block;font-size:.7rem;color:var(--dimmer)}
+.lg-htrack{height:10px;border-radius:0 5px 5px 0;background:rgba(201,162,76,.07);overflow:hidden}
+.lg-htrack i{display:block;height:100%;background:linear-gradient(90deg,var(--gilt-dim),var(--gilt));border-radius:0 5px 5px 0;transition:width .5s cubic-bezier(.2,.8,.25,1)}
+.lg-hval{font-family:var(--f-data);font-size:.8rem;color:var(--parchment-2);font-variant-numeric:tabular-nums;text-align:right;min-width:24px;white-space:nowrap}
+
+/* finishing days */
+.lg-hm{display:flex;flex-direction:column;gap:3px;max-width:560px}
+.lg-hm-row{display:grid;grid-template-columns:14px repeat(31,minmax(0,1fr));gap:2px;align-items:center}
+.lg-hm-row span{font-family:var(--f-display);font-size:.5rem;color:var(--dimmer)}
+.lg-hm-row i{aspect-ratio:1;border-radius:2px;background:rgba(201,162,76,.07)}
+.lg-hm-row i.x{background:none}
+.lg-hm-row i.l1{background:rgba(201,162,76,.45)}
+.lg-hm-row i.l2{background:rgba(201,162,76,.75)}
+.lg-hm-row i.l3{background:var(--gilt-bright);box-shadow:0 0 6px rgba(234,203,128,.5)}
+
+/* series */
+.lg-series{display:flex;flex-direction:column}
+.lg-srow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:7px 0}
+.lg-srow + .lg-srow{border-top:1px solid var(--hair-soft)}
+.lg-sname{font-family:var(--f-body);font-size:.98rem;color:var(--parchment-2);min-width:0;line-height:1.3}
+.lg-sname small{display:block;font-family:var(--f-data);font-size:.72rem;color:var(--dimmer)}
+.lg-srow.stalled .lg-sname small{color:#E3A06A}
+.lg-srow.done .lg-sname small{color:#9FC0A2}
+.lg-spips{display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end;max-width:150px}
+.lg-spips i{width:8px;height:14px;border-radius:1px;background:rgba(201,162,76,.14);border:1px solid rgba(201,162,76,.22)}
+.lg-spips i.on{background:linear-gradient(180deg,var(--gilt-bright),var(--gilt));border-color:var(--gilt)}
+
+/* sheets */
+.lg-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:14px}
+#lgKinds{gap:6px}
+.lg-toggle{align-items:flex-start;padding:8px 0;border-top:1px solid var(--hair-soft)}
+.lg-toggle input{margin-top:4px}
+.lg-toggle span{display:flex;flex-direction:column;color:var(--parchment-2);font-size:.92rem}
+.lg-toggle small{color:var(--dimmer);font-size:.76rem;line-height:1.4;margin-top:2px}
+.lg-gitem{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center}
+.lg-gitem input{padding:6px 9px}
+.lg-gcount{font-family:var(--f-data);font-size:.76rem;color:var(--dimmer);min-width:18px;text-align:right}
+#lgGenreList{gap:6px}
+.lg-review{width:min(460px,100%)}
+.lg-review-frame{display:flex;justify-content:center}
+.lg-review canvas{width:min(100%,300px);height:auto;aspect-ratio:9/16;border-radius:6px;box-shadow:0 14px 40px rgba(0,0,0,.6)}
+
+/* on the book's page (parchment) */
+.lg-plabel{display:block;margin:14px 0 6px}
+.lg-pgenres{display:flex;flex-wrap:wrap;gap:5px}
+.lg-pchip{
+  font-family:var(--f-data);font-size:.78rem;cursor:pointer;padding:4px 10px;border-radius:14px;
+  background:rgba(255,255,255,.34);border:1px solid rgba(138,115,81,.3);color:#5C4E44;
+}
+.lg-pchip[aria-pressed="true"]{background:linear-gradient(180deg,#DCBB72,#C9A24C);border-color:#B8933F;color:#2A2119}
+.lg-pread{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:flex-end;padding:8px 0;border-top:1px solid rgba(138,115,81,.2)}
+.lg-pread:first-child{border-top:0;padding-top:0}
+.lg-pread label:not(.check){display:flex;flex-direction:column;gap:3px}
+.lg-pread label span{font-family:var(--f-display);font-size:.5rem;letter-spacing:.16em;text-transform:uppercase;color:#8A7351}
+.lg-pread input[type=date]{
+  font-family:var(--f-body);font-size:.95rem;color:var(--page-ink);
+  background:rgba(255,255,255,.4);border:1px solid rgba(138,115,81,.3);border-radius:2px;padding:4px 7px;min-height:32px;
+}
+.lg-pread .check{padding-bottom:6px}
+.lg-prm{margin-left:auto;align-self:center;width:30px;height:30px;border-radius:50%;cursor:pointer;
+  background:none;border:1px solid rgba(138,115,81,.3);color:#8A7351;font-size:1.1rem;line-height:1}
+.lg-prm:hover{color:var(--rose);border-color:var(--rose)}
+.lg-pactions{margin-top:10px}
+.lg-olist{margin-top:10px;border:1px solid rgba(138,115,81,.28);border-radius:2px;background:rgba(255,255,255,.24)}
+.lg-olist button{padding:8px 10px}
+.lg-olist button:hover{background:rgba(201,162,76,.14)}
+.lg-olist .t{font-family:var(--f-body);font-size:.98rem;color:var(--page-ink)}
+.lg-olist .m{font-family:var(--f-data);font-size:.74rem;color:var(--page-ink-dim)}
+#lgLookupOut .hintline{margin-top:8px}
+
+@media (max-width:560px){
+  .ledger-card{padding:18px 15px 18px}
+  .lg-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lg-goals{grid-template-columns:1fr}
+  .lg-hrow{grid-template-columns:minmax(84px,38%) 1fr auto;gap:8px}
+}
+
 @media (max-width:480px){
   .oracle-card{padding:18px 15px 16px}
   .or-head{flex-direction:column-reverse;align-items:stretch;gap:10px}
@@ -1193,7 +1368,7 @@ body.app .footer{flex-direction:column;align-items:flex-start;gap:8px;font-size:
 
 /* tab bar */
 body.app .tabbar{
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:grid;grid-template-columns:repeat(var(--tabs,5),1fr);
   position:fixed;left:0;right:0;bottom:0;z-index:55;
   padding:7px max(8px,env(safe-area-inset-right)) calc(env(safe-area-inset-bottom) + 7px) max(8px,env(safe-area-inset-left));
   background:linear-gradient(180deg,rgba(26,20,36,.94),rgba(10,8,15,.98));
@@ -1362,6 +1537,28 @@ body.app #oracleOverlay .oracle-card{
   padding:6px max(18px,env(safe-area-inset-right)) 20px max(18px,env(safe-area-inset-left));
 }
 body.app #oracleOverlay .or-actions .btn{min-height:48px}
+
+/* the Ledger is a tab too */
+body.app #ledgerOverlay{
+  z-index:50;align-items:flex-start;
+  padding:calc(env(safe-area-inset-top) + 64px) 0 calc(env(safe-area-inset-bottom) + 84px);
+  background:
+    radial-gradient(700px 420px at 50% 0%, rgba(201,162,76,.12), transparent 70%),
+    linear-gradient(180deg,var(--night),var(--ink));
+  animation:fadeIn .2s ease both;
+}
+body.app #ledgerOverlay .ledger-card{
+  width:100%;margin:0;border:0;border-radius:0;box-shadow:none;background:transparent;animation:none;
+  padding:6px max(16px,env(safe-area-inset-right)) 20px max(16px,env(safe-area-inset-left));
+}
+body.app #ledgerOverlay .or-eyebrow,body.app #ledgerOverlay .lg-close{display:none}
+body.app.on-ledger #appSearchBtn{visibility:hidden}
+body.app .lg-tools .btn{min-height:40px;flex:1 1 auto}
+body.app .lg-years .or-pick{min-height:36px}
+body.app .lg-col{min-height:44px}
+body.app #lgGoalOverlay,body.app #lgSetOverlay,body.app #lgReviewOverlay{z-index:75}
+body.app .lg-pread input[type=date]{font-size:16px;min-height:38px}
+body.app .lg-pchip{min-height:34px;padding:5px 12px}
 </style>
 
 <svg style="display:none" aria-hidden="true">
@@ -1383,6 +1580,7 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
   <symbol id="ic-search" viewBox="0 0 24 24"><path d="M10.2 3a7.2 7.2 0 0 1 5.8 11.5l5 5-1.5 1.5-5-5A7.2 7.2 0 1 1 10.2 3zm0 2a5.2 5.2 0 1 0 0 10.4 5.2 5.2 0 0 0 0-10.4z"/></symbol>
   <symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M3 6h9.2a2.6 2.6 0 0 1 5 0H21v2h-3.8a2.6 2.6 0 0 1-5 0H3zm0 10h3.8a2.6 2.6 0 0 1 5 0H21v2h-9.2a2.6 2.6 0 0 1-5 0H3z"/></symbol>
   <symbol id="ic-back" viewBox="0 0 24 24"><path d="M15.4 4.6 16.8 6l-6 6 6 6-1.4 1.4L8 12z"/></symbol>
+  <symbol id="ic-ledger" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M5 2.5h12.5A1.5 1.5 0 0 1 19 4v15.5H6.6a1.1 1.1 0 0 0 0 2.2H19v1.3H6.6A2.6 2.6 0 0 1 4 20.4V3.5a1 1 0 0 1 1-1zm3.2 4v1.6h7.6V6.5zm0 3.4v1.4h5.4V9.9zM7.6 14h1.6v3.2H7.6zm2.8-2.2h1.6v5.4h-1.6zm2.8 1.2h1.6v4.2h-1.6zm2.8-2.6h1.6v6.8H16z"/></symbol>
   <symbol id="ic-drop" viewBox="0 0 24 24"><path d="M12 2.4 6.6 9.8a6.8 6.8 0 1 0 10.8 0zM12 6l3.8 5.3a4.7 4.7 0 1 1-7.6 0z"/></symbol>
 </svg>
 
@@ -1428,6 +1626,8 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
         <option value="rating">Rating</option>
         <option value="favorite">Favorites</option>
         <option value="letter">First letter</option>
+        <option value="genre">Genre</option>
+        <option value="yearread">Year read</option>
       </select>
     </div>
     <div class="field">
@@ -1468,6 +1668,7 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
     </div>
     <button class="btn ghost" id="setBtn">Settings</button>
     <button class="btn ghost" id="oracleBtn" hidden>The Oracle</button>
+    <button class="btn ghost" id="ledgerBtn">The Ledger</button>
     <button class="btn ghost" id="exportBtn">Export</button>
     <button class="btn ghost" id="importBtn">Import</button>
   </div>
@@ -1503,6 +1704,7 @@ body.app #oracleOverlay .or-actions .btn{min-height:48px}
   <button type="button" data-app-tab="shelf" aria-current="page"><svg viewBox="0 0 24 24"><use href="#ic-shelf"/></svg><span>Shelf</span></button>
   <button type="button" data-app-tab="oracle" id="appOracleTab"><svg viewBox="0 0 24 24"><use href="#ic-eye"/></svg><span>Oracle</span></button>
   <button type="button" data-app-tab="add" class="add"><i><svg viewBox="0 0 24 24"><use href="#ic-plus"/></svg></i><span>Add</span></button>
+  <button type="button" data-app-tab="ledger"><svg viewBox="0 0 24 24"><use href="#ic-ledger"/></svg><span>Ledger</span></button>
   <button type="button" data-app-tab="more"><svg viewBox="0 0 24 24"><use href="#ic-more"/></svg><span>More</span></button>
 </nav>
 
@@ -1603,7 +1805,8 @@ var state = {
   defaultSections:DEFAULT_SECTIONS.slice(),
   shelfPlates:{show:false, labels:{}, hidden:{}},
   groupLayout:{}, defaultGroupLayout:"shelf",
-  oracle:null
+  oracle:null,
+  ledger:null, prefsLoaded:false
 };
 
 /* ---------------- the Oracle ----------------
@@ -2258,7 +2461,8 @@ function savePrefs(){
     dir: state.dir,
     groupBy: state.groupBy,
     groupStyle: state.groupStyle,
-    oracle: state.oracle
+    oracle: state.oracle,
+    ledger: ledgerState()
   }).catch(function(){
     setSave("Couldn't save your settings", "warn");
   });
@@ -2292,6 +2496,9 @@ function cmp(a, b){
   else if(s === "favorite") r = (b.favorite?1:0)-(a.favorite?1:0);
   else if(s === "added") r = (a.addedAt||0)-(b.addedAt||0);
   else if(s === "progress") r = (a.progress||0)-(b.progress||0);
+  else if(s === "pages") r = bookPages(a)-bookPages(b);
+  else if(s === "published") r = (a.pubYear||0)-(b.pubYear||0);
+  else if(s === "finished") r = (lastFinish(a)||"").localeCompare(lastFinish(b)||"");
   else if(s === "custom") r = orderOf(a)-orderOf(b);
   else if(s.indexOf("r:") === 0){ var k = s.slice(2); r = ratingOf(a,k)-ratingOf(b,k); }
   else r = 0;
@@ -2306,6 +2513,8 @@ function groupKey(b){
     case "rating":   var v = ratingOf(b,"overall"); return v < 0 ? "Unrated" : (Math.floor(v)+(v%1?"½":"")+" of 5");
     case "favorite": return b.favorite ? "Favorites" : "The rest";
     case "letter":   return (b.title||"?").replace(/^(the|a|an)\s+/i,"").charAt(0).toUpperCase();
+    case "genre":    return b.genres && b.genres.length ? genreLabel(b.genres[0]) : "No genre yet";
+    case "yearread": var lf = lastFinish(b); return lf ? "Read in " + lf.slice(0, 4) : (b.status === "read" ? "Before the Ledger" : "Not finished");
     default:         return "";
   }
 }
@@ -2670,6 +2879,7 @@ function oracleTake(){
     }
   };
   if(lane) state.books[id].spineColor = LANE_COLOR[lane];
+  fillFromOracle(state.books[id]);
   saveBook(state.books[id]);
   render();
   paintSaveSticky("“" + rec.title + "” is on your Want to Read shelf", "");
@@ -3473,7 +3683,8 @@ function renderStats(){
     "<span><b>" + all.length + "</b> volumes</span>" +
     "<span><b>" + read.length + "</b> read</span>" +
     "<span><b>" + all.filter(function(b){ return b.favorite; }).length + "</b> favorites</span>" +
-    "<span>avg overall <b>" + avg + "</b></span>";
+    "<span>avg overall <b>" + avg + "</b></span>" +
+    "<span><b>" + ledgerEntries().filter(function(e){ return e.year === thisYear() && !e.dnf; }).length + "</b> in " + thisYear() + "</span>";
 }
 
 /* ---------------- open book ---------------- */
@@ -3601,6 +3812,8 @@ function openBook(id, isNew){
         '<dt>Progress</dt><dd class="row2"><input class="num" type="text" id="f-prog" data-f="progress" value="' + esc(b.progress == null ? "" : b.progress) + '" placeholder="%" inputmode="numeric"></dd>' +
       "</dl>" +
       '<div class="page-rule"></div>' +
+      ledgerBlockHTML(b) +
+      '<div class="page-rule"></div>' +
       '<span class="notes-label">The story</span>' +
       '<textarea class="blurb" id="f-desc" data-f="description" placeholder="What it&rsquo;s about…">' + esc(b.description || "") + "</textarea>" +
       '<div class="page-rule"></div>' +
@@ -3720,6 +3933,7 @@ function openBook(id, isNew){
   ov.scrollTop = 0;
 
   var spread = ov.querySelector(".spread");
+  wireLedgerBlock(b, spread);
 
   function refreshPreview(){
     var pv = byId("coverPreview");
@@ -3736,11 +3950,18 @@ function openBook(id, isNew){
   function commit(el){
     var f = el.getAttribute("data-f");
     var val = (el.isContentEditable ? el.textContent : el.value);
+    var prevStatus = b.status;
     if(f === "seriesNumber" || f === "progress"){
       var n = parseFloat(val);
       b[f] = isNaN(n) ? null : n;
     } else {
       b[f] = (typeof val === "string" ? val.trim() : val);
+    }
+    if(f === "status" && prevStatus !== b.status){
+      ledgerOnStatus(b, prevStatus, b.status);
+      if(ledgerReadsRedraw) ledgerReadsRedraw();
+      if(byId("ledgerCard")) drawLedger();
+      renderStats();
     }
     if(["title","author","series","status","progress","seriesNumber"].indexOf(f) !== -1){
       render(); refreshPreview();
@@ -4144,7 +4365,9 @@ function openBook(id, isNew){
 function closeBook(){
   var ov = byId("bookOverlay");
   if(ov) ov.remove();
-  document.body.style.overflow = "";
+  ledgerReadsRedraw = null;
+  if(byId("ledgerCard")) drawLedger();
+  else document.body.style.overflow = "";
   state.openId = null;
   var btn = document.querySelector('[data-id="' + (window.__lastSpine || "") + '"]');
   if(btn) btn.focus();
@@ -4365,6 +4588,7 @@ function libraryPayload(images){
     groupLayout:state.groupLayout,
     defaultGroupLayout:state.defaultGroupLayout,
     categories:state.categories,
+    ledger:ledgerState(),
     books:list(),
     images:images || {}
   };
@@ -4449,6 +4673,7 @@ function normalizeBook(raw){
   });
   b.favorite = !!b.favorite;
   if(typeof b.addedAt !== "number") b.addedAt = Date.now();
+  normLedgerFields(b);
   migrateSections(b);
   return b;
 }
@@ -4502,6 +4727,7 @@ function finishImport(payload, incoming, mode){
     state.defaultGroupLayout = normLayout(payload.defaultGroupLayout, "shelf");
     byId("groupLayout").value = state.defaultGroupLayout;
   }
+  if(payload.ledger !== undefined) state.ledger = normLedger(payload.ledger);
   savePrefs();
   render();
   setSave("Imported " + incoming.length + " books", "");
@@ -4541,7 +4767,9 @@ function buildSortOptions(){
   var opts = [
     ["series","Series &amp; volume"],["title","Title"],["author","Author"],
     ["number","Volume number"],["status","Shelf"],["favorite","Favorites first"],
-    ["added","Date added"],["progress","Progress"],["custom","Custom (arranged)"]
+    ["added","Date added"],["progress","Progress"],
+    ["finished","Date finished"],["pages","Page count"],["published","Year published"],
+    ["custom","Custom (arranged)"]
   ].map(function(o){ return '<option value="' + o[0] + '">' + o[1] + "</option>"; });
   state.categories.forEach(function(c){
     opts.push('<option value="r:' + esc(c.key) + '">Rating &middot; ' + esc(c.label) + "</option>");
@@ -5163,6 +5391,1225 @@ function endDrag(commit){
   flushRender();
 }
 
+/* ---------------- the Ledger ----------------
+   Reading history, statistics and goals. Everything it counts comes from four
+   kinds of field on a book: its reads (start and finish dates, any number of
+   them, so a reread counts again), its genres, pages and year of publication,
+   and its format. Books read before the Ledger existed have no dates; they
+   still count in All time, never under a month. */
+var LEDGER_FORMATS = [["print","Print"],["ebook","Ebook"],["audio","Audiobook"]];
+var LEDGER_SOURCES = [["owned","Owned"],["library","Library"],["subscription","Subscription"],["borrowed","Borrowed"]];
+var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var MONTHS_LONG = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+var GOAL_KINDS = [
+  {k:"books",  l:"Books in the year",   unit:"books",  hint:"Every book you finish in the year."},
+  {k:"pages",  l:"Pages in the year",   unit:"pages",  hint:"The page counts of the books you finish."},
+  {k:"month",  l:"Books every month",   unit:"books",  hint:"A target for each month on its own."},
+  {k:"genre",  l:"Books in a genre",    unit:"books",  hint:"Finished books tagged with one genre."},
+  {k:"series", l:"Series finished",     unit:"series", hint:"A series counts once every volume on your shelf is read, the last of them this year."},
+  {k:"tbr",    l:"From the old TBR",    unit:"books",  hint:"Books finished this year that were already on your shelf on 1 January."}
+];
+var LENGTH_BANDS = [
+  {l:"Under 300", lo:0, hi:299}, {l:"300 – 449", lo:300, hi:449},
+  {l:"450 – 599", lo:450, hi:599}, {l:"600 and up", lo:600, hi:1e9}
+];
+/* Open Library subjects are free text. These are the words that put a book
+   in one of the Oracle's genres; a genre you add yourself matches on its name. */
+var OL_GENRE_WORDS = {
+  romantasy:   [/romantasy/, /fantasy romance/, /romantic fantasy/],
+  darkromance: [/dark romance/, /erotic/, /romantic suspense/, /bully romance/, /mafia/],
+  gothic:      [/gothic/, /horror/, /haunt/, /ghost/, /vampire/, /occult/],
+  thriller:    [/thriller/, /suspense/, /serial murder/, /serial kill/, /psychological fiction/, /mystery/, /detective/],
+  epic:        [/epic fantasy/, /high fantasy/, /dragons/],
+  historical:  [/historical fantasy/, /historical fiction/],
+  academia:    [/dark academia/, /boarding school/, /universities and colleges/, /magic schools/, /secret societies/],
+  fairytale:   [/fairy tale/, /fairies/, /faerie/, /\bfae\b/, /folklore/, /retelling/],
+  scifi:       [/science fiction/, /dystopia/, /space opera/, /speculative/]
+};
+
+var ledgerView = {year:null, month:null};
+var ledgerFillRun = null;
+var ledgerReadsRedraw = null;
+
+function pad2(n){ return (n < 10 ? "0" : "") + n; }
+function isoDay(d){ d = d || new Date(); return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); }
+function validDay(s){
+  if(typeof s !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
+  var d = dayDate(s);
+  return isNaN(d.getTime()) ? null : s;
+}
+function dayDate(s){ var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+function fmtDay(s){ return dayDate(s).toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"}); }
+function thisYear(){ return new Date().getFullYear(); }
+function daysInYear(y){ return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 366 : 365; }
+function dayOfYear(d){ return Math.floor((d - new Date(d.getFullYear(), 0, 1)) / 864e5) + 1; }
+function num(n){ return Math.round(n).toLocaleString(); }
+function plural(n, one, many){ return n === 1 ? one : (many || one + "s"); }
+
+function defaultLedger(){
+  return {
+    genres: GENRES.map(function(g){ return {k:g.k, l:g.l}; }),
+    goals: [],
+    countAudio: true, audioPages: true,
+    countDnf: false, dnfPages: true,
+    filled: false
+  };
+}
+function normLedger(v){
+  var d = defaultLedger();
+  if(!v || typeof v !== "object") return d;
+  if(Array.isArray(v.genres)){
+    var seen = {};
+    d.genres = v.genres.filter(function(g){
+      if(!g || typeof g.k !== "string" || !g.k || seen[g.k]) return false;
+      seen[g.k] = true;
+      return true;
+    }).map(function(g){ return {k:g.k, l:String(g.l || g.k).slice(0, 60)}; });
+  }
+  if(Array.isArray(v.goals)){
+    d.goals = v.goals.filter(function(g){
+      return g && typeof g.id === "string" && GOAL_KINDS.some(function(k){ return k.k === g.kind; }) &&
+        typeof g.target === "number" && g.target > 0 && typeof g.year === "number";
+    }).map(function(g){
+      var o = {id:g.id, kind:g.kind, target:Math.round(g.target), year:Math.round(g.year)};
+      if(g.kind === "genre" && typeof g.genre === "string") o.genre = g.genre;
+      if(validDay(g.sealed)) o.sealed = g.sealed;
+      return o;
+    });
+  }
+  ["countAudio","audioPages","countDnf","dnfPages","filled"].forEach(function(k){
+    if(typeof v[k] === "boolean") d[k] = v[k];
+  });
+  return d;
+}
+function ledgerState(){
+  if(!state.ledger) state.ledger = defaultLedger();
+  return state.ledger;
+}
+function genreLabel(k){
+  var g = ledgerState().genres.filter(function(x){ return x.k === k; })[0] ||
+    GENRES.filter(function(x){ return x.k === k; })[0];
+  return g ? g.l : k;
+}
+
+/* ---- book fields ---- */
+function normReads(v){
+  if(!Array.isArray(v)) return [];
+  return v.filter(function(r){ return r && typeof r === "object"; }).map(function(r){
+    var o = {start:validDay(r.start), end:validDay(r.end)};
+    if(r.dnf) o.dnf = true;
+    return o;
+  }).filter(function(r){ return r.start || r.end; }).slice(0, 60);
+}
+function normLedgerFields(b){
+  if(b.reads !== undefined) b.reads = normReads(b.reads);
+  if(b.genres !== undefined){
+    b.genres = Array.isArray(b.genres)
+      ? b.genres.filter(function(g, i, a){ return typeof g === "string" && g && a.indexOf(g) === i; }).slice(0, 12)
+      : [];
+  }
+  ["pages","pubYear"].forEach(function(k){
+    if(b[k] == null) return;
+    var n = parseInt(b[k], 10);
+    if(isNaN(n) || n <= 0 || n > (k === "pages" ? 20000 : 3000)) delete b[k];
+    else b[k] = n;
+  });
+  if(b.format != null && !LEDGER_FORMATS.some(function(f){ return f[0] === b.format; })) delete b.format;
+  if(b.source != null && !LEDGER_SOURCES.some(function(f){ return f[0] === b.source; })) delete b.source;
+}
+function bookPages(b){ return typeof b.pages === "number" && b.pages > 0 ? b.pages : 0; }
+function lastFinish(b){
+  var out = null;
+  (b.reads || []).forEach(function(r){ if(r.end && !r.dnf && (!out || r.end > out)) out = r.end; });
+  return out;
+}
+
+/* Moving a book between shelves writes its dates, so nothing has to be typed:
+   Reading opens a read, Read closes it today, Set Aside closes it as unfinished.
+   A slip (Read, then straight back) takes back what it wrote. */
+function ledgerOnStatus(b, from, to){
+  if(from === to) return;
+  var reads = b.reads = normReads(b.reads);
+  var today = isoDay();
+  var open = null, i;
+  for(i = reads.length - 1; i >= 0; i--){ if(!reads[i].end){ open = reads[i]; break; } }
+  var last = reads[reads.length - 1];
+  var slip = last && last.end === today && (from === "read" || from === "dnf");
+  if(slip && (to === "want" || to === "reading")){
+    if(last.start){ last.end = null; delete last.dnf; }
+    else reads.pop();
+    if(to === "want" && last.start === today) reads.pop();
+    return;
+  }
+  if(to === "reading"){
+    if(!open) reads.push({start:today, end:null});
+  } else if(to === "read"){
+    if(open){ open.end = today; delete open.dnf; }
+    else if(!(last && last.end === today && !last.dnf)) reads.push({start:null, end:today});
+  } else if(to === "dnf"){
+    if(open){ open.end = today; open.dnf = true; }
+    else reads.push({start:null, end:today, dnf:true});
+  }
+}
+
+/* ---- what counts ---- */
+function entryPages(b, r){
+  var L = ledgerState(), p = bookPages(b);
+  if(!p) return 0;
+  if(b.format === "audio" && !L.audioPages) return 0;
+  if(r && r.dnf){
+    if(!L.dnfPages) return 0;
+    var pr = typeof b.progress === "number" ? Math.max(0, Math.min(100, b.progress)) : 0;
+    return Math.round(p * pr / 100);
+  }
+  return p;
+}
+function audioCounts(b){ return b.format !== "audio" || ledgerState().countAudio; }
+/* Every dated finish, oldest first. */
+function ledgerEntries(){
+  var L = ledgerState(), out = [];
+  list().forEach(function(b){
+    if(!audioCounts(b)) return;
+    (b.reads || []).forEach(function(r){
+      var end = validDay(r.end);
+      if(!end) return;
+      if(r.dnf && !L.countDnf) return;
+      out.push({b:b, start:validDay(r.start), end:end, dnf:!!r.dnf,
+        year:+end.slice(0, 4), month:+end.slice(5, 7) - 1, day:+end.slice(8, 10), pages:entryPages(b, r)});
+    });
+  });
+  return out.sort(function(a, c){ return a.end < c.end ? -1 : a.end > c.end ? 1 : 0; });
+}
+/* Read before the Ledger: on the Read shelf with no finish date. */
+function undatedReads(){
+  return list().filter(function(b){
+    return b.status === "read" && audioCounts(b) && !(b.reads || []).some(function(r){ return validDay(r.end) && !r.dnf; });
+  });
+}
+function entriesFor(year){
+  var all = ledgerEntries();
+  if(year === "all"){
+    return all.concat(undatedReads().map(function(b){
+      return {b:b, start:null, end:null, dnf:false, year:null, month:null, day:null, pages:entryPages(b, null)};
+    }));
+  }
+  return all.filter(function(e){ return e.year === year; });
+}
+function ledgerYears(){
+  var ys = {};
+  ys[thisYear()] = true;
+  ledgerEntries().forEach(function(e){ ys[e.year] = true; });
+  ledgerState().goals.forEach(function(g){ ys[g.year] = true; });
+  return Object.keys(ys).map(Number).sort(function(a, b){ return b - a; });
+}
+
+/* ---- the numbers ---- */
+function avgOf(arr){ return arr.length ? arr.reduce(function(a, c){ return a + c; }, 0) / arr.length : null; }
+function tally(entries, keysOf){
+  var m = {};
+  entries.forEach(function(e){
+    keysOf(e).forEach(function(k){
+      var t = m[k] || (m[k] = {k:k, n:0, books:[], r:[], s:[], pages:0});
+      t.n++;
+      t.books.push(e);
+      t.pages += e.pages;
+      var r = ratingOf(e.b, "overall"), s = ratingOf(e.b, "spice");
+      if(r >= 0) t.r.push(r);
+      if(s >= 0) t.s.push(s);
+    });
+  });
+  return Object.keys(m).map(function(k){ return m[k]; }).sort(function(a, b){ return b.n - a.n || b.pages - a.pages || String(a.k).localeCompare(String(b.k)); });
+}
+function ledgerSummary(entries, year){
+  var finished = entries.filter(function(e){ return !e.dnf; });
+  var withPages = finished.filter(function(e){ return bookPages(e.b); });
+  var rated = finished.map(function(e){ return ratingOf(e.b, "overall"); }).filter(function(v){ return v >= 0; });
+  var pages = entries.reduce(function(a, e){ return a + e.pages; }, 0);
+  var longest = null, shortest = null;
+  withPages.forEach(function(e){
+    if(!longest || bookPages(e.b) > bookPages(longest.b)) longest = e;
+    if(!shortest || bookPages(e.b) < bookPages(shortest.b)) shortest = e;
+  });
+  var days = null;
+  if(typeof year === "number"){
+    var now = new Date();
+    days = year === now.getFullYear() ? dayOfYear(now) : year < now.getFullYear() ? daysInYear(year) : null;
+  }
+  return {
+    count: entries.length, finished: finished.length, dnf: entries.length - finished.length,
+    pages: pages, avgRating: avgOf(rated), avgPages: avgOf(withPages.map(function(e){ return bookPages(e.b); })),
+    longest: longest, shortest: shortest,
+    perDay: days ? pages / days : null
+  };
+}
+
+/* ---- goals ---- */
+function seriesFinishedIn(year){
+  var bySeries = {};
+  list().forEach(function(b){
+    if(!b.series) return;
+    (bySeries[b.series] = bySeries[b.series] || []).push(b);
+  });
+  return Object.keys(bySeries).filter(function(s){
+    var books = bySeries[s];
+    if(books.length < 2 || books.some(function(b){ return b.status !== "read"; })) return false;
+    var last = books.map(lastFinish).filter(Boolean).sort().pop();
+    return !!last && +last.slice(0, 4) === year;
+  });
+}
+function goalProgress(g){
+  var es = ledgerEntries().filter(function(e){ return e.year === g.year; });
+  var done = es.filter(function(e){ return !e.dnf || ledgerState().countDnf; });
+  var now = new Date();
+  var p = {value:0, target:g.target, months:null};
+  if(g.kind === "books") p.value = done.length;
+  else if(g.kind === "pages") p.value = done.reduce(function(a, e){ return a + e.pages; }, 0);
+  else if(g.kind === "genre") p.value = done.filter(function(e){ return (e.b.genres || []).indexOf(g.genre) !== -1; }).length;
+  else if(g.kind === "series") p.value = seriesFinishedIn(g.year).length;
+  else if(g.kind === "tbr"){
+    var jan1 = new Date(g.year, 0, 1).getTime();
+    p.value = done.filter(function(e){ return (e.b.addedAt || 0) < jan1; }).length;
+  } else if(g.kind === "month"){
+    var per = MONTHS.map(function(){ return 0; });
+    done.forEach(function(e){ per[e.month]++; });
+    var lastMonth = g.year < now.getFullYear() ? 11 : g.year === now.getFullYear() ? now.getMonth() : -1;
+    var cur = g.year === now.getFullYear() ? now.getMonth() : lastMonth;
+    p.months = per;
+    p.monthsMet = per.filter(function(n, i){ return i <= lastMonth && n >= g.target; }).length;
+    p.monthsSoFar = lastMonth + 1;
+    p.value = cur >= 0 ? per[cur] : 0;
+    p.curMonth = cur;
+  }
+  p.met = g.kind === "month"
+    ? (p.monthsSoFar === 12 && p.monthsMet === 12)
+    : p.value >= g.target;
+  /* Pace, for the yearly goals of the current year. */
+  if(g.kind !== "month" && g.year === now.getFullYear() && !p.met){
+    var expected = g.target * dayOfYear(now) / daysInYear(g.year);
+    var diff = p.value - expected;
+    var unit = g.kind === "pages" ? 10 : 1;
+    p.pace = Math.abs(diff) < unit * 0.5 ? 0 : (diff > 0 ? 1 : -1) * Math.max(unit, Math.round(Math.abs(diff) / unit) * unit);
+  }
+  return p;
+}
+function goalTitle(g){
+  var unit = (GOAL_KINDS.filter(function(k){ return k.k === g.kind; })[0] || {}).unit || "books";
+  var n = num(g.target);
+  if(g.kind === "books") return n + " " + plural(g.target, "book") + " in " + g.year;
+  if(g.kind === "pages") return n + " pages in " + g.year;
+  if(g.kind === "month") return n + " " + plural(g.target, "book") + " every month";
+  if(g.kind === "genre") return n + " " + genreLabel(g.genre || "") + " in " + g.year;
+  if(g.kind === "series") return n + " " + plural(g.target, "series", "series") + " finished in " + g.year;
+  if(g.kind === "tbr") return n + " from the old TBR";
+  return n + " " + unit;
+}
+function ringSVG(frac){
+  var r = 30, c = 2 * Math.PI * r, f = Math.max(0, Math.min(1, frac));
+  return '<svg class="lg-ring" viewBox="0 0 72 72" aria-hidden="true">' +
+    '<circle cx="36" cy="36" r="' + r + '" class="track"/>' +
+    '<circle cx="36" cy="36" r="' + r + '" class="fill" stroke-dasharray="' + (c * f).toFixed(1) + " " + c.toFixed(1) + '"/>' +
+  "</svg>";
+}
+var SEAL_SVG = '<svg class="lg-seal" viewBox="0 0 64 64" aria-hidden="true">' +
+  '<path class="wax" d="M32 3c4 0 5 3 8.6 3.6 3.7.6 6-1.6 9 .9 2.9 2.4 1.6 5.6 3.6 8.6 2 3.1 5.4 3.6 6.2 7.3.8 3.7-2 5.6-2 9.6s2.8 5.9 2 9.6c-.8 3.7-4.2 4.2-6.2 7.3-2 3-.7 6.2-3.6 8.6-3 2.5-5.3.3-9 .9C37 59 36 61 32 61s-5-2-8.6-2.6c-3.7-.6-6 1.6-9-.9-2.9-2.4-1.6-5.6-3.6-8.6-2-3.1-5.4-3.6-6.2-7.3C3.8 37.9 6.6 36 6.6 32s-2.8-5.9-2-9.6c.8-3.7 4.2-4.2 6.2-7.3 2-3 .7-6.2 3.6-8.6 3-2.5 5.3-.3 9-.9C27 5 28 3 32 3z"/>' +
+  '<circle class="rim" cx="32" cy="32" r="19"/>' +
+  '<path class="mark" d="M32 19.5l3.4 7 7.6 1.1-5.5 5.3 1.3 7.6L32 36.9l-6.8 3.6 1.3-7.6-5.5-5.3 7.6-1.1z"/>' +
+"</svg>";
+
+/* ---- drawing ---- */
+function hbarsHTML(rows, max, opts){
+  opts = opts || {};
+  if(!rows.length) return '<p class="lg-empty">' + esc(opts.empty || "Nothing to show yet.") + "</p>";
+  return '<div class="lg-hbars">' + rows.map(function(r){
+    var w = max ? Math.max(2, Math.round(r.v / max * 100)) : 0;
+    return '<div class="lg-hrow"' + (r.title ? ' title="' + esc(r.title) + '"' : "") + ">" +
+      '<span class="lg-hlbl">' + esc(r.l) + (r.sub ? '<small>' + esc(r.sub) + "</small>" : "") + "</span>" +
+      '<span class="lg-htrack"><i style="width:' + w + '%"></i></span>' +
+      '<span class="lg-hval">' + esc(r.vl != null ? r.vl : num(r.v)) + "</span></div>";
+  }).join("") + "</div>";
+}
+function monthBarsHTML(entries, year){
+  var per = MONTHS.map(function(){ return 0; }), pg = MONTHS.map(function(){ return 0; });
+  entries.forEach(function(e){ per[e.month]++; pg[e.month] += e.pages; });
+  var max = Math.max.apply(null, per.concat([1]));
+  var now = new Date();
+  return '<div class="lg-cols" role="list">' + per.map(function(n, i){
+    var future = year > now.getFullYear() || (year === now.getFullYear() && i > now.getMonth());
+    var h = n ? Math.max(4, Math.round(n / max * 100)) : 0;
+    return '<button type="button" role="listitem" class="lg-col' + (ledgerView.month === i ? " on" : "") + (future ? " future" : "") +
+      '" data-lg-month="' + i + '" aria-label="' + MONTHS_LONG[i] + ": " + n + " " + plural(n, "book") + ", " + num(pg[i]) + ' pages">' +
+      '<span class="lg-cbar"><b>' + (n || "") + '</b><i style="height:' + h + '%"></i></span>' +
+      '<span class="lg-clbl">' + MONTHS[i].charAt(0) + "</span></button>";
+  }).join("") + "</div>";
+}
+function yearBarsHTML(){
+  var per = {};
+  ledgerEntries().forEach(function(e){
+    var t = per[e.year] || (per[e.year] = {n:0, p:0});
+    t.n++; t.p += e.pages;
+  });
+  var ys = Object.keys(per).map(Number).sort();
+  if(!ys.length) return '<p class="lg-empty">No dated reads yet. Each book you finish from now on lands in its year.</p>';
+  var max = Math.max.apply(null, ys.map(function(y){ return per[y].n; }));
+  return hbarsHTML(ys.map(function(y){
+    return {l:String(y), v:per[y].n, vl:per[y].n + " · " + num(per[y].p) + " pp"};
+  }), max);
+}
+function bookLineHTML(e){
+  var b = e.b;
+  return '<li><button type="button" data-lg-open="' + esc(b.id) + '">' +
+    '<span class="t">' + esc(b.title || "Untitled") + (e.dnf ? ' <em>set aside</em>' : "") + "</span>" +
+    '<span class="m">' + esc([b.author, e.end ? fmtDay(e.end) : "", bookPages(b) ? bookPages(b) + " pp" : ""].filter(Boolean).join(" · ")) + "</span>" +
+  "</button></li>";
+}
+function heatmapHTML(entries, year){
+  var per = {};
+  entries.forEach(function(e){ per[e.end] = (per[e.end] || []).concat([e.b.title || "Untitled"]); });
+  var rows = MONTHS.map(function(m, mi){
+    var dim = new Date(year, mi + 1, 0).getDate(), cells = "";
+    for(var d = 1; d <= 31; d++){
+      if(d > dim){ cells += '<i class="x"></i>'; continue; }
+      var key = year + "-" + pad2(mi + 1) + "-" + pad2(d), hit = per[key];
+      var lvl = hit ? Math.min(3, hit.length) : 0;
+      cells += '<i class="l' + lvl + '"' + (hit ? ' title="' + esc(fmtDay(key) + ": " + hit.join(", ")) + '"' : "") + "></i>";
+    }
+    return '<div class="lg-hm-row"><span>' + m.charAt(0) + "</span>" + cells + "</div>";
+  }).join("");
+  return '<div class="lg-hm">' + rows + "</div>";
+}
+/* Weeks with at least one finish, run end to end. */
+function weekStreaks(entries){
+  var weeks = {};
+  entries.forEach(function(e){
+    var d = dayDate(e.end);
+    var monday = new Date(d.getFullYear(), d.getMonth(), d.getDate() - ((d.getDay() + 6) % 7));
+    weeks[Math.round(monday.getTime() / 6048e5)] = true;
+  });
+  var ks = Object.keys(weeks).map(Number).sort(function(a, b){ return a - b; });
+  var best = 0, run = 0, prev = null;
+  ks.forEach(function(k){ run = prev !== null && k === prev + 1 ? run + 1 : 1; best = Math.max(best, run); prev = k; });
+  var now = new Date();
+  var thisMonday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+  var tw = Math.round(thisMonday.getTime() / 6048e5);
+  var cur = 0;
+  if(weeks[tw] || weeks[tw - 1]){
+    var k = weeks[tw] ? tw : tw - 1;
+    while(weeks[k]){ cur++; k--; }
+  }
+  return {best:best, current:cur};
+}
+function seriesRows(){
+  var bySeries = {};
+  list().forEach(function(b){ if(b.series) (bySeries[b.series] = bySeries[b.series] || []).push(b); });
+  var now = Date.now();
+  return Object.keys(bySeries).filter(function(s){ return bySeries[s].length > 1 || bySeries[s].some(function(b){ return b.seriesNumber > 1; }); })
+    .map(function(s){
+      var books = bySeries[s];
+      var read = books.filter(function(b){ return b.status === "read"; }).length;
+      var top = books.reduce(function(m, b){ return Math.max(m, typeof b.seriesNumber === "number" ? b.seriesNumber : 0); }, 0);
+      var last = books.map(lastFinish).filter(Boolean).sort().pop();
+      var reading = books.some(function(b){ return b.status === "reading"; });
+      var stalled = read > 0 && read < books.length && !reading && (!last || now - dayDate(last).getTime() > 120 * 864e5);
+      return {s:s, read:read, total:books.length, top:top, stalled:stalled, reading:reading, done:read === books.length};
+    })
+    .sort(function(a, b){ return (a.done - b.done) || (b.reading - a.reading) || (b.read / b.total - a.read / a.total) || a.s.localeCompare(b.s); });
+}
+
+function openLedger(){
+  closeLedger();
+  if(ledgerView.year == null) ledgerView.year = thisYear();
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "ledgerOverlay";
+  ov.innerHTML = '<div class="ledger-card" role="dialog" aria-modal="true" aria-label="The Ledger" id="ledgerCard"></div>';
+  document.body.appendChild(ov);
+  document.body.style.overflow = "hidden";
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeLedger(); });
+  ov.addEventListener("click", ledgerClick);
+  drawLedger();
+}
+function closeLedger(){
+  var ov = byId("ledgerOverlay");
+  if(ov) ov.remove();
+  if(!byId("oracleOverlay") && !byId("bookOverlay")) document.body.style.overflow = "";
+}
+function goalCardHTML(g){
+  var p = goalProgress(g);
+  var frac = g.kind === "month" ? (p.monthsSoFar ? p.monthsMet / Math.max(1, p.monthsSoFar) : 0) : p.value / g.target;
+  var big, line;
+  if(g.kind === "month"){
+    big = p.curMonth >= 0 ? p.value + "<small>/" + g.target + "</small>" : "&mdash;";
+    line = p.curMonth >= 0
+      ? (g.year === thisYear() ? "This month &middot; " : "") + p.monthsMet + " of " + p.monthsSoFar + " " + plural(p.monthsSoFar, "month") + " met"
+      : "Starts in " + g.year;
+  } else {
+    big = num(p.value) + "<small>/" + num(g.target) + "</small>";
+    if(p.met) line = "Met" + (g.sealed ? " on " + esc(fmtDay(g.sealed)) : "");
+    else if(p.pace == null) line = num(g.target - p.value) + " to go";
+    else if(p.pace === 0) line = "Right on pace";
+    else line = "<b class='" + (p.pace > 0 ? "up" : "down") + "'>" + num(Math.abs(p.pace)) + " " +
+      (g.kind === "pages" ? "pages" : plural(Math.abs(p.pace), g.kind === "series" ? "series" : "book", g.kind === "series" ? "series" : "books")) +
+      (p.pace > 0 ? " ahead of" : " behind") + "</b> pace";
+  }
+  return '<button type="button" class="lg-goal' + (p.met ? " met" : "") + '" data-lg-goal="' + esc(g.id) + '">' +
+    '<span class="lg-ringbox">' + ringSVG(p.met ? 1 : frac) + (p.met ? SEAL_SVG : "") + "</span>" +
+    '<span class="lg-gtext"><span class="lg-gtitle">' + esc(goalTitle(g)) + "</span>" +
+    '<span class="lg-gbig">' + big + "</span>" +
+    '<span class="lg-gline">' + line + "</span></span></button>";
+}
+function drawLedger(){
+  var card = byId("ledgerCard");
+  if(!card) return;
+  var L = ledgerState();
+  var y = ledgerView.year;
+  var years = ledgerYears();
+  var es = entriesFor(y);
+  var sum = ledgerSummary(es, y);
+  var goalYear = y === "all" ? thisYear() : y;
+  var goals = L.goals.filter(function(g){ return g.year === goalYear; });
+  var undated = undatedReads();
+  var finished = es.filter(function(e){ return !e.dnf; });
+
+  var chips = years.map(function(yy){
+    return '<button type="button" class="or-pick" data-lg-year="' + yy + '" aria-pressed="' + (y === yy) + '">' + yy + "</button>";
+  }).join("") + '<button type="button" class="or-pick" data-lg-year="all" aria-pressed="' + (y === "all") + '">All time</button>';
+
+  var goalsHTML = goals.length
+    ? '<div class="lg-goals">' + goals.map(goalCardHTML).join("") + "</div>"
+    : '<p class="lg-empty">No goals for ' + goalYear + ' yet. Set one and it keeps count as books move to Read.</p>';
+
+  var tiles = [
+    {v:num(sum.finished), l:plural(sum.finished, "Book") + " read", s:sum.dnf ? sum.dnf + " set aside" : ""},
+    {v:num(sum.pages), l:"Pages", s:sum.perDay != null && sum.pages ? (sum.perDay >= 10 ? Math.round(sum.perDay) : sum.perDay.toFixed(1)) + " a day" : ""},
+    {v:sum.avgRating != null ? sum.avgRating.toFixed(2) : "&mdash;", l:"Average rating", s:"overall"},
+    {v:sum.avgPages != null ? num(sum.avgPages) : "&mdash;", l:"Average length", s:"pages"},
+    {v:sum.longest ? num(bookPages(sum.longest.b)) : "&mdash;", l:"Longest", s:sum.longest ? sum.longest.b.title : ""},
+    {v:sum.shortest ? num(bookPages(sum.shortest.b)) : "&mdash;", l:"Shortest", s:sum.shortest ? sum.shortest.b.title : ""}
+  ].map(function(t){
+    return '<div class="lg-tile"><b>' + t.v + "</b><span>" + esc(t.l) + "</span>" + (t.s ? "<small>" + esc(t.s) + "</small>" : "") + "</div>";
+  }).join("");
+
+  /* by month / by year */
+  var timeHTML;
+  if(y === "all"){
+    timeHTML = '<section class="lg-sec"><h4 class="or-h">By year</h4>' + yearBarsHTML() + "</section>";
+  } else {
+    var pick = ledgerView.month;
+    var monthList = "";
+    if(pick != null){
+      var inMonth = es.filter(function(e){ return e.month === pick; });
+      monthList = '<div class="lg-monthlist"><p class="lg-sub">' + MONTHS_LONG[pick] + " " + y + " &middot; " +
+        inMonth.length + " " + plural(inMonth.length, "book") + ", " + num(inMonth.reduce(function(a, e){ return a + e.pages; }, 0)) + " pages</p>" +
+        (inMonth.length ? '<ul class="lg-books">' + inMonth.map(bookLineHTML).join("") + "</ul>" : '<p class="lg-empty">Nothing finished that month.</p>') +
+      "</div>";
+    }
+    var st = weekStreaks(ledgerEntries());
+    timeHTML =
+      '<section class="lg-sec"><h4 class="or-h">By month</h4>' + monthBarsHTML(es, y) +
+        '<p class="lg-note">Tap a month to see its books.</p>' + monthList + "</section>" +
+      '<section class="lg-sec"><h4 class="or-h">Finishing days</h4>' + heatmapHTML(es, y) +
+        '<p class="lg-note">Streak: ' + st.current + " " + plural(st.current, "week") + " running &middot; best " + st.best + " " + plural(st.best, "week") +
+        ". A week counts when you finish at least one book in it.</p></section>";
+  }
+
+  /* genres */
+  var gT = tally(finished, function(e){ return (e.b.genres && e.b.genres.length) ? e.b.genres : ["__none"]; });
+  var gMax = gT.reduce(function(m, t){ return Math.max(m, t.n); }, 0);
+  var genreRows = gT.map(function(t){
+    var bits = [];
+    if(t.r.length) bits.push("avg " + avgOf(t.r).toFixed(1));
+    if(t.s.length) bits.push("spice " + avgOf(t.s).toFixed(1));
+    return {l:t.k === "__none" ? "No genre yet" : genreLabel(t.k), v:t.n, sub:bits.join(" · ")};
+  });
+  var gBest = gT.filter(function(t){ return t.k !== "__none" && t.r.length; }).sort(function(a, b){ return avgOf(b.r) - avgOf(a.r); })[0];
+  var gMost = gT.filter(function(t){ return t.k !== "__none"; })[0];
+  var genreNote = gBest && gMost && gBest.k !== gMost.k
+    ? '<p class="lg-note">You read ' + esc(genreLabel(gMost.k)) + " most, but rate " + esc(genreLabel(gBest.k)) + " highest.</p>" : "";
+
+  /* authors */
+  var aT = tally(finished, function(e){ return [e.b.author || "Unattributed"]; }).slice(0, 10);
+  var aMax = aT.length ? aT[0].n : 0;
+
+  /* length bands */
+  var withP = finished.filter(function(e){ return bookPages(e.b); });
+  var bands = LENGTH_BANDS.map(function(bd){
+    return {l:bd.l, v:withP.filter(function(e){ var p = bookPages(e.b); return p >= bd.lo && p <= bd.hi; }).length};
+  });
+  var bMax = bands.reduce(function(m, r){ return Math.max(m, r.v); }, 0);
+  var noPages = finished.length - withP.length;
+
+  /* publication */
+  var withY = finished.filter(function(e){ return e.b.pubYear; });
+  var dT = tally(withY, function(e){ return [Math.floor(e.b.pubYear / 10) * 10]; }).sort(function(a, b){ return b.k - a.k; });
+  var dMax = dT.reduce(function(m, t){ return Math.max(m, t.n); }, 0);
+  var fresh = withY.filter(function(e){ return e.year != null && e.b.pubYear >= e.year - 1; }).length;
+  var noYear = finished.length - withY.length;
+
+  /* ratings */
+  var rBins = [1, 2, 3, 4, 5].map(function(n){
+    return {l:n === 1 ? "Up to 1" : (n - 0.5) + " – " + n, v:finished.filter(function(e){ var r = ratingOf(e.b, "overall"); return r >= 0 && Math.ceil(r) === n; }).length};
+  }).reverse();
+  var rMax = rBins.reduce(function(m, r){ return Math.max(m, r.v); }, 0);
+
+  /* formats */
+  var fT = tally(es, function(e){ return [e.b.format || "__none"]; });
+  var fMax = fT.reduce(function(m, t){ return Math.max(m, t.n); }, 0);
+  var fLabel = function(k){ var f = LEDGER_FORMATS.filter(function(x){ return x[0] === k; })[0]; return f ? f[1] : "Not recorded"; };
+
+  var sRows = seriesRows();
+
+  var empty = !es.length;
+  card.innerHTML =
+    '<p class="or-eyebrow">The Ledger<i></i></p>' +
+    '<div class="lg-top">' +
+      '<div class="or-picks lg-years">' + chips + "</div>" +
+      '<div class="lg-tools">' +
+        '<button class="btn small" type="button" id="lgAddGoal">Set a goal</button>' +
+        (y !== "all" ? '<button class="btn small ghost" type="button" id="lgReview">Year in review</button>' : "") +
+        '<button class="btn small ghost" type="button" id="lgSettings">Ledger settings</button>' +
+        '<button class="btn small ghost lg-close" type="button" id="lgClose">Close</button>' +
+      "</div>" +
+    "</div>" +
+    '<section class="lg-sec"><h4 class="or-h">Goals for ' + goalYear + "</h4>" + goalsHTML + "</section>" +
+    (empty
+      ? '<p class="lg-empty lg-fresh">' + (y === "all"
+          ? "Nothing on the Read shelf yet."
+          : "Nothing finished in " + y + " yet. Move a book to Read and it lands here with today&rsquo;s date; Reading starts the clock.") + "</p>"
+      : "") +
+    '<section class="lg-sec"><h4 class="or-h">' + (y === "all" ? "All time" : "The year so far") + '</h4><div class="lg-tiles">' + tiles + "</div></section>" +
+    timeHTML +
+    '<section class="lg-sec"><h4 class="or-h">Genres</h4>' + hbarsHTML(genreRows, gMax, {empty:"Finish a book with a genre and it appears here."}) + genreNote + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Authors</h4>' + hbarsHTML(aT.map(function(t){
+      return {l:t.k, v:t.n, sub:t.r.length ? "avg " + avgOf(t.r).toFixed(1) : ""};
+    }), aMax) + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Book length</h4>' + hbarsHTML(bands.filter(function(){ return withP.length; }), bMax, {empty:"Add page counts and the spread of lengths shows here."}) +
+      (noPages && withP.length ? '<p class="lg-note">' + noPages + " " + plural(noPages, "book has", "books have") + " no page count yet.</p>" : "") + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Publication</h4>' + hbarsHTML(dT.map(function(t){ return {l:t.k + "s", v:t.n}; }), dMax, {empty:"Add years of publication and the decades show here."}) +
+      (withY.length && y !== "all" ? '<p class="lg-note">' + fresh + " new " + plural(fresh, "release") + " (published within a year of reading) &middot; " + (withY.length - fresh) + " from the backlist.</p>" : "") +
+      (noYear && withY.length ? '<p class="lg-note">' + noYear + " without a year.</p>" : "") + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Ratings</h4>' + hbarsHTML(rMax ? rBins : [], rMax, {empty:"Rate what you finish and the spread shows here."}) + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Format</h4>' + hbarsHTML(fT.map(function(t){ return {l:fLabel(t.k), v:t.n}; }), fMax) + "</section>" +
+    '<section class="lg-sec"><h4 class="or-h">Series</h4>' +
+      (sRows.length ? '<div class="lg-series">' + sRows.map(function(r){
+        var tag = r.done ? "Finished" : r.reading ? "Reading" : r.stalled ? "Stalled" : r.read ? "Under way" : "Not started";
+        return '<div class="lg-srow' + (r.stalled ? " stalled" : "") + (r.done ? " done" : "") + '">' +
+          '<span class="lg-sname">' + esc(r.s) + "<small>" + tag + (r.top ? " &middot; up to #" + r.top + " on your shelf" : "") + "</small></span>" +
+          '<span class="lg-spips">' + Array.apply(null, Array(Math.min(r.total, 14))).map(function(_, i){
+            return "<i" + (i < r.read ? ' class="on"' : "") + "></i>";
+          }).join("") + "</span>" +
+          '<span class="lg-hval">' + r.read + "/" + r.total + "</span></div>";
+      }).join("") + "</div>"
+        : '<p class="lg-empty">Books that share a series name show up here.</p>') +
+      '<p class="lg-note">Counts the volumes on your shelf. Add the rest to Want to Read to see the whole series.</p></section>' +
+    (undated.length
+      ? '<section class="lg-sec"><h4 class="or-h">Before the Ledger</h4><p class="lg-note">' + undated.length + " " +
+        plural(undated.length, "book was", "books were") + " read before the Ledger began. " +
+        (y === "all" ? "They are counted above." : "They count under All time, never in a month.") +
+        " Give one a finish date on its page and it moves into that month.</p></section>"
+      : "");
+  ledgerSeal();
+}
+function ledgerClick(e){
+  var t;
+  if(e.target.closest("#lgClose")){ closeLedger(); return; }
+  if((t = e.target.closest("[data-lg-year]"))){
+    var v = t.getAttribute("data-lg-year");
+    ledgerView.year = v === "all" ? "all" : +v;
+    ledgerView.month = null;
+    drawLedger();
+    return;
+  }
+  if((t = e.target.closest("[data-lg-month]"))){
+    var m = +t.getAttribute("data-lg-month");
+    ledgerView.month = ledgerView.month === m ? null : m;
+    drawLedger();
+    return;
+  }
+  if((t = e.target.closest("[data-lg-open]"))){
+    var id = t.getAttribute("data-lg-open");
+    if(state.books[id]) openBook(id, false);
+    return;
+  }
+  if((t = e.target.closest("[data-lg-goal]"))){ openGoalSheet(t.getAttribute("data-lg-goal")); return; }
+  if(e.target.closest("#lgAddGoal")){ openGoalSheet(null); return; }
+  if(e.target.closest("#lgSettings")){ openLedgerSettings(); return; }
+  if(e.target.closest("#lgReview")){ openYearReview(ledgerView.year); return; }
+}
+/* The first time a goal is met it is sealed in wax: once, with a moment. */
+function ledgerSeal(){
+  var L = ledgerState(), fresh = [];
+  L.goals.forEach(function(g){
+    if(g.sealed) return;
+    if(goalProgress(g).met){ g.sealed = isoDay(); fresh.push(g); }
+  });
+  if(!fresh.length) return;
+  savePrefs();
+  var old = byId("lgSealMoment");
+  if(old) old.remove();
+  var el = document.createElement("div");
+  el.className = "lg-moment";
+  el.id = "lgSealMoment";
+  el.setAttribute("role", "status");
+  el.innerHTML = SEAL_SVG + "<p>Goal met</p><b>" + esc(goalTitle(fresh[0])) + "</b>";
+  document.body.appendChild(el);
+  el.addEventListener("click", function(){ el.remove(); });
+  setTimeout(function(){ el.classList.add("out"); }, 3400);
+  setTimeout(function(){ el.remove(); }, 4100);
+  if(byId("ledgerCard")) drawLedger();
+}
+
+/* ---- goal sheet ---- */
+function openGoalSheet(id){
+  closeGoalSheet();
+  var L = ledgerState();
+  var g = id ? L.goals.filter(function(x){ return x.id === id; })[0] : null;
+  var yNow = thisYear();
+  var year = g ? g.year : (ledgerView.year === "all" ? yNow : ledgerView.year);
+  var kind = g ? g.kind : "books";
+  var yearOpts = [yNow - 1, yNow, yNow + 1].concat(year < yNow - 1 || year > yNow + 1 ? [year] : []).map(function(yy){
+    return '<option value="' + yy + '"' + (yy === year ? " selected" : "") + ">" + yy + "</option>";
+  }).join("");
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "lgGoalOverlay";
+  ov.innerHTML =
+    '<div class="sheet" role="dialog" aria-modal="true" aria-label="' + (g ? "Edit goal" : "Set a goal") + '">' +
+      "<h3>" + (g ? "Edit goal" : "Set a goal") + "</h3>" +
+      '<p class="hint">Goals count themselves. Every book that moves to Read is added on the day it moves.</p>' +
+      '<div class="or-picks" id="lgKinds">' + GOAL_KINDS.map(function(k){
+        return '<button type="button" class="or-pick" data-kind="' + k.k + '" aria-pressed="' + (k.k === kind) + '">' + esc(k.l) + "</button>";
+      }).join("") + "</div>" +
+      '<p class="lg-note" id="lgKindHint"></p>' +
+      '<div class="lg-form">' +
+        '<div class="field"><label class="lbl" for="lgTarget">Target</label>' +
+          '<input type="text" inputmode="numeric" id="lgTarget" value="' + (g ? g.target : "") + '" placeholder="52"></div>' +
+        '<div class="field" id="lgGenreField"><label class="lbl" for="lgGenre">Genre</label><select id="lgGenre">' +
+          L.genres.map(function(x){ return '<option value="' + esc(x.k) + '"' + (g && g.genre === x.k ? " selected" : "") + ">" + esc(x.l) + "</option>"; }).join("") +
+        "</select></div>" +
+        '<div class="field"><label class="lbl" for="lgYear">Year</label><select id="lgYear">' + yearOpts + "</select></div>" +
+      "</div>" +
+      '<p class="or-out warn" id="lgGoalOut"></p>' +
+      '<div class="sheet-actions">' +
+        (g ? '<button class="btn ghost danger" type="button" id="lgGoalDel">Remove goal</button>' : "") +
+        '<button class="btn ghost" type="button" id="lgGoalCancel">Cancel</button>' +
+        '<button class="btn" type="button" id="lgGoalSave">' + (g ? "Save" : "Set goal") + "</button>" +
+      "</div>" +
+    "</div>";
+  document.body.appendChild(ov);
+  var cur = kind;
+  function sync(){
+    Array.prototype.forEach.call(ov.querySelectorAll("[data-kind]"), function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-kind") === cur)); });
+    byId("lgKindHint").textContent = GOAL_KINDS.filter(function(k){ return k.k === cur; })[0].hint;
+    byId("lgGenreField").hidden = cur !== "genre";
+    byId("lgTarget").placeholder = cur === "pages" ? "15000" : cur === "month" ? "4" : cur === "series" ? "3" : cur === "books" ? "52" : "10";
+  }
+  sync();
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeGoalSheet(); });
+  ov.addEventListener("click", function(e){
+    var k = e.target.closest("[data-kind]");
+    if(k){ cur = k.getAttribute("data-kind"); sync(); return; }
+    if(e.target.closest("#lgGoalCancel")){ closeGoalSheet(); return; }
+    if(e.target.closest("#lgGoalDel")){
+      L.goals = L.goals.filter(function(x){ return x.id !== g.id; });
+      savePrefs(); closeGoalSheet(); drawLedger(); renderStats();
+      return;
+    }
+    if(e.target.closest("#lgGoalSave")){
+      var target = parseInt(String(byId("lgTarget").value).replace(/[^\d]/g, ""), 10);
+      if(!target || target < 1){ byId("lgGoalOut").textContent = "Give it a target of at least 1."; return; }
+      var next = {id:g ? g.id : "g-" + Date.now().toString(36), kind:cur, target:target, year:+byId("lgYear").value};
+      if(cur === "genre") next.genre = byId("lgGenre").value;
+      /* A changed target may not be met any more; let it earn its seal again. */
+      if(g && g.sealed && g.kind === next.kind && g.target === next.target && g.year === next.year && g.genre === next.genre) next.sealed = g.sealed;
+      if(g) L.goals = L.goals.map(function(x){ return x.id === g.id ? next : x; });
+      else L.goals.push(next);
+      ledgerView.year = next.year;
+      savePrefs(); closeGoalSheet(); drawLedger(); renderStats();
+    }
+  });
+  setTimeout(function(){ var t = byId("lgTarget"); if(t && !g) t.focus(); }, 60);
+}
+function closeGoalSheet(){ var ov = byId("lgGoalOverlay"); if(ov) ov.remove(); }
+
+/* ---- Ledger settings ---- */
+function openLedgerSettings(){
+  closeLedgerSettings();
+  var L = ledgerState();
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "lgSetOverlay";
+  function toggle(id, on, label, hint){
+    return '<label class="toggle lg-toggle" for="' + id + '"><input type="checkbox" id="' + id + '"' + (on ? " checked" : "") + ">" +
+      "<span>" + label + "<small>" + hint + "</small></span></label>";
+  }
+  ov.innerHTML =
+    '<div class="sheet" role="dialog" aria-modal="true" aria-label="Ledger settings">' +
+      "<h3>Ledger settings</h3>" +
+      '<p class="hint">What counts is yours to decide. Changing these redraws every figure and goal at once.</p>' +
+      "<h4>Audiobooks</h4>" +
+      toggle("lgCountAudio", L.countAudio, "Count audiobooks", "A book with its format set to Audiobook counts as read.") +
+      toggle("lgAudioPages", L.audioPages, "Count their pages", "Its page count goes into your page totals.") +
+      "<h4>Books you set aside</h4>" +
+      toggle("lgCountDnf", L.countDnf, "Count them as read", "A book moved to Set Aside counts toward goals and totals.") +
+      toggle("lgDnfPages", L.dnfPages, "Count the pages you got through", "Uses the book&rsquo;s progress: 40% of a 400-page book is 160 pages.") +
+      '<div class="page-rule"></div>' +
+      "<h4>Genres</h4>" +
+      '<p class="hint" style="margin:0 0 10px;font-size:.84rem">Starts from the Oracle&rsquo;s list. Rename one and every book tagged with it follows; a removed genre stays on its books until you untick it there.</p>' +
+      '<div class="cat-list" id="lgGenreList"></div>' +
+      '<div class="field"><label class="lbl" for="lgNewGenre">Add a genre</label>' +
+        '<div class="grad-line" style="margin-top:5px">' +
+          '<input type="text" id="lgNewGenre" placeholder="Contemporary romance, Literary…">' +
+          '<button class="btn small ghost" id="lgAddGenre" type="button">Add</button>' +
+        "</div></div>" +
+      '<div class="page-rule"></div>' +
+      "<h4>Fill in missing details</h4>" +
+      '<p class="hint" style="margin:0 0 10px;font-size:.84rem">Looks up every book missing its pages, year or genres: first in the Oracle&rsquo;s catalogue, ' +
+        "then on Open Library (openlibrary.org), which is sent each title and author. Only empty fields are filled; nothing you have typed is changed.</p>" +
+      '<button class="btn small" id="lgFill" type="button">' + (ledgerFillRun ? "Stop" : "Fill in missing details") + "</button>" +
+      '<p class="or-out" id="lgFillOut"></p>' +
+      '<div class="sheet-actions"><button class="btn" type="button" id="lgSetClose">Done</button></div>' +
+    "</div>";
+  document.body.appendChild(ov);
+  function drawGenres(){
+    byId("lgGenreList").innerHTML = L.genres.map(function(g, i){
+      var n = list().filter(function(b){ return (b.genres || []).indexOf(g.k) !== -1; }).length;
+      return '<div class="lg-gitem"><input type="text" data-gi="' + i + '" value="' + esc(g.l) + '" aria-label="Genre name">' +
+        '<span class="lg-gcount">' + n + "</span>" +
+        '<button class="btn small ghost" type="button" data-grm="' + i + '" aria-label="Remove ' + esc(g.l) + '">Remove</button></div>';
+    }).join("");
+  }
+  drawGenres();
+  [["lgCountAudio","countAudio"],["lgAudioPages","audioPages"],["lgCountDnf","countDnf"],["lgDnfPages","dnfPages"]].forEach(function(p){
+    byId(p[0]).addEventListener("change", function(){
+      L[p[1]] = this.checked;
+      savePrefs(); drawLedger(); renderStats();
+    });
+  });
+  byId("lgGenreList").addEventListener("change", function(e){
+    var inp = e.target.closest("[data-gi]");
+    if(!inp) return;
+    var g = L.genres[+inp.getAttribute("data-gi")], v = inp.value.trim();
+    if(!g) return;
+    if(!v){ inp.value = g.l; return; }
+    g.l = v.slice(0, 60);
+    savePrefs(); drawLedger();
+  });
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeLedgerSettings(); });
+  ov.addEventListener("click", function(e){
+    var rm = e.target.closest("[data-grm]");
+    if(rm){
+      L.genres.splice(+rm.getAttribute("data-grm"), 1);
+      savePrefs(); drawGenres(); drawLedger();
+      return;
+    }
+    if(e.target.closest("#lgAddGenre")){
+      var name = byId("lgNewGenre").value.trim();
+      if(!name) return;
+      var k = slug(name) || ("g" + Date.now().toString(36));
+      if(L.genres.some(function(g){ return g.k === k; })) return;
+      L.genres.push({k:k, l:name.slice(0, 60)});
+      byId("lgNewGenre").value = "";
+      savePrefs(); drawGenres();
+      return;
+    }
+    if(e.target.closest("#lgFill")){
+      if(ledgerFillRun){ ledgerFillRun.stop = true; return; }
+      fillMissing(function(text){
+        var out = byId("lgFillOut");
+        if(out) out.textContent = text;
+        var btn = byId("lgFill");
+        if(btn) btn.textContent = ledgerFillRun ? "Stop" : "Fill in missing details";
+      });
+      return;
+    }
+    if(e.target.closest("#lgSetClose")) closeLedgerSettings();
+  });
+}
+function closeLedgerSettings(){ var ov = byId("lgSetOverlay"); if(ov) ov.remove(); }
+
+/* ---- filling details: the Oracle's catalogue first, then Open Library ---- */
+function oracleRecordFor(b){
+  if(!ORACLE) return null;
+  var t = oracleNormTitle(b.title || "");
+  if(!t) return null;
+  var hit = null;
+  ORACLE.catalog.concat(ORACLE.anchors).some(function(r){
+    if(r && r.title && oracleNormTitle(r.title) === t){ hit = r; return true; }
+    return false;
+  });
+  return hit;
+}
+function needsDetails(b){
+  return !bookPages(b) || !b.pubYear || !(b.genres && b.genres.length);
+}
+/* Copies what the catalogue knows into empty fields. Returns true if it wrote. */
+function fillFromOracle(b){
+  var r = oracleRecordFor(b), wrote = false;
+  if(!r) return false;
+  if(!b.pubYear && typeof r.year === "number"){ b.pubYear = r.year; wrote = true; }
+  var gs = oracleGenresOf(r).filter(function(g){ return ledgerState().genres.some(function(x){ return x.k === g; }); });
+  if(!(b.genres && b.genres.length) && gs.length){ b.genres = gs; wrote = true; }
+  return wrote;
+}
+function olGenres(subjects){
+  var text = (subjects || []).join(" | ").toLowerCase();
+  var out = [];
+  ledgerState().genres.forEach(function(g){
+    var words = OL_GENRE_WORDS[g.k];
+    var hit = words ? words.some(function(re){ return re.test(text); }) : text.indexOf(g.l.toLowerCase()) !== -1;
+    if(hit) out.push(g.k);
+  });
+  /* "Fantasy" and "Romance" as separate subjects still make a romantasy. */
+  if(out.indexOf("romantasy") === -1 && /\bfantasy\b/.test(text) && /\bromance\b/.test(text) &&
+     ledgerState().genres.some(function(g){ return g.k === "romantasy"; })) out.unshift("romantasy");
+  return out.slice(0, 4);
+}
+function ampless(t){ return String(t || "").replace(/\s*&\s*/g, " and "); }
+function olSearch(b){
+  var q = "title=" + encodeURIComponent(ampless(b.title)) +
+    (b.author ? "&author=" + encodeURIComponent(b.author) : "") +
+    "&limit=6&fields=key,title,author_name,first_publish_year,number_of_pages_median,subject";
+  return fetch("https://openlibrary.org/search.json?" + q, {headers:{Accept:"application/json"}})
+    .then(function(r){ if(!r.ok) throw new Error("http " + r.status); return r.json(); })
+    .then(function(d){
+      return (d && Array.isArray(d.docs) ? d.docs : []).filter(function(x){
+        return x && x.title && !/collection|box set|books? set|\btarot\b|coloring|colouring|journal|summary of/i.test(x.title);
+      }).map(function(x){
+        return {
+          title: x.title, author: (x.author_name || [])[0] || "",
+          year: typeof x.first_publish_year === "number" ? x.first_publish_year : null,
+          pages: typeof x.number_of_pages_median === "number" ? x.number_of_pages_median : null,
+          genres: olGenres(x.subject)
+        };
+      });
+    });
+}
+function olBest(b, docs){
+  var t = oracleNormTitle(ampless(b.title));
+  var surname = (b.author || "").toLowerCase().split(/\s+/).pop();
+  return docs.filter(function(d){
+    var dt = oracleNormTitle(ampless(d.title));
+    var titleOk = dt === t || dt.indexOf(t) === 0 || t.indexOf(dt) === 0;
+    var authorOk = !surname || (d.author || "").toLowerCase().indexOf(surname) !== -1;
+    return titleOk && authorOk && !/collection|box set|books? set|\bseries\b/i.test(d.title);
+  })[0] || null;
+}
+function applyOl(b, d, overwrite){
+  if(d.pages && (overwrite || !bookPages(b))) b.pages = d.pages;
+  if(d.year && (overwrite || !b.pubYear)) b.pubYear = d.year;
+  if(d.genres.length){
+    if(overwrite) b.genres = (b.genres || []).concat(d.genres).filter(function(g, i, a){ return a.indexOf(g) === i; });
+    else if(!(b.genres && b.genres.length)) b.genres = d.genres.slice();
+  }
+}
+function fillMissing(report){
+  var queue = list().filter(needsDetails);
+  if(!queue.length){ report("Every book already has its pages, year and genres."); return; }
+  var run = ledgerFillRun = {stop:false};
+  var i = 0, filled = 0, missed = [];
+  report("Looking up " + queue.length + " " + plural(queue.length, "book") + "…");
+  function next(){
+    if(run.stop || i >= queue.length){
+      ledgerFillRun = null;
+      report((run.stop ? "Stopped. " : "Done. ") + filled + " " + plural(filled, "book") + " filled in" +
+        (missed.length ? "; no match for " + missed.slice(0, 6).join(", ") + (missed.length > 6 ? " and " + (missed.length - 6) + " more" : "") + ". Use Look it up on a book&rsquo;s page to pick by hand." : ".").replace("&rsquo;", "’"));
+      render(); drawLedger();
+      return;
+    }
+    var b = queue[i++];
+    var wrote = fillFromOracle(b);
+    report("Looking up " + i + " of " + queue.length + ": " + (b.title || "Untitled") + "…");
+    if(!needsDetails(b)){
+      if(wrote){ filled++; saveBook(b); }
+      setTimeout(next, 0);
+      return;
+    }
+    olSearch(b).then(function(docs){
+      var d = olBest(b, docs);
+      if(d){ applyOl(b, d, false); wrote = true; }
+      else if(!wrote) missed.push("“" + (b.title || "Untitled") + "”");
+    }, function(){
+      if(!wrote) missed.push("“" + (b.title || "Untitled") + "”");
+      if(i === 1){ run.stop = true; report("Couldn't reach Open Library. Check the connection and try again."); }
+    }).then(function(){
+      if(wrote){ filled++; saveBook(b); }
+      setTimeout(next, 350);
+    });
+  }
+  next();
+}
+/* Once, the first time the Ledger meets a shelf: whatever the Oracle's
+   catalogue already knows about books on it goes into their empty fields. */
+function ledgerFirstFill(){
+  var L = ledgerState();
+  if(L.filled || !state.loaded || !state.prefsLoaded || !db) return;
+  L.filled = true;
+  list().forEach(function(b){ if(needsDetails(b) && fillFromOracle(b)) saveBook(b); });
+  savePrefs();
+}
+
+/* ---- on the book's page ---- */
+function ledgerBlockHTML(b){
+  var opt = function(pairs, cur){
+    return '<option value="">&mdash;</option>' + pairs.map(function(p){
+      return '<option value="' + p[0] + '"' + (cur === p[0] ? " selected" : "") + ">" + p[1] + "</option>";
+    }).join("");
+  };
+  return '<span class="notes-label">The ledger</span>' +
+    '<dl class="meta">' +
+      '<dt>Pages</dt><dd class="row2"><input class="num" type="text" inputmode="numeric" data-lf="pages" id="lf-pages" value="' + esc(b.pages || "") + '" placeholder="&mdash;"></dd>' +
+      '<dt>Published</dt><dd class="row2"><input class="num" type="text" inputmode="numeric" data-lf="pubYear" id="lf-pub" value="' + esc(b.pubYear || "") + '" placeholder="Year"></dd>' +
+      '<dt>Format</dt><dd><select data-lf="format" id="lf-format">' + opt(LEDGER_FORMATS, b.format) + "</select></dd>" +
+      '<dt>Source</dt><dd><select data-lf="source" id="lf-source">' + opt(LEDGER_SOURCES, b.source) + "</select></dd>" +
+    "</dl>" +
+    '<span class="sub-label lg-plabel">Genres</span>' +
+    '<div class="lg-pgenres" id="lgPageGenres"></div>' +
+    '<span class="sub-label lg-plabel">Reads</span>' +
+    '<div id="lgPageReads"></div>' +
+    '<div class="page-actions lg-pactions">' +
+      '<button class="btn small" type="button" id="lgAddRead">Add a read</button>' +
+      '<button class="btn small ghost" type="button" id="lgLookup">Look it up online</button>' +
+    "</div>" +
+    '<div id="lgLookupOut"></div>';
+}
+function wireLedgerBlock(b, spread){
+  function drawGenres(){
+    var el = byId("lgPageGenres");
+    if(!el) return;
+    var mine = b.genres || [];
+    var known = ledgerState().genres.map(function(g){ return g.k; });
+    var keys = known.concat(mine.filter(function(k){ return known.indexOf(k) === -1; }));
+    el.innerHTML = keys.map(function(k){
+      return '<button type="button" class="lg-pchip" data-pg="' + esc(k) + '" aria-pressed="' + (mine.indexOf(k) !== -1) + '">' + esc(genreLabel(k)) + "</button>";
+    }).join("");
+  }
+  function drawReads(){
+    var el = byId("lgPageReads");
+    if(!el) return;
+    var reads = b.reads || [];
+    el.innerHTML = reads.length ? reads.map(function(r, i){
+      return '<div class="lg-pread" data-ri="' + i + '">' +
+        '<label><span>Started</span><input type="date" data-rf="start" value="' + esc(r.start || "") + '"></label>' +
+        '<label><span>Finished</span><input type="date" data-rf="end" value="' + esc(r.end || "") + '"></label>' +
+        '<label class="check"><input type="checkbox" data-rf="dnf"' + (r.dnf ? " checked" : "") + ">Set aside</label>" +
+        '<button type="button" class="lg-prm" data-rrm="' + i + '" aria-label="Remove this read">&times;</button></div>';
+    }).join("") : '<p class="hintline">' + (b.status === "read"
+      ? "Read before the Ledger began. Add a read with its finish date to place it in a month."
+      : "Dates fill in as the book moves: Reading starts a read, Read finishes it.") + "</p>";
+  }
+  drawGenres();
+  drawReads();
+  ledgerReadsRedraw = drawReads;
+  function changed(){ saveBook(b); render(); if(byId("ledgerCard")) drawLedger(); renderStats(); }
+
+  spread.addEventListener("change", function(e){
+    var lf = e.target.closest("[data-lf]");
+    if(lf){
+      var f = lf.getAttribute("data-lf"), v = lf.value.trim();
+      if(f === "pages" || f === "pubYear"){
+        var n = parseInt(v.replace(/[^\d]/g, ""), 10);
+        if(n > 0) b[f] = n; else delete b[f];
+        lf.value = b[f] || "";
+      } else if(v) b[f] = v;
+      else delete b[f];
+      changed();
+      return;
+    }
+    var rf = e.target.closest("[data-rf]");
+    if(rf){
+      var i = +rf.closest("[data-ri]").getAttribute("data-ri");
+      var r = (b.reads || [])[i];
+      if(!r) return;
+      var k = rf.getAttribute("data-rf");
+      if(k === "dnf"){ if(rf.checked) r.dnf = true; else delete r.dnf; }
+      else r[k] = validDay(rf.value);
+      changed();
+    }
+  });
+  spread.addEventListener("click", function(e){
+    var t;
+    if((t = e.target.closest("[data-pg]"))){
+      var k = t.getAttribute("data-pg");
+      var gs = (b.genres || []).slice(), at = gs.indexOf(k);
+      if(at === -1) gs.push(k); else gs.splice(at, 1);
+      b.genres = gs;
+      drawGenres(); changed();
+      return;
+    }
+    if((t = e.target.closest("[data-rrm]"))){
+      (b.reads || []).splice(+t.getAttribute("data-rrm"), 1);
+      drawReads(); changed();
+      return;
+    }
+    if(e.target.closest("#lgAddRead")){
+      b.reads = (b.reads || []).concat([{start:null, end:isoDay()}]);
+      drawReads(); changed();
+      return;
+    }
+    if((t = e.target.closest("[data-olpick]"))){
+      var d = lookupHits[+t.getAttribute("data-olpick")];
+      if(!d) return;
+      applyOl(b, d, true);
+      byId("lf-pages").value = b.pages || "";
+      byId("lf-pub").value = b.pubYear || "";
+      drawGenres();
+      byId("lgLookupOut").innerHTML = '<p class="hintline">Filled from Open Library. Change anything that looks wrong.</p>';
+      changed();
+      return;
+    }
+    if(e.target.closest("#lgLookup")){
+      var out = byId("lgLookupOut");
+      out.innerHTML = '<p class="hintline">Asking Open Library about “' + esc(b.title || "") + "”…</p>";
+      olSearch(b).then(function(docs){
+        lookupHits = docs;
+        if(!byId("lgLookupOut")) return;
+        byId("lgLookupOut").innerHTML = docs.length
+          ? '<ul class="lg-olist">' + docs.map(function(d, i){
+              return '<li><button type="button" data-olpick="' + i + '">' +
+                '<span class="t">' + esc(d.title) + "</span>" +
+                '<span class="m">' + esc([d.author, d.year, d.pages ? d.pages + " pp" : "", d.genres.map(genreLabel).join(", ")].filter(Boolean).join(" · ")) + "</span>" +
+                "</button></li>";
+            }).join("") + '</ul><p class="hintline">Pick the right edition to fill in pages, year and genres.</p>'
+          : '<p class="hintline">Open Library has nothing under that title and author. Check the spelling, or fill it in by hand.</p>';
+      }, function(){
+        if(byId("lgLookupOut")) byId("lgLookupOut").innerHTML = '<p class="hintline">Couldn’t reach Open Library. Check the connection and try again.</p>';
+      });
+    }
+  });
+  var lookupHits = [];
+}
+
+/* ---- Year in Review: an image to keep or share ---- */
+function reviewData(year){
+  var es = entriesFor(year).filter(function(e){ return !e.dnf; });
+  var sum = ledgerSummary(es, year);
+  var g = tally(es, function(e){ return e.b.genres && e.b.genres.length ? e.b.genres : []; })[0];
+  var a = tally(es, function(e){ return e.b.author ? [e.b.author] : []; })[0];
+  var fav = es.slice().sort(function(x, y){
+    return (ratingOf(y.b, "overall") - ratingOf(x.b, "overall")) || ((y.b.favorite ? 1 : 0) - (x.b.favorite ? 1 : 0)) || (x.end < y.end ? 1 : -1);
+  })[0];
+  var per = MONTHS.map(function(){ return 0; });
+  es.forEach(function(e){ per[e.month]++; });
+  return {year:year, n:es.length, pages:sum.pages, genre:g ? genreLabel(g.k) : null, genreN:g ? g.n : 0,
+    author:a ? a.k : null, authorN:a ? a.n : 0, fav:fav ? fav.b : null, months:per,
+    avg:sum.avgRating, longest:sum.longest ? sum.longest.b : null};
+}
+function drawReview(canvas, d){
+  var W = 1080, H = 1920, x = canvas.getContext("2d");
+  canvas.width = W; canvas.height = H;
+  var bg = x.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, "#241A31"); bg.addColorStop(.45, "#100C17"); bg.addColorStop(1, "#07060B");
+  x.fillStyle = bg; x.fillRect(0, 0, W, H);
+  var glow = x.createRadialGradient(W / 2, 120, 0, W / 2, 120, 760);
+  glow.addColorStop(0, "rgba(201,162,76,.26)"); glow.addColorStop(1, "rgba(201,162,76,0)");
+  x.fillStyle = glow; x.fillRect(0, 0, W, H);
+  x.strokeStyle = "rgba(201,162,76,.55)"; x.lineWidth = 2; x.strokeRect(48, 48, W - 96, H - 96);
+  x.strokeStyle = "rgba(201,162,76,.22)"; x.lineWidth = 1; x.strokeRect(62, 62, W - 124, H - 124);
+  var DISPLAY = '"Cinzel", Georgia, serif', BODY = '"EB Garamond", Georgia, serif';
+  function text(s, px, y, font, color, align, spacing){
+    x.font = font; x.fillStyle = color; x.textAlign = align || "center";
+    if(spacing && "letterSpacing" in x) x.letterSpacing = spacing + "px";
+    x.fillText(s, px, y);
+    if("letterSpacing" in x) x.letterSpacing = "0px";
+  }
+  function fit(s, max, size, weight, family){
+    var f = size;
+    do { x.font = weight + " " + f + "px " + family; f -= 2; } while(x.measureText(s).width > max && f > 20);
+    return x.font;
+  }
+  text("GILDED SPINES", W / 2, 170, "500 30px " + DISPLAY, "#8A7139", "center", 10);
+  text(String(d.year), W / 2, 380, "600 210px " + DISPLAY, "#EACB80", "center", 6);
+  text("in the Ledger", W / 2, 460, "italic 54px " + BODY, "#E4D7BB");
+  x.fillStyle = "rgba(201,162,76,.5)"; x.fillRect(W / 2 - 140, 510, 280, 2);
+
+  /* the two big numbers */
+  text(num(d.n), W * 0.3, 690, "600 150px " + DISPLAY, "#F1E8D5");
+  text(d.n === 1 ? "BOOK" : "BOOKS", W * 0.3, 750, "500 30px " + DISPLAY, "#C9A24C", "center", 8);
+  text(num(d.pages), W * 0.7, 690, fit(num(d.pages), 400, 150, "600", DISPLAY), "#F1E8D5");
+  text("PAGES", W * 0.7, 750, "500 30px " + DISPLAY, "#C9A24C", "center", 8);
+
+  var rows = [];
+  if(d.genre) rows.push(["MOST-READ GENRE", d.genre, d.genreN + " " + plural(d.genreN, "book")]);
+  if(d.author) rows.push(["MOST-READ AUTHOR", d.author, d.authorN + " " + plural(d.authorN, "book")]);
+  if(d.fav) rows.push(["THE ONE THAT GOT ME", d.fav.title || "Untitled", d.fav.author ? "by " + d.fav.author : ""]);
+  if(d.avg != null) rows.push(["AVERAGE RATING", d.avg.toFixed(2) + " of 5", ""]);
+  var y0 = 880;
+  rows.slice(0, 4).forEach(function(r, i){
+    var y = y0 + i * 170;
+    text(r[0], W / 2, y, "500 26px " + DISPLAY, "#8A7139", "center", 7);
+    text(r[1], W / 2, y + 66, fit(r[1], W - 220, 60, "500", BODY), "#F1E8D5");
+    if(r[2]) text(r[2], W / 2, y + 112, "italic 34px " + BODY, "#9C8BAC");
+  });
+
+  /* months */
+  var max = Math.max.apply(null, d.months.concat([1]));
+  var bx = 150, bw = (W - 300) / 12, base = 1720, bh = 150;
+  d.months.forEach(function(n, i){
+    var h = n ? Math.max(8, n / max * bh) : 3;
+    var gx = bx + i * bw + bw * 0.2, gw = bw * 0.6;
+    x.fillStyle = n ? "#C9A24C" : "rgba(201,162,76,.25)";
+    x.beginPath();
+    if(x.roundRect) x.roundRect(gx, base - h, gw, h, [6, 6, 0, 0]); else x.rect(gx, base - h, gw, h);
+    x.fill();
+    text(MONTHS[i].charAt(0), gx + gw / 2, base + 44, "500 26px " + DISPLAY, "#6E6180");
+  });
+}
+function openYearReview(year){
+  closeYearReview();
+  var d = reviewData(year);
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "lgReviewOverlay";
+  ov.innerHTML =
+    '<div class="sheet lg-review" role="dialog" aria-modal="true" aria-label="Year in review">' +
+      "<h3>" + year + " in the Ledger</h3>" +
+      '<p class="hint">' + (d.n ? "Sized for a story post. Save it, or share it straight from here." : "Nothing finished in " + year + " yet, so the card is bare. It fills as you read.") + "</p>" +
+      '<div class="lg-review-frame"><canvas id="lgReviewCanvas" width="1080" height="1920" aria-label="Year in review card"></canvas></div>' +
+      '<div class="sheet-actions">' +
+        '<button class="btn ghost" type="button" id="lgReviewClose">Close</button>' +
+        '<button class="btn ghost" type="button" id="lgReviewSave">Save image</button>' +
+        (navigator.share ? '<button class="btn" type="button" id="lgReviewShare">Share</button>' : "") +
+      "</div>" +
+    "</div>";
+  document.body.appendChild(ov);
+  var canvas = byId("lgReviewCanvas");
+  var ready = document.fonts && document.fonts.load
+    ? Promise.all(['600 100px "Cinzel"', '500 30px "Cinzel"', 'italic 40px "EB Garamond"', '500 40px "EB Garamond"'].map(function(f){
+        return document.fonts.load(f).catch(function(){});
+      }))
+    : Promise.resolve();
+  ready.then(function(){ drawReview(canvas, d); });
+  function blob(cb){
+    try { canvas.toBlob(function(b){ cb(b); }, "image/png"); } catch(e){ cb(null); }
+  }
+  var name = "gilded-spines-" + year + ".png";
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeYearReview(); });
+  ov.addEventListener("click", function(e){
+    if(e.target.closest("#lgReviewClose")){ closeYearReview(); return; }
+    if(e.target.closest("#lgReviewSave")){
+      blob(function(b){
+        if(!b) return;
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(b);
+        a.download = name;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(a.href); }, 4000);
+      });
+      return;
+    }
+    if(e.target.closest("#lgReviewShare")){
+      blob(function(b){
+        if(!b) return;
+        var file = new File([b], name, {type:"image/png"});
+        var data = {files:[file], title:year + " in the Ledger"};
+        if(navigator.canShare && !navigator.canShare(data)) data = {title:year + " in the Ledger", text:d.n + " books, " + num(d.pages) + " pages."};
+        navigator.share(data).catch(function(){});
+      });
+    }
+  });
+}
+function closeYearReview(){ var ov = byId("lgReviewOverlay"); if(ov) ov.remove(); }
+
 /* ---------------- events ---------------- */
 byId("tabs").addEventListener("click", function(e){
   var t = e.target.closest("[data-tab]");
@@ -5325,6 +6772,7 @@ if(ORACLE){
   byId("oracleBtn").hidden = false;
   byId("oracleBtn").addEventListener("click", function(){ clearUndo(); openOracle(); });
 }
+byId("ledgerBtn").addEventListener("click", function(){ clearUndo(); closeOracle(); openLedger(); });
 byId("exportBtn").addEventListener("click", exportLibrary);
 byId("importBtn").addEventListener("click", importLibrary);
 byId("addBtn").addEventListener("click", function(){
@@ -5340,7 +6788,12 @@ byId("addBtn").addEventListener("click", function(){
 });
 document.addEventListener("keydown", function(e){
   if(e.key !== "Escape") return;
-  if(byId("oracleFixOverlay")) closeOracleFix();
+  if(byId("lgReviewOverlay")) closeYearReview();
+  else if(byId("lgGoalOverlay")) closeGoalSheet();
+  else if(byId("lgSetOverlay")) closeLedgerSettings();
+  else if(byId("bookOverlay") && byId("ledgerOverlay")) closeBook();
+  else if(byId("ledgerOverlay")) closeLedger();
+  else if(byId("oracleFixOverlay")) closeOracleFix();
   else if(byId("oracleWantOverlay")) closeOracleWant();
   else if(byId("oracleOverlay")) closeOracle();
   else if(byId("bulkOverlay")) closeBulk();
@@ -5400,7 +6853,7 @@ document.addEventListener("keydown", function(e){
       if(m.mark.parentNode){ m.mark.parentNode.insertBefore(m.el, m.mark); m.mark.remove(); }
     });
     moved = [];
-    document.body.classList.remove("app", "on-oracle");
+    document.body.classList.remove("app", "on-oracle", "on-ledger");
   }
   function decide(){ if(mq && mq.matches) enter(); else leave(); }
 
@@ -5468,28 +6921,36 @@ document.addEventListener("keydown", function(e){
 
   /* ---- tab bar ---- */
   function syncTabs(){
-    var onOracle = !!byId("oracleOverlay");
+    var onLedger = !!byId("ledgerOverlay");
+    var onOracle = !onLedger && !!byId("oracleOverlay");
     document.body.classList.toggle("on-oracle", onOracle);
-    byId("appTitle").textContent = onOracle ? "The Oracle" : "Gilded Spines";
+    document.body.classList.toggle("on-ledger", onLedger);
+    byId("appTitle").textContent = onLedger ? "The Ledger" : onOracle ? "The Oracle" : "Gilded Spines";
     Array.prototype.forEach.call(document.querySelectorAll("[data-app-tab]"), function(b){
       var t = b.getAttribute("data-app-tab");
-      var on = (t === "oracle" && onOracle) || (t === "shelf" && !onOracle);
+      var on = (t === "oracle" && onOracle) || (t === "ledger" && onLedger) || (t === "shelf" && !onOracle && !onLedger);
       if(on) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
     });
   }
-  if(!ORACLE) byId("appOracleTab").hidden = true;
+  if(!ORACLE){ byId("appOracleTab").hidden = true; byId("tabBar").style.setProperty("--tabs", "4"); }
   byId("tabBar").addEventListener("click", function(e){
     var b = e.target.closest("[data-app-tab]");
     if(!b) return;
     var t = b.getAttribute("data-app-tab");
     closeSheets();
     if(t === "shelf"){
-      if(byId("oracleOverlay")) closeOracle();
+      if(byId("oracleOverlay") || byId("ledgerOverlay")){ closeOracle(); closeLedger(); }
       else window.scrollTo({top:0, behavior:"smooth"});
     } else if(t === "oracle"){
+      closeLedger();
       if(!byId("oracleOverlay")) byId("oracleBtn").click();
+    } else if(t === "ledger"){
+      closeOracle();
+      if(!byId("ledgerOverlay")) openLedger();
+      else { var lo = byId("ledgerOverlay"); lo.scrollTo({top:0, behavior:"smooth"}); }
     } else if(t === "add"){
       if(byId("oracleOverlay")) closeOracle();
+      closeLedger();
       byId("addBtn").click();
     } else if(t === "more"){
       openSheet("moreSheet");
@@ -5586,6 +7047,7 @@ if(window.claude && window.claude.use){
     }
     db = store;
     db.doc("settings/prefs").onSnapshot(function(snap){
+      state.prefsLoaded = true;
       if(snap.exists){
         var d = snap.data() || {};
         if(Array.isArray(d.categories) && d.categories.length){
@@ -5599,6 +7061,7 @@ if(window.claude && window.claude.use){
           byId("platesOn").checked = state.shelfPlates.show;
         }
         if(d.oracle !== undefined) state.oracle = normOracle(d.oracle);
+        if(d.ledger !== undefined){ state.ledger = normLedger(d.ledger); if(byId("ledgerCard")) drawLedger(); }
         if(d.groupLayout !== undefined) state.groupLayout = normLayoutMap(d.groupLayout);
         if(d.defaultGroupLayout !== undefined){
           state.defaultGroupLayout = normLayout(d.defaultGroupLayout, "shelf");
@@ -5621,6 +7084,7 @@ if(window.claude && window.claude.use){
         byId("dir").value = state.dir;
         render();
       }
+      ledgerFirstFill();
     }, function(){});
     db.collection("books").onSnapshot(function(snap){
       var next = {};
@@ -5636,6 +7100,8 @@ if(window.claude && window.claude.use){
       state.loaded = true;
       setSaveQuiet("Saved to your account", "");
       render();
+      ledgerFirstFill();
+      if(byId("ledgerCard")) drawLedger();
     }, function(err){
       state.loaded = true;
       setSave(err && err.code === "not_granted" ? "Not saving — permission declined" : "Shelf offline", "warn");
