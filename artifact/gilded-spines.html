@@ -1713,6 +1713,15 @@ button.jvcol{cursor:pointer}
 .jth-sw i{position:absolute;left:10px;right:40%;bottom:10px;height:8px;border-radius:0 4px 4px 0;background:var(--j-accent)}
 .jth-sw::after{content:"Aa";position:absolute;right:9px;top:8px;font-family:var(--j-head);font-style:var(--j-heads);font-size:1.05rem;color:var(--j-accent2)}
 .jplist{display:flex;flex-direction:column;gap:2px}
+.jbf{width:min(640px,100%)}
+.jbf-all{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;margin-bottom:12px;border:1px solid var(--hair);border-radius:4px;background:rgba(var(--ink-rgb),.4)}
+.jbf-all select{width:auto;flex:1 1 110px}
+.jbf-all .sub-label{flex:1 1 100%}
+.jbf-list{display:flex;flex-direction:column}
+.jbf-row{display:grid;grid-template-columns:minmax(0,1fr) 128px 96px;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--hair-soft)}
+.jbf-t{font-size:1rem;color:var(--parchment-2);line-height:1.3;min-width:0}
+.jbf-t small{display:block;font-family:var(--f-data);font-size:.74rem;color:var(--dimmer)}
+@media (max-width:560px){.jbf-row{grid-template-columns:1fr 1fr}.jbf-t{grid-column:1 / -1}}
 .jpl{display:grid;grid-template-columns:1fr auto auto;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--hair-soft)}
 .jpl .check{font-size:.92rem;color:var(--parchment-2)}
 .jcolors{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px 12px}
@@ -2016,7 +2025,8 @@ body.app.on-ledger #appSearchBtn{visibility:hidden}
 body.app .lg-tools .btn{min-height:40px;flex:1 1 auto}
 body.app .lg-years .or-pick{min-height:36px}
 body.app .lg-col{min-height:44px}
-body.app #lgGoalOverlay,body.app #lgSetOverlay,body.app #lgReviewOverlay,body.app #lgDecoOverlay{z-index:75}
+body.app #lgGoalOverlay,body.app #lgSetOverlay,body.app #lgReviewOverlay,body.app #lgDecoOverlay,body.app #lgBackfillOverlay{z-index:75}
+body.app .jbf-row select,body.app .jbf-all select{min-height:40px}
 body.app #ledgerOverlay .ledger-card.journal{padding:6px max(12px,env(safe-area-inset-right)) 20px max(12px,env(safe-area-inset-left))}
 body.app .jtab{min-height:34px}
 body.app .jgear{width:40px;height:40px;padding:0;justify-content:center}
@@ -5928,6 +5938,13 @@ function validDay(s){
 }
 function dayDate(s){ var p = s.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
 function fmtDay(s){ return dayDate(s).toLocaleDateString(undefined, {day:"numeric", month:"short", year:"numeric"}); }
+/* A finish as precisely as it is known. */
+function fmtEnd(e){
+  if(!e.end) return "";
+  if(e.approx === "year") return e.end.slice(0, 4);
+  if(e.approx === "month") return dayDate(e.end).toLocaleDateString(undefined, {month:"short", year:"numeric"});
+  return fmtDay(e.end);
+}
 function thisYear(){ return new Date().getFullYear(); }
 function daysInYear(y){ return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0 ? 366 : 365; }
 function dayOfYear(d){ return Math.floor((d - new Date(d.getFullYear(), 0, 1)) / 864e5) + 1; }
@@ -5989,6 +6006,7 @@ function normReads(v){
   return v.filter(function(r){ return r && typeof r === "object"; }).map(function(r){
     var o = {start:validDay(r.start), end:validDay(r.end)};
     if(r.dnf) o.dnf = true;
+    if((r.approx === "month" || r.approx === "year") && o.end) o.approx = r.approx;
     return o;
   }).filter(function(r){ return r.start || r.end; }).slice(0, 60);
 }
@@ -6065,8 +6083,11 @@ function ledgerEntries(){
       var end = validDay(r.end);
       if(!end) return;
       if(r.dnf && !L.countDnf) return;
-      out.push({b:b, start:validDay(r.start), end:end, dnf:!!r.dnf,
-        year:+end.slice(0, 4), month:+end.slice(5, 7) - 1, day:+end.slice(8, 10), pages:entryPages(b, r)});
+      /* A read remembered only to the month has no day; only to the year, no month either. */
+      var ap = r.approx === "month" || r.approx === "year" ? r.approx : null;
+      out.push({b:b, start:validDay(r.start), end:end, dnf:!!r.dnf, approx:ap,
+        year:+end.slice(0, 4), month:ap === "year" ? null : +end.slice(5, 7) - 1,
+        day:ap ? null : +end.slice(8, 10), pages:entryPages(b, r)});
     });
   });
   return out.sort(function(a, c){ return a.end < c.end ? -1 : a.end > c.end ? 1 : 0; });
@@ -6162,7 +6183,7 @@ function goalProgress(g){
     p.value = done.filter(function(e){ return (e.b.addedAt || 0) < jan1; }).length;
   } else if(g.kind === "month"){
     var per = MONTHS.map(function(){ return 0; });
-    done.forEach(function(e){ per[e.month]++; });
+    done.forEach(function(e){ if(e.month != null) per[e.month]++; });
     var lastMonth = g.year < now.getFullYear() ? 11 : g.year === now.getFullYear() ? now.getMonth() : -1;
     var cur = g.year === now.getFullYear() ? now.getMonth() : lastMonth;
     p.months = per;
@@ -6212,13 +6233,14 @@ function bookLineHTML(e){
   var b = e.b;
   return '<li><button type="button" data-lg-open="' + esc(b.id) + '">' +
     '<span class="t">' + esc(b.title || "Untitled") + (e.dnf ? ' <em>set aside</em>' : "") + "</span>" +
-    '<span class="m">' + esc([b.author, e.end ? fmtDay(e.end) : "", bookPages(b) ? bookPages(b) + " pp" : ""].filter(Boolean).join(" · ")) + "</span>" +
+    '<span class="m">' + esc([b.author, fmtEnd(e), bookPages(b) ? bookPages(b) + " pp" : ""].filter(Boolean).join(" · ")) + "</span>" +
   "</button></li>";
 }
 /* Weeks with at least one finish, run end to end. */
 function weekStreaks(entries){
   var weeks = {};
   entries.forEach(function(e){
+    if(e.approx) return;
     var d = dayDate(e.end);
     var monday = new Date(d.getFullYear(), d.getMonth(), d.getDate() - ((d.getDay() + 6) % 7));
     weeks[Math.round(monday.getTime() / 6048e5)] = true;
@@ -6554,7 +6576,7 @@ function miniSpineHTML(e, color, dark){
   var w = Math.round(Math.max(11, Math.min(26, 7 + p / 40)));
   var c = color || color_(b);
   return '<button type="button" class="jspine" data-lg-open="' + esc(b.id) + '" style="height:' + h + "px;width:" + w + "px;--sc:" + esc(c) + '" title="' +
-    esc((b.title || "Untitled") + (b.author ? " — " + b.author : "") + (e.end ? " · " + fmtDay(e.end) : "")) + '"><span>' + esc(b.title || "") + "</span></button>";
+    esc((b.title || "Untitled") + (b.author ? " — " + b.author : "") + (e.end ? " · " + fmtEnd(e) : "")) + '"><span>' + esc(b.title || "") + "</span></button>";
 }
 function color_(b){ return color(b); }
 
@@ -6658,7 +6680,8 @@ function pageBodyHTML(id, d){
       (g0 ? '<div class="jc-goal">' + goalBlockHTML(g0, pageForm("goals"), c.dark, pageMark("goals"), pageSticker("goals")) + "</div>" : "") +
       (!es.length && y !== "all" ? '<p class="jempty">Nothing finished in ' + y + " yet. Move a book to Read and it is written in here with today&rsquo;s date.</p>" : "") +
       (d.undated.length ? '<p class="jnote">' + d.undated.length + " " + plural(d.undated.length, "book was", "books were") +
-        " read before the Ledger began. " + (y === "all" ? "They are counted here." : "They count under All time, never in a month.") + "</p>" : "") +
+        " read before the Ledger began. " + (y === "all" ? "They are counted here." : "They count under All time, never in a month.") + "</p>" +
+        '<button class="btn small jadd" type="button" id="lgBackfill">Date them</button>' : "") +
     "</div>";
   }
   if(id === "goals"){
@@ -6684,7 +6707,8 @@ function pageBodyHTML(id, d){
         {accent:c.accent, mark:c.mark, sticker:c.sticker, empty:"No dated reads yet."});
     }
     var months = MONTHS.map(function(m, i){ return {l:MONTHS_LONG[i], short:m.charAt(0), v:0, books:[], c:c.accent, i:i}; });
-    es.forEach(function(e){ months[e.month].v++; months[e.month].books.push(e); });
+    es.forEach(function(e){ if(e.month != null){ months[e.month].v++; months[e.month].books.push(e); } });
+    var yearOnly = es.filter(function(e){ return e.month == null; }).length;
     var pick = ledgerView.month, body;
     if(c.form === "spines"){
       var mx = months.reduce(function(m, r){ return Math.max(m, r.v); }, 1);
@@ -6710,7 +6734,9 @@ function pageBodyHTML(id, d){
       list = '<div class="jmonthlist"><p class="jsub">' + MONTHS_LONG[pick] + " &middot; " + inM.length + " " + plural(inM.length, "book") + "</p>" +
         (inM.length ? '<ul class="jbooks">' + inM.map(function(e){ return jbookLine(e, c); }).join("") + "</ul>" : '<p class="jempty">Nothing finished that month.</p>') + "</div>";
     }
-    return body + (c.form === "vbar" || c.form === "spines" ? '<p class="jnote">Tap a month to see its books.</p>' : "") + list;
+    return body + (c.form === "vbar" || c.form === "spines" ? '<p class="jnote">Tap a month to see its books.</p>' : "") +
+      (yearOnly ? '<p class="jnote">' + yearOnly + " " + plural(yearOnly, "book is", "books are") + " dated only to " + y + ", so " +
+        plural(yearOnly, "it counts", "they count") + " in the year but in no month.</p>" : "") + list;
   }
   if(id === "log"){
     if(y === "all") return '<p class="jempty">Choose a year to keep its monthly log.</p>';
@@ -6726,7 +6752,7 @@ function pageBodyHTML(id, d){
         var r = ratingOf(e.b, "overall");
         return '<li><button type="button" data-lg-open="' + esc(e.b.id) + '">' + markHTML(c.mark === "tally" ? "fill" : c.mark, bookGenreColor(e.b, c.dark), c.sticker, 15) +
           '<span class="jl-t">' + esc(e.b.title || "Untitled") + (e.dnf ? " <em>set aside</em>" : "") + '<small>' +
-          esc([e.b.author, fmtDay(e.end), bookPages(e.b) ? bookPages(e.b) + " pp" : "", (e.b.genres || []).map(genreLabel).join(", ")].filter(Boolean).join(" · ")) +
+          esc([e.b.author, fmtEnd(e), bookPages(e.b) ? bookPages(e.b) + " pp" : "", (e.b.genres || []).map(genreLabel).join(", ")].filter(Boolean).join(" · ")) +
           "</small></span>" + (r >= 0 ? '<span class="jl-r">' + starsText(r) + "</span>" : "") + "</button></li>";
       }).join("") + "</ul>" : '<p class="jempty">Nothing written here yet.</p>');
   }
@@ -6826,7 +6852,7 @@ function jbookLine(e, c){
   var b = e.b;
   return '<li><button type="button" data-lg-open="' + esc(b.id) + '">' + markHTML(c.mark === "tally" ? "fill" : (c.mark || "fill"), bookGenreColor(b, c.dark), c.sticker, 12) +
     '<span class="jl-t">' + esc(b.title || "Untitled") + (e.dnf ? " <em>set aside</em>" : "") +
-    "<small>" + esc([b.author, e.end ? fmtDay(e.end) : "", bookPages(b) ? bookPages(b) + " pp" : ""].filter(Boolean).join(" · ")) + "</small></span></button></li>";
+    "<small>" + esc([b.author, fmtEnd(e), bookPages(b) ? bookPages(b) + " pp" : ""].filter(Boolean).join(" · ")) + "</small></span></button></li>";
 }
 function defaultLogMonth(es, y){
   var now = new Date();
@@ -6835,7 +6861,7 @@ function defaultLogMonth(es, y){
 }
 function dayMarks(es){
   var per = {};
-  es.forEach(function(e){ (per[e.end] = per[e.end] || []).push(e); });
+  es.forEach(function(e){ if(!e.approx) (per[e.end] = per[e.end] || []).push(e); });
   return per;
 }
 function dayCell(hit, c, size){
@@ -7020,6 +7046,7 @@ function ledgerClick(e){
   if((t = e.target.closest("[data-lg-goal]"))){ openGoalSheet(t.getAttribute("data-lg-goal")); return; }
   if(e.target.closest("#lgAddGoal")){ openGoalSheet(null); return; }
   if(e.target.closest("#lgSettings")){ openLedgerSettings(); return; }
+  if(e.target.closest("#lgBackfill")){ openBackfill(); return; }
   if(e.target.closest("#lgReview")){ openYearReview(ledgerView.year); return; }
 }
 /* Page titles are written straight onto the page, like the shelf plates. */
@@ -7053,6 +7080,109 @@ function ledgerSwipe(ov){
     if(Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6 && Date.now() - t0 < 700) journalStep(dx < 0 ? 1 : -1);
   }, {passive:true});
 }
+
+/* ---- dating the books read before the Ledger began ----
+   One list of every book on the Read shelf with no finish date. Each can be
+   given a month and year, a year alone, or nothing at all, and a single row
+   sets them all at once. Nothing is invented: a year alone is stored as just
+   that, and counts in the year without claiming a month. */
+function openBackfill(){
+  closeBackfill();
+  var books = undatedReads().slice().sort(function(a, b){ return (a.title || "").localeCompare(b.title || ""); });
+  var yNow = thisYear(), years = [];
+  for(var y = yNow; y >= yNow - 40; y--) years.push(y);
+  var pick = {};
+  books.forEach(function(b){ pick[b.id] = {m:"", y:""}; });
+  function monthOpts(cur){
+    return '<option value="">Month?</option>' + MONTHS_LONG.map(function(m, i){
+      return '<option value="' + i + '"' + (String(cur) === String(i) ? " selected" : "") + ">" + m + "</option>";
+    }).join("");
+  }
+  function yearOpts(cur){
+    return '<option value="">Year?</option>' + years.map(function(yy){
+      return '<option value="' + yy + '"' + (String(cur) === String(yy) ? " selected" : "") + ">" + yy + "</option>";
+    }).join("");
+  }
+  var ov = document.createElement("div");
+  ov.className = "overlay";
+  ov.id = "lgBackfillOverlay";
+  ov.innerHTML =
+    '<div class="sheet jbf" role="dialog" aria-modal="true" aria-label="Date your earlier reads">' +
+      "<h3>Date your earlier reads</h3>" +
+      (books.length
+        ? '<p class="hint">' + books.length + " " + plural(books.length, "book is", "books are") + " on your Read shelf with no finish date. " +
+          "Give each the month you finished it if you know it, or just the year. Leave one blank and it stays under Before the Ledger, counted in All time.</p>" +
+          '<div class="jbf-all"><span class="sub-label">Set them all</span>' +
+            '<select id="bfAllM" aria-label="Month for all">' + monthOpts("") + "</select>" +
+            '<select id="bfAllY" aria-label="Year for all">' + yearOpts("") + "</select>" +
+            '<button class="btn small ghost" type="button" id="bfAllGo">Apply to the blanks</button></div>' +
+          '<div class="jbf-list">' + books.map(function(b){
+            return '<div class="jbf-row" data-bf="' + esc(b.id) + '"><span class="jbf-t">' + esc(b.title || "Untitled") +
+              "<small>" + esc(b.author || "") + "</small></span>" +
+              '<select data-bfm aria-label="Month finished">' + monthOpts("") + "</select>" +
+              '<select data-bfy aria-label="Year finished">' + yearOpts("") + "</select></div>";
+          }).join("") + "</div>" +
+          '<p class="or-out" id="bfOut"></p>'
+        : '<p class="hint">Every book on your Read shelf already has a finish date.</p>') +
+      '<div class="sheet-actions">' +
+        '<button class="btn ghost" type="button" id="bfCancel">' + (books.length ? "Cancel" : "Close") + "</button>" +
+        (books.length ? '<button class="btn" type="button" id="bfSave">Save dates</button>' : "") +
+      "</div>" +
+    "</div>";
+  document.body.appendChild(ov);
+  function count(){
+    var n = 0, ny = 0;
+    Object.keys(pick).forEach(function(id){ if(pick[id].y){ n++; if(pick[id].m === "") ny++; } });
+    var out = byId("bfOut");
+    if(out) out.textContent = n ? n + " " + plural(n, "book", "books") + " to date" + (ny ? ", " + ny + " by year only" : "") + "." : "";
+  }
+  ov.addEventListener("change", function(e){
+    var row = e.target.closest("[data-bf]");
+    if(row){
+      var p = pick[row.getAttribute("data-bf")];
+      if(e.target.hasAttribute("data-bfm")) p.m = e.target.value;
+      if(e.target.hasAttribute("data-bfy")) p.y = e.target.value;
+      count();
+    }
+  });
+  ov.addEventListener("mousedown", function(e){ if(e.target === ov) closeBackfill(); });
+  ov.addEventListener("click", function(e){
+    if(e.target.closest("#bfCancel")){ closeBackfill(); return; }
+    if(e.target.closest("#bfAllGo")){
+      var am = byId("bfAllM").value, ay = byId("bfAllY").value;
+      if(!ay){ byId("bfOut").textContent = "Choose a year to apply."; return; }
+      Array.prototype.forEach.call(ov.querySelectorAll("[data-bf]"), function(row){
+        var p = pick[row.getAttribute("data-bf")];
+        if(p.y) return;
+        p.y = ay; p.m = am;
+        row.querySelector("[data-bfy]").value = ay;
+        row.querySelector("[data-bfm]").value = am;
+      });
+      count();
+      return;
+    }
+    if(e.target.closest("#bfSave")){
+      var n = 0;
+      Object.keys(pick).forEach(function(id){
+        var p = pick[id], b = state.books[id];
+        if(!b || !p.y) return;
+        var end = p.y + "-" + (p.m === "" ? "01" : pad2(+p.m + 1)) + "-01";
+        b.reads = normReads(b.reads).concat([{start:null, end:end, approx:p.m === "" ? "year" : "month"}]);
+        saveBook(b);
+        n++;
+      });
+      closeBackfill();
+      render(); renderStats();
+      if(n){
+        var ys = Object.keys(pick).map(function(id){ return +pick[id].y; }).filter(Boolean);
+        if(ys.length && ledgerView.year !== "all" && ys.indexOf(ledgerView.year) === -1) ledgerView.year = Math.max.apply(null, ys);
+      }
+      if(byId("ledgerCard")) drawLedger();
+      paintSaveSticky(n ? "Dated " + n + " " + plural(n, "book", "books") + " in the Ledger" : "Nothing dated; every book stays as it was", "");
+    }
+  });
+}
+function closeBackfill(){ var ov = byId("lgBackfillOverlay"); if(ov) ov.remove(); }
 
 /* ---- decorate one page ---- */
 function openDecorate(id){
@@ -7403,6 +7533,13 @@ function openLedgerSettings(){
           '<button class="btn small ghost" id="lgAddGenre" type="button">Add</button>' +
         "</div></div>" +
       '<div class="page-rule"></div>' +
+      "<h4>Books read before the Ledger</h4>" +
+      '<p class="hint" style="margin:0 0 10px;font-size:.84rem">' + (undatedReads().length
+        ? undatedReads().length + " " + plural(undatedReads().length, "book on your Read shelf has", "books on your Read shelf have") +
+          " no finish date. Give them a month or a year and they move into the Ledger&rsquo;s months and years."
+        : "Every book on your Read shelf has a finish date.") + "</p>" +
+      '<button class="btn small" id="lgBackfillS" type="button">Date your earlier reads</button>' +
+      '<div class="page-rule"></div>' +
       "<h4>Fill in missing details</h4>" +
       '<p class="hint" style="margin:0 0 10px;font-size:.84rem">Looks up every book missing its pages, year or genres: first in the Oracle&rsquo;s catalogue, ' +
         "then on Open Library (openlibrary.org), which is sent each title and author. Only empty fields are filled; nothing you have typed is changed.</p>" +
@@ -7470,6 +7607,7 @@ function openLedgerSettings(){
       });
       return;
     }
+    if(e.target.closest("#lgBackfillS")){ closeLedgerSettings(); openBackfill(); return; }
     if(e.target.closest("#lgSetClose")) closeLedgerSettings();
   });
 }
@@ -7638,7 +7776,8 @@ function wireLedgerBlock(b, spread){
     el.innerHTML = reads.length ? reads.map(function(r, i){
       return '<div class="lg-pread" data-ri="' + i + '">' +
         '<label><span>Started</span><input type="date" data-rf="start" value="' + esc(r.start || "") + '"></label>' +
-        '<label><span>Finished</span><input type="date" data-rf="end" value="' + esc(r.end || "") + '"></label>' +
+        '<label><span>Finished' + (r.approx ? " &middot; " + (r.approx === "year" ? "year only" : "month only") : "") +
+          '</span><input type="date" data-rf="end" value="' + esc(r.end || "") + '"></label>' +
         '<label class="check"><input type="checkbox" data-rf="dnf"' + (r.dnf ? " checked" : "") + ">Set aside</label>" +
         '<button type="button" class="lg-prm" data-rrm="' + i + '" aria-label="Remove this read">&times;</button></div>';
     }).join("") : '<p class="hintline">' + (b.status === "read"
@@ -7670,7 +7809,7 @@ function wireLedgerBlock(b, spread){
       if(!r) return;
       var k = rf.getAttribute("data-rf");
       if(k === "dnf"){ if(rf.checked) r.dnf = true; else delete r.dnf; }
-      else r[k] = validDay(rf.value);
+      else { r[k] = validDay(rf.value); if(k === "end") delete r.approx; }
       changed();
     }
   });
@@ -7737,7 +7876,7 @@ function reviewData(year){
     return (ratingOf(y.b, "overall") - ratingOf(x.b, "overall")) || ((y.b.favorite ? 1 : 0) - (x.b.favorite ? 1 : 0)) || (x.end < y.end ? 1 : -1);
   })[0];
   var per = MONTHS.map(function(){ return 0; });
-  es.forEach(function(e){ per[e.month]++; });
+  es.forEach(function(e){ if(e.month != null) per[e.month]++; });
   return {year:year, n:es.length, pages:sum.pages, genre:g ? genreLabel(g.k) : null, genreN:g ? g.n : 0,
     author:a ? a.k : null, authorN:a ? a.n : 0, fav:fav ? fav.b : null, months:per,
     avg:sum.avgRating, longest:sum.longest ? sum.longest.b : null};
@@ -8036,7 +8175,8 @@ document.addEventListener("keydown", function(e){
     return;
   }
   if(e.key !== "Escape") return;
-  if(byId("lgDecoOverlay")) closeDecorate();
+  if(byId("lgBackfillOverlay")) closeBackfill();
+  else if(byId("lgDecoOverlay")) closeDecorate();
   else if(byId("lgReviewOverlay")) closeYearReview();
   else if(byId("lgGoalOverlay")) closeGoalSheet();
   else if(byId("lgSetOverlay")) closeLedgerSettings();

@@ -105,7 +105,12 @@ your notes and theories on the verso.
   Set Aside closes it unfinished, and a slip straight back takes it back.
   The Ledger began fresh: books read before it have no dates, count under
   **All time** and never under a month, and move into a month the moment one
-  is given a finish date. For any year, or all time, it shows books and pages
+  is given a finish date. **Date your earlier reads** (on the journal's cover,
+  or in Journal & settings) lists every one of them at once: give each a month
+  and year, a year alone, or nothing, or set them all in one go. A read known
+  only to the month or the year is stored as exactly that (`"approx": "month"`
+  or `"year"`), and counts in its year without being placed on a day or, for a
+  year alone, in a month. For any year, or all time, it shows books and pages
   read, average rating and length, longest and shortest, pages a day; books by
   month (tap a month for its list), a calendar of finishing days with the
   weekly streak; genres with their average rating and spice; authors; book
