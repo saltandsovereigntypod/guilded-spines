@@ -204,7 +204,7 @@ h1{
 .field{display:flex;flex-direction:column;gap:5px;min-width:0}
 .field.grow{flex:1 1 200px}
 label.lbl{font-family:var(--f-display);font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gilt-dim)}
-input[type=text],input[type=search],select,textarea{
+input[type=text],input[type=search],input[type=email],select,textarea{
   font-family:var(--f-body);font-size:.96rem;color:var(--parchment);
   background:rgba(var(--ink-rgb),.72);border:1px solid var(--hair-soft);border-radius:2px;
   padding:8px 10px;width:100%;transition:border-color .2s,box-shadow .2s;
@@ -1713,6 +1713,18 @@ button.jvcol{cursor:pointer}
 .jth-sw i{position:absolute;left:10px;right:40%;bottom:10px;height:8px;border-radius:0 4px 4px 0;background:var(--j-accent)}
 .jth-sw::after{content:"Aa";position:absolute;right:9px;top:8px;font-family:var(--j-head);font-style:var(--j-heads);font-size:1.05rem;color:var(--j-accent2)}
 .jplist{display:flex;flex-direction:column;gap:2px}
+.syncp{display:flex;flex-direction:column;gap:9px}
+.syncp-note{margin:0;font-size:.94rem;line-height:1.5;color:var(--dim)}
+.syncp-note b{color:var(--parchment-2);font-weight:500}
+.syncp-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.syncp-row input{flex:1 1 180px;min-width:0}
+.syncp-row .btn{flex:0 0 auto}
+.syncp-msg{margin:0;font-family:var(--f-data);font-size:.82rem;color:var(--dim);display:flex;align-items:center;gap:8px;line-height:1.4}
+.syncp-msg.warn{color:var(--amber)}
+.syncp-msg .lamp{width:7px;height:7px;border-radius:50%;background:var(--dimmer);flex:0 0 auto}
+.syncp-msg .lamp.on{background:var(--sage);box-shadow:0 0 8px var(--sage)}
+body.app .syncp-row .btn{min-height:44px}
+body.app #syncMoreBlock .syncp{padding:0 2px 6px}
 .jbf{width:min(640px,100%)}
 .jbf-all{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:10px 12px;margin-bottom:12px;border:1px solid var(--hair);border-radius:4px;background:rgba(var(--ink-rgb),.4)}
 .jbf-all select{width:auto;flex:1 1 110px}
@@ -2207,6 +2219,10 @@ body.app .lg-pchip{min-height:34px;padding:5px 12px}
     <p class="bs-label">Keep it safe</p>
     <p class="bs-note" id="backupNote">Your shelf lives on this phone. Export a copy now and then, so it can never be lost.</p>
     <div class="bs-list" id="moreBackup"></div>
+    <div id="syncMoreBlock" hidden>
+      <p class="bs-label">Sync across devices</p>
+      <div class="syncp" data-sync-panel></div>
+    </div>
     <div id="installBlock" hidden>
       <p class="bs-label">Put it on your home screen</p>
       <p class="bs-note" id="installNote"></p>
@@ -2696,11 +2712,33 @@ function imgGet(key){
 }
 function imgPut(key, dataUrl){
   IMGCACHE[key] = dataUrl;
-  return IMGDB.put(key, dataUrl);
+  return IMGDB.put(key, dataUrl).then(function(r){
+    if(window.__gsSync) window.__gsSync.imageChanged(key);
+    return r;
+  });
 }
 function imgDel(key){
   delete IMGCACHE[key];
-  return IMGDB.del(key).catch(function(){});
+  return IMGDB.del(key).catch(function(){}).then(function(){
+    if(window.__gsSync) window.__gsSync.imageChanged(key);
+  });
+}
+/* Sync's way into the image store: writes from other devices go straight to
+   IndexedDB (so they are not sent back), then the shelf redraws with them. */
+if(window.__gsSync){
+  window.__gsSync.setImageStore({
+    get: function(k){ return IMGDB.get(k); },
+    put: function(k, v){ return IMGDB.put(k, v).then(function(){ IMGCACHE[k] = v; }); },
+    del: function(k){ return IMGDB.del(k).then(function(){ delete IMGCACHE[k]; }); },
+    keys: function(){ return IMGDB.keys(); },
+    refreshed: function(keys){
+      (keys || []).forEach(function(k){
+        if(k.indexOf("sticker:") === 0) delete jStickerImgs[k.slice(8)];
+      });
+      if(!keys || !keys.length) jStickerImgs = {};
+      setTimeout(function(){ render(); if(byId("ledgerCard")){ loadStickers(); drawLedger(); } }, 0);
+    }
+  });
 }
 
 /* Never store the raw file — a phone photo is several megabytes and would make
@@ -4868,6 +4906,7 @@ function openSettings(){
   ov.innerHTML =
   '<div class="sheet" role="dialog" aria-modal="true" aria-label="Settings">' +
     "<h3>Settings</h3>" +
+    (window.__gsSync ? "<h4>Sync across devices</h4><div class=\"syncp\" data-sync-panel></div><div class=\"page-rule\"></div>" : "") +
     "<h4>Theme</h4>" +
     '<p class="hint" style="margin:0 0 10px;font-size:.84rem">The look of the whole app. The bookcase keeps its wood and leather in every one.</p>' +
     themeCardsHTML(journal().theme, "data-sitetheme") +
@@ -5066,6 +5105,7 @@ function openSettings(){
       savePrefs(); drawCats(); buildSortOptions(); render();
     }
   });
+  drawSyncPanels();
   byId("setClose").focus();
 }
 function closeSettings(){
@@ -8252,7 +8292,7 @@ document.addEventListener("keydown", function(e){
     var sh = byId(id);
     sh.classList.add("open");
     sh.setAttribute("aria-hidden", "false");
-    if(id === "moreSheet") backupNote();
+    if(id === "moreSheet"){ backupNote(); drawSyncPanels(); }
     if(id === "viewSheet") viewSummary();
   }
   function closeSheets(){
@@ -8418,6 +8458,104 @@ document.addEventListener("keydown", function(e){
     m.appendChild(d);
   }
 })();
+
+/* ---------------- sync across devices ----------------
+   Only in the standalone app, where src/sync-shim.js provides window.__gsSync.
+   One panel, drawn wherever there is a slot for it: the More sheet on a
+   phone and the Settings sheet on a desktop. */
+var syncKeep = {email:"", code:""};
+function syncAgo(t){
+  if(!t) return "not yet";
+  var s = Math.round((Date.now() - t) / 1000);
+  if(s < 45) return "just now";
+  if(s < 3600) return Math.round(s / 60) + " min ago";
+  if(s < 86400) return Math.round(s / 3600) + " h ago";
+  return new Date(t).toLocaleDateString(undefined, {day:"numeric", month:"short"});
+}
+function syncPanelHTML(st){
+  if(st.status === "signed-out"){
+    return '<p class="syncp-note">Sign in on each phone, tablet or computer you read on, and they all keep one shelf. ' +
+      "We email you a 6-digit code; there is no password. A book on two devices becomes one book, never two.</p>" +
+      '<div class="syncp-row"><input type="email" data-sync-email autocomplete="email" inputmode="email" placeholder="you@example.com" value="' + esc(syncKeep.email) + '" aria-label="Email address">' +
+      '<button class="btn" type="button" data-sync="send">Email me a code</button></div>' +
+      (st.message ? '<p class="syncp-msg">' + esc(st.message) + "</p>" : "");
+  }
+  if(st.status === "code-sent"){
+    return '<p class="syncp-note">A 6-digit code is on its way to <b>' + esc(st.pendingEmail) + "</b>. It can take a minute.</p>" +
+      '<div class="syncp-row"><input type="text" data-sync-code inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456" value="' + esc(syncKeep.code) + '" aria-label="Code from the email">' +
+      '<button class="btn" type="button" data-sync="verify">Sign in</button></div>' +
+      '<div class="syncp-row"><button class="btn small ghost" type="button" data-sync="send-again">Send a new code</button>' +
+      '<button class="btn small ghost" type="button" data-sync="change">Use a different email</button></div>' +
+      (st.message ? '<p class="syncp-msg">' + esc(st.message) + "</p>" : "");
+  }
+  var line = st.status === "syncing" ? "Syncing…" :
+    st.status === "offline" ? "Offline. Changes are kept here and sync when you are back online." :
+    st.status === "error" ? st.message :
+    "Synced " + syncAgo(st.last) + (st.pending ? " · " + st.pending + " " + (st.pending === 1 ? "change" : "changes") + " waiting" : "") + ".";
+  return '<p class="syncp-note">Signed in as <b>' + esc(st.email || "your account") + "</b>.</p>" +
+    '<p class="syncp-msg' + (st.status === "error" ? " warn" : "") + '"><span class="lamp' + (st.status === "synced" ? " on" : "") + '"></span>' + esc(line) + "</p>" +
+    '<div class="syncp-row"><button class="btn small" type="button" data-sync="now">Sync now</button>' +
+    '<button class="btn small ghost" type="button" data-sync="out">Sign out</button></div>';
+}
+function drawSyncPanels(){
+  if(!window.__gsSync) return;
+  var st = window.__gsSync.status();
+  Array.prototype.forEach.call(document.querySelectorAll("[data-sync-panel]"), function(el){
+    var em = el.querySelector("[data-sync-email]"), cd = el.querySelector("[data-sync-code]");
+    if(em) syncKeep.email = em.value;
+    if(cd) syncKeep.code = cd.value;
+    var focus = document.activeElement && el.contains(document.activeElement) ? document.activeElement.getAttribute("data-sync-email") !== null ? "email" : document.activeElement.getAttribute("data-sync-code") !== null ? "code" : null : null;
+    el.innerHTML = syncPanelHTML(st);
+    if(focus){ var f = el.querySelector(focus === "email" ? "[data-sync-email]" : "[data-sync-code]"); if(f) f.focus(); }
+  });
+  var note = byId("backupNote");
+  if(note && st.status !== "signed-out" && st.status !== "code-sent") note.textContent = "Your shelf syncs to your account, and lives on this device too. Export a copy now and then all the same.";
+}
+function syncPanelClick(e){
+  var b = e.target.closest("[data-sync]");
+  if(!b || !window.__gsSync) return;
+  var panel = b.closest("[data-sync-panel]"), S = window.__gsSync, act = b.getAttribute("data-sync");
+  function msg(t){ var m = panel.querySelector(".syncp-msg") || document.createElement("p"); m.className = "syncp-msg warn"; m.textContent = t; if(!m.parentNode) panel.appendChild(m); }
+  function busy(on){ b.disabled = on; }
+  if(act === "send" || act === "send-again"){
+    var email = act === "send" ? (panel.querySelector("[data-sync-email]") || {}).value : S.status().pendingEmail;
+    syncKeep.email = email || "";
+    busy(true);
+    S.sendCode(email).then(function(){ syncKeep.code = ""; drawSyncPanels(); setTimeout(function(){ var c = document.querySelector("[data-sync-code]"); if(c) c.focus(); }, 60); },
+      function(err){ busy(false); msg(/rate limit|429/i.test(err.message) ? "Too many codes asked for just now. Wait a little and try again." :
+        /not.?authori[sz]ed/i.test(err.message) ? "This address can’t receive sign-in emails yet: the app’s email sender still needs setting up for addresses outside the team." :
+        /is invalid/i.test(err.message) ? "That address was turned down. Check it’s spelled right." :
+        err.message); });
+  } else if(act === "verify"){
+    var code = (panel.querySelector("[data-sync-code]") || {}).value;
+    busy(true);
+    S.verify(code).then(function(){ syncKeep.code = ""; drawSyncPanels(); paintSaveSticky("Signed in. Your shelf is syncing", ""); },
+      function(err){ busy(false); msg(/expired|invalid|token/i.test(err.message) ? "That code didn’t work. Check it, or send a new one." : err.message); });
+  } else if(act === "change"){
+    S.signOut().then(drawSyncPanels);
+  } else if(act === "now"){
+    S.syncNow();
+  } else if(act === "out"){
+    if(!confirm("Sign out on this device?\n\nThe shelf stays on this device, and stays in your account. Changes made here while signed out won’t sync until you sign in again.")) return;
+    S.signOut().then(drawSyncPanels);
+  }
+}
+if(window.__gsSync){
+  byId("syncMoreBlock").hidden = false;
+  document.addEventListener("click", function(e){ if(e.target.closest("[data-sync-panel]")) syncPanelClick(e); });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Enter") return;
+    var p = e.target.closest && e.target.closest("[data-sync-panel]");
+    if(!p) return;
+    var b = p.querySelector('[data-sync="verify"]') || p.querySelector('[data-sync="send"]');
+    if(b){ e.preventDefault(); b.click(); }
+  });
+  window.__gsSync.onChange(function(st){
+    drawSyncPanels();
+    if(st.status === "synced" && byId("ledgerCard")) drawLedger();
+  });
+  setInterval(function(){ if(document.querySelector("[data-sync-panel]") && document.visibilityState === "visible") drawSyncPanels(); }, 30000);
+}
 
 /* ---------------- boot ---------------- */
 applySiteTheme();
