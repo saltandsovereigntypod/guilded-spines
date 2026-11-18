@@ -92,7 +92,33 @@ your notes and theories on the verso.
   you set it, and it remembers your choices until you change them.
   Recalibrate in Settings to re-fit its weights against the books you have
   rated. Nothing about the catalogue is ever written onto a book or into an
-  export. Drop the file and the button simply disappears.
+  export. Drop the file and the button simply disappears. The one exception is
+  the Ledger's fill-in: a book's year and genres are copied from the catalogue
+  into its empty fields, once, as a starting point that is then the reader's own.
+- **The Ledger.** Reading history, statistics and goals, as a fifth tab on the
+  phone and a button on the desktop. Every book's page gains pages, year of
+  publication, format, source, genres (any number, from a list that starts as
+  the Oracle's and can be renamed and added to) and its **reads**: start and
+  finish dates, as many as it needs, so a reread counts again. Nothing has to
+  be typed: moving a book to Reading starts a read, Read finishes it today,
+  Set Aside closes it unfinished, and a slip straight back takes it back.
+  The Ledger began fresh: books read before it have no dates, count under
+  **All time** and never under a month, and move into a month the moment one
+  is given a finish date. For any year, or all time, it shows books and pages
+  read, average rating and length, longest and shortest, pages a day; books by
+  month (tap a month for its list), a calendar of finishing days with the
+  weekly streak; genres with their average rating and spice; authors; book
+  length; publication decade and new release against backlist; the spread of
+  ratings; format; and every series with how much of it you have read, flagging
+  the ones that have stalled. **Goals** count themselves: books or pages in a
+  year, books every month, books in one genre, series finished, and books from
+  the old TBR, each drawn as a gilt ring with how far ahead of or behind pace
+  you are, and sealed in wax the first time it is met. Whether audiobooks and
+  books set aside count, and whether their pages do, is a switch in Ledger
+  settings. **Year in review** draws a 1080×1920 card to save or share.
+  **Look it up online** on a book's page, or **Fill in missing details** for
+  the whole shelf, asks Open Library for pages, year and subjects; the bulk
+  fill writes only to empty fields.
 - **Export and import.** Every copy of the app keeps its own store, so this is
   how a shelf moves between devices: **Export** writes the whole library — books,
   rating categories and every cover and spine image — to a dated JSON file, and
@@ -187,7 +213,9 @@ a shelf seen by candle, so there is a single palette — deep aubergine night, g
 oxblood, aged parchment — painted explicitly so the page holds on any host
 background. Type is **Cinzel** for carved spine lettering and headings,
 **EB Garamond** for the book pages, **Spectral** for small data. No frameworks, no
-build step for the app itself, no external requests beyond Google Fonts.
+build step for the app itself, no external requests beyond Google Fonts, and
+Open Library (`openlibrary.org/search.json`, sent a title and author) only when
+the reader asks the Ledger to look a book up.
 
 **Texture and colour are independent layers.** A book's spine and cover
 background is one stack, topmost first: the edge shading that makes the spine
@@ -279,7 +307,13 @@ One document per book:
   "spineHeight": null,
   "spineWidth": null,
   "order": 300,
-  "addedAt": 1757000001000
+  "addedAt": 1757000001000,
+  "reads": [ { "start": "2026-11-02", "end": "2026-11-18" } ],
+  "genres": ["romantasy", "epic"],
+  "pages": 522,
+  "pubYear": 2023,
+  "format": "print",
+  "source": "owned"
 }
 ```
 
@@ -293,6 +327,12 @@ spine or cover rather than a gradient; `coverColor`/`coverColor2` absent mean th
 cover follows the spine's colours, and it keeps doing so until the cover is given
 colours of its own. `order` is the hand-arranged shelf position, used only by the
 **Custom (arranged)** sort and seeded from wherever the books already sat.
+
+`reads` holds local dates as `YYYY-MM-DD`; a read with no `end` is in
+progress, and `"dnf": true` marks one set aside. `format` is `print`, `ebook`
+or `audio`; `source` is `owned`, `library`, `subscription` or `borrowed`.
+Goals, the genre list and the counting switches live in `settings/prefs` under
+`ledger`, and travel in an export.
 
 `showStatusDot` absent means the book follows the global default in Settings;
 `true` or `false` is the book's own answer and outranks it. `dotColor` absent
