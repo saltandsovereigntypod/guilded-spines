@@ -105,7 +105,12 @@ your notes and theories on the verso.
   Set Aside closes it unfinished, and a slip straight back takes it back.
   The Ledger began fresh: books read before it have no dates, count under
   **All time** and never under a month, and move into a month the moment one
-  is given a finish date. For any year, or all time, it shows books and pages
+  is given a finish date. **Date your earlier reads** (on the journal's cover,
+  or in Journal & settings) lists every one of them at once: give each a month
+  and year, a year alone, or nothing, or set them all in one go. A read known
+  only to the month or the year is stored as exactly that (`"approx": "month"`
+  or `"year"`), and counts in its year without being placed on a day or, for a
+  year alone, in a month. For any year, or all time, it shows books and pages
   read, average rating and length, longest and shortest, pages a day; books by
   month (tap a month for its list), a calendar of finishing days with the
   weekly streak; genres with their average rating and spice; authors; book
@@ -149,8 +154,20 @@ your notes and theories on the verso.
   leaves the bookcase alone: the wood, the leather and the gilt lettering are
   the same furniture in every room, except that the Grimoire tools its books in
   silver foil.
-- **Export and import.** Every copy of the app keeps its own store, so this is
-  how a shelf moves between devices: **Export** writes the whole library — books,
+- **Sync across devices.** In the phone app, More (or Settings on a computer)
+  has **Sync across devices**: type your email, then the 6-digit code it is
+  sent, and that device joins your account. Every device keeps working from its
+  own copy, offline included, and trades changes with the account in the
+  background. The newest edit to a book wins; a deletion reaches every device;
+  covers and stickers travel too. Nothing is ever doubled: the first time a
+  device signs in its shelf is merged into the account's (the same book on both
+  is combined field by field, with both sets of notes, reads and genres kept),
+  and a book added separately on two devices, same title and author, becomes
+  one book on both. Each account sees only its own shelf: a new account starts
+  empty, and signing a different account in on a device swaps that device's
+  shelf rather than mixing the two.
+- **Export and import.** Without sync, every copy of the app keeps its own
+  store, so this is how a shelf moves between devices: **Export** writes the whole library — books,
   rating categories and every cover and spine image — to a dated JSON file, and
   **Import** reads one back, either replacing the shelf outright or merging the
   file into it.
@@ -195,6 +212,37 @@ python3 build.py      # artifact source + src/*.json -> index.html
 Edit `artifact/gilded-spines.html` and re-run the build; never edit `index.html`
 by hand.
 
+### Sync: `src/sync-shim.js` and the Gilded Spines Supabase project
+
+The standalone build's storage. It keeps the app's `db` surface over
+localStorage and, once signed in, syncs with a single `public.docs` table in the
+**Gilded Spines** Supabase project (schema in `supabase/migrations/`). A row is
+one book, the settings or one image, keyed by account, kind and id, with:
+
+- `rev`: the writing device's clock in milliseconds. The newest revision wins;
+  a trigger refuses a write older than the stored one.
+- `deleted`: a tombstone, so deletions reach other devices.
+- `synced_at`: server time, the cursor each device pulls from.
+
+Row level security restricts every operation to `auth.uid() = user_id`. The
+page talks to Supabase's REST and Auth endpoints with `fetch` and the
+project's publishable key (no client library, nothing to load when offline).
+Sign-in is the email one-time code (`/auth/v1/otp`, then `/auth/v1/verify`).
+
+Duplicates are prevented in three places: a device's first sign-in merges its
+books into the account's by id, then by normalised title and author; untouched
+books from the built-in starter shelf are never uploaded; and after every pull
+the same title-and-author check folds any pair into the copy added first (the
+smaller id on a tie), which every device chooses identically.
+
+Two settings live only in the Supabase dashboard:
+
+- **Authentication, Emails, Magic Link template** must contain `{{ .Token }}`
+  so the email carries the 6-digit code.
+- Supabase's built-in email sender only delivers to members of the
+  organisation's team, a few an hour. For anyone else to sign in, set up custom
+  SMTP under **Authentication, Emails, SMTP Settings**.
+
 ### The phone app at books.saltandsovereignty.com
 
 The standalone build is also an installable web app. `build.py` writes
@@ -228,6 +276,8 @@ at the domain's DNS host, add a `CNAME` record for `books` pointing to
 artifact/gilded-spines.html   the app (single file, no dependencies)
 src/library.seed.json         seed library for the standalone build
 src/oracle-catalog.json       the Oracle's vetted candidates and fitted model
+src/sync-shim.js              storage + Supabase sync for the standalone build
+supabase/migrations/          the sync database's schema
 build.py                      wraps the artifact source into index.html
 index.html                    generated — standalone build
 manifest.webmanifest, sw.js   generated: the installable app and its offline cache
