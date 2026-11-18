@@ -49,7 +49,8 @@ your notes and theories on the verso.
   3D with faces that carry their own lettering, planted on the shelf line with a
   contact shadow. Both the cover and the spine can take an image of your own.
 - **Or lay a group flat.** Any group can be a **stack** instead of a row of
-  standing books: each volume becomes a slab seen from the spine, title reading
+  standing books: each volume becomes a slab seen from the spine, exactly as
+  long as the book stands tall and as thick as its spine, title reading
   across, widest at the bottom, in the same leather or cloth it would have had
   standing up. Neat stacks line their edges up; messy ones sit a little askew,
   seeded from each book's id so the pile looks the same every time you come
@@ -119,6 +120,35 @@ your notes and theories on the verso.
   **Look it up online** on a book's page, or **Fill in missing details** for
   the whole shelf, asks Open Library for pages, year and subjects; the bulk
   fill writes only to empty fields.
+- **The Ledger is a journal.** Every view is a page: The Year, Goals, Books
+  Read, By Month, Monthly Log, Finishing Days, Genres, Authors, Book Length,
+  Publication, Ratings, Format, Series and Year in Review. Turn them one at a
+  time (two at once on a wide screen, by swipe, arrow keys or the contents
+  tabs) or scroll them all; choose which pages appear and in what order; rename
+  any page by typing on its title. Each page's **Decorate** brush gives it its
+  own theme, its own chart form and its own way of marking things:
+  - **forms**: goals as rings, bars with a pace mark, jars filling up, candles
+    burning down or a shelf of slots; months as vertical or horizontal bars,
+    stacked spines coloured by genre, tally marks or a dot grid; genres and
+    authors as bars, a bookshelf of real-proportioned spines, a donut, a
+    waffle of one square per book, or stickers; finishing days as month rows,
+    a calendar or a year in pixels; ratings as bars, star rows or a scatter
+    of rating against spice;
+  - **marks**: a colour fill, a sticker, a hand-drawn check, tally marks or a
+    stamp. Twelve stickers come built in and you can add your own images,
+    which are kept on the device and travel in an export.
+  - **colours** belong to the thing they mark, so a genre is the same colour on
+    every page. The nine default genre colours are chosen so every pair stays
+    distinguishable on both light and dark paper; change any of them, set a
+    colour per goal or per shelf, and the journal warns when two genres come
+    too close to tell apart.
+- **Themes for the whole app.** Candlelit, Dark Academia, Witch's Grimoire,
+  Cottage, Blood & Roses and Minimal, chosen in Settings or the Ledger's
+  Journal & settings. A theme repaints the room (the walls, bars, sheets,
+  buttons, type, the paper of an open book and the Year in Review card) and
+  leaves the bookcase alone: the wood, the leather and the gilt lettering are
+  the same furniture in every room, except that the Grimoire tools its books in
+  silver foil.
 - **Export and import.** Every copy of the app keeps its own store, so this is
   how a shelf moves between devices: **Export** writes the whole library — books,
   rating categories and every cover and spine image — to a dated JSON file, and
@@ -208,8 +238,8 @@ docs/shelf.png                screenshot
 
 ## Design notes
 
-Committed to one visual world rather than a light/dark pair: the whole conceit is
-a shelf seen by candle, so there is a single palette — deep aubergine night, gilt,
+Candlelit is the original world and the default: the whole conceit is a shelf
+seen by candle, so it has a single palette — deep aubergine night, gilt,
 oxblood, aged parchment — painted explicitly so the page holds on any host
 background. Type is **Cinzel** for carved spine lettering and headings,
 **EB Garamond** for the book pages, **Spectral** for small data. No frameworks, no
@@ -332,7 +362,16 @@ colours of its own. `order` is the hand-arranged shelf position, used only by th
 progress, and `"dnf": true` marks one set aside. `format` is `print`, `ebook`
 or `audio`; `source` is `owned`, `library`, `subscription` or `borrowed`.
 Goals, the genre list and the counting switches live in `settings/prefs` under
-`ledger`, and travel in an export.
+`ledger`, and travel in an export. So does `ledger.journal`: the app's theme,
+turn or scroll, page order and hidden pages, each page's overrides
+(`title`, `theme`, `form`, `mark`, `sticker`, `colorBy`), genre colours, and the
+list of custom stickers, whose images live in the image store as
+`sticker:<id>`.
+
+The app's colours are tokens on `:root` (`--ink`, `--velvet`, `--gilt`,
+`--parchment`…, plus `-rgb` channel versions for translucent use); a theme is a
+`body[data-site]` block that restates them. Books, slabs, plates and planks
+restate the furniture tokens for themselves, so a theme cannot reach them.
 
 `showStatusDot` absent means the book follows the global default in Settings;
 `true` or `false` is the book's own answer and outranks it. `dotColor` absent
